@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Models\Department;
 use App\Models\Employee;
 use Spatie\Permission\Models\Role;
-use App\Models\Factory;
 use DB;
 use Hash;
 use Illuminate\Support\Str;

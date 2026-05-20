@@ -22,49 +22,14 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    // public function store(LoginRequest $request): RedirectResponse
-    // {
-    //     $request->authenticate();
-    //     $request->session()->regenerate(); 
-    //     return redirect()->intended(route('admin.dashboard', absolute: false));
-    // }
-
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-        $request->session()->regenerate();
-
-        $user = auth()->user();
-
-        // Default active role = highest priority
-        if($user->hasRole('super_admin')) {
-            $activeRole = 'super_admin';
-        } elseif($user->hasRole('admin')) {
-            $activeRole = 'admin';
-        } elseif($user->hasRole('employee')) {
-            $activeRole = 'employee';
-        } else {
-            $activeRole = 'user';
-        }
-
-        session(['active_role' => $activeRole]);
-
-        return $this->redirectBasedOnRole($activeRole);
+        $request->session()->regenerate(); 
+        return redirect()->intended(route('admin.dashboard', absolute: false));
     }
 
-    protected function redirectBasedOnRole($role)
-    {
-        switch($role) {
-            case 'super_admin':
-                return redirect()->route('admin.dashboard');
-            case 'human_resource':
-                return redirect()->route('hr.dashboard');
-            case 'employee':
-                return redirect()->route('employee.dashboard');
-            default:
-                return redirect()->route('welcome');
-        }
-    }
+
 
     /**
      * Destroy an authenticated session.

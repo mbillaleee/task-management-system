@@ -48,14 +48,6 @@ class User extends Authenticatable
         ];
     }
 
-    public function employee() {
-        return $this->hasOne(Employee::class);
-    }
-
-    public function department()
-    {
-        return $this->belongsTo(Department::class, 'department_id');
-    }
 
  
 }

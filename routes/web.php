@@ -16,11 +16,6 @@ use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Hr\HrController;
 
 
-
-
-
-
-
 Route::get('/', [FrontendController::class, 'welcome'])->name('welcome');
 
 
