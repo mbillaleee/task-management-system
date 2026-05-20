@@ -19,6 +19,7 @@ use App\Http\Controllers\Hr\HrController;
 Route::get('/', [FrontendController::class, 'welcome'])->name('welcome');
 
 
+
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middleware(['auth', 'verified', 'role:super_admin'])->name('admin.dashboard');
 
 Route::middleware('auth')->group(function () {

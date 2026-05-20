@@ -16,23 +16,10 @@ class FrontendController extends Controller
 {
     public function welcome()
     {
+        if (auth()->check()) {
+            return redirect()->route('admin.dashboard');
+        }
         return view('welcome');
     }
-
-    public function about()
-    {
-        $departments = Department::with(['users' => function ($query) {
-            $query->orderBy('id', 'asc');
-        }])->get();
-
-        return view('about', compact('departments'));
-    }
-
-    public function contact()
-    {
-        return view('contact');
-    }
-
-
 
 }
