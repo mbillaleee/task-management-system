@@ -13,6 +13,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\User\UserDashboardController;
+use App\Http\Controllers\User\TaskController;
+use App\Http\Controllers\User\TaskCategoryController;
+use App\Http\Controllers\User\TaskSubtaskController;
+use App\Http\Controllers\User\TaskCommentController;
 
 
 
@@ -32,6 +36,26 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'userDashboard'])->name('dashboard');
+
+    Route::resource('tasks', TaskController::class);
+
+    Route::get('tasks-kanban', [TaskController::class, 'kanban'])->name('tasks.kanban');
+    Route::patch('tasks/{task}/status', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus');
+
+    Route::resource('task-categories', TaskCategoryController::class);
+    Route::resource('task-labels', TaskLabelController::class);
+
+    Route::post('tasks/{task}/subtasks', [TaskSubtaskController::class, 'store'])->name('tasks.subtasks.store');
+    Route::patch('subtasks/{subtask}/toggle', [TaskSubtaskController::class, 'toggle'])->name('subtasks.toggle');
+    Route::delete('subtasks/{subtask}', [TaskSubtaskController::class, 'destroy'])->name('subtasks.destroy');
+
+    Route::post('tasks/{task}/comments', [TaskCommentController::class, 'store'])->name('tasks.comments.store');
+
+
+    Route::get('/features', function () {
+        return view('user.features');
+    })->name('features');
+
 });
 
 
@@ -40,7 +64,6 @@ Route::middleware(['auth','role:super_admin'])->prefix('admin')->name('admin.')-
     Route::resource('permissions', PermissionController::class);
     Route::resource('roles', RoleController::class);
 });
-
 
 
 
