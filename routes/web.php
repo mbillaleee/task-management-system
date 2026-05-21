@@ -12,8 +12,8 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\Employee\EmployeeController;
-use App\Http\Controllers\Hr\HrController;
+use App\Http\Controllers\User\UserDashboardController;
+
 
 
 Route::get('/', [FrontendController::class, 'welcome'])->name('welcome');
@@ -26,6 +26,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(function () {
+    Route::get('/dashboard', [UserDashboardController::class, 'userDashboard'])->name('dashboard');
 });
 
 

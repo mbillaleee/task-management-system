@@ -17,8 +17,18 @@ class FrontendController extends Controller
     public function welcome()
     {
         if (auth()->check()) {
-            return redirect()->route('admin.dashboard');
+            $user = auth()->user();
+
+            if ($user->hasRole('admin')) {
+                return redirect()->route('admin.dashboard');
+            } elseif ($user->hasRole('user')) {
+                return redirect()->route('user.dashboard');
+            }
+            // Optional: default fallback if role missing
+            return redirect()->route('welcome');
         }
+
+        // Guest view
         return view('welcome');
     }
 
