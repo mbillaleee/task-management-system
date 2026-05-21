@@ -25,6 +25,7 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middlewar
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/account/update', [ProfileController::class, 'updateAccount'])->name('profile.update.account');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
