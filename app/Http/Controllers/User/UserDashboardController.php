@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Models\Habit;
 use Carbon\Carbon;
 
 class UserDashboardController extends Controller
@@ -48,6 +49,35 @@ class UserDashboardController extends Controller
 
         $dailyProgress = $todayTotal > 0 ? round(($todayCompleted / $todayTotal) * 100) : 0;
 
+
+
+
+        $todayHabits = Habit::with('todayLog')
+            ->where('user_id', auth()->id())
+            ->where('status', true)
+            ->get();
+
+        $totalHabits = $todayHabits->count();
+
+        $completedToday = $todayHabits->filter(function ($habit) {
+            return $habit->todayLog?->is_completed;
+        })->count();
+
+        $habitCompletionRate = $totalHabits > 0
+            ? round(($completedToday / $totalHabits) * 100)
+            : 0;
+
+        $circleDash = 314.16;
+
+        $circleOffset = $circleDash - ($circleDash * $habitCompletionRate / 100);
+
+        $habitScoreLabel = match (true) {
+            $habitCompletionRate >= 90 => 'Excellent',
+            $habitCompletionRate >= 70 => 'Good',
+            $habitCompletionRate >= 40 => 'Average',
+            default => 'Low',
+        };
+
         return view('user.dashboard', compact(
             'todayTasks',
             'topPriorities',
@@ -56,7 +86,14 @@ class UserDashboardController extends Controller
             'overdueTasks',
             'dailyProgress',
             'todayTotal',
-            'todayCompleted'
+            'todayCompleted',
+            'todayHabits',
+            'totalHabits',
+            'completedToday',
+            'habitCompletionRate',
+            'circleDash',
+            'circleOffset',
+            'habitScoreLabel'
         ));
     }
 }

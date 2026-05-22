@@ -58,7 +58,7 @@
             <span>Tasks</span>
         </a>
 
-        <a href="#"
+        <a href="{{ route('user.habits.index') }}"
             class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline
             dark:text-gray-400 text-gray-600 dark:hover:bg-white/[0.06] hover:bg-black/[0.05]
             dark:hover:text-white hover:text-gray-900 transition-all duration-200">

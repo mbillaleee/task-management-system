@@ -222,7 +222,7 @@
                         <option>This month</option>
                     </select>
 
-                    <a href="#"
+                    <a href="{{ route('user.tasks.create') }}"
                         class="px-5 py-2.5 rounded-xl text-white text-[16px] font-bold
                         bg-gradient-to-r from-orange-500 to-pink-500
                         shadow-[0_4px_18px_rgba(249,115,22,.45)]">
@@ -439,19 +439,27 @@
                     </div>
                 </div>
 
-                <!-- Focus Score -->
+
+                <!-- Habit Score -->
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px] flex flex-col items-center">
-                    <h3 class="text-[20px] font-bold dark:text-white text-gray-900 self-start mb-3.5">Focus Score</h3>
+
+                    <h3 class="text-[20px] font-bold dark:text-white text-gray-900 self-start mb-3.5">
+                        Habit Score
+                    </h3>
+
                     <!-- Ring -->
                     <div class="relative w-[120px] h-[120px] mb-4">
                         <svg class="w-full h-full" viewBox="0 0 120 120">
+
                             <circle cx="60" cy="60" r="50" fill="none" stroke-width="10"
                                 class="dark:stroke-[#1e1a2e] stroke-gray-100" />
+
                             <circle cx="60" cy="60" r="50" fill="none" stroke-width="10"
                                 stroke-linecap="round" stroke="url(#focusGrad)" stroke-dasharray="314.16"
-                                stroke-dashoffset="37.7" style="transform:rotate(-90deg);transform-origin:50% 50%;"
-                                class="progress-circle" />
+                                stroke-dashoffset="{{ $circleOffset }}"
+                                style="transform:rotate(-90deg);transform-origin:50% 50%;" class="progress-circle" />
+
                             <defs>
                                 <linearGradient id="focusGrad" x1="0" y1="0" x2="1"
                                     y2="0">
@@ -460,24 +468,38 @@
                                 </linearGradient>
                             </defs>
                         </svg>
+
                         <div class="absolute inset-0 flex flex-col items-center justify-center">
                             <span
-                                class="text-[28px] font-extrabold tracking-[-0.5px] dark:text-white text-gray-900 leading-none">94<sup
-                                    class="text-[15px] align-super">%</sup></span>
-                            <span class="text-[14px] dark:text-gray-400 text-gray-500 mt-0.5">Excellent</span>
+                                class="text-[28px] font-extrabold tracking-[-0.5px] dark:text-white text-gray-900 leading-none">
+                                {{ $habitCompletionRate }}<sup class="text-[15px] align-super">%</sup>
+                            </span>
+
+                            <span class="text-[14px] dark:text-gray-400 text-gray-500 mt-0.5">
+                                {{ $habitScoreLabel }}
+                            </span>
                         </div>
                     </div>
+
                     <!-- Goal bar -->
                     <div class="w-full">
+
                         <div class="flex justify-between text-[16px] mb-1.5">
-                            <span class="dark:text-gray-400 text-gray-500">Weekly Goal</span>
-                            <span class="font-bold dark:text-white text-gray-800">80%</span>
+                            <span class="dark:text-gray-400 text-gray-500">
+                                Today Completed
+                            </span>
+
+                            <span class="font-bold dark:text-white text-gray-800">
+                                {{ $completedToday }}/{{ $totalHabits }}
+                            </span>
                         </div>
+
                         <div class="w-full h-[7px] rounded-full dark:bg-white/[0.08] bg-gray-100 overflow-hidden">
                             <div class="h-full rounded-full bg-gradient-to-r from-orange-500 to-amber-400"
-                                style="width:80%">
+                                style="width:{{ $habitCompletionRate }}%">
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

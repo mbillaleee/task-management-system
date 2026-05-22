@@ -17,6 +17,8 @@ use App\Http\Controllers\User\TaskController;
 use App\Http\Controllers\User\TaskCategoryController;
 use App\Http\Controllers\User\TaskSubtaskController;
 use App\Http\Controllers\User\TaskCommentController;
+use App\Http\Controllers\User\HabitController;
+use App\Http\Controllers\User\HabitLogController;
 
 
 
@@ -48,8 +50,14 @@ Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(fu
     Route::post('tasks/{task}/subtasks', [TaskSubtaskController::class, 'store'])->name('tasks.subtasks.store');
     Route::patch('subtasks/{subtask}/toggle', [TaskSubtaskController::class, 'toggle'])->name('subtasks.toggle');
     Route::delete('subtasks/{subtask}', [TaskSubtaskController::class, 'destroy'])->name('subtasks.destroy');
-
     Route::post('tasks/{task}/comments', [TaskCommentController::class, 'store'])->name('tasks.comments.store');
+
+
+    Route::resource('habits', HabitController::class);
+    Route::get('habits-board', [HabitController::class, 'board'])->name('habits.board');
+    Route::post('habits/{habit}/toggle', [HabitLogController::class, 'toggle'])->name('habits.toggle');
+
+
 
 
     Route::get('/features', function () {
