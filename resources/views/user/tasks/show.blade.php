@@ -7,19 +7,19 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     Task Details
                 </h2>
-                <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     View subtasks, comments and activity history.
                 </p>
             </div>
 
             <div class="flex gap-2">
                 <a href="{{ route('user.tasks.edit', $task) }}"
-                    class="px-4 py-2 rounded-[10px] text-white text-[12.5px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
+                    class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
                     Edit Task
                 </a>
 
                 <a href="{{ route('user.tasks.index') }}"
-                    class="px-4 py-2 rounded-[10px] text-[12.5px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
+                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
                     Back
                 </a>
             </div>
@@ -36,26 +36,26 @@
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[11px] dark:text-gray-500 text-gray-400">Status</p>
-                            <p class="text-[12.5px] font-bold dark:text-white text-gray-800">
+                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Status</p>
+                            <p class="text-[16px] font-bold dark:text-white text-gray-800">
                                 {{ ucwords(str_replace('_', ' ', $task->status)) }}</p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[11px] dark:text-gray-500 text-gray-400">Priority</p>
-                            <p class="text-[12.5px] font-bold dark:text-white text-gray-800">{{ ucfirst($task->priority) }}
+                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Priority</p>
+                            <p class="text-[16px] font-bold dark:text-white text-gray-800">{{ ucfirst($task->priority) }}
                             </p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[11px] dark:text-gray-500 text-gray-400">Category</p>
-                            <p class="text-[12.5px] font-bold dark:text-white text-gray-800">
+                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Category</p>
+                            <p class="text-[16px] font-bold dark:text-white text-gray-800">
                                 {{ $task->category?->name ?? 'N/A' }}</p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[11px] dark:text-gray-500 text-gray-400">Due Date</p>
-                            <p class="text-[12.5px] font-bold dark:text-white text-gray-800">
+                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Due Date</p>
+                            <p class="text-[16px] font-bold dark:text-white text-gray-800">
                                 {{ $task->due_date ? $task->due_date->format('d M, Y') : 'No deadline' }}
                             </p>
                         </div>
@@ -64,14 +64,14 @@
 
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                    <h3 class="text-[14px] font-bold dark:text-white text-gray-900 mb-3.5">Subtasks</h3>
+                    <h3 class="text-[18px] font-bold dark:text-white text-gray-900 mb-3.5">Subtasks</h3>
 
                     <form action="{{ route('user.tasks.subtasks.store', $task) }}" method="POST" class="flex gap-2 mb-4">
                         @csrf
                         <input name="title" placeholder="Add a subtask..."
-                            class="flex-1 px-3.5 py-2 rounded-[10px] text-[13px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
+                            class="flex-1 px-3.5 py-2 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
                         <button
-                            class="px-4 py-2 rounded-[10px] text-white text-[12.5px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
+                            class="px-4 py-2 rounded-[10px] text-white text-[16px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
                             Add
                         </button>
                     </form>
@@ -83,7 +83,7 @@
                                 @csrf
                                 @method('PATCH')
                                 <button
-                                    class="text-[13px] font-medium {{ $subtask->is_completed ? 'line-through text-gray-400' : 'dark:text-gray-200 text-gray-700' }}">
+                                    class="text-[14px] font-medium {{ $subtask->is_completed ? 'line-through text-gray-400' : 'dark:text-gray-200 text-gray-700' }}">
                                     {{ $subtask->is_completed ? '✓' : '○' }} {{ $subtask->title }}
                                 </button>
                             </form>
@@ -91,7 +91,7 @@
                             <form action="{{ route('user.subtasks.destroy', $subtask) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="text-[12px] font-bold text-red-500">Delete</button>
+                                <button class="text-[14px] font-bold text-red-500">Delete</button>
                             </form>
                         </div>
                     @endforeach
@@ -99,23 +99,23 @@
 
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                    <h3 class="text-[14px] font-bold dark:text-white text-gray-900 mb-3.5">Comments</h3>
+                    <h3 class="text-[18px] font-bold dark:text-white text-gray-900 mb-3.5">Comments</h3>
 
                     <form action="{{ route('user.tasks.comments.store', $task) }}" method="POST" class="mb-4">
                         @csrf
                         <textarea name="comment" rows="3" placeholder="Write a comment..."
-                            class="w-full px-3.5 py-2 rounded-[10px] text-[13px] outline-none resize-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]"></textarea>
+                            class="w-full px-3.5 py-2 rounded-[10px] text-[14px] outline-none resize-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]"></textarea>
                         <button
-                            class="mt-2 px-4 py-2 rounded-[10px] text-white text-[12.5px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
+                            class="mt-2 px-4 py-2 rounded-[10px] text-white text-[16px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
                             Post Comment
                         </button>
                     </form>
 
                     @foreach ($task->comments as $comment)
                         <div class="py-3 border-b dark:border-white/[0.06] border-black/[0.05]">
-                            <p class="text-[12.5px] font-bold dark:text-gray-200 text-gray-800">{{ $comment->user->name }}
+                            <p class="text-[16px] font-bold dark:text-gray-200 text-gray-800">{{ $comment->user->name }}
                             </p>
-                            <p class="text-[12px] dark:text-gray-500 text-gray-500 mt-1">{{ $comment->comment }}</p>
+                            <p class="text-[16px] dark:text-gray-500 text-gray-500 mt-1">{{ $comment->comment }}</p>
                         </div>
                     @endforeach
                 </div>
@@ -123,7 +123,7 @@
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07]  border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[14px] font-bold dark:text-white text-gray-900 mb-4">
+                <h3 class="text-[18px] font-bold dark:text-white text-gray-900 mb-4">
                     Task History
                 </h3>
 

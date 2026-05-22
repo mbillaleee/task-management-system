@@ -56,6 +56,22 @@ Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(fu
         return view('user.features');
     })->name('features');
 
+    Route::get('/tools', function () {
+        return view('user.tools');
+    })->name('tools');
+
+    Route::get('/pricing', function () {
+        return view('user.pricing');
+    })->name('pricing');
+
+    Route::get('/changelog', function () {
+        return view('user.changelog');
+    })->name('changelog');
+
+    Route::get('/about', function () {
+        return view('user.about');
+    })->name('about');
+
 });
 
 

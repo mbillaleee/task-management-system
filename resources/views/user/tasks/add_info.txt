@@ -1,0 +1,305 @@
+Due date / deadline
+Recurring task
+Drag & drop ordering
+
+Task e ei gula add korar functionality implement kore daw
+Thought for a couple of seconds
+
+নিচের মতো implement করো।
+
+1. tasks table update migration
+php artisan make:migration add_due_recurring_order_fields_to_tasks_table
+Schema::table('tasks', function (Blueprint $table) {
+    $table->date('due_date')->nullable()->after('priority');
+    $table->time('due_time')->nullable()->after('due_date');
+
+    $table->boolean('is_recurring')->default(false)->after('due_time');
+    $table->enum('recurring_type', ['daily', 'weekly', 'monthly'])->nullable()->after('is_recurring');
+    $table->date('recurring_end_date')->nullable()->after('recurring_type');
+
+    $table->unsignedInteger('position')->default(0)->after('recurring_end_date');
+});
+
+Run:
+
+php artisan migrate
+2. Task Model update
+
+app/Models/Task.php
+
+protected $fillable = [
+    'user_id',
+    'task_category_id',
+    'title',
+    'description',
+    'status',
+    'priority',
+    'due_date',
+    'due_time',
+    'is_recurring',
+    'recurring_type',
+    'recurring_end_date',
+    'position',
+];
+
+protected $casts = [
+    'due_date' => 'date',
+    'due_time' => 'datetime:H:i',
+    'is_recurring' => 'boolean',
+    'recurring_end_date' => 'date',
+];
+3. Route add
+Route::patch('tasks/reorder', [TaskController::class, 'reorder'])->name('tasks.reorder');
+4. TaskController validation update
+
+store() এবং update() method-এর validation এ add করো:
+
+'due_date' => 'nullable|date',
+'due_time' => 'nullable|date_format:H:i',
+'is_recurring' => 'nullable|boolean',
+'recurring_type' => 'nullable|in:daily,weekly,monthly',
+'recurring_end_date' => 'nullable|date|after_or_equal:due_date',
+
+Create/update array এ add করো:
+
+'due_date' => $request->due_date,
+'due_time' => $request->due_time,
+'is_recurring' => $request->has('is_recurring'),
+'recurring_type' => $request->has('is_recurring') ? $request->recurring_type : null,
+'recurring_end_date' => $request->has('is_recurring') ? $request->recurring_end_date : null,
+5. Drag & Drop reorder method
+
+TaskController.php
+
+public function reorder(Request $request)
+{
+    $request->validate([
+        'tasks' => 'required|array',
+        'tasks.*.id' => 'required|exists:tasks,id',
+        'tasks.*.position' => 'required|integer',
+    ]);
+
+    foreach ($request->tasks as $taskItem) {
+        Task::where('id', $taskItem['id'])
+            ->where('user_id', auth()->id())
+            ->update([
+                'position' => $taskItem['position'],
+            ]);
+    }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Task order updated.',
+    ]);
+}
+6. index query update
+
+index() method:
+
+$tasks = Task::with(['category', 'labels', 'subtasks'])
+    ->where('user_id', auth()->id())
+    ->orderBy('position')
+    ->latest()
+    ->paginate(10);
+
+Better:
+
+$tasks = Task::with(['category', 'labels', 'subtasks'])
+    ->where('user_id', auth()->id())
+    ->orderBy('position', 'asc')
+    ->orderBy('created_at', 'desc')
+    ->paginate(10);
+7. Form update
+
+resources/views/user/tasks/partials/form.blade.php
+
+Due date section replace/add করো:
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
+            Due Date
+        </label>
+        <input type="date" name="due_date"
+            value="{{ old('due_date', isset($task) && $task->due_date ? $task->due_date->format('Y-m-d') : '') }}"
+            class="w-full px-3.5 py-2.5 rounded-[10px] text-[13px] outline-none
+            dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700
+            dark:border dark:border-white/[0.1] border border-black/[0.1]">
+    </div>
+
+    <div>
+        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
+            Due Time
+        </label>
+        <input type="time" name="due_time"
+            value="{{ old('due_time', isset($task) && $task->due_time ? \Carbon\Carbon::parse($task->due_time)->format('H:i') : '') }}"
+            class="w-full px-3.5 py-2.5 rounded-[10px] text-[13px] outline-none
+            dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700
+            dark:border dark:border-white/[0.1] border border-black/[0.1]">
+    </div>
+</div>
+
+<div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-4 border dark:border-white/[0.06] border-black/[0.05]">
+    <label class="flex items-center gap-2 text-[13px] font-bold dark:text-gray-200 text-gray-700">
+        <input type="checkbox" name="is_recurring" value="1"
+            class="rounded border-gray-300"
+            @checked(old('is_recurring', $task->is_recurring ?? false))>
+        Recurring Task
+    </label>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        <div>
+            <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
+                Repeat Type
+            </label>
+            <select name="recurring_type"
+                class="w-full px-3.5 py-2.5 rounded-[10px] text-[13px] outline-none
+                dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700
+                dark:border dark:border-white/[0.1] border border-black/[0.1]">
+                <option value="">Select Repeat Type</option>
+                <option value="daily" @selected(old('recurring_type', $task->recurring_type ?? '') == 'daily')>Daily</option>
+                <option value="weekly" @selected(old('recurring_type', $task->recurring_type ?? '') == 'weekly')>Weekly</option>
+                <option value="monthly" @selected(old('recurring_type', $task->recurring_type ?? '') == 'monthly')>Monthly</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
+                Recurring End Date
+            </label>
+            <input type="date" name="recurring_end_date"
+                value="{{ old('recurring_end_date', isset($task) && $task->recurring_end_date ? $task->recurring_end_date->format('Y-m-d') : '') }}"
+                class="w-full px-3.5 py-2.5 rounded-[10px] text-[13px] outline-none
+                dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700
+                dark:border dark:border-white/[0.1] border border-black/[0.1]">
+        </div>
+    </div>
+</div>
+8. Task card due date show
+
+Index card এ due date section update করো:
+
+<p class="text-[12px] font-semibold dark:text-gray-300 text-gray-700">
+    @if ($task->due_date)
+        {{ $task->due_date->format('d M, Y') }}
+        @if ($task->due_time)
+            • {{ \Carbon\Carbon::parse($task->due_time)->format('h:i A') }}
+        @endif
+    @else
+        No deadline
+    @endif
+</p>
+
+@if ($task->is_recurring)
+    <p class="text-[11px] text-pink-400 mt-1">
+        Repeats {{ ucfirst($task->recurring_type) }}
+    </p>
+@endif
+9. Drag & Drop index page
+
+Task card wrapper update করো:
+
+<div id="taskSortable" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+
+প্রতিটা task card div এ data-id add করো:
+
+<div data-id="{{ $task->id }}"
+    class="task-card hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07]
+    rounded-2xl p-4 relative overflow-hidden cursor-move">
+
+Page এর নিচে script add করো:
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+
+<script>
+    const sortable = document.getElementById('taskSortable');
+
+    if (sortable) {
+        new Sortable(sortable, {
+            animation: 180,
+            ghostClass: 'opacity-50',
+            onEnd: function () {
+                let tasks = [];
+
+                document.querySelectorAll('#taskSortable .task-card').forEach((item, index) => {
+                    tasks.push({
+                        id: item.dataset.id,
+                        position: index + 1
+                    });
+                });
+
+                fetch("{{ route('user.tasks.reorder') }}", {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({
+                        tasks: tasks
+                    })
+                });
+            }
+        });
+    }
+</script>
+10. Recurring task auto-create logic
+
+Simple version: task completed হলে next recurring task create হবে।
+
+TaskController@updateStatus এ status completed হলে add করো:
+
+if ($request->status === 'completed' && $task->is_recurring) {
+    $nextDueDate = match ($task->recurring_type) {
+        'daily' => $task->due_date?->copy()->addDay(),
+        'weekly' => $task->due_date?->copy()->addWeek(),
+        'monthly' => $task->due_date?->copy()->addMonth(),
+        default => null,
+    };
+
+    if ($nextDueDate && (!$task->recurring_end_date || $nextDueDate->lte($task->recurring_end_date))) {
+        $newTask = $task->replicate();
+        $newTask->status = 'pending';
+        $newTask->due_date = $nextDueDate;
+        $newTask->position = Task::where('user_id', auth()->id())->max('position') + 1;
+        $newTask->created_at = now();
+        $newTask->updated_at = now();
+        $newTask->save();
+
+        $newTask->labels()->sync($task->labels->pluck('id')->toArray());
+
+        TaskHistory::create([
+            'task_id' => $newTask->id,
+            'user_id' => auth()->id(),
+            'action' => 'Recurring Task Created',
+            'changes' => 'Created from completed recurring task: ' . $task->title,
+        ]);
+    }
+}
+11. History update for recurring/deadline/order
+
+Task update এ due date/recurring change track করতে পারো:
+
+$changes = [];
+
+if ($task->wasChanged('due_date')) {
+    $changes['due_date'] = [
+        'old' => $task->getOriginal('due_date'),
+        'new' => $task->due_date,
+    ];
+}
+
+if ($task->wasChanged('is_recurring') || $task->wasChanged('recurring_type')) {
+    $changes['recurring'] = [
+        'old' => $task->getOriginal('recurring_type') ?? 'Not recurring',
+        'new' => $task->recurring_type ?? 'Not recurring',
+    ];
+}
+
+if (!empty($changes)) {
+    TaskHistory::create([
+        'task_id' => $task->id,
+        'user_id' => auth()->id(),
+        'action' => 'Task Schedule Updated',
+        'changes' => json_encode($changes),
+    ]);
+}

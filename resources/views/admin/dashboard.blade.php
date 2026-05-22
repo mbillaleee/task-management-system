@@ -9,44 +9,37 @@
 
         <!-- Hero Text -->
         <div class="flex-1 relative z-10 max-w-[400px]">
-            <h1
-                class="text-[32px] sm:text-[36px] font-extrabold leading-[1.15] tracking-[-0.5px] dark:text-white text-gray-900 mb-0.5">
+            <h1 class="text-[38px] sm:text-[42px] font-extrabold leading-[1.1] dark:text-white text-gray-900">
                 One system.
             </h1>
-            <h1 class="text-[32px] sm:text-[36px] font-extrabold leading-[1.15] tracking-[-0.5px] mb-3">
+            <h1 class="text-[38px] sm:text-[42px] font-extrabold leading-[1.1] mb-4">
                 <span class="grad-text-dark dark:grad-text-dark" id="heroGradText">Infinite potential.</span>
             </h1>
-            <p class="text-[13px] dark:text-gray-400 text-gray-500 leading-[1.7] mb-5">
+            <p class="text-[16px] leading-[1.7] dark:text-gray-400 text-gray-500 mb-6">
                 Veroa is your all-in-one productivity hub.<br />
                 Tasks, habits, notes, focus timers, tools &amp; analytics –<br />
                 everything you need to become your best self.
             </p>
             <!-- Buttons -->
-            <div class="flex flex-wrap gap-2.5 mb-4">
+            <div class="flex flex-wrap gap-3 mb-5">
                 <button
-                    class="flex items-center gap-1.5 px-5 py-2.5 rounded-[10px] text-white text-[13px] font-bold btn-trans
+                    class="px-6 py-3 rounded-xl text-white text-[16px] font-bold
                         bg-gradient-to-r from-orange-500 to-pink-500
-                        shadow-[0_4px_20px_rgba(249,115,22,0.45)]">
-                    Start for free &nbsp;→
+                        shadow-[0_0_28px_rgba(249,115,22,.45)]">
+                    Start for free →
                 </button>
                 <button
-                    class="flex items-center gap-1.5 px-5 py-2.5 rounded-[10px] text-[13px] font-semibold btn-trans
-                                dark:text-white text-gray-800 border dark:border-white/[0.2] border-gray-300
-                            dark:hover:border-orange-400/60 hover:border-orange-400  bg-transparent transition-colors">
-                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                        <polygon points="5,3 19,12 5,21" />
-                    </svg>
+                    class="px-6 py-3 rounded-xl text-[16px] font-semibold
+                                dark:text-white text-gray-800 border dark:border-white/[0.14] border-gray-300
+                            dark:bg-white/[0.02] bg-white/40">
                     See how it works
                 </button>
             </div>
             <!-- Checks -->
-            <div class="flex flex-wrap gap-4 text-[11.5px] dark:text-gray-500 text-gray-400">
-                <span class="flex items-center gap-1.5"><span class="dark:text-orange-400 text-orange-500">✓</span> No
-                    credit card</span>
-                <span class="flex items-center gap-1.5"><span class="dark:text-orange-400 text-orange-500">✓</span> Free
-                    forever</span>
-                <span class="flex items-center gap-1.5"><span class="dark:text-orange-400 text-orange-500">✓</span> Cancel
-                    anytime</span>
+            <div class="flex flex-wrap gap-4 text-[16px] dark:text-gray-500 text-gray-500">
+                <span><b class="text-orange-400">✓</b> No credit card</span>
+                <span><b class="text-pink-400">✓</b> Free forever</span>
+                <span><b class="text-amber-400">✓</b> Cancel anytime</span>
             </div>
             <!-- Social proof (light mode only) -->
             <div class="hidden dark:hidden mt-3.5 items-center gap-2.5" id="socialProof">
@@ -128,42 +121,90 @@
     </section>
 
     <!-- ══ FEATURE CARDS ══ -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
 
         <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4">
-            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-2.5 text-base bg-amber-400/[0.15]">
-                ⚡</div>
-            <h4 class="text-[13px] font-bold dark:text-white text-gray-900 mb-1">All-in-One</h4>
-            <p class="text-[11.5px] dark:text-gray-500 text-gray-400 leading-relaxed">Everything you need in
-                one powerful workspace.</p>
+            class="group hover-lift relative overflow-hidden rounded-2xl p-5 min-h-[118px]
+            dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07]">
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none"
+                style="background: radial-gradient(circle at 20% 45%, rgba(249,115,22,.16), transparent 35%),
+                       radial-gradient(circle at 85% 60%, rgba(236,72,153,.12), transparent 35%);">
+            </div>
+            <div class="relative z-10 flex items-center gap-4">
+                <div
+                    class="w-14 h-14 flex items-center justify-center text-[40px]
+                    drop-shadow-[0_0_14px_rgba(249,115,22,0.85)]">
+                    ⚡
+                </div>
+                <div>
+                    <h4 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-2">All-in-One</h4>
+                    <p class="text-[12px] leading-[1.7] dark:text-gray-400 text-gray-500">Everything you need in
+                        one powerful workspace.</p>
+                </div>
+            </div>
         </div>
 
         <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4">
-            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-2.5 text-base bg-pink-500/[0.15]">
-                🎯</div>
-            <h4 class="text-[13px] font-bold dark:text-white text-gray-900 mb-1">Focus First</h4>
-            <p class="text-[11.5px] dark:text-gray-500 text-gray-400 leading-relaxed">Built to eliminate
-                distractions and help you go deep.</p>
+            class="group hover-lift relative overflow-hidden rounded-2xl p-5 min-h-[118px]
+            dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07]">
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none"
+                style="background: radial-gradient(circle at 20% 45%, rgba(249,115,22,.16), transparent 35%),
+                       radial-gradient(circle at 85% 60%, rgba(236,72,153,.12), transparent 35%);">
+            </div>
+            <div class="relative z-10 flex items-center gap-4">
+                <div
+                    class="w-14 h-14 flex items-center justify-center text-[40px]
+                    drop-shadow-[0_0_14px_rgba(249,115,22,0.85)]">
+                    🎯
+                </div>
+                <div>
+                    <h4 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-2">Focus First</h4>
+                    <p class="text-[12px] leading-[1.7] dark:text-gray-400 text-gray-500">Built to eliminate
+                        distractions and help you go deep.</p>
+                </div>
+            </div>
         </div>
 
         <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4">
-            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-2.5 text-base bg-purple-500/[0.15]">
-                📊</div>
-            <h4 class="text-[13px] font-bold dark:text-white text-gray-900 mb-1">Data Driven</h4>
-            <p class="text-[11.5px] dark:text-gray-500 text-gray-400 leading-relaxed">Analytics that help you
-                improve every day.</p>
+            class="group hover-lift relative overflow-hidden rounded-2xl p-5 min-h-[118px]
+            dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07]">
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none"
+                style="background: radial-gradient(circle at 20% 45%, rgba(249,115,22,.16), transparent 35%),
+                       radial-gradient(circle at 85% 60%, rgba(236,72,153,.12), transparent 35%);">
+            </div>
+            <div class="relative z-10 flex items-center gap-4">
+                <div
+                    class="w-14 h-14 flex items-center justify-center text-[40px]
+                    drop-shadow-[0_0_14px_rgba(249,115,22,0.85)]">
+                    📊
+                </div>
+                <div>
+                    <h4 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-2">Data Driven</h4>
+                    <p class="text-[12px] leading-[1.7] dark:text-gray-400 text-gray-500">Analytics that help you
+                        improve every day.</p>
+                </div>
+            </div>
         </div>
 
         <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4">
-            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-2.5 text-base bg-emerald-500/[0.15]">
-                🔒</div>
-            <h4 class="text-[13px] font-bold dark:text-white text-gray-900 mb-1">Privacy First</h4>
-            <p class="text-[11.5px] dark:text-gray-500 text-gray-400 leading-relaxed">Your data is yours.
-                Always.</p>
+            class="group hover-lift relative overflow-hidden rounded-2xl p-5 min-h-[118px]
+            dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07]">
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none"
+                style="background: radial-gradient(circle at 20% 45%, rgba(249,115,22,.16), transparent 35%),
+                       radial-gradient(circle at 85% 60%, rgba(236,72,153,.12), transparent 35%);">
+            </div>
+            <div class="relative z-10 flex items-center gap-4">
+                <div
+                    class="w-14 h-14 flex items-center justify-center text-[40px]
+                    drop-shadow-[0_0_14px_rgba(249,115,22,0.85)]">
+                    🔒
+                </div>
+                <div>
+                    <h4 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-2">Privacy First</h4>
+                    <p class="text-[12px] leading-[1.7] dark:text-gray-400 text-gray-500">Your data is yours.
+                        Always.</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -186,7 +227,7 @@
                 <option>This month</option>
             </select>
             <button
-                class="flex items-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[12.5px] font-bold btn-trans
+                class="flex items-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[16px] font-bold btn-trans
                         bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
                 + Add Task
             </button>
@@ -199,7 +240,7 @@
         <!-- Daily Score -->
         <div
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-            <p class="text-[12px] font-semibold dark:text-gray-400 text-gray-500 mb-3.5">Daily Score</p>
+            <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-3">Daily Score</p>
             <div class="flex flex-col items-center gap-2">
                 <div class="relative w-24 h-24">
                     <svg class="w-full h-full" viewBox="0 0 96 96">
@@ -217,48 +258,55 @@
                         </defs>
                     </svg>
                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <span
-                            class="text-[26px] font-extrabold tracking-[-1px] dark:text-white text-gray-900 leading-none">87</span>
+                        <span class="text-[28px] font-extrabold dark:text-white text-gray-900 leading-none">87</span>
                         <span class="text-[11px] dark:text-gray-500 text-gray-400">/100</span>
                     </div>
                 </div>
-                <p class="text-[12px] font-semibold text-orange-400">Amazing work!</p>
+                <p class="text-[14px] font-semibold text-orange-400">Amazing work!</p>
             </div>
         </div>
 
         <!-- Streak -->
         <div
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-            <p class="text-[12px] font-semibold dark:text-gray-400 text-gray-500 mb-3.5">Streak</p>
+            <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-3">Streak</p>
             <div class="flex flex-col items-center gap-1">
                 <span class="text-[44px] leading-none">🔥</span>
                 <span
                     class="text-[38px] font-extrabold tracking-[-1px] dark:text-white text-gray-900 leading-none mt-1">12</span>
-                <span class="text-[12px] dark:text-gray-500 text-gray-400">days</span>
-                <p class="text-[12px] font-semibold text-orange-400 mt-0.5">Keep it hot! 🔥</p>
+                <span class="text-[14px] dark:text-gray-500 text-gray-400">days</span>
+                <p class="text-[14px] font-semibold text-orange-400 mt-0.5">Keep it hot! 🔥</p>
             </div>
         </div>
 
         <!-- XP Progress -->
         <div
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-            <p class="text-[12px] font-semibold dark:text-gray-400 text-gray-500 mb-3">XP Progress</p>
-            <p class="text-[16px] font-bold text-orange-400 mb-1">Level 24</p>
-            <p class="text-[12px] dark:text-gray-400 text-gray-500 mb-2.5">2,450 / 3,500 XP</p>
-            <div class="w-full h-[7px] rounded-full dark:bg-white/[0.08] bg-gray-100 overflow-hidden">
-                <div class="h-full rounded-full bg-gradient-to-r from-orange-500 to-pink-500" style="width:70%"></div>
+            <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-3">XP Progress</p>
+            <p class="text-[20px] font-bold text-orange-400 mb-1">Level 24</p>
+            <p class="text-[14px] dark:text-gray-400 text-gray-500 mb-2.5">2,450 / 3,500 XP</p>
+            <div class="w-full h-[8px] rounded-full dark:bg-white/[0.08] bg-orange-100 overflow-hidden">
+                <div class="h-full rounded-full bg-gradient-to-r from-pink-500 to-orange-500" style="width:70%"></div>
             </div>
-            <canvas id="xpSparkline" height="36" class="w-full mt-2.5 block"></canvas>
         </div>
 
         <!-- Focus Time -->
         <div
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-            <p class="text-[12px] font-semibold dark:text-gray-400 text-gray-500 mb-2.5">Focus Time</p>
-            <p class="text-[26px] font-extrabold tracking-[-0.5px] dark:text-white text-gray-900 leading-none mb-1">
+            <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-3">Focus Time</p>
+            <p class="text-[28px] font-extrabold tracking-[-0.5px] dark:text-white text-gray-900 leading-none mb-1">
                 3h 24m</p>
-            <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-2.5">Today</p>
-            <canvas id="focusSparkline" height="36" class="w-full block"></canvas>
+            <p class="text-[14px] dark:text-gray-500 text-gray-400 mb-2.5">Today</p>
+            <svg viewBox="0 0 160 45" class="w-full h-[45px]">
+                <path d="M0 35 C18 30, 18 10, 35 20 C52 30, 50 5, 70 14 C90 23, 88 38, 108 22 C128 5, 132 28, 160 12"
+                    fill="none" stroke="url(#focusLine)" stroke-width="3" stroke-linecap="round" />
+                <defs>
+                    <linearGradient id="focusLine" x1="0" y1="0" x2="1" y2="0">
+                        <stop stop-color="#ec4899" />
+                        <stop offset="1" stop-color="#f97316" />
+                    </linearGradient>
+                </defs>
+            </svg>
         </div>
     </div>
 
@@ -268,7 +316,7 @@
         <!-- Top 3 Priorities -->
         <div
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-            <h3 class="text-[14px] font-bold dark:text-white text-gray-900 mb-3.5">Top 3 Priorities</h3>
+            <h3 class="text-[20px] font-bold dark:text-white text-gray-900 mb-3.5">Top 3 Priorities</h3>
 
             <!-- Item 1 -->
             <div class="flex items-center gap-2.5 py-2.5 border-b dark:border-white/[0.06] border-black/[0.05]">
@@ -280,8 +328,8 @@
                 <span class="flex-1 text-[13px] font-medium dark:text-gray-200 text-gray-700">Launch new
                     landing page</span>
                 <span
-                    class="px-2.5 py-[3px] rounded-[7px] text-[11px] font-semibold  dark:bg-red-500/[0.15] dark:text-red-400 dark:border dark:border-red-500/[0.3] bg-red-50 text-red-600 border border-red-200">High</span>
-                <span class="text-[11px] dark:text-gray-600 text-gray-300 cursor-grab ml-1">⋮⋮</span>
+                    class="px-2.5 py-[3px] rounded-[7px] text-[14px] font-semibold  dark:bg-red-500/[0.15] dark:text-red-400 dark:border dark:border-red-500/[0.3] bg-red-50 text-red-600 border border-red-200">High</span>
+                <span class="text-[14px] dark:text-gray-600 text-gray-300 cursor-grab ml-1">⋮⋮</span>
             </div>
 
             <!-- Item 2 -->
@@ -293,8 +341,8 @@
                 <span class="flex-1 text-[13px] font-medium dark:text-gray-200 text-gray-700">Workout &amp;
                     gym</span>
                 <span
-                    class="px-2.5 py-[3px] rounded-[7px] text-[11px] font-semibold  dark:bg-orange-500/[0.15] dark:text-orange-400 dark:border dark:border-orange-500/[0.3]  bg-orange-50 text-orange-600 border border-orange-200">Medium</span>
-                <span class="text-[11px] dark:text-gray-600 text-gray-300 cursor-grab ml-1">⋮⋮</span>
+                    class="px-2.5 py-[3px] rounded-[7px] text-[14px] font-semibold  dark:bg-orange-500/[0.15] dark:text-orange-400 dark:border dark:border-orange-500/[0.3]  bg-orange-50 text-orange-600 border border-orange-200">Medium</span>
+                <span class="text-[14px] dark:text-gray-600 text-gray-300 cursor-grab ml-1">⋮⋮</span>
             </div>
 
             <!-- Item 3 -->
@@ -306,15 +354,15 @@
                 <span class="flex-1 text-[13px] font-medium dark:text-gray-200 text-gray-700">Read 20
                     pages</span>
                 <span
-                    class="px-2.5 py-[3px] rounded-[7px] text-[11px] font-semibold  dark:bg-emerald-500/[0.15]  bg-emerald-50 text-emerald-600 border border-emerald-200">Low</span>
-                <span class="text-[11px] dark:text-gray-600 text-gray-300 cursor-grab ml-1">⋮⋮</span>
+                    class="px-2.5 py-[3px] rounded-[7px] text-[14px] font-semibold  dark:bg-emerald-500/[0.15]  bg-emerald-50 text-emerald-600 border border-emerald-200">Low</span>
+                <span class="text-[14px] dark:text-gray-600 text-gray-300 cursor-grab ml-1">⋮⋮</span>
             </div>
         </div>
 
         <!-- Activity Feed -->
         <div
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-            <h3 class="text-[14px] font-bold dark:text-white text-gray-900 mb-3.5">Activity Feed</h3>
+            <h3 class="text-[20px] font-bold dark:text-white text-gray-900 mb-3.5">Activity Feed</h3>
 
             <div class="flex items-start gap-2.5 py-2 border-b dark:border-white/[0.06] border-black/[0.05]">
                 <div
@@ -326,7 +374,7 @@
                         task</p>
                     <p class="text-[11.5px] dark:text-gray-500 text-gray-400">Build new habit system</p>
                 </div>
-                <span class="text-[11px] dark:text-gray-600 text-gray-400 flex-shrink-0 mt-0.5">2m ago</span>
+                <span class="text-[14px] dark:text-gray-600 text-gray-400 flex-shrink-0 mt-0.5">2m ago</span>
             </div>
 
             <div class="flex items-start gap-2.5 py-2 border-b dark:border-white/[0.06] border-black/[0.05]">
@@ -337,7 +385,7 @@
                     <p class="text-[12.5px] font-semibold dark:text-gray-200 text-gray-800">You reached a 12
                         day streak! 🔥</p>
                 </div>
-                <span class="text-[11px] dark:text-gray-600 text-gray-400 flex-shrink-0 mt-0.5">1h ago</span>
+                <span class="text-[14px] dark:text-gray-600 text-gray-400 flex-shrink-0 mt-0.5">1h ago</span>
             </div>
 
             <div class="flex items-start gap-2.5 py-2 border-b dark:border-white/[0.06] border-black/[0.05]">
@@ -350,7 +398,7 @@
                         completed</p>
                     <p class="text-[11.5px] dark:text-gray-500 text-gray-400">Deep Work Session</p>
                 </div>
-                <span class="text-[11px] dark:text-gray-600 text-gray-400 flex-shrink-0 mt-0.5">2h ago</span>
+                <span class="text-[14px] dark:text-gray-600 text-gray-400 flex-shrink-0 mt-0.5">2h ago</span>
             </div>
 
             <div class="flex items-start gap-2.5 py-2">
@@ -363,7 +411,7 @@
                     </p>
                     <p class="text-[11.5px] dark:text-gray-500 text-gray-400">Project Ideas</p>
                 </div>
-                <span class="text-[11px] dark:text-gray-600 text-gray-400 flex-shrink-0 mt-0.5">3h ago</span>
+                <span class="text-[14px] dark:text-gray-600 text-gray-400 flex-shrink-0 mt-0.5">3h ago</span>
             </div>
         </div>
     </div>
@@ -375,12 +423,12 @@
         <div
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-[14px] font-bold dark:text-white text-gray-900">Productivity Overview</h3>
+                <h3 class="text-[20px] font-bold dark:text-white text-gray-900">Productivity Overview</h3>
                 <div class="flex items-center gap-3.5">
-                    <div class="flex items-center gap-1.5 text-[11.5px] dark:text-gray-400 text-gray-500">
+                    <div class="flex items-center gap-1.5 text-[14px] dark:text-gray-400 text-gray-500">
                         <div class="w-2.5 h-1 rounded-full bg-orange-400"></div>This week
                     </div>
-                    <div class="flex items-center gap-1.5 text-[11.5px] dark:text-gray-400 text-gray-500">
+                    <div class="flex items-center gap-1.5 text-[14px] dark:text-gray-400 text-gray-500">
                         <div class="w-2.5 h-1 rounded-full bg-amber-400/60"></div>Last week
                     </div>
                 </div>
@@ -393,7 +441,7 @@
         <!-- Focus Score -->
         <div
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px] flex flex-col items-center">
-            <h3 class="text-[14px] font-bold dark:text-white text-gray-900 self-start mb-3.5">Focus Score</h3>
+            <h3 class="text-[20px] font-bold dark:text-white text-gray-900 self-start mb-3.5">Focus Score</h3>
             <!-- Ring -->
             <div class="relative w-[120px] h-[120px] mb-4">
                 <svg class="w-full h-full" viewBox="0 0 120 120">
@@ -414,12 +462,12 @@
                     <span
                         class="text-[28px] font-extrabold tracking-[-0.5px] dark:text-white text-gray-900 leading-none">94<sup
                             class="text-[15px] align-super">%</sup></span>
-                    <span class="text-[11.5px] dark:text-gray-400 text-gray-500 mt-0.5">Excellent</span>
+                    <span class="text-[14px] dark:text-gray-400 text-gray-500 mt-0.5">Excellent</span>
                 </div>
             </div>
             <!-- Goal bar -->
             <div class="w-full">
-                <div class="flex justify-between text-[12px] mb-1.5">
+                <div class="flex justify-between text-[16px] mb-1.5">
                     <span class="dark:text-gray-400 text-gray-500">Weekly Goal</span>
                     <span class="font-bold dark:text-white text-gray-800">80%</span>
                 </div>

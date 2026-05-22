@@ -5,22 +5,22 @@
 
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
+                <h2 class="text-[28px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     My Tasks
                 </h2>
-                <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[18px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Organize your workflow with priority based task cards.
                 </p>
             </div>
 
             <div class="flex items-center gap-2.5">
                 <a href="{{ route('user.tasks.kanban') }}"
-                    class="px-4 py-2 rounded-[10px] text-[12.5px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
+                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
                     Kanban View
                 </a>
 
                 <a href="{{ route('user.tasks.create') }}"
-                    class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[12.5px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
+                    class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
                     + Add Task
                 </a>
             </div>
@@ -54,20 +54,20 @@
 
                     <div class="relative z-10 flex items-start justify-between gap-3">
                         <div>
-                            <h3 class="text-[15px] font-bold dark:text-white text-gray-900 leading-snug">
+                            <h3 class="text-[18px] font-bold dark:text-white text-gray-900 leading-snug">
                                 {{ $task->title }}
                             </h3>
-                            <p class="text-[11.5px] dark:text-gray-500 text-gray-400 mt-1">
+                            <p class="text-[16px] dark:text-gray-500 text-gray-400 mt-1">
                                 {{ $task->category?->name ?? 'Uncategorized' }}
                             </p>
                         </div>
 
-                        <span class="px-2.5 py-[4px] rounded-lg text-[11px] font-bold border {{ $priorityClass }}">
+                        <span class="px-2.5 py-[4px] rounded-lg text-[15px] font-bold border {{ $priorityClass }}">
                             {{ ucfirst($task->priority) }}
                         </span>
                     </div>
 
-                    <p class="relative z-10 text-[12.5px] dark:text-gray-400 text-gray-500 leading-relaxed mt-3">
+                    <p class="relative z-10 text-[16px] dark:text-gray-400 text-gray-500 leading-relaxed mt-3">
                         {{ \Illuminate\Support\Str::limit($task->description, 120) ?? 'No description added.' }}
                     </p>
 
@@ -97,14 +97,14 @@
                                     'bg-gray-100 text-gray-600 dark:bg-white/10 dark:text-gray-300 border border-white/10';
                             @endphp
 
-                            <span class="px-2.5 py-[4px] rounded-md text-[10.5px] font-semibold {{ $colorClass }}">
+                            <span class="px-2.5 py-[4px] rounded-md text-[15px] font-semibold {{ $colorClass }}">
                                 #{{ strtolower($label->name) }}
                             </span>
 
                         @empty
 
                             <span
-                                class="px-2.5 py-[4px] rounded-md text-[10.5px] font-semibold
+                                class="px-2.5 py-[4px] rounded-md text-[15px] font-semibold
             bg-gray-100 text-gray-500 dark:bg-white/10 dark:text-gray-400 border border-white/10">
                                 No Label
                             </span>
@@ -115,19 +115,19 @@
                     <div
                         class="relative z-10 flex items-center justify-between mt-4 pt-3 border-t dark:border-white/[0.06] border-black/[0.05]">
                         <div>
-                            <p class="text-[11px] dark:text-gray-500 text-gray-400">Due Date</p>
-                            <p class="text-[12px] font-semibold dark:text-gray-300 text-gray-700">
+                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Due Date</p>
+                            <p class="text-[14px] font-semibold dark:text-gray-300 text-gray-700">
                                 {{ $task->due_date ? $task->due_date->format('d M, Y') : 'No deadline' }}
                             </p>
                         </div>
 
-                        <span class="px-2.5 py-[4px] rounded-lg text-[11px] font-bold {{ $statusClass }}">
+                        <span class="px-2.5 py-[4px] rounded-lg text-[15px] font-bold {{ $statusClass }}">
                             {{ ucfirst(str_replace('_', ' ', $task->status)) }}
                         </span>
                     </div>
 
                     <div class="relative z-10 mt-4">
-                        <div class="flex justify-between text-[11.5px] mb-1.5">
+                        <div class="flex justify-between text-[16px] mb-1.5">
                             <span class="dark:text-gray-400 text-gray-500">Subtasks</span>
                             <span class="font-bold dark:text-white text-gray-800">
                                 {{ $completedSubtasks }}/{{ $totalSubtasks }}
@@ -142,13 +142,13 @@
 
                     <div class="relative z-10 flex items-center justify-between gap-2 mt-4">
                         <a href="{{ route('user.tasks.show', $task) }}"
-                            class="px-3 py-2 rounded-lg text-[12px] font-bold text-white bg-gradient-to-r from-orange-500 to-pink-500">
+                            class="px-3 py-2 rounded-lg text-[14px] font-bold text-white bg-gradient-to-r from-orange-500 to-pink-500">
                             View
                         </a>
 
                         <div class="flex items-center gap-2">
                             <a href="{{ route('user.tasks.edit', $task) }}"
-                                class="px-3 py-2 rounded-lg text-[12px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
+                                class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
                                 Edit
                             </a>
 
@@ -156,7 +156,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button onclick="return confirm('Delete this task?')"
-                                    class="px-3 py-2 rounded-lg text-[12px] font-bold dark:bg-red-500/[0.15] bg-red-50 text-red-500">
+                                    class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-red-500/[0.15] bg-red-50 text-red-500">
                                     Delete
                                 </button>
                             </form>

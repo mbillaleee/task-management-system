@@ -234,7 +234,7 @@
     <!-- ═══════════════════════════════════════
         MAIN WRAPPER
     ═══════════════════════════════════════ -->
-    <div class="lg:ml-52 flex flex-col min-h-screen relative z-10">
+    <div class="lg:ml-64 flex flex-col min-h-screen relative z-10">
 
         <!-- ─── HEADER ─── -->
         @include('user.layouts.navbar')
@@ -249,168 +249,13 @@
         </main>
     </div>
 
-    <!-- ═══════════════════════════════════════
-        JAVASCRIPT
-    ═══════════════════════════════════════ -->
     <script>
-        /* ─────────────────────────────────────
-                THEME MANAGEMENT
-            ───────────────────────────────────── */
         let currentTheme = localStorage.getItem('veroa-theme') || 'dark';
-        let prodChart, xpChart, focusChart;
+        let prodChart = null;
 
-        function setTheme(mode) {
-            currentTheme = mode;
-            const html = document.documentElement;
-            const hero = document.getElementById('heroSection');
-            const heroSvg = document.getElementById('heroSvg');
-            const heroGradText = document.getElementById('heroGradText');
-            const socialProof = document.getElementById('socialProof');
-            const upgradeCard = document.getElementById('upgradeCard');
-            const btnLight = document.getElementById('btnLight');
-            const btnDark = document.getElementById('btnDark');
-
-            // All nav items
-            const navItems = document.querySelectorAll('.nav-item');
-
-            if (mode === 'dark') {
-                html.classList.remove('light');
-                html.classList.add('dark');
-
-                // Hero
-                hero.classList.add('hero-dark');
-                hero.classList.remove('hero-light');
-                hero.classList.add('border-orange-500/[0.15]');
-                hero.classList.remove('border-orange-200/60');
-
-                // Grad text
-                heroGradText.classList.add('grad-text-dark');
-                heroGradText.classList.remove('grad-text-light');
-
-                // SVG filter
-                heroSvg.classList.add('hero-svg-dark');
-                heroSvg.classList.remove('hero-svg-light');
-
-                // Social proof hidden
-                socialProof.classList.add('hidden');
-                socialProof.classList.remove('flex');
-
-                // Upgrade card
-                upgradeCard.classList.add('upgrade-dark');
-                upgradeCard.classList.remove('upgrade-light');
-
-                // Toggle buttons
-                btnDark.classList.add('dark:text-white', 'dark:bg-[#1e1730]', 'dark:shadow-sm');
-                btnLight.classList.remove('bg-white', 'shadow-sm', 'text-gray-800');
-                btnLight.classList.add('text-gray-500');
-
-                // Active nav item
-                updateNavActive();
-
-                // Rebuild charts
-                rebuildCharts();
-
-            } else {
-                html.classList.remove('dark');
-                html.classList.add('light');
-
-                // Hero
-                hero.classList.remove('hero-dark');
-                hero.classList.add('hero-light');
-                hero.classList.remove('border-orange-500/[0.15]');
-                hero.classList.add('border-orange-200/60');
-
-                // Grad text
-                heroGradText.classList.remove('grad-text-dark');
-                heroGradText.classList.add('grad-text-light');
-
-                // SVG filter
-                heroSvg.classList.remove('hero-svg-dark');
-                heroSvg.classList.add('hero-svg-light');
-
-                // Social proof visible
-                socialProof.classList.remove('hidden');
-                socialProof.classList.add('flex');
-
-                // Upgrade card
-                upgradeCard.classList.remove('upgrade-dark');
-                upgradeCard.classList.add('upgrade-light');
-
-                // Toggle buttons
-                btnLight.classList.add('bg-white', 'shadow-sm', 'text-gray-800');
-                btnLight.classList.remove('text-gray-500');
-                btnDark.classList.add('text-gray-400');
-                btnDark.classList.remove('text-white');
-
-                // Active nav item
-                updateNavActive();
-
-                // Rebuild charts
-                rebuildCharts();
-            }
-
-            localStorage.setItem('veroa-theme', mode);
-        }
-
-        function updateNavActive() {
-            // Will be handled in setNav
-        }
-
-        // ─────────────────────────────────────
-        // SIDEBAR TOGGLE
-        // ─────────────────────────────────────
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('hidden');
-        }
-
-        function closeSidebar() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('overlay').classList.add('hidden');
-        }
-
-        // ─────────────────────────────────────
-        // NAV ACTIVE STATE
-        // ─────────────────────────────────────
-        let activeNav = 'dashboard';
-
-        function setNav(id, e) {
-            if (e) e.preventDefault();
-            activeNav = id;
-
-            const navIds = ['dashboard', 'users', 'tasks', 'habits', 'notes', 'focus', 'tools', 'analytics', 'settings'];
-            navIds.forEach(navId => {
-                const el = document.getElementById('nav-' + navId);
-                if (!el) return;
-
-                if (navId === id) {
-                    // Active
-                    el.classList.remove('dark:text-gray-400', 'text-gray-500', 'dark:hover:text-white',
-                        'hover:text-gray-900', 'dark:hover:bg-white/[0.05]', 'hover:bg-black/[0.04]');
-                    el.classList.add('dark:text-orange-400', 'text-orange-600', 'font-semibold');
-                    // Apply active bg
-                    el.style.background = currentTheme === 'dark' ?
-                        'linear-gradient(90deg, rgba(249,115,22,0.18) 0%, rgba(249,115,22,0.04) 100%)' :
-                        'linear-gradient(90deg, rgba(234,88,12,0.14) 0%, rgba(234,88,12,0.03) 100%)';
-                    el.style.borderLeftColor = currentTheme === 'dark' ? '#f97316' : '#ea580c';
-                } else {
-                    // Inactive
-                    el.classList.remove('dark:text-orange-400', 'text-orange-600', 'font-semibold');
-                    el.classList.add('dark:text-gray-400', 'text-gray-500', 'dark:hover:text-white',
-                        'hover:text-gray-900', 'dark:hover:bg-white/[0.05]', 'hover:bg-black/[0.04]');
-                    el.style.background = '';
-                    el.style.borderLeftColor = 'transparent';
-                }
-            });
-        }
-
-        // ─────────────────────────────────────
-        // CHARTS
-        // ─────────────────────────────────────
         function getChartCfg() {
             const dark = document.documentElement.classList.contains('dark');
+
             return {
                 grid: dark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.05)',
                 tick: dark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.4)',
@@ -421,15 +266,24 @@
         }
 
         function buildProductivityChart() {
+            const canvas = document.getElementById('productivityChart');
+
+            if (!canvas || typeof Chart === 'undefined') return;
+
+            if (prodChart) {
+                prodChart.destroy();
+                prodChart = null;
+            }
+
             const cfg = getChartCfg();
-            const ctx = document.getElementById('productivityChart').getContext('2d');
+            const ctx = canvas.getContext('2d');
 
             const grad1 = ctx.createLinearGradient(0, 0, 0, 130);
-            grad1.addColorStop(0, 'rgba(249,115,22,0.3)');
+            grad1.addColorStop(0, 'rgba(249,115,22,0.30)');
             grad1.addColorStop(1, 'rgba(249,115,22,0.01)');
 
             const grad2 = ctx.createLinearGradient(0, 0, 0, 130);
-            grad2.addColorStop(0, 'rgba(245,158,11,0.2)');
+            grad2.addColorStop(0, 'rgba(245,158,11,0.22)');
             grad2.addColorStop(1, 'rgba(245,158,11,0.01)');
 
             prodChart = new Chart(ctx, {
@@ -440,9 +294,9 @@
                             label: 'This week',
                             data: [38, 52, 46, 64, 90, 70, 82],
                             borderColor: '#f97316',
+                            backgroundColor: grad1,
                             borderWidth: 2.5,
                             fill: true,
-                            backgroundColor: grad1,
                             tension: 0.45,
                             pointRadius: 3.5,
                             pointBackgroundColor: '#f97316',
@@ -453,9 +307,9 @@
                             label: 'Last week',
                             data: [28, 40, 35, 52, 60, 55, 62],
                             borderColor: cfg.line2,
+                            backgroundColor: grad2,
                             borderWidth: 2,
                             fill: true,
-                            backgroundColor: grad2,
                             tension: 0.45,
                             pointRadius: 2.5,
                             pointBackgroundColor: '#f59e0b',
@@ -511,11 +365,11 @@
                             },
                             ticks: {
                                 color: cfg.tick,
+                                stepSize: 25,
                                 font: {
                                     size: 11,
                                     family: 'Inter'
-                                },
-                                stepSize: 25
+                                }
                             },
                             border: {
                                 display: false
@@ -526,73 +380,52 @@
             });
         }
 
-        function buildSparkline(id, data, c1, c2) {
-            const ctx = document.getElementById(id).getContext('2d');
-            const grad = ctx.createLinearGradient(0, 0, 200, 0);
-            grad.addColorStop(0, c1);
-            grad.addColorStop(1, c2 || c1);
+        function setTheme(mode) {
+            currentTheme = mode;
 
-            return new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: data.map((_, i) => i),
-                    datasets: [{
-                        data,
-                        borderColor: grad,
-                        borderWidth: 2.5,
-                        fill: false,
-                        tension: 0.5,
-                        pointRadius: 0,
-                    }]
-                },
-                options: {
-                    responsive: false,
-                    animation: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            enabled: false
-                        }
-                    },
-                    scales: {
-                        x: {
-                            display: false
-                        },
-                        y: {
-                            display: false
-                        }
-                    },
+            const html = document.documentElement;
+            const upgradeCard = document.getElementById('upgradeCard');
+
+            if (mode === 'dark') {
+                html.classList.remove('light');
+                html.classList.add('dark');
+
+                if (upgradeCard) {
+                    upgradeCard.classList.add('upgrade-dark');
+                    upgradeCard.classList.remove('upgrade-light');
                 }
-            });
-        }
+            } else {
+                html.classList.remove('dark');
+                html.classList.add('light');
 
-        function buildSparklines() {
-            xpChart = buildSparkline('xpSparkline',
-                [18, 32, 26, 48, 40, 58, 50, 70, 62, 78, 68, 84],
-                '#ec4899', '#f97316');
-            focusChart = buildSparkline('focusSparkline',
-                [28, 42, 36, 55, 48, 68, 60, 78, 70, 86, 76, 90],
-                '#f97316', '#ec4899');
-        }
+                if (upgradeCard) {
+                    upgradeCard.classList.remove('upgrade-dark');
+                    upgradeCard.classList.add('upgrade-light');
+                }
+            }
 
-        function rebuildCharts() {
-            if (prodChart) prodChart.destroy();
-            if (xpChart) xpChart.destroy();
-            if (focusChart) focusChart.destroy();
+            localStorage.setItem('veroa-theme', mode);
             buildProductivityChart();
-            buildSparklines();
         }
 
-        // ─────────────────────────────────────
-        // INIT
-        // ─────────────────────────────────────
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (sidebar) sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('hidden');
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (sidebar) sidebar.classList.remove('open');
+            if (overlay) overlay.classList.add('hidden');
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             setTheme(currentTheme);
-            setNav('dashboard', null);
-            buildProductivityChart();
-            buildSparklines();
         });
     </script>
 </body>

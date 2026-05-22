@@ -41,14 +41,14 @@
      <nav class="hidden md:flex items-center gap-6">
          <a href="{{ route('user.features') }}"
              class="text-[13.5px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Features</a>
-         <a href="#"
+         <a href="{{ route('user.tools') }}"
              class="text-[13.5px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Tools</a>
-         <a href="#"
+         <a href="{{ route('user.pricing') }}"
              class="text-[13.5px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Pricing</a>
-         <a href="#"
+         <a href="{{ route('user.about') }}"
              class="text-[13.5px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">About</a>
-         <a href="#"
-             class="text-[13.5px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Changelog</a>
+         {{-- <a href="{{ route('user.changelog') }}"
+             class="text-[13.5px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Changelog</a> --}}
      </nav>
 
      <!-- Right: icons + toggle -->
