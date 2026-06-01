@@ -49,5 +49,26 @@ class User extends Authenticatable
     }
 
 
+    public function notes()
+    {
+        return $this->hasMany(\App\Models\Note::class);
+    }
+
+    public function noteFolders()
+    {
+        return $this->hasMany(\App\Models\NoteFolder::class);
+    }
+
+    public function noteCategories()
+    {
+        return $this->hasMany(\App\Models\NoteCategory::class);
+    }
+
+    public function noteTags()
+    {
+        return $this->hasMany(\App\Models\NoteTag::class);
+    }
+
+
  
 }

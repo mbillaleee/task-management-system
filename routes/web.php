@@ -19,6 +19,9 @@ use App\Http\Controllers\User\TaskSubtaskController;
 use App\Http\Controllers\User\TaskCommentController;
 use App\Http\Controllers\User\HabitController;
 use App\Http\Controllers\User\HabitLogController;
+use App\Http\Controllers\User\NoteController;
+use App\Http\Controllers\User\NoteFolderController;
+use App\Http\Controllers\User\NoteCategoryController;
 
 
 
@@ -58,6 +61,24 @@ Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(fu
     Route::get('all-habits', [HabitController::class, 'allHabits'])->name('allHabits');
     Route::get('habits-board', [HabitController::class, 'board'])->name('habits.board');
     Route::post('habits/{habit}/toggle', [HabitLogController::class, 'toggle'])->name('habits.toggle');
+
+
+    Route::resource('notes', NoteController::class);
+
+    Route::post('/notes/{note}/toggle-pin', [NoteController::class, 'togglePin'])
+        ->name('notes.toggle-pin');
+
+    Route::post('/notes/{note}/toggle-favorite', [NoteController::class, 'toggleFavorite'])
+        ->name('notes.toggle-favorite');
+
+    Route::put('/notes/{note}/autosave', [NoteController::class, 'autosave'])
+        ->name('notes.autosave');
+
+    Route::resource('note-folders', NoteFolderController::class)
+        ->only(['index', 'store', 'update', 'destroy']);
+
+    Route::resource('note-categories', NoteCategoryController::class)
+        ->only(['index', 'store', 'update', 'destroy']);
 
 
 
