@@ -17,16 +17,17 @@
             <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
                 <div>
                     <span
-                        class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold
+                        class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold
                     bg-orange-500/[0.14] text-orange-400 border border-orange-500/[0.25] mb-3">
                         Product Updates
                     </span>
 
-                    <h1 class="text-[30px] sm:text-[38px] font-extrabold leading-tight dark:text-white text-gray-900">
+                    <h1
+                        class="text-[28px] sm:text-[32px] md:text-[38px] font-extrabold leading-tight dark:text-white text-gray-900">
                         Changelog
                     </h1>
 
-                    <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-2 max-w-[520px] leading-[1.7]">
+                    <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-2 max-w-[520px] leading-[1.7]">
                         Track every improvement, new feature, bug fix and performance update inside Veroa.
                     </p>
                 </div>
@@ -45,30 +46,30 @@
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <p class="text-[12px] font-semibold dark:text-gray-400 text-gray-500 mb-2">Total Updates</p>
+                <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-2">Total Updates</p>
                 <h3 class="text-[30px] font-extrabold dark:text-white text-gray-900">24</h3>
-                <p class="text-[11.5px] text-orange-400 mt-1">Released changes</p>
+                <p class="text-[12px] text-orange-400 mt-1">Released changes</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <p class="text-[12px] font-semibold dark:text-gray-400 text-gray-500 mb-2">New Features</p>
+                <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-2">New Features</p>
                 <h3 class="text-[30px] font-extrabold text-pink-500">12</h3>
-                <p class="text-[11.5px] text-pink-500 mt-1">Major additions</p>
+                <p class="text-[12px] text-pink-500 mt-1">Major additions</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <p class="text-[12px] font-semibold dark:text-gray-400 text-gray-500 mb-2">Fixes</p>
+                <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-2">Fixes</p>
                 <h3 class="text-[30px] font-extrabold text-emerald-500">8</h3>
-                <p class="text-[11.5px] text-emerald-500 mt-1">Bug resolved</p>
+                <p class="text-[12px] text-emerald-500 mt-1">Bug resolved</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <p class="text-[12px] font-semibold dark:text-gray-400 text-gray-500 mb-2">Current Version</p>
+                <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-2">Current Version</p>
                 <h3 class="text-[30px] font-extrabold text-orange-500">v1.4</h3>
-                <p class="text-[11.5px] text-orange-400 mt-1">Stable release</p>
+                <p class="text-[12px] text-orange-400 mt-1">Stable release</p>
             </div>
 
         </div>

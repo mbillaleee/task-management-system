@@ -9,13 +9,13 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     Features
                 </h2>
-                <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Explore all powerful tools designed to improve your productivity.
                 </p>
             </div>
 
             <a href="{{ route('user.tasks.create') }}"
-                class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[12.5px] font-bold
+                class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[14px] font-bold
             bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
                 + Start Planning
             </a>
@@ -37,26 +37,26 @@
                 </span>
 
                 <h1
-                    class="text-[34px] md:text-[46px] leading-tight font-extrabold tracking-[-1.5px] mt-5 dark:text-white text-gray-900">
+                    class="text-[28px] sm:text-[36px] md:text-[46px] leading-tight font-extrabold tracking-[-1.5px] mt-5 dark:text-white text-gray-900">
                     One system. <br>
                     <span class="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">
                         Infinite potential.
                     </span>
                 </h1>
 
-                <p class="text-[13px] md:text-[14px] dark:text-gray-400 text-gray-500 mt-4 leading-relaxed">
+                <p class="text-[14px] md:text-[14px] dark:text-gray-400 text-gray-500 mt-4 leading-relaxed">
                     Manage tasks, habits, notes, focus sessions, analytics and goals from one powerful workspace.
                 </p>
 
                 <div class="flex flex-wrap gap-3 mt-6">
                     <a href="{{ route('user.tasks.index') }}"
-                        class="px-5 py-2.5 rounded-[10px] text-white text-[13px] font-bold
+                        class="px-5 py-2.5 rounded-[10px] text-white text-[14px] font-bold
                     bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
                         View Tasks
                     </a>
 
                     <a href="#feature-list"
-                        class="px-5 py-2.5 rounded-[10px] text-[13px] font-bold
+                        class="px-5 py-2.5 rounded-[10px] text-[14px] font-bold
                     dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
                         See Features
                     </a>

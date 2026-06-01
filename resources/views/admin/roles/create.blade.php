@@ -8,8 +8,8 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-                <h2 class="text-[24px] font-extrabold dark:text-white text-gray-900">Create New Role</h2>
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-1">
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Create New Role</h2>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-1">
                     Create a new role and assign the appropriate permissions.
                 </p>
             </div>
@@ -46,7 +46,7 @@
 
                     <!-- Role Name -->
                     <div>
-                        <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700">Role Name <span
+                        <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700">Role Name <span
                                 class="text-red-500">*</span></label>
                         <div
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
@@ -54,7 +54,7 @@
                             <input type="text" name="name" placeholder="Enter role name" value="{{ old('name') }}"
                                 class="w-full px-3 py-2 dark:bg-[#1a1625] dark:text-white focus:outline-none">
                         </div>
-                        <small class="text-[11px] text-gray-500 dark:text-gray-400">Example: Admin, Manager, Editor, Support
+                        <small class="text-[12px] text-gray-500 dark:text-gray-400">Example: Admin, Manager, Editor, Support
                             Agent</small>
                     </div>
 
@@ -94,13 +94,13 @@
                         @foreach ($permission as $value)
                             <div class="hover-lift p-3 border dark:border-white/10 rounded-lg dark:bg-[#1a1625] bg-white">
                                 <label
-                                    class="flex items-center gap-2 cursor-pointer text-[13px] dark:text-white text-gray-900">
+                                    class="flex items-center gap-2 cursor-pointer text-[14px] dark:text-white text-gray-900">
                                     <input type="checkbox" name="permission[{{ $value->id }}]"
                                         value="{{ $value->id }}" class="permission-checkbox" id="perm{{ $value->id }}"
                                         {{ old('permission.' . $value->id) ? 'checked' : '' }}>
                                     {{ $value->name }}
                                 </label>
-                                <small class="text-[11px] text-gray-500 dark:text-gray-400">System access permission</small>
+                                <small class="text-[12px] text-gray-500 dark:text-gray-400">System access permission</small>
                             </div>
                         @endforeach
                     </div>

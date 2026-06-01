@@ -13,12 +13,27 @@ class HabitController extends Controller
 {
     public function index()
     {
+        $habits = Habit::with([
+                'category',
+                'todayLog',
+                'streak'
+            ])
+            ->where('user_id', auth()->id())
+            ->whereDate('created_at', today())
+            ->latest()
+            ->paginate(10);
+
+        return view('user.habits.index', compact('habits'));
+    }
+
+    public function allHabits()
+    {
         $habits = Habit::with(['category', 'todayLog', 'streak'])
             ->where('user_id', auth()->id())
             ->latest()
             ->paginate(10);
 
-        return view('user.habits.index', compact('habits'));
+        return view('user.habits.all_habits', compact('habits'));
     }
 
     public function create()

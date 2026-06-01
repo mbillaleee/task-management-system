@@ -9,7 +9,7 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     Pricing
                 </h2>
-                <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Choose the right plan for your productivity journey.
                 </p>
             </div>
@@ -43,14 +43,14 @@
                 </span>
 
                 <h1
-                    class="text-[32px] md:text-[44px] leading-tight font-extrabold tracking-[-1.4px] mt-5 dark:text-white text-gray-900">
+                    class="text-[24px] sm:text-[32px] md:text-[44px] leading-tight font-extrabold tracking-[-1.4px] mt-5 dark:text-white text-gray-900">
                     Start free. <br>
                     <span class="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">
                         Upgrade when you grow.
                     </span>
                 </h1>
 
-                <p class="text-[13px] md:text-[14px] dark:text-gray-400 text-gray-500 mt-4 leading-relaxed">
+                <p class="text-[14px] md:text-[14px] dark:text-gray-400 text-gray-500 mt-4 leading-relaxed">
                     Manage your tasks, habits, notes, focus sessions and analytics with flexible plans for every workflow.
                 </p>
             </div>
@@ -67,8 +67,8 @@
                 <div class="absolute top-0 right-0 w-24 h-24 bg-gray-500 blur-3xl opacity-20"></div>
 
                 <div class="relative z-10">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">Free</h3>
-                    <p class="text-[12.5px] dark:text-gray-500 text-gray-500 mt-1">
+                    <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900">Free</h3>
+                    <p class="text-[14px] dark:text-gray-500 text-gray-500 mt-1">
                         Best for getting started.
                     </p>
 

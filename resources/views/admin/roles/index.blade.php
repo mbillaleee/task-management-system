@@ -9,8 +9,8 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-                <h2 class="text-[24px] font-extrabold dark:text-white text-gray-900">Role Management</h2>
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-1">
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Role Management</h2>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-1">
                     Manage user roles with a clean and premium admin interface.
                 </p>
             </div>
@@ -85,7 +85,7 @@
                         <tbody id="roleTable">
                             @foreach ($roles as $key => $role)
                                 <tr
-                                    class="border-b border-gray-200 dark:border-white/[0.05] hover:bg-gray-50 dark:hover:bg-white/5">
+                                    class=" dark:text-white text-gray-500 border-b border-gray-200 dark:border-white/[0.05] hover:bg-gray-50 dark:hover:bg-white/5">
                                     <td class="px-3 py-2">{{ $loop->iteration }}</td>
                                     <td class="px-3 py-2">
                                         <div class="font-semibold dark:text-white text-gray-900">{{ $role->name }}</div>
@@ -93,7 +93,7 @@
                                     </td>
                                     <td class="px-3 py-2">
                                         <span
-                                            class="px-2 py-1 rounded-full text-[11px] font-semibold bg-green-100 dark:bg-green-700 text-green-600 dark:text-green-200">Active</span>
+                                            class="px-2 py-1 rounded-full text-[12px] font-semibold bg-green-100 dark:bg-green-700 text-green-600 dark:text-green-200">Active</span>
                                     </td>
                                     <td class="px-3 py-2 text-center flex justify-center gap-2">
                                         <a href="{{ route('admin.roles.show', $role->id) }}"

@@ -40,6 +40,7 @@ Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(fu
     Route::get('/dashboard', [UserDashboardController::class, 'userDashboard'])->name('dashboard');
 
     Route::resource('tasks', TaskController::class);
+    Route::get('all-tasks', [TaskController::class, 'allTasks'])->name('allTasks');
 
     Route::get('tasks-kanban', [TaskController::class, 'kanban'])->name('tasks.kanban');
     Route::patch('tasks/{task}/status', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus');
@@ -54,6 +55,7 @@ Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(fu
 
 
     Route::resource('habits', HabitController::class);
+    Route::get('all-habits', [HabitController::class, 'allHabits'])->name('allHabits');
     Route::get('habits-board', [HabitController::class, 'board'])->name('habits.board');
     Route::post('habits/{habit}/toggle', [HabitLogController::class, 'toggle'])->name('habits.toggle');
 

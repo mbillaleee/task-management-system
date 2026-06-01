@@ -19,8 +19,8 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-                <h2 class="text-[24px] font-extrabold dark:text-white text-gray-900">Show Role</h2>
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-1">
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Show Role</h2>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-1">
                     View the selected role details and all currently assigned permissions.
                 </p>
             </div>

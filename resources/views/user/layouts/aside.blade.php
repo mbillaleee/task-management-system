@@ -58,6 +58,8 @@
             <span>Tasks</span>
         </a>
 
+
+
         <a href="{{ route('user.habits.index') }}"
             class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline
             dark:text-gray-400 text-gray-600 dark:hover:bg-white/[0.06] hover:bg-black/[0.05]
@@ -69,6 +71,8 @@
             </svg>
             <span>Habits</span>
         </a>
+
+        {{--
 
         <a href="#"
             class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline
@@ -119,6 +123,8 @@
             <span>Analytics</span>
         </a>
 
+        --}}
+
         <a href="#"
             class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline
             dark:text-gray-400 text-gray-600 dark:hover:bg-white/[0.06] hover:bg-black/[0.05]
@@ -151,9 +157,10 @@
 
     <!-- Upgrade to Pro -->
     <div class="mx-3 mb-3">
-        <div class="upgrade-dark upgrade-light rounded-2xl p-4 border dark:border-orange-500/25 border-orange-300/50">
+        <div class="upgrade-dark dark:upgrade-dark upgrade-light rounded-2xl p-4 border dark:border-orange-500/25 border-orange-300/50"
+            id="upgradeCard">
             <div class="flex items-center gap-2 mb-1.5">
-                <span class="text-[20px]">👑</span>
+                <span class="text-[20px]">ðŸ‘‘</span>
                 <span class="text-[15px] font-bold dark:text-white text-gray-900">Upgrade to Pro</span>
             </div>
 

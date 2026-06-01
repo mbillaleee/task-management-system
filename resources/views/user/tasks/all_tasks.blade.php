@@ -6,7 +6,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Today's My Tasks
+                    My Tasks
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Organize your workflow with priority based task cards.
@@ -19,9 +19,9 @@
                     Kanban View
                 </a>
 
-                <a href="{{ route('user.allTasks') }}"
+                <a href="{{ route('user.tasks.index') }}"
                     class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                    <i class="fas fa-list"></i> All Tasks
+                    <i class="fas fa-list"></i> Today's Tasks
                 </a>
 
                 <a href="{{ route('user.tasks.create') }}"

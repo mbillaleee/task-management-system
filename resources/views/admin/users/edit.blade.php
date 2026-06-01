@@ -8,8 +8,8 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-                <h2 class="text-[24px] font-extrabold dark:text-white text-gray-900">Edit User</h2>
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-1">
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Edit User</h2>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-1">
                     Update user account details and assigned roles.
                 </p>
             </div>
@@ -48,7 +48,7 @@
 
                     <!-- Name -->
                     <div>
-                        <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700">Name <span
+                        <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700">Name <span
                                 class="text-red-500">*</span></label>
                         <div
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
@@ -61,7 +61,7 @@
 
                     <!-- Email -->
                     <div>
-                        <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700">Email <span
+                        <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700">Email <span
                                 class="text-red-500">*</span></label>
                         <div
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
@@ -74,7 +74,7 @@
 
                     <!-- Password -->
                     <div>
-                        <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700">Password</label>
+                        <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700">Password</label>
                         <div
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
                             <span class="px-3 text-gray-400 dark:text-gray-500"><i class="fas fa-lock"></i></span>
@@ -82,13 +82,13 @@
                                 class="w-full px-3 py-2 dark:bg-[#1a1625] dark:text-white focus:outline-none"
                                 placeholder="Enter new password">
                         </div>
-                        <small class="text-[11px] text-gray-500 dark:text-gray-400">Leave blank if you don't want to change
+                        <small class="text-[12px] text-gray-500 dark:text-gray-400">Leave blank if you don't want to change
                             the password.</small>
                     </div>
 
                     <!-- Confirm Password -->
                     <div>
-                        <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700">Confirm
+                        <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700">Confirm
                             Password</label>
                         <div
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
@@ -101,7 +101,7 @@
 
                     <!-- Profile Picture -->
                     <div>
-                        <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700">Profile
+                        <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700">Profile
                             Picture</label>
                         <div
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
@@ -110,7 +110,7 @@
                                 class="w-full px-3 py-2 dark:bg-[#1a1625] dark:text-white focus:outline-none"
                                 accept="image/*" onchange="previewProfileImage(event)">
                         </div>
-                        <small class="text-[11px] text-gray-500 dark:text-gray-400">Upload a profile picture.</small>
+                        <small class="text-[12px] text-gray-500 dark:text-gray-400">Upload a profile picture.</small>
                         <img id="profilePreview"
                             src="{{ $user->profile ? asset('storage/profile/' . $user->profile) : asset('images/default-user.webp') }}"
                             alt="Profile Preview"
@@ -119,7 +119,7 @@
 
                     <!-- Roles -->
                     <div class="md:col-span-3">
-                        <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700 mb-1">Assign Role
+                        <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700 mb-1">Assign Role
                             <span class="text-red-500">*</span></label>
                         <select name="role"
                             class="w-full rounded-lg border dark:border-white/20 border-gray-300 px-3 py-2 dark:bg-[#1a1625] dark:text-white">
@@ -131,7 +131,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        <small class="text-[11px] text-gray-500 dark:text-gray-400">Assign a single role to this
+                        <small class="text-[12px] text-gray-500 dark:text-gray-400">Assign a single role to this
                             user.</small>
                     </div>
 

@@ -14,7 +14,21 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
+    {
+        $tasks = Task::with(['category', 'labels', 'subtasks'])
+            ->where('user_id', auth()->id())
+            ->whereDate('due_date', today())
+            ->whereIn('status', ['pending', 'in_progress'])
+            ->latest()
+            ->paginate(10);
+
+        return view('user.tasks.index', compact('tasks'));
+    }
+
+
+    public function allTasks()
     {
         
         $tasks = Task::with(['category', 'labels', 'subtasks'])
@@ -22,7 +36,7 @@ class TaskController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('user.tasks.index', compact('tasks'));
+        return view('user.tasks.all_tasks', compact('tasks'));
     }
 
     /**

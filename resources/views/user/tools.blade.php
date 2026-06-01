@@ -9,13 +9,13 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     Tools
                 </h2>
-                <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Quick productivity tools to help you work smarter every day.
                 </p>
             </div>
 
             <a href="{{ route('user.tasks.create') }}"
-                class="px-4 py-2 rounded-[10px] text-white text-[12.5px] font-bold
+                class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold
             bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
                 + Add Task
             </a>
@@ -37,14 +37,14 @@
                 </span>
 
                 <h1
-                    class="text-[32px] md:text-[44px] leading-tight font-extrabold tracking-[-1.4px] mt-5 dark:text-white text-gray-900">
+                    class="text-[24px] sm:text-[32px] md:text-[44px] leading-tight font-extrabold tracking-[-1.4px] mt-5 dark:text-white text-gray-900">
                     Powerful tools for <br>
                     <span class="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">
                         focused daily work.
                     </span>
                 </h1>
 
-                <p class="text-[13px] md:text-[14px] dark:text-gray-400 text-gray-500 mt-4 leading-relaxed">
+                <p class="text-[14px] md:text-[14px] dark:text-gray-400 text-gray-500 mt-4 leading-relaxed">
                     Use focus timer, checklist, calculator, planner and quick utilities to keep your workflow organized.
                 </p>
             </div>
@@ -128,16 +128,16 @@
                             </span>
                         </div>
 
-                        <h3 class="text-[15px] font-extrabold dark:text-white text-gray-900 mt-4">
+                        <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900 mt-4">
                             {{ $tool['title'] }}
                         </h3>
 
-                        <p class="text-[12.5px] dark:text-gray-400 text-gray-500 leading-relaxed mt-2">
+                        <p class="text-[14px] dark:text-gray-400 text-gray-500 leading-relaxed mt-2">
                             {{ $tool['text'] }}
                         </p>
 
                         <button
-                            class="mt-4 w-full px-3 py-2 rounded-[10px] text-[12px] font-bold
+                            class="mt-4 w-full px-3 py-2 rounded-[10px] text-[14px] font-bold
                         dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
                             Open Tool
                         </button>

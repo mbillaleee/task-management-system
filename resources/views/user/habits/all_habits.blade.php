@@ -21,7 +21,7 @@
 
                 <a href="{{ route('user.allHabits') }}"
                     class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                    <i class="fas fa-list"></i> All Habits
+                    <i class="fas fa-list"></i> Today's Habits
                 </a>
 
                 <a href="{{ route('user.habits.create') }}"

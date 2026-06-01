@@ -29,33 +29,33 @@
             <div class="xl:col-span-2 space-y-4">
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">{{ $task->title }}</h3>
-                    <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-3 leading-relaxed">
+                    <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900">{{ $task->title }}</h3>
+                    <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-3 leading-relaxed">
                         {{ $task->description }}
                     </p>
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Status</p>
-                            <p class="text-[16px] font-bold dark:text-white text-gray-800">
+                            <p class="text-[14px] dark:text-gray-500 text-gray-400">Status</p>
+                            <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ ucwords(str_replace('_', ' ', $task->status)) }}</p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Priority</p>
-                            <p class="text-[16px] font-bold dark:text-white text-gray-800">{{ ucfirst($task->priority) }}
+                            <p class="text-[14px] dark:text-gray-500 text-gray-400">Priority</p>
+                            <p class="text-[14px] font-bold dark:text-white text-gray-800">{{ ucfirst($task->priority) }}
                             </p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Category</p>
-                            <p class="text-[16px] font-bold dark:text-white text-gray-800">
+                            <p class="text-[14px] dark:text-gray-500 text-gray-400">Category</p>
+                            <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ $task->category?->name ?? 'N/A' }}</p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Due Date</p>
-                            <p class="text-[16px] font-bold dark:text-white text-gray-800">
+                            <p class="text-[14px] dark:text-gray-500 text-gray-400">Due Date</p>
+                            <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ $task->due_date ? $task->due_date->format('d M, Y') : 'No deadline' }}
                             </p>
                         </div>
@@ -64,14 +64,14 @@
 
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                    <h3 class="text-[18px] font-bold dark:text-white text-gray-900 mb-3.5">Subtasks</h3>
+                    <h3 class="text-[16px] font-bold dark:text-white text-gray-900 mb-3.5">Subtasks</h3>
 
                     <form action="{{ route('user.tasks.subtasks.store', $task) }}" method="POST" class="flex gap-2 mb-4">
                         @csrf
                         <input name="title" placeholder="Add a subtask..."
                             class="flex-1 px-3.5 py-2 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
                         <button
-                            class="px-4 py-2 rounded-[10px] text-white text-[16px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
+                            class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
                             Add
                         </button>
                     </form>

@@ -6,8 +6,8 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-                <h2 class="text-[24px] font-extrabold dark:text-white text-gray-900">Permission Management</h2>
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-1">
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Permission Management</h2>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-1">
                     Manage application permissions with a cleaner and user-friendly admin interface.
                 </p>
             </div>
@@ -43,7 +43,7 @@
             <div class="overflow-x-auto">
                 <table class="min-w-full text-left" id="permissionTable">
                     <thead
-                        class="text-[12px] uppercase dark:text-gray-400 text-gray-500 border-b border-gray-200 dark:border-white/[0.1]">
+                        class="text-[12px] uppercase dark:text-white text-gray-500 border-b border-gray-200 dark:border-white/[0.1]">
                         <tr>
                             <th class="px-3 py-2 w-16">#</th>
                             <th class="px-3 py-2">Permission Name</th>
@@ -54,7 +54,7 @@
                     <tbody>
                         @foreach ($data as $key => $permission)
                             <tr
-                                class="border-b border-gray-200 dark:border-white/[0.05] hover:bg-gray-50 dark:hover:bg-white/5">
+                                class=" dark:text-white text-gray-500 border-b border-gray-200 dark:border-white/[0.05] hover:bg-gray-50 dark:hover:bg-white/5">
                                 <td class="px-3 py-2">{{ $loop->iteration }}</td>
                                 <td class="px-3 py-2">{{ $permission->name }}</td>
                                 <td class="px-3 py-2">{{ $permission->guard_name ?? 'web' }}</td>
@@ -89,7 +89,7 @@
                 </h5>
                 <form method="POST" action="{{ route('admin.permissions.store') }}">
                     @csrf
-                    <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700 mb-1">Permission
+                    <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700 mb-1">Permission
                         Name</label>
                     <input type="text" name="name" required
                         class="w-full px-3 py-2 rounded-lg border dark:border-white/20 dark:bg-[#1a1625] dark:text-white mb-3">
@@ -113,7 +113,7 @@
                 <form method="POST" id="editPermissionForm">
                     @csrf
                     @method('PUT')
-                    <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700 mb-1">Permission
+                    <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700 mb-1">Permission
                         Name</label>
                     <input type="text" name="name" id="editPermissionName" required
                         class="w-full px-3 py-2 rounded-lg border dark:border-white/20 dark:bg-[#1a1625] dark:text-white mb-3">

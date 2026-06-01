@@ -7,8 +7,8 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-                <h2 class="text-[24px] font-extrabold dark:text-white text-gray-900">Show User</h2>
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-1">View user details and assigned roles.</p>
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Show User</h2>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-1">View user details and assigned roles.</p>
             </div>
             <div>
                 <a href="{{ route('admin.users.index') }}"
@@ -34,7 +34,7 @@
                     <i class="fas fa-user"></i>
                 </div>
                 <h3 class="mt-3 text-[18px] font-bold dark:text-white text-gray-900">{{ $user->name }}</h3>
-                <p class="text-[13px] dark:text-gray-400 text-gray-600">{{ $user->email }}</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-600">{{ $user->email }}</p>
                 <div
                     class="mt-2 px-2 py-1 inline-flex items-center gap-1 text-[12px] font-semibold text-green-600 bg-green-100 dark:bg-green-800 rounded-full">
                     <i class="fas fa-user-shield"></i> {{ count($user->getRoleNames()) }} Roles Assigned
@@ -65,10 +65,10 @@
                         <span class="mt-1">
                             @if ($user->status == 1)
                                 <span
-                                    class="px-2 py-1 text-[11px] font-semibold text-white bg-green-500 rounded-full">Active</span>
+                                    class="px-2 py-1 text-[12px] font-semibold text-white bg-green-500 rounded-full">Active</span>
                             @else
                                 <span
-                                    class="px-2 py-1 text-[11px] font-semibold text-white bg-gray-500 rounded-full">Inactive</span>
+                                    class="px-2 py-1 text-[12px] font-semibold text-white bg-gray-500 rounded-full">Inactive</span>
                             @endif
                         </span>
                     </div>
@@ -79,7 +79,7 @@
                             @if (!empty($user->getRoleNames()) && count($user->getRoleNames()) > 0)
                                 @foreach ($user->getRoleNames() as $role)
                                     <span
-                                        class="px-2 py-1 rounded-full text-[11px] font-semibold bg-gradient-to-r from-orange-500 to-pink-500 text-white inline-flex items-center gap-1">
+                                        class="px-2 py-1 rounded-full text-[12px] font-semibold bg-gradient-to-r from-orange-500 to-pink-500 text-white inline-flex items-center gap-1">
                                         <i class="fas fa-check-circle"></i>{{ $role }}
                                     </span>
                                 @endforeach

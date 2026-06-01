@@ -32,39 +32,39 @@
 
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">
+                    <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900">
                         {{ $habit->title }}
                     </h3>
 
-                    <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-3 leading-relaxed">
+                    <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-3 leading-relaxed">
                         {{ $habit->description ?? 'No description added.' }}
                     </p>
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Type</p>
-                            <p class="text-[16px] font-bold dark:text-white text-gray-800">
+                            <p class="text-[14px] dark:text-gray-500 text-gray-400">Type</p>
+                            <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ ucfirst($habit->type) }}
                             </p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Frequency</p>
-                            <p class="text-[16px] font-bold dark:text-white text-gray-800">
+                            <p class="text-[14px] dark:text-gray-500 text-gray-400">Frequency</p>
+                            <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ ucfirst($habit->frequency) }}
                             </p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Category</p>
-                            <p class="text-[16px] font-bold dark:text-white text-gray-800">
+                            <p class="text-[14px] dark:text-gray-500 text-gray-400">Category</p>
+                            <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ $habit->category?->name ?? 'General' }}
                             </p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Status</p>
-                            <p class="text-[16px] font-bold dark:text-white text-gray-800">
+                            <p class="text-[14px] dark:text-gray-500 text-gray-400">Status</p>
+                            <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ $habit->status ? 'Active' : 'Inactive' }}
                             </p>
                         </div>
@@ -74,7 +74,7 @@
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
                     <div class="flex items-center justify-between mb-3.5">
-                        <h3 class="text-[18px] font-bold dark:text-white text-gray-900">
+                        <h3 class="text-[16px] font-bold dark:text-white text-gray-900">
                             Completion Logs
                         </h3>
 

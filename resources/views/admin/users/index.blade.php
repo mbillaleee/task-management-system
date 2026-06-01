@@ -6,8 +6,8 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-                <h2 class="text-[24px] font-extrabold dark:text-white text-gray-900">Users Management</h2>
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-1">Manage system users, roles, and permissions.</p>
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Users Management</h2>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-1">Manage system users, roles, and permissions.</p>
             </div>
             <div class="flex flex-wrap gap-2">
                 <a href="{{ route('admin.users.create') }}"
@@ -86,7 +86,7 @@
                             <td class="px-3 py-2 text-white dark:text-white">
                                 @foreach ($user->getRoleNames() as $role)
                                     <span
-                                        class="px-2 py-1 rounded-lg bg-gradient-to-r from-orange-500 to-pink-500 text-white text-[11px] font-semibold mr-1">{{ $role }}</span>
+                                        class="px-2 py-1 rounded-lg bg-gradient-to-r from-orange-500 to-pink-500 text-white text-[12px] font-semibold mr-1">{{ $role }}</span>
                                 @endforeach
                             </td>
                             <td class="px-3 py-2 text-center flex justify-center gap-2">

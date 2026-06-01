@@ -54,7 +54,7 @@
                         class="w-[26px] h-[26px] rounded-full border-2 border-white bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center text-white text-[10px] font-bold">
                         C</div>
                 </div>
-                <span class="text-[11.5px] text-gray-500">Join 2,847+ focused people already leveling up their
+                <span class="text-[12px] text-gray-500">Join 2,847+ focused people already leveling up their
                     life.</span>
             </div>
         </div>
@@ -259,7 +259,7 @@
                     </svg>
                     <div class="absolute inset-0 flex flex-col items-center justify-center">
                         <span class="text-[28px] font-extrabold dark:text-white text-gray-900 leading-none">87</span>
-                        <span class="text-[11px] dark:text-gray-500 text-gray-400">/100</span>
+                        <span class="text-[12px] dark:text-gray-500 text-gray-400">/100</span>
                     </div>
                 </div>
                 <p class="text-[14px] font-semibold text-orange-400">Amazing work!</p>
@@ -325,7 +325,7 @@
                     class="w-5 h-5 rounded-full border-2 dark:border-white/20 border-transparent flex-shrink-0 flex items-center justify-center  dark:bg-transparent bg-gradient-to-br from-orange-400 to-amber-500">
                     <span class="dark:hidden text-[10px] text-white font-bold">1</span>
                 </div>
-                <span class="flex-1 text-[13px] font-medium dark:text-gray-200 text-gray-700">Launch new
+                <span class="flex-1 text-[14px] font-medium dark:text-gray-200 text-gray-700">Launch new
                     landing page</span>
                 <span
                     class="px-2.5 py-[3px] rounded-[7px] text-[14px] font-semibold  dark:bg-red-500/[0.15] dark:text-red-400 dark:border dark:border-red-500/[0.3] bg-red-50 text-red-600 border border-red-200">High</span>
@@ -338,7 +338,7 @@
                     class="w-5 h-5 rounded-full border-2 dark:border-white/20 border-transparent flex-shrink-0 flex items-center justify-center  dark:bg-transparent bg-gradient-to-br from-orange-400 to-amber-500">
                     <span class="dark:hidden text-[10px] text-white font-bold">2</span>
                 </div>
-                <span class="flex-1 text-[13px] font-medium dark:text-gray-200 text-gray-700">Workout &amp;
+                <span class="flex-1 text-[14px] font-medium dark:text-gray-200 text-gray-700">Workout &amp;
                     gym</span>
                 <span
                     class="px-2.5 py-[3px] rounded-[7px] text-[14px] font-semibold  dark:bg-orange-500/[0.15] dark:text-orange-400 dark:border dark:border-orange-500/[0.3]  bg-orange-50 text-orange-600 border border-orange-200">Medium</span>
@@ -351,7 +351,7 @@
                     class="w-5 h-5 rounded-full border-2 dark:border-white/20 border-transparent flex-shrink-0 flex items-center justify-center  dark:bg-transparent bg-gradient-to-br from-orange-400 to-amber-500">
                     <span class="dark:hidden text-[10px] text-white font-bold">3</span>
                 </div>
-                <span class="flex-1 text-[13px] font-medium dark:text-gray-200 text-gray-700">Read 20
+                <span class="flex-1 text-[14px] font-medium dark:text-gray-200 text-gray-700">Read 20
                     pages</span>
                 <span
                     class="px-2.5 py-[3px] rounded-[7px] text-[14px] font-semibold  dark:bg-emerald-500/[0.15]  bg-emerald-50 text-emerald-600 border border-emerald-200">Low</span>
@@ -372,7 +372,7 @@
                 <div class="flex-1 min-w-0">
                     <p class="text-[12.5px] font-semibold dark:text-gray-200 text-gray-800">You completed a
                         task</p>
-                    <p class="text-[11.5px] dark:text-gray-500 text-gray-400">Build new habit system</p>
+                    <p class="text-[12px] dark:text-gray-500 text-gray-400">Build new habit system</p>
                 </div>
                 <span class="text-[14px] dark:text-gray-600 text-gray-400 flex-shrink-0 mt-0.5">2m ago</span>
             </div>
@@ -390,26 +390,26 @@
 
             <div class="flex items-start gap-2.5 py-2 border-b dark:border-white/[0.06] border-black/[0.05]">
                 <div
-                    class="w-8 h-8 rounded-[9px] flex items-center justify-center flex-shrink-0 text-[15px]
+                    class="w-8 h-8 rounded-[9px] flex items-center justify-center flex-shrink-0 text-[14px]
                     bg-pink-500/[0.18]">
                     🎯</div>
                 <div class="flex-1 min-w-0">
                     <p class="text-[12.5px] font-semibold dark:text-gray-200 text-gray-800">Focus session
                         completed</p>
-                    <p class="text-[11.5px] dark:text-gray-500 text-gray-400">Deep Work Session</p>
+                    <p class="text-[12px] dark:text-gray-500 text-gray-400">Deep Work Session</p>
                 </div>
                 <span class="text-[14px] dark:text-gray-600 text-gray-400 flex-shrink-0 mt-0.5">2h ago</span>
             </div>
 
             <div class="flex items-start gap-2.5 py-2">
                 <div
-                    class="w-8 h-8 rounded-[9px] flex items-center justify-center flex-shrink-0 text-[15px]
+                    class="w-8 h-8 rounded-[9px] flex items-center justify-center flex-shrink-0 text-[14px]
                     bg-purple-500/[0.18]">
                     📝</div>
                 <div class="flex-1 min-w-0">
                     <p class="text-[12.5px] font-semibold dark:text-gray-200 text-gray-800">New note created
                     </p>
-                    <p class="text-[11.5px] dark:text-gray-500 text-gray-400">Project Ideas</p>
+                    <p class="text-[12px] dark:text-gray-500 text-gray-400">Project Ideas</p>
                 </div>
                 <span class="text-[14px] dark:text-gray-600 text-gray-400 flex-shrink-0 mt-0.5">3h ago</span>
             </div>
@@ -461,7 +461,7 @@
                 <div class="absolute inset-0 flex flex-col items-center justify-center">
                     <span
                         class="text-[28px] font-extrabold tracking-[-0.5px] dark:text-white text-gray-900 leading-none">94<sup
-                            class="text-[15px] align-super">%</sup></span>
+                            class="text-[14px] align-super">%</sup></span>
                     <span class="text-[14px] dark:text-gray-400 text-gray-500 mt-0.5">Excellent</span>
                 </div>
             </div>

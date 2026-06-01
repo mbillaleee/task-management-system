@@ -8,8 +8,8 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-                <h2 class="text-[24px] font-extrabold dark:text-white text-gray-900">Create New User</h2>
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-1">
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Create New User</h2>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-1">
                     Add a new user account and assign roles with a clean admin experience.
                 </p>
             </div>
@@ -47,7 +47,7 @@
 
                     <!-- Name -->
                     <div>
-                        <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700">Name <span
+                        <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700">Name <span
                                 class="text-red-500">*</span></label>
                         <div
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
@@ -55,12 +55,12 @@
                             <input type="text" name="name" placeholder="Enter full name" value="{{ old('name') }}"
                                 class="w-full px-3 py-2 dark:bg-[#1a1625] dark:text-white focus:outline-none">
                         </div>
-                        <small class="text-[11px] text-gray-500 dark:text-gray-400">Enter the user's full name.</small>
+                        <small class="text-[12px] text-gray-500 dark:text-gray-400">Enter the user's full name.</small>
                     </div>
 
                     <!-- Email -->
                     <div>
-                        <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700">Email <span
+                        <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700">Email <span
                                 class="text-red-500">*</span></label>
                         <div
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
@@ -69,12 +69,12 @@
                                 value="{{ old('email') }}"
                                 class="w-full px-3 py-2 dark:bg-[#1a1625] dark:text-white focus:outline-none">
                         </div>
-                        <small class="text-[11px] text-gray-500 dark:text-gray-400">Enter a valid email address.</small>
+                        <small class="text-[12px] text-gray-500 dark:text-gray-400">Enter a valid email address.</small>
                     </div>
 
                     <!-- Profile Picture -->
                     <div>
-                        <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700">Profile
+                        <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700">Profile
                             Picture</label>
                         <div
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
@@ -82,12 +82,12 @@
                             <input type="file" name="profile"
                                 class="w-full px-3 py-2 dark:bg-[#1a1625] dark:text-white focus:outline-none">
                         </div>
-                        <small class="text-[11px] text-gray-500 dark:text-gray-400">Upload user profile picture.</small>
+                        <small class="text-[12px] text-gray-500 dark:text-gray-400">Upload user profile picture.</small>
                     </div>
 
                     <!-- Password -->
                     <div>
-                        <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700">Password <span
+                        <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700">Password <span
                                 class="text-red-500">*</span></label>
                         <div
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
@@ -95,13 +95,13 @@
                             <input type="password" name="password" placeholder="Enter password"
                                 class="w-full px-3 py-2 dark:bg-[#1a1625] dark:text-white focus:outline-none">
                         </div>
-                        <small class="text-[11px] text-gray-500 dark:text-gray-400">Use a strong password for
+                        <small class="text-[12px] text-gray-500 dark:text-gray-400">Use a strong password for
                             security.</small>
                     </div>
 
                     <!-- Confirm Password -->
                     <div>
-                        <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700">Confirm Password
+                        <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700">Confirm Password
                             <span class="text-red-500">*</span></label>
                         <div
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
@@ -109,13 +109,13 @@
                             <input type="password" name="confirm-password" placeholder="Confirm password"
                                 class="w-full px-3 py-2 dark:bg-[#1a1625] dark:text-white focus:outline-none">
                         </div>
-                        <small class="text-[11px] text-gray-500 dark:text-gray-400">Re-enter password for
+                        <small class="text-[12px] text-gray-500 dark:text-gray-400">Re-enter password for
                             confirmation.</small>
                     </div>
 
                     <!-- Roles -->
                     <div class="md:col-span-3">
-                        <label class="block text-[13px] font-semibold dark:text-gray-300 text-gray-700 mb-1">
+                        <label class="block text-[14px] font-semibold dark:text-gray-300 text-gray-700 mb-1">
                             Assign Role <span class="text-red-500">*</span>
                         </label>
 
@@ -129,7 +129,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        <small class="text-[11px] text-gray-500 dark:text-gray-400">
+                        <small class="text-[12px] text-gray-500 dark:text-gray-400">
                             Assign a single role to this user.
                         </small>
                     </div>
@@ -139,11 +139,11 @@
                 <!-- Form Buttons -->
                 <div class="flex flex-wrap justify-between mt-5 gap-2">
                     <a href="{{ route('admin.users.index') }}"
-                        class="px-4 py-2 rounded-[10px] border bg-gray-100 dark:bg-[#1a1625] dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#2a1f38] transition flex items-center gap-1">
+                        class="px-4 py-2 rounded-[10px] border bg-gray-100 dark:bg-[#1a1625] dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#2a1f38] transition flex items-center gap-1 text-[14px]">
                         <i class="fas fa-times"></i> Cancel
                     </a>
                     <button type="submit"
-                        class="px-4 py-2 rounded-[10px] bg-gradient-to-r from-orange-500 to-pink-500 text-white font-bold hover:opacity-90 transition flex items-center gap-1">
+                        class="px-4 py-2 rounded-[10px] bg-gradient-to-r from-orange-500 to-pink-500 text-white font-bold hover:opacity-90 transition flex items-center gap-1 text-[14px]">
                         <i class="fas fa-save"></i> Create User
                     </button>
                 </div>
