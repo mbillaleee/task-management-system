@@ -10,6 +10,9 @@ class Task extends Model
 
     protected $casts = [
         'due_date' => 'date',
+        'reminder_enabled' => 'boolean',
+        'remind_at' => 'datetime',
+        'reminder_sent_at' => 'datetime',
     ];
 
     public function user()

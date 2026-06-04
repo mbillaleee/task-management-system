@@ -48,6 +48,21 @@ class User extends Authenticatable
         ];
     }
 
+    public function tasks()
+    {
+        return $this->hasMany(\App\Models\Task::class);
+    }
+
+    public function taskCategories()
+    {
+        return $this->hasMany(\App\Models\TaskCategory::class);
+    }
+
+    public function taskLabels()
+    {
+        return $this->hasMany(\App\Models\TaskLabel::class);
+    }
+
 
     public function notes()
     {
