@@ -23,6 +23,9 @@ use App\Http\Controllers\User\NoteController;
 use App\Http\Controllers\User\NoteFolderController;
 use App\Http\Controllers\User\NoteCategoryController;
 use App\Http\Controllers\User\FocusController;
+use App\Http\Controllers\User\GoalController;
+use App\Http\Controllers\User\GoalCategoryController;
+use App\Http\Controllers\User\GoalMilestoneController;
 
 
 
@@ -93,6 +96,21 @@ Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(fu
     Route::post('focus/{focus}/cancel', [FocusController::class, 'cancel'])->name('focus.cancel');
 
     Route::resource('focus', FocusController::class);
+
+
+
+
+    Route::resource('goals', GoalController::class);
+
+    Route::post('/goals/{goal}/milestones', [GoalMilestoneController::class, 'store'])->name('goals.milestones.store');
+    Route::patch('/goal-milestones/{milestone}/toggle', [GoalMilestoneController::class, 'toggle'])->name('goal.milestones.toggle');
+    Route::delete('/goal-milestones/{milestone}', [GoalMilestoneController::class, 'destroy'])->name('goal.milestones.destroy');
+
+    Route::get('/goal-categories', [GoalCategoryController::class, 'index'])->name('goal.categories.index');
+    Route::post('/goal-categories', [GoalCategoryController::class, 'store'])->name('goal.categories.store');
+    Route::put('/goal-categories/{category}', [GoalCategoryController::class, 'update'])->name('goal.categories.update');
+    Route::delete('/goal-categories/{category}', [GoalCategoryController::class, 'destroy'])->name('goal.categories.destroy');
+
 
 
     Route::get('/features', function () {

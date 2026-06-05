@@ -108,6 +108,23 @@
             <span>Focus</span>
         </a>
 
+
+
+        <a href="{{ route('user.goals.index') }}"
+            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline
+    dark:text-gray-400 text-gray-600 dark:hover:bg-white/[0.06] hover:bg-black/[0.05]
+    dark:hover:text-white hover:text-gray-900 transition-all duration-200">
+
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M12 13V2l8 4-8 4"></path>
+                <path d="M20.55 10.23A9 9 0 1 1 8.53 3.59"></path>
+                <path d="M12 13l4.5-2.25"></path>
+            </svg>
+
+            <span>Goals</span>
+        </a>
+
         {{--
 
         <a href="#"

@@ -93,5 +93,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\FocusSessionHistory::class);
     }
+
+    public function goals()
+    {
+        return $this->hasMany(Goal::class);
+    }
+
+    public function goalCategories()
+    {
+        return $this->hasMany(GoalCategory::class);
+    }
     
 }

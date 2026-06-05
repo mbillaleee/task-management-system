@@ -1,213 +1,267 @@
 <?php
-// app/Http/Controllers/User/FocusController.php
 
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\FocusSession;
-use App\Models\FocusSessionHistory;
 use Illuminate\Http\Request;
+use App\Models\Task;
+use App\Models\TaskCategory;
+use App\Models\TaskLabel;
+use App\Models\TaskHistory;
 
-class FocusController extends Controller
+class TaskController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
+
     public function index()
     {
-        $sessions = FocusSession::where('user_id', auth()->id())
+        $tasks = Task::with(['category', 'labels', 'subtasks'])
+            ->where('user_id', auth()->id())
+            ->whereDate('due_date', today())
+            ->whereIn('status', ['pending', 'in_progress'])
             ->latest()
-            ->paginate(9);
+            ->paginate(10);
 
-        $totalFocusMinutes = FocusSession::where('user_id', auth()->id())
-            ->where('status', 'completed')
-            ->sum('completed_minutes');
-
-        $completedSessions = FocusSession::where('user_id', auth()->id())
-            ->where('status', 'completed')
-            ->count();
-
-        $totalXp = FocusSession::where('user_id', auth()->id())->sum('xp_earned');
-
-        $runningSession = FocusSession::where('user_id', auth()->id())
-            ->where('status', 'running')
-            ->first();
-
-        return view('user.focus.index', compact(
-            'sessions',
-            'totalFocusMinutes',
-            'completedSessions',
-            'totalXp',
-            'runningSession'
-        ));
+        return view('user.tasks.index', compact('tasks'));
     }
 
+
+    public function allTasks()
+    {
+        
+        $tasks = Task::with(['category', 'labels', 'subtasks'])
+            ->where('user_id', auth()->id())
+            ->latest()
+            ->paginate(10);
+
+        return view('user.tasks.all_tasks', compact('tasks'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('user.focus.create');
+
+         $categories = TaskCategory::where('user_id', auth()->id())->get();
+        $labels = TaskLabel::where('user_id', auth()->id())->get();
+
+        return view('user.tasks.create', compact('categories', 'labels'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $data = $this->validatedData($request);
+        // dd($request->all());
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'task_category_id' => 'nullable|exists:task_categories,id',
+            'priority' => 'required|in:low,medium,high',
+            'status' => 'required|in:pending,in_progress,completed',
+            'due_date' => 'nullable|date',
+            'labels' => 'nullable|array',
+        ]);
 
-        $data['user_id'] = auth()->id();
-        $data['completed_minutes'] = $data['completed_minutes'] ?? 0;
-        $data['xp_earned'] = $data['xp_earned'] ?? 0;
-        $data['fullscreen_mode'] = $request->boolean('fullscreen_mode');
-        $data['distraction_free'] = $request->boolean('distraction_free');
+        $task = Task::create([
+            'user_id' => auth()->id(),
+            'task_category_id' => $request->task_category_id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'priority' => $request->priority,
+            'status' => $request->status,
+            'due_date' => $request->due_date,
+        ]);
 
-        $focus = FocusSession::create($data);
-
-        $this->history($focus, 'Created', 'Focus session created.');
-
-        return redirect()->route('user.focus.index')->with('success', 'Focus session created successfully.');
-    }
-
-    public function show($id)
-    {
-        $focus = FocusSession::with('histories')
-            ->where('user_id', auth()->id())
-            ->where('id', $id)
-            ->firstOrFail();
-
-        return view('user.focus.show', compact('focus'));
-    }
-
-    public function edit($id)
-    {
-        $focus = FocusSession::where('user_id', auth()->id())
-            ->where('id', $id)
-            ->firstOrFail();
-
-        return view('user.focus.edit', compact('focus'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $focus = FocusSession::where('user_id', auth()->id())
-            ->where('id', $id)
-            ->firstOrFail();
-
-        $data = $this->validatedData($request);
-
-        $data['fullscreen_mode'] = $request->boolean('fullscreen_mode');
-        $data['distraction_free'] = $request->boolean('distraction_free');
-
-        if ($data['status'] === 'completed') {
-            $data['completed_minutes'] = $data['duration_minutes'];
-            $data['completed_at'] = now();
-            $data['xp_earned'] = $this->calculateXp($data['duration_minutes']);
+        if ($request->has('labels')) {
+            $task->labels()->sync($request->labels);
         }
 
-        $focus->update($data);
-
-        $this->history($focus, 'Updated', 'Focus session updated.');
-
-        return redirect()->route('user.focus.index')->with('success', 'Focus session updated successfully.');
-    }
-
-    public function destroy($id)
-    {
-        $focus = FocusSession::where('user_id', auth()->id())
-            ->where('id', $id)
-            ->firstOrFail();
-
-        $focus->delete();
-
-        return redirect()->route('user.focus.index')->with('success', 'Focus session deleted successfully.');
-    }
-
-    public function start($id)
-    {
-        $focus = $this->findUserFocus($id);
-
-        $focus->update([
-            'status' => 'running',
-            'started_at' => $focus->started_at ?? now(),
-            'paused_at' => null,
-        ]);
-
-        $this->history($focus, 'Started', 'Focus session started.');
-
-        return back()->with('success', 'Session started.');
-    }
-
-    public function pause(Request $request, $id)
-    {
-        $focus = $this->findUserFocus($id);
-
-        $focus->update([
-            'status' => 'paused',
-            'paused_at' => now(),
-            'completed_minutes' => $request->completed_minutes ?? $focus->completed_minutes,
-        ]);
-
-        $this->history($focus, 'Paused', 'Focus session paused.');
-
-        return back()->with('success', 'Session paused.');
-    }
-
-    public function complete(Request $request, $id)
-    {
-        $focus = $this->findUserFocus($id);
-
-        $completedMinutes = $request->completed_minutes ?? $focus->duration_minutes;
-
-        $focus->update([
-            'status' => 'completed',
-            'completed_minutes' => $completedMinutes,
-            'completed_at' => now(),
-            'xp_earned' => $this->calculateXp($completedMinutes),
-        ]);
-
-        $this->history($focus, 'Completed', 'Focus session completed.');
-
-        return back()->with('success', 'Session completed.');
-    }
-
-    public function cancel($id)
-    {
-        $focus = $this->findUserFocus($id);
-
-        $focus->update([
-            'status' => 'cancelled',
-        ]);
-
-        $this->history($focus, 'Cancelled', 'Focus session cancelled.');
-
-        return back()->with('success', 'Session cancelled.');
-    }
-
-    private function validatedData(Request $request): array
-    {
-        return $request->validate([
-            'title' => 'nullable|string|max:255',
-            'type' => 'required|in:pomodoro,deep_work,focus_timer,break',
-            'duration_minutes' => 'required|integer|min:1|max:300',
-            'completed_minutes' => 'nullable|integer|min:0',
-            'status' => 'required|in:pending,running,paused,completed,cancelled',
-            'ambient_sound' => 'required|in:none,white_noise,rain,lofi',
-            'xp_earned' => 'nullable|integer|min:0',
-        ]);
-    }
-
-    private function findUserFocus($id)
-    {
-        return FocusSession::where('user_id', auth()->id())
-            ->where('id', $id)
-            ->firstOrFail();
-    }
-
-    private function calculateXp(int $minutes): int
-    {
-        return max(5, $minutes * 2);
-    }
-
-    private function history(FocusSession $focus, string $action, string $description): void
-    {
-        FocusSessionHistory::create([
-            'focus_session_id' => $focus->id,
+        TaskHistory::create([
+            'task_id' => $task->id,
             'user_id' => auth()->id(),
-            'action' => $action,
-            'description' => $description,
+            'action' => 'Task Created',
+            'changes' => 'New task created',
         ]);
+
+        return redirect()->route('user.tasks.index')->with('success', 'Task created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $task = Task::with(['category', 'labels', 'subtasks', 'comments.user', 'histories'])->findOrFail($id);
+        abort_if($task->user_id !== auth()->id(), 403);
+
+        return view('user.tasks.show', compact('task'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $task = Task::findOrFail($id);
+        abort_if($task->user_id !== auth()->id(), 403);
+
+        $categories = TaskCategory::where('user_id', auth()->id())->get();
+        $labels = TaskLabel::where('user_id', auth()->id())->get();
+
+
+        return view('user.tasks.edit', compact('task', 'categories', 'labels'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $task = Task::findOrFail($id);
+        abort_if($task->user_id !== auth()->id(), 403);
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'task_category_id' => 'nullable|exists:task_categories,id',
+            'priority' => 'required|in:low,medium,high',
+            'status' => 'required|in:pending,in_progress,completed',
+            'due_date' => 'nullable|date',
+            'labels' => 'nullable|array',
+        ]);
+
+        $originalData = $task->getOriginal();
+
+        $task->update([
+            'task_category_id' => $request->task_category_id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'priority' => $request->priority,
+            'status' => $request->status,
+            'due_date' => $request->due_date,
+        ]);
+
+        if ($request->has('labels')) {
+            $task->labels()->sync($request->labels);
+        } else {
+            $task->labels()->detach();
+        }
+
+        // Log changes
+        $changes = [];
+        foreach ($task->getChanges() as $field => $newValue) {
+            $changes[$field] = [
+                'old' => $originalData[$field] ?? null,
+                'new' => $newValue,
+            ];
+        }
+
+        if (!empty($changes)) {
+            TaskHistory::create([
+                'task_id' => $task->id,
+                'user_id' => auth()->id(),
+                'action' => 'Task Updated',
+                'changes' => json_encode($changes),
+            ]);
+        }
+
+        return redirect()->route('user.tasks.show', $task)->with('success', 'Task updated successfully.');
+
+        // dd($request->all());
+
+        $task = Task::findOrFail($id);
+
+        abort_if($task->user_id !== auth()->id(), 403);
+
+        $oldStatus = $task->status;
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'task_category_id' => 'nullable|exists:task_categories,id',
+            'priority' => 'required|in:low,medium,high',
+            'status' => 'required|in:pending,in_progress,completed',
+            'due_date' => 'nullable|date',
+            'labels' => 'nullable|array',
+        ]);
+
+        $task->update($request->only([
+            'title',
+            'description',
+            'task_category_id',
+            'priority',
+            'status',
+            'due_date',
+        ]));
+
+        $task->labels()->sync($request->labels ?? []);
+
+        if ($oldStatus !== $request->status) {
+            TaskHistory::create([
+                'task_id' => $task->id,
+                'user_id' => auth()->id(),
+                'action' => 'Status Changed',
+                'changes' => "Status changed from {$oldStatus} to {$request->status}",
+            ]);
+        }
+
+        return redirect()->route('user.tasks.index')->with('success', 'Task updated successfully.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $task = Task::findOrFail($id);
+        abort_if($task->user_id !== auth()->id(), 403);
+
+        $task->delete();
+        return redirect()->route('user.tasks.index')->with('success', 'Task deleted successfully.');
+
+        // abort_if($task->user_id !== auth()->id(), 403);
+        // $task->delete();
+        // return redirect()->route('user.tasks.index')->with('success', 'Task deleted successfully.');
+    }
+
+
+
+    public function kanban()
+    {
+        $tasks = Task::with(['category', 'labels'])
+            ->where('user_id', auth()->id())
+            ->get()
+            ->groupBy('status');
+
+        return view('user.tasks.kanban', compact('tasks'));
+    }
+
+    public function updateStatus(Request $request, Task $task)
+    {
+        abort_if($task->user_id !== auth()->id(), 403);
+
+        $request->validate([
+            'status' => 'required|in:pending,in_progress,completed',
+        ]);
+
+        $oldStatus = $task->status;
+
+        $task->update([
+            'status' => $request->status,
+        ]);
+
+        TaskHistory::create([
+            'task_id' => $task->id,
+            'user_id' => auth()->id(),
+            'action' => 'Status Updated',
+            'changes' => "Status changed from {$oldStatus} to {$request->status}",
+        ]);
+
+        return back()->with('success', 'Task status updated.');
     }
 }
