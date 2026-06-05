@@ -84,6 +84,14 @@ class User extends Authenticatable
         return $this->hasMany(\App\Models\NoteTag::class);
     }
 
+    public function focusSessions()
+    {
+        return $this->hasMany(\App\Models\FocusSession::class);
+    }
 
- 
+    public function focusSessionHistories()
+    {
+        return $this->hasMany(\App\Models\FocusSessionHistory::class);
+    }
+    
 }

@@ -22,6 +22,7 @@ use App\Http\Controllers\User\HabitLogController;
 use App\Http\Controllers\User\NoteController;
 use App\Http\Controllers\User\NoteFolderController;
 use App\Http\Controllers\User\NoteCategoryController;
+use App\Http\Controllers\User\FocusController;
 
 
 
@@ -81,6 +82,17 @@ Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(fu
         ->only(['index', 'store', 'update', 'destroy']);
 
 
+    
+    Route::get('focus/statistics', [FocusController::class, 'statistics'])->name('focus.statistics');
+    Route::get('focus/history', [FocusController::class, 'history'])->name('focus.history');
+    Route::get('focus/{focus}/fullscreen', [FocusController::class, 'fullscreen'])->name('focus.fullscreen');
+
+    Route::post('focus/{focus}/start', [FocusController::class, 'start'])->name('focus.start');
+    Route::post('focus/{focus}/pause', [FocusController::class, 'pause'])->name('focus.pause');
+    Route::post('focus/{focus}/complete', [FocusController::class, 'complete'])->name('focus.complete');
+    Route::post('focus/{focus}/cancel', [FocusController::class, 'cancel'])->name('focus.cancel');
+
+    Route::resource('focus', FocusController::class);
 
 
     Route::get('/features', function () {

@@ -1,5 +1,4 @@
 <?php
-// app/Http/Controllers/User/FocusController.php
 
 namespace App\Http\Controllers\User;
 
@@ -7,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\FocusSession;
 use App\Models\FocusSessionHistory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FocusController extends Controller
 {
@@ -16,27 +16,9 @@ class FocusController extends Controller
             ->latest()
             ->paginate(9);
 
-        $totalFocusMinutes = FocusSession::where('user_id', auth()->id())
-            ->where('status', 'completed')
-            ->sum('completed_minutes');
+        $stats = $this->stats();
 
-        $completedSessions = FocusSession::where('user_id', auth()->id())
-            ->where('status', 'completed')
-            ->count();
-
-        $totalXp = FocusSession::where('user_id', auth()->id())->sum('xp_earned');
-
-        $runningSession = FocusSession::where('user_id', auth()->id())
-            ->where('status', 'running')
-            ->first();
-
-        return view('user.focus.index', compact(
-            'sessions',
-            'totalFocusMinutes',
-            'completedSessions',
-            'totalXp',
-            'runningSession'
-        ));
+        return view('user.focus.index', compact('sessions', 'stats'));
     }
 
     public function create()
@@ -56,35 +38,31 @@ class FocusController extends Controller
 
         $focus = FocusSession::create($data);
 
-        $this->history($focus, 'Created', 'Focus session created.');
+        $this->storeHistory($focus, 'Created', 'Focus session created.');
 
-        return redirect()->route('user.focus.index')->with('success', 'Focus session created successfully.');
+        return redirect()
+            ->route('user.focus.index')
+            ->with('success', 'Focus session created successfully.');
     }
 
     public function show($id)
     {
-        $focus = FocusSession::with('histories')
-            ->where('user_id', auth()->id())
-            ->where('id', $id)
-            ->firstOrFail();
+        $focus = $this->findUserFocus($id);
+        $focus->load('histories');
 
         return view('user.focus.show', compact('focus'));
     }
 
     public function edit($id)
     {
-        $focus = FocusSession::where('user_id', auth()->id())
-            ->where('id', $id)
-            ->firstOrFail();
+        $focus = $this->findUserFocus($id);
 
         return view('user.focus.edit', compact('focus'));
     }
 
     public function update(Request $request, $id)
     {
-        $focus = FocusSession::where('user_id', auth()->id())
-            ->where('id', $id)
-            ->firstOrFail();
+        $focus = $this->findUserFocus($id);
 
         $data = $this->validatedData($request);
 
@@ -93,26 +71,28 @@ class FocusController extends Controller
 
         if ($data['status'] === 'completed') {
             $data['completed_minutes'] = $data['duration_minutes'];
-            $data['completed_at'] = now();
+            $data['completed_at'] = $focus->completed_at ?? now();
             $data['xp_earned'] = $this->calculateXp($data['duration_minutes']);
         }
 
         $focus->update($data);
 
-        $this->history($focus, 'Updated', 'Focus session updated.');
+        $this->storeHistory($focus, 'Updated', 'Focus session updated.');
 
-        return redirect()->route('user.focus.index')->with('success', 'Focus session updated successfully.');
+        return redirect()
+            ->route('user.focus.show', $focus->id)
+            ->with('success', 'Focus session updated successfully.');
     }
 
     public function destroy($id)
     {
-        $focus = FocusSession::where('user_id', auth()->id())
-            ->where('id', $id)
-            ->firstOrFail();
+        $focus = $this->findUserFocus($id);
 
         $focus->delete();
 
-        return redirect()->route('user.focus.index')->with('success', 'Focus session deleted successfully.');
+        return redirect()
+            ->route('user.focus.index')
+            ->with('success', 'Focus session deleted successfully.');
     }
 
     public function start($id)
@@ -125,9 +105,9 @@ class FocusController extends Controller
             'paused_at' => null,
         ]);
 
-        $this->history($focus, 'Started', 'Focus session started.');
+        $this->storeHistory($focus, 'Started', 'Focus session started.');
 
-        return back()->with('success', 'Session started.');
+        return back()->with('success', 'Focus session started.');
     }
 
     public function pause(Request $request, $id)
@@ -140,9 +120,9 @@ class FocusController extends Controller
             'completed_minutes' => $request->completed_minutes ?? $focus->completed_minutes,
         ]);
 
-        $this->history($focus, 'Paused', 'Focus session paused.');
+        $this->storeHistory($focus, 'Paused', 'Focus session paused.');
 
-        return back()->with('success', 'Session paused.');
+        return back()->with('success', 'Focus session paused.');
     }
 
     public function complete(Request $request, $id)
@@ -158,9 +138,9 @@ class FocusController extends Controller
             'xp_earned' => $this->calculateXp($completedMinutes),
         ]);
 
-        $this->history($focus, 'Completed', 'Focus session completed.');
+        $this->storeHistory($focus, 'Completed', 'Focus session completed.');
 
-        return back()->with('success', 'Session completed.');
+        return back()->with('success', 'Focus session completed.');
     }
 
     public function cancel($id)
@@ -171,9 +151,46 @@ class FocusController extends Controller
             'status' => 'cancelled',
         ]);
 
-        $this->history($focus, 'Cancelled', 'Focus session cancelled.');
+        $this->storeHistory($focus, 'Cancelled', 'Focus session cancelled.');
 
-        return back()->with('success', 'Session cancelled.');
+        return back()->with('success', 'Focus session cancelled.');
+    }
+
+    public function fullscreen($id)
+    {
+        $focus = $this->findUserFocus($id);
+
+        return view('user.focus.fullscreen', compact('focus'));
+    }
+
+    public function statistics()
+    {
+        $stats = $this->stats();
+
+        $dailyFocus = FocusSession::where('user_id', auth()->id())
+            ->where('status', 'completed')
+            ->select(
+                DB::raw('DATE(created_at) as date'),
+                DB::raw('SUM(completed_minutes) as minutes')
+            )
+            ->groupBy(DB::raw('DATE(created_at)'))
+            ->orderBy('date', 'desc')
+            ->take(7)
+            ->get()
+            ->reverse()
+            ->values();
+
+        return view('user.focus.statistics', compact('stats', 'dailyFocus'));
+    }
+
+    public function history()
+    {
+        $histories = FocusSessionHistory::with('focusSession')
+            ->where('user_id', auth()->id())
+            ->latest()
+            ->paginate(15);
+
+        return view('user.focus.history', compact('histories'));
     }
 
     private function validatedData(Request $request): array
@@ -189,7 +206,7 @@ class FocusController extends Controller
         ]);
     }
 
-    private function findUserFocus($id)
+    private function findUserFocus($id): FocusSession
     {
         return FocusSession::where('user_id', auth()->id())
             ->where('id', $id)
@@ -201,7 +218,7 @@ class FocusController extends Controller
         return max(5, $minutes * 2);
     }
 
-    private function history(FocusSession $focus, string $action, string $description): void
+    private function storeHistory(FocusSession $focus, string $action, string $description): void
     {
         FocusSessionHistory::create([
             'focus_session_id' => $focus->id,
@@ -209,5 +226,34 @@ class FocusController extends Controller
             'action' => $action,
             'description' => $description,
         ]);
+    }
+
+    private function stats(): array
+    {
+        $baseQuery = FocusSession::where('user_id', auth()->id());
+
+        return [
+            'total_focus_minutes' => (clone $baseQuery)
+                ->where('status', 'completed')
+                ->sum('completed_minutes'),
+
+            'completed_sessions' => (clone $baseQuery)
+                ->where('status', 'completed')
+                ->count(),
+
+            'total_xp' => (clone $baseQuery)
+                ->sum('xp_earned'),
+
+            'running_session' => (clone $baseQuery)
+                ->where('status', 'running')
+                ->first(),
+
+            'total_sessions' => (clone $baseQuery)
+                ->count(),
+
+            'longest_session' => (clone $baseQuery)
+                ->where('status', 'completed')
+                ->max('completed_minutes') ?? 0,
+        ];
     }
 }
