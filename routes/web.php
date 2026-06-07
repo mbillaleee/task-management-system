@@ -28,10 +28,12 @@ use App\Http\Controllers\User\GoalCategoryController;
 use App\Http\Controllers\User\GoalMilestoneController;
 use App\Http\Controllers\User\JournalController;
 use App\Http\Controllers\User\JournalCategoryController;
-use App\Http\Controllers\User\GamificationController;
-use App\Http\Controllers\User\BadgeController;
-use App\Http\Controllers\User\ChallengeController;
-
+use App\Http\Controllers\Admin\GamificationController as AdminGamificationController;
+use App\Http\Controllers\Admin\BadgeController as AdminBadgeController;
+use App\Http\Controllers\Admin\ChallengeController as AdminChallengeController;
+use App\Http\Controllers\Admin\DailyRewardController as AdminDailyRewardController;
+use App\Http\Controllers\User\GamificationController as UserGamificationController;
+use App\Http\Controllers\User\ChallengeController as UserChallengeController;
 
 
 
@@ -130,15 +132,13 @@ Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(fu
 
 
 
-    Route::get('/gamification', [\App\Http\Controllers\User\GamificationController::class,'index'])->name('gamification.index');
-    Route::post('/gamification/add-xp', [\App\Http\Controllers\User\GamificationController::class,'addXp'])->name('gamification.addXp');
-    Route::post('/gamification/claim-daily-reward', [\App\Http\Controllers\User\GamificationController::class,'claimDailyReward'])->name('gamification.claimDailyReward');
-
-    // User badges and challenges
-    Route::get('/badges', [\App\Http\Controllers\User\BadgeController::class,'index'])->name('badges.index');
-    Route::get('/challenges', [\App\Http\Controllers\User\ChallengeController::class,'index'])->name('challenges.index');
-    Route::post('/challenges/{challenge}/join', [\App\Http\Controllers\User\ChallengeController::class,'join'])->name('challenges.join');
-    Route::patch('/user-challenges/{userChallenge}/progress', [\App\Http\Controllers\User\ChallengeController::class,'progress'])->name('userChallenges.progress');
+    // Gamification dashboard + daily reward claim
+    Route::get('/gamification', [UserGamificationController::class, 'index'])->name('gamification.index');
+    Route::post('/gamification/claim-daily-reward', [UserGamificationController::class, 'claimDailyReward'])->name('gamification.claimDailyReward');
+    
+    // User can only JOIN challenges and update their own progress (no create/delete)
+    Route::post('/challenges/{challenge}/join', [UserChallengeController::class, 'join'])->name('challenges.join');
+    Route::patch('/user-challenges/{userChallenge}/progress', [UserChallengeController::class, 'progress'])->name('userChallenges.progress');
 
 
     Route::get('/features', function () {
@@ -170,14 +170,26 @@ Route::middleware(['auth','role:super_admin'])->prefix('admin')->name('admin.')-
     Route::resource('roles', RoleController::class);
 
 
-    // Badge CRUD
-    Route::resource('badges', \App\Http\Controllers\Admin\BadgeController::class);
-
-    // Challenge CRUD
-    Route::resource('challenges', \App\Http\Controllers\Admin\ChallengeController::class);
-
-    // Optional Admin dashboard for stats
-    Route::get('/gamification/dashboard', [\App\Http\Controllers\Admin\GamificationController::class,'dashboard'])->name('gamification.dashboard');
+    // Gamification overview
+    Route::get('/gamification', [AdminGamificationController::class, 'index'])->name('gamification.index');
+    
+    // Badge CRUD (admin creates/edits/deletes globally)
+    Route::get('/badges', [AdminBadgeController::class, 'index'])->name('badges.index');
+    Route::post('/badges', [AdminBadgeController::class, 'store'])->name('badges.store');
+    Route::put('/badges/{badge}', [AdminBadgeController::class, 'update'])->name('badges.update');
+    Route::delete('/badges/{badge}', [AdminBadgeController::class, 'destroy'])->name('badges.destroy');
+    
+    // Challenge CRUD (admin creates/edits/deletes globally)
+    Route::get('/challenges', [AdminChallengeController::class, 'index'])->name('challenges.index');
+    Route::post('/challenges', [AdminChallengeController::class, 'store'])->name('challenges.store');
+    Route::put('/challenges/{challenge}', [AdminChallengeController::class, 'update'])->name('challenges.update');
+    Route::delete('/challenges/{challenge}', [AdminChallengeController::class, 'destroy'])->name('challenges.destroy');
+    
+    // Daily Rewards CRUD
+    Route::get('/daily-rewards', [AdminDailyRewardController::class, 'index'])->name('daily-rewards.index');
+    Route::post('/daily-rewards', [AdminDailyRewardController::class, 'store'])->name('daily-rewards.store');
+    Route::put('/daily-rewards/{dailyReward}', [AdminDailyRewardController::class, 'update'])->name('daily-rewards.update');
+    Route::delete('/daily-rewards/{dailyReward}', [AdminDailyRewardController::class, 'destroy'])->name('daily-rewards.destroy');
 });
 
 
