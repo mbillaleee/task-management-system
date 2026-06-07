@@ -26,6 +26,12 @@ use App\Http\Controllers\User\FocusController;
 use App\Http\Controllers\User\GoalController;
 use App\Http\Controllers\User\GoalCategoryController;
 use App\Http\Controllers\User\GoalMilestoneController;
+use App\Http\Controllers\User\JournalController;
+use App\Http\Controllers\User\JournalCategoryController;
+use App\Http\Controllers\User\GamificationController;
+use App\Http\Controllers\User\BadgeController;
+use App\Http\Controllers\User\ChallengeController;
+
 
 
 
@@ -113,6 +119,28 @@ Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(fu
 
 
 
+
+    Route::resource('journals', JournalController::class);
+
+    Route::patch('/journals/{journal}/favorite', [JournalController::class, 'toggleFavorite'])->name('journals.favorite');
+    Route::get('/journal-categories', [JournalCategoryController::class, 'index'])->name('journal.categories.index');
+    Route::post('/journal-categories', [JournalCategoryController::class, 'store'])->name('journal.categories.store');
+    Route::put('/journal-categories/{category}', [JournalCategoryController::class, 'update'])->name('journal.categories.update');
+    Route::delete('/journal-categories/{category}', [JournalCategoryController::class, 'destroy'])->name('journal.categories.destroy');
+
+
+
+    Route::get('/gamification', [\App\Http\Controllers\User\GamificationController::class,'index'])->name('gamification.index');
+    Route::post('/gamification/add-xp', [\App\Http\Controllers\User\GamificationController::class,'addXp'])->name('gamification.addXp');
+    Route::post('/gamification/claim-daily-reward', [\App\Http\Controllers\User\GamificationController::class,'claimDailyReward'])->name('gamification.claimDailyReward');
+
+    // User badges and challenges
+    Route::get('/badges', [\App\Http\Controllers\User\BadgeController::class,'index'])->name('badges.index');
+    Route::get('/challenges', [\App\Http\Controllers\User\ChallengeController::class,'index'])->name('challenges.index');
+    Route::post('/challenges/{challenge}/join', [\App\Http\Controllers\User\ChallengeController::class,'join'])->name('challenges.join');
+    Route::patch('/user-challenges/{userChallenge}/progress', [\App\Http\Controllers\User\ChallengeController::class,'progress'])->name('userChallenges.progress');
+
+
     Route::get('/features', function () {
         return view('user.features');
     })->name('features');
@@ -140,6 +168,16 @@ Route::middleware(['auth','role:super_admin'])->prefix('admin')->name('admin.')-
     Route::resource('users', UserController::class);
     Route::resource('permissions', PermissionController::class);
     Route::resource('roles', RoleController::class);
+
+
+    // Badge CRUD
+    Route::resource('badges', \App\Http\Controllers\Admin\BadgeController::class);
+
+    // Challenge CRUD
+    Route::resource('challenges', \App\Http\Controllers\Admin\ChallengeController::class);
+
+    // Optional Admin dashboard for stats
+    Route::get('/gamification/dashboard', [\App\Http\Controllers\Admin\GamificationController::class,'dashboard'])->name('gamification.dashboard');
 });
 
 

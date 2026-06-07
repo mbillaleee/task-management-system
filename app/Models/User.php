@@ -103,5 +103,36 @@ class User extends Authenticatable
     {
         return $this->hasMany(GoalCategory::class);
     }
+
+    public function journals()
+    {
+        return $this->hasMany(Journal::class);
+    }
+
+    public function journalCategories()
+    {
+        return $this->hasMany(JournalCategory::class);
+    }
+
+
+
+    public function gamification()
+    {
+        return $this->hasOne(UserGamification::class);
+    }
+
+    public function badges()
+    {
+        return $this->belongsToMany(Badge::class, 'user_badges')
+            ->withPivot('unlocked_at')
+            ->withTimestamps();
+    }
+
+    public function challenges()
+    {
+        return $this->belongsToMany(Challenge::class, 'user_challenges')
+            ->withPivot(['progress', 'is_completed', 'completed_at'])
+            ->withTimestamps();
+    }
     
 }
