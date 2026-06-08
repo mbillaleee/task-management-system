@@ -28,12 +28,16 @@ use App\Http\Controllers\User\GoalCategoryController;
 use App\Http\Controllers\User\GoalMilestoneController;
 use App\Http\Controllers\User\JournalController;
 use App\Http\Controllers\User\JournalCategoryController;
+use App\Http\Controllers\User\CalendarController;
+
+
 use App\Http\Controllers\Admin\GamificationController as AdminGamificationController;
 use App\Http\Controllers\Admin\BadgeController as AdminBadgeController;
 use App\Http\Controllers\Admin\ChallengeController as AdminChallengeController;
 use App\Http\Controllers\Admin\DailyRewardController as AdminDailyRewardController;
 use App\Http\Controllers\User\GamificationController as UserGamificationController;
 use App\Http\Controllers\User\ChallengeController as UserChallengeController;
+
 use App\Http\Controllers\Admin\LanguageController;
 
 
@@ -143,6 +147,21 @@ Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.
 
 
     Route::post('/languages/update/status/{language}', [UserDashboardController::class, 'updateStatus'])->name('languages.update.status');
+
+
+    Route::prefix('calendar')->name('calendar.')->group(function () {
+        Route::get('/',         [CalendarController::class, 'index'])    ->name('index');
+        Route::get('/week',     [CalendarController::class, 'week'])     ->name('week');
+        Route::get('/day',      [CalendarController::class, 'day'])      ->name('day');
+        Route::get('/timeline', [CalendarController::class, 'timeline']) ->name('timeline');
+        Route::get('/events',   [CalendarController::class, 'events'])   ->name('events');
+ 
+        Route::post('/',                        [CalendarController::class, 'store'])        ->name('store');
+        Route::get('/{calendarEvent}',          [CalendarController::class, 'show'])         ->name('show');
+        Route::put('/{calendarEvent}',          [CalendarController::class, 'update'])       ->name('update');
+        Route::delete('/{calendarEvent}',       [CalendarController::class, 'destroy'])      ->name('destroy');
+        Route::patch('/{calendarEvent}/status', [CalendarController::class, 'updateStatus']) ->name('updateStatus');
+    });
 
 
     Route::get('/features', function () {

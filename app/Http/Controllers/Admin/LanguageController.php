@@ -91,6 +91,10 @@ class LanguageController extends Controller
                 ['lang_value'=>$value,'editedby_id'=>Auth::id()]
             );
         }
+
+        // Clear cached translations for this language so updated values appear immediately.
+        Cache::forget("translations-{$request->lang}");
+
         return back()->with('success','Translations updated successfully.');
     }
 

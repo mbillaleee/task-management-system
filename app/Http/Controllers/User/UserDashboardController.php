@@ -98,14 +98,18 @@ class UserDashboardController extends Controller
         ));
     }
 
-    public function updateStatus(Request $request, $languageId)
-    {
-        // dd($languageId);
-        $language = Language::findOrFail($languageId);
-        request()->session()->put('locale', $language->language_code);
-        $translate = 'Language Changed successfully';
-        $success = 'success';
-        // toast($translate, $success);
-        return back();
-    }
+public function updateStatus(Language $language)
+{
+    // 1. Save selected language in session
+    session(['locale' => $language->language_code]);
+
+    // 2. Set Laravel locale immediately
+    \Illuminate\Support\Facades\App::setLocale($language->language_code);
+
+    // 3. Optional: flash a success message
+    session()->flash('success', 'Language changed successfully');
+
+    // 4. Redirect back
+    return back();
+}
 }

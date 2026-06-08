@@ -114,9 +114,8 @@
              </button>
 
              @php
-                 $locale = session('locale', env('DEFAULT_LANGUAGE', config('app.locale')));
+                 $locale = Session::get('locale', env('DEFAULT_LANGUAGE', config('app.locale')));
                  $currentLang = App\Models\Language::where('language_code', $locale)->where('active', 1)->first();
-                 $activeLanguages = App\Models\Language::where('active', 1)->get();
              @endphp
 
              @if ($currentLang)
@@ -124,8 +123,8 @@
                  <div class="relative z-[999]">
                      <div id="languageDropdown"
                          class="hidden absolute right-0 mt-2 w-36 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg z-[99]">
-                         @foreach ($activeLanguages as $language)
-                             <form action="{{ route('user.languages.update.status', $language) }}" method="POST">
+                         @foreach (App\Models\Language::where('active', 1)->get() as $language)
+                             <form action="{{ route('admin.languages.update.status', $language) }}" method="POST">
                                  @csrf
                                  <button type="submit"
                                      class="w-full flex items-center justify-between text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
