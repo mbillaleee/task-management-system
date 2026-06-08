@@ -25,12 +25,14 @@
         </svg>
 
         <span class="text-[20px] font-extrabold tracking-[-0.4px] dark:text-white text-gray-900">
-            veroa
+            {{ translate('veroa') }}
         </span>
     </div>
 
     <!-- Nav items -->
     <nav class="flex-1 px-3 py-4 flex flex-col gap-1.5 overflow-y-auto">
+
+
 
         {{-- Dashboard --}}
         <a id="nav-dashboard" href="{{ route('admin.dashboard') }}"
@@ -43,7 +45,7 @@
                 <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                 <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
-            <span>Dashboard</span>
+            <span>{{ translate('Dashboard') }}</span>
         </a>
 
         {{-- Users --}}
@@ -59,7 +61,7 @@
                 <path d="M23 21v-2a4 4 0 00-3-3.87" />
                 <path d="M16 3.13a4 4 0 010 7.75" />
             </svg>
-            <span>Users</span>
+            <span>{{ translate('Users') }}</span>
         </a>
 
 
@@ -72,7 +74,7 @@
                 <path
                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
             </svg>
-            <span>Plans</span>
+            <span>{{ translate('Plans') }}</span>
         </a>
 
         <a id="nav-tasks" href="{{ route('admin.gamification.index') }}"
@@ -84,7 +86,19 @@
                 <path
                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
             </svg>
-            <span>Gamification</span>
+            <span>{{ translate('Gamification') }}</span>
+        </a>
+
+        <a id="nav-tasks" href="{{ route('admin.languages') }}"
+            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[14px] font-semibold cursor-pointer no-underline
+            dark:text-gray-400 text-gray-600 dark:hover:bg-white/[0.06] hover:bg-black/[0.05]
+            dark:hover:text-white hover:text-gray-900 transition-all duration-200">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+            <span>{{ translate('Languages') }}</span>
         </a>
 
         {{--
@@ -194,6 +208,7 @@
         </form>
     </nav>
 
+    {{--
     <!-- Upgrade to Pro -->
     <div class="mx-3 mb-3">
         <div class="upgrade-dark dark:upgrade-dark upgrade-light rounded-2xl p-4 border dark:border-orange-500/25 border-orange-300/50"
@@ -215,6 +230,7 @@
             </button>
         </div>
     </div>
+    --}}
 
     <!-- User Profile -->
     <div

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Habit;
+use App\Models\Language;
 use Carbon\Carbon;
 
 class UserDashboardController extends Controller
@@ -95,5 +96,16 @@ class UserDashboardController extends Controller
             'circleOffset',
             'habitScoreLabel'
         ));
+    }
+
+    public function updateStatus(Request $request, $languageId)
+    {
+        // dd($languageId);
+        $language = Language::findOrFail($languageId);
+        request()->session()->put('locale', $language->language_code);
+        $translate = 'Language Changed successfully';
+        $success = 'success';
+        // toast($translate, $success);
+        return back();
     }
 }

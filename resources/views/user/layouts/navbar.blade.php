@@ -1,5 +1,5 @@
  <header
-     class="sticky top-0 z-30 flex items-center justify-between px-5 py-2.5
+     class="sticky top-0 z-30 flex items-center justify-between px-5 py-5
                 dark:bg-[#0d0b14]/90 bg-[#f0e8dc]/90
                 dark:border-b dark:border-white/[0.06] border-b border-black/[0.06]
                 backdrop-blur-xl">
@@ -40,15 +40,15 @@
      <!-- Center: Nav links -->
      <nav class="hidden md:flex items-center gap-6">
          <a href="{{ route('user.features') }}"
-             class="text-[13.5px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Features</a>
+             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Features</a>
          <a href="{{ route('user.tools') }}"
-             class="text-[13.5px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Tools</a>
+             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Tools</a>
          <a href="{{ route('user.pricing') }}"
-             class="text-[13.5px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Pricing</a>
+             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Pricing</a>
          <a href="{{ route('user.about') }}"
-             class="text-[13.5px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">About</a>
+             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">About</a>
          {{-- <a href="{{ route('user.changelog') }}"
-             class="text-[13.5px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Changelog</a> --}}
+             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Changelog</a> --}}
      </nav>
 
      <!-- Right: icons + toggle -->
@@ -101,5 +101,69 @@
                  <span class="hidden sm:inline">Dark</span>
              </button>
          </div>
+
+         <div class="relative inline-block text-left">
+             <!-- Language Button -->
+             <button id="languageButton"
+                 class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors group relative">
+                 <i class="fas fa-language text-[#273C98] dark:text-[#05B2FC] text-lg sm:text-xl"></i>
+                 <span
+                     class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden sm:block">
+                     অনুবাদ
+                 </span>
+             </button>
+
+             @php
+                 $locale = session('locale', env('DEFAULT_LANGUAGE', config('app.locale')));
+                 $currentLang = App\Models\Language::where('language_code', $locale)->where('active', 1)->first();
+                 $activeLanguages = App\Models\Language::where('active', 1)->get();
+             @endphp
+
+             @if ($currentLang)
+                 <!-- Dropdown -->
+                 <div class="relative z-[999]">
+                     <div id="languageDropdown"
+                         class="hidden absolute right-0 mt-2 w-36 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg z-[99]">
+                         @foreach ($activeLanguages as $language)
+                             <form action="{{ route('user.languages.update.status', $language) }}" method="POST">
+                                 @csrf
+                                 <button type="submit"
+                                     class="w-full flex items-center justify-between text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                                     data-lang="{{ $language->language_code }}">
+                                     <div class="flex items-center space-x-2">
+                                         <i
+                                             class="fas fa-globe-americas {{ $locale == $language->language_code ? 'text-green-500' : 'text-red-500' }}"></i>
+                                         <span>{{ $language->title }}</span>
+                                     </div>
+                                     @if ($locale == $language->language_code)
+                                         <i class="fas fa-check text-green-500"></i>
+                                     @endif
+                                 </button>
+                             </form>
+                         @endforeach
+                     </div>
+                 </div>
+             @endif
+         </div>
+
+         <!-- Dropdown Toggle Script -->
+         <script>
+             document.addEventListener('DOMContentLoaded', function() {
+                 const btn = document.getElementById('languageButton');
+                 const dropdown = document.getElementById('languageDropdown');
+
+                 btn.addEventListener('click', function(e) {
+                     e.preventDefault();
+                     dropdown.classList.toggle('hidden');
+                 });
+
+                 // Close dropdown when clicking outside
+                 document.addEventListener('click', function(e) {
+                     if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+                         dropdown.classList.add('hidden');
+                     }
+                 });
+             });
+         </script>
      </div>
  </header>

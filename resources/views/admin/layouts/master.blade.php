@@ -249,10 +249,14 @@
         </main>
     </div>
 
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+
     <script>
         /* ─────────────────────────────────────
-           THEME MANAGEMENT
-        ───────────────────────────────────── */
+                   THEME MANAGEMENT
+                ───────────────────────────────────── */
         let currentTheme = localStorage.getItem('veroa-theme') || 'dark';
         let prodChart, xpChart, focusChart;
 
@@ -481,24 +485,19 @@
 
             return {
                 grid: dark ?
-                    'rgba(255,255,255,0.04)' :
-                    'rgba(0,0,0,0.05)',
+                    'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.05)',
 
                 tick: dark ?
-                    'rgba(255,255,255,0.35)' :
-                    'rgba(0,0,0,0.4)',
+                    'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.4)',
 
                 line2: dark ?
-                    'rgba(245,158,11,0.6)' :
-                    'rgba(245,158,11,0.75)',
+                    'rgba(245,158,11,0.6)' : 'rgba(245,158,11,0.75)',
 
                 tooltipBg: dark ?
-                    '#1a1625' :
-                    '#ffffff',
+                    '#1a1625' : '#ffffff',
 
                 tooltipColor: dark ?
-                    '#ffffff' :
-                    '#111827',
+                    '#ffffff' : '#111827',
             };
         }
 
@@ -734,6 +733,8 @@
             buildSparklines();
         });
     </script>
+
+    @stack('js')
 </body>
 
 </html>

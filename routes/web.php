@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\ChallengeController as AdminChallengeController;
 use App\Http\Controllers\Admin\DailyRewardController as AdminDailyRewardController;
 use App\Http\Controllers\User\GamificationController as UserGamificationController;
 use App\Http\Controllers\User\ChallengeController as UserChallengeController;
+use App\Http\Controllers\Admin\LanguageController;
 
 
 
@@ -41,9 +42,9 @@ Route::get('/', [FrontendController::class, 'welcome'])->name('welcome');
 
 
 
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middleware(['auth', 'verified', 'role:super_admin'])->name('admin.dashboard');
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middleware(['setLocale','auth', 'verified', 'role:super_admin'])->name('admin.dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','setLocale'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profile/account/update', [ProfileController::class, 'updateAccount'])->name('profile.update.account');
@@ -51,7 +52,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(function () {
+Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.')->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'userDashboard'])->name('dashboard');
 
     Route::resource('tasks', TaskController::class);
@@ -141,6 +142,9 @@ Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(fu
     Route::patch('/user-challenges/{userChallenge}/progress', [UserChallengeController::class, 'progress'])->name('userChallenges.progress');
 
 
+    Route::post('/languages/update/status/{language}', [UserDashboardController::class, 'updateStatus'])->name('languages.update.status');
+
+
     Route::get('/features', function () {
         return view('user.features');
     })->name('features');
@@ -164,7 +168,7 @@ Route::middleware(['auth','role:user'])->prefix('user')->name('user.')->group(fu
 });
 
 
-Route::middleware(['auth','role:super_admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth','role:super_admin','setLocale'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('permissions', PermissionController::class);
     Route::resource('roles', RoleController::class);
@@ -190,6 +194,22 @@ Route::middleware(['auth','role:super_admin'])->prefix('admin')->name('admin.')-
     Route::post('/daily-rewards', [AdminDailyRewardController::class, 'store'])->name('daily-rewards.store');
     Route::put('/daily-rewards/{dailyReward}', [AdminDailyRewardController::class, 'update'])->name('daily-rewards.update');
     Route::delete('/daily-rewards/{dailyReward}', [AdminDailyRewardController::class, 'destroy'])->name('daily-rewards.destroy');
+
+
+
+     Route::get('languages',[LanguageController::class,'index'])->name('languages');
+    Route::get('language/create',[LanguageController::class,'create'])->name('language.create');
+    Route::post('language/store',[LanguageController::class,'store'])->name('language.store');
+    Route::get('language/edit/{language}',[LanguageController::class,'edit'])->name('language.edit');
+    Route::post('language/update/{language}',[LanguageController::class,'update'])->name('language.update');
+    Route::post('language/delete/{language}',[LanguageController::class,'destroy'])->name('language.delete');
+    Route::post('language/status',[LanguageController::class,'toggleStatus'])->name('language.status');
+
+    Route::get('language/translations/{language}',[LanguageController::class,'translations'])->name('language.translations');
+    Route::post('language/translation/value/store',[LanguageController::class,'storeTranslationValues'])->name('language.translation.value.store');
+    Route::get('language/translation/search/ajax',[LanguageController::class,'translationSearchAjax'])->name('language.translation.search.ajax');
+
+    Route::post('/languages/update/status/{language}', [LanguageController::class, 'updateStatus'])->name('languages.update.status');
 });
 
 
