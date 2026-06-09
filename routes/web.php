@@ -29,6 +29,7 @@ use App\Http\Controllers\User\GoalMilestoneController;
 use App\Http\Controllers\User\JournalController;
 use App\Http\Controllers\User\JournalCategoryController;
 use App\Http\Controllers\User\CalendarController;
+use App\Http\Controllers\User\UserSubscriptionController;
 
 
 use App\Http\Controllers\Admin\GamificationController as AdminGamificationController;
@@ -39,6 +40,7 @@ use App\Http\Controllers\User\GamificationController as UserGamificationControll
 use App\Http\Controllers\User\ChallengeController as UserChallengeController;
 
 use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\SubscriptionController;
 
 
 
@@ -164,6 +166,13 @@ Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.
     });
 
 
+    Route::prefix('subscription')->name('subscription.')->group(function () {
+        Route::get('/',           [UserSubscriptionController::class, 'index'])          ->name('index');
+        Route::post('/upgrade',   [UserSubscriptionController::class, 'upgradeRequest']) ->name('upgrade');
+        Route::post('/cancel',    [UserSubscriptionController::class, 'cancel'])         ->name('cancel');
+    });
+
+
     Route::get('/features', function () {
         return view('user.features');
     })->name('features');
@@ -172,9 +181,7 @@ Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.
         return view('user.tools');
     })->name('tools');
 
-    Route::get('/pricing', function () {
-        return view('user.pricing');
-    })->name('pricing');
+    Route::get('/pricing', [UserDashboardController::class, 'pricing'])->name('pricing');
 
     Route::get('/changelog', function () {
         return view('user.changelog');
@@ -229,6 +236,21 @@ Route::middleware(['auth','role:super_admin','setLocale'])->prefix('admin')->nam
     Route::get('language/translation/search/ajax',[LanguageController::class,'translationSearchAjax'])->name('language.translation.search.ajax');
 
     Route::post('/languages/update/status/{language}', [LanguageController::class, 'updateStatus'])->name('languages.update.status');
+
+
+
+        // ─── Subscription Plans (Admin CRUD) ───
+    Route::get('/subscriptions',                           [SubscriptionController::class, 'index'])             ->name('subscriptions.index');
+    Route::post('/subscriptions',                          [SubscriptionController::class, 'store'])             ->name('subscriptions.store');
+    Route::put('/subscriptions/{subscription}',            [SubscriptionController::class, 'update'])            ->name('subscriptions.update');
+    Route::delete('/subscriptions/{subscription}',         [SubscriptionController::class, 'destroy'])           ->name('subscriptions.destroy');
+    Route::post('/subscriptions/{subscription}/toggle',    [SubscriptionController::class, 'toggleStatus'])      ->name('subscriptions.toggle');
+
+    // ─── Subscriber Management ───
+    Route::get('/subscriptions/subscribers',               [SubscriptionController::class, 'subscribers'])       ->name('subscriptions.subscribers');
+    Route::post('/subscriptions/assign',                   [SubscriptionController::class, 'assignPlan'])        ->name('subscriptions.assign');
+    Route::patch('/subscriptions/cancel/{userSubscription}',[SubscriptionController::class, 'cancelSubscription'])->name('subscriptions.cancel');
+
 });
 
 

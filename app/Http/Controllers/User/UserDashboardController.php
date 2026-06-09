@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Habit;
 use App\Models\Language;
+use App\Models\SubscriptionPlan;
+use App\Models\UserSubscription;
 use Carbon\Carbon;
 
 class UserDashboardController extends Controller
@@ -98,18 +100,37 @@ class UserDashboardController extends Controller
         ));
     }
 
-public function updateStatus(Language $language)
-{
-    // 1. Save selected language in session
-    session(['locale' => $language->language_code]);
+    public function pricing()
+    {
+        // Load all active plans ordered by sort_order / price
+        $plans = SubscriptionPlan::active()
+            ->ordered()
+            ->get();
+ 
+        // Current user's active/trial subscription (latest one)
+        $currentSubscription = UserSubscription::with('plan')
+            ->where('user_id', auth()->id())
+            ->whereIn('status', ['active', 'trial'])
+            ->latest()
+            ->first();
+ 
+        $currentPlanId = $currentSubscription?->plan?->id;
+ 
+        return view('user.pricing', compact('plans', 'currentSubscription', 'currentPlanId'));
+    }
 
-    // 2. Set Laravel locale immediately
-    \Illuminate\Support\Facades\App::setLocale($language->language_code);
+    public function updateStatus(Language $language)
+    {
+        // 1. Save selected language in session
+        session(['locale' => $language->language_code]);
 
-    // 3. Optional: flash a success message
-    session()->flash('success', 'Language changed successfully');
+        // 2. Set Laravel locale immediately
+        \Illuminate\Support\Facades\App::setLocale($language->language_code);
 
-    // 4. Redirect back
-    return back();
-}
+        // 3. Optional: flash a success message
+        session()->flash('success', 'Language changed successfully');
+
+        // 4. Redirect back
+        return back();
+    }
 }

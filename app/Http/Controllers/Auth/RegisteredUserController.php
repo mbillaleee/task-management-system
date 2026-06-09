@@ -68,8 +68,8 @@ class RegisteredUserController extends Controller
         // Assign role 'user'
         $user->assignRole('user'); // <-- new line for role assignment
 
-        // Fire registered event
-        event(new Registered($user));
+        // 3. ★ Auto-assign Free plan ★
+        $user->assignFreePlan();
 
         // Login the user
         Auth::login($user);

@@ -134,5 +134,99 @@ class User extends Authenticatable
             ->withPivot(['progress', 'is_completed', 'completed_at'])
             ->withTimestamps();
     }
+
+
+    // ─── Subscription relationships ───────────────────────────────────────────
+
+    /** All subscriptions for this user */
+    public function subscriptions()
+    {
+        return $this->hasMany(UserSubscription::class);
+    }
+
+    /** Current active/trial subscription (latest) */
+    public function activeSubscription()
+    {
+        return $this->hasOne(UserSubscription::class)
+            ->whereIn('status', ['active', 'trial'])
+            ->latest();
+    }
+
+    // ─── Subscription helpers ─────────────────────────────────────────────────
+
+    /** Get the current active subscription with plan eager loaded */
+    public function currentSubscription(): ?UserSubscription
+    {
+        return $this->activeSubscription()->with('plan')->first();
+    }
+
+    /** Get the current plan (or null) */
+    public function currentPlan(): ?SubscriptionPlan
+    {
+        return $this->currentSubscription()?->plan;
+    }
+
+    /** Is the user on a free plan? */
+    public function isOnFreePlan(): bool
+    {
+        $plan = $this->currentPlan();
+        return $plan === null || $plan->price_monthly == 0;
+    }
+
+    /** Is the user subscribed to a specific plan slug? */
+    public function isSubscribedTo(string $slug): bool
+    {
+        return $this->currentPlan()?->slug === $slug;
+    }
+
+    /** Does the user have access to a boolean feature? */
+    public function canAccess(string $feature): bool
+    {
+        $plan = $this->currentPlan();
+        if (!$plan) return false;
+        return (bool) ($plan->$feature ?? false);
+    }
+
+    /** Check numeric limit; returns true if under limit or limit is -1 (unlimited) */
+    public function withinLimit(string $limitField, int $currentCount): bool
+    {
+        $plan = $this->currentPlan();
+        if (!$plan) return false;
+        $limit = $plan->$limitField ?? -1;
+        return $limit === -1 || $currentCount < $limit;
+    }
+
+    /**
+     * Assign the free plan on registration.
+     * Called from RegisteredUserController after user creation.
+     */
+    public function assignFreePlan(): void
+    {
+        // Find the free plan (price_monthly = 0, is_active = true)
+        $freePlan = SubscriptionPlan::where('price_monthly', 0)
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->first();
+
+        if (!$freePlan) return; // No free plan seeded yet — skip silently
+
+        // Avoid duplicate subscription
+        $existing = $this->subscriptions()
+            ->where('subscription_plan_id', $freePlan->id)
+            ->where('status', 'active')
+            ->exists();
+
+        if ($existing) return;
+
+        UserSubscription::create([
+            'user_id'              => $this->id,
+            'subscription_plan_id' => $freePlan->id,
+            'billing_cycle'        => 'monthly',
+            'status'               => 'active',
+            'amount_paid'          => 0,
+            'starts_at'            => now(),
+            'ends_at'              => null, // Free = never expires
+        ]);
+    }
     
 }
