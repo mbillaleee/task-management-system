@@ -25,7 +25,7 @@
         </svg>
 
         <span class="text-[22px] font-extrabold tracking-[-0.4px] dark:text-white text-gray-900">
-            veroa
+            {{ translate('veroa') }}
         </span>
     </div>
 
@@ -42,12 +42,12 @@
                 <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                 <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
-            <span>Dashboard</span>
+            <span>{{ translate('Dashboard') }}</span>
         </a>
 
         <a href="{{ route('user.tasks.index') }}"
             class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline transition-all duration-200
-            {{ request()->routeIs('user.tasks.*')
+            {{ request()->routeIs('user.tasks.index')
                 ? 'text-orange-600 dark:text-orange-400 nav-active-dark'
                 : 'text-gray-600 dark:text-gray-400 dark:hover:bg-white/[0.06] hover:bg-black/[0.05] dark:hover:text-white hover:text-gray-900' }}">
             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
@@ -55,29 +55,31 @@
                 <path
                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
             </svg>
-            <span>Tasks</span>
+            <span>{{ translate('Tasks') }}</span>
         </a>
 
 
 
         <a href="{{ route('user.habits.index') }}"
-            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline
-            dark:text-gray-400 text-gray-600 dark:hover:bg-white/[0.06] hover:bg-black/[0.05]
-            dark:hover:text-white hover:text-gray-900 transition-all duration-200">
+            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline transition-all duration-200
+            {{ request()->routeIs('user.habits.index')
+                ? 'text-orange-600 dark:text-orange-400 nav-active-dark'
+                : 'text-gray-600 dark:text-gray-400 dark:hover:bg-white/[0.06] hover:bg-black/[0.05] dark:hover:text-white hover:text-gray-900' }}">
             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                 <path
                     d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
-            <span>Habits</span>
+            <span>{{ translate('Habits') }}</span>
         </a>
 
 
 
         <a href="{{ route('user.notes.index') }}"
-            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline
-            dark:text-gray-400 text-gray-600 dark:hover:bg-white/[0.06] hover:bg-black/[0.05]
-            dark:hover:text-white hover:text-gray-900 transition-all duration-200">
+            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline transition-all duration-200
+            {{ request()->routeIs('user.notes.index')
+                ? 'text-orange-600 dark:text-orange-400 nav-active-dark'
+                : 'text-gray-600 dark:text-gray-400 dark:hover:bg-white/[0.06] hover:bg-black/[0.05] dark:hover:text-white hover:text-gray-900' }}">
 
             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -88,15 +90,16 @@
                 <path d="M10 9H8" />
             </svg>
 
-            <span>Notes</span>
+            <span>{{ translate('Notes') }}</span>
         </a>
 
 
 
         <a href="{{ route('user.focus.index') }}"
-            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline
-    dark:text-gray-400 text-gray-600 dark:hover:bg-white/[0.06] hover:bg-black/[0.05]
-    dark:hover:text-white hover:text-gray-900 transition-all duration-200">
+            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline transition-all duration-200
+            {{ request()->routeIs('user.focus.index')
+                ? 'text-orange-600 dark:text-orange-400 nav-active-dark'
+                : 'text-gray-600 dark:text-gray-400 dark:hover:bg-white/[0.06] hover:bg-black/[0.05] dark:hover:text-white hover:text-gray-900' }}">
 
             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -105,15 +108,16 @@
                 <circle cx="12" cy="12" r="1"></circle>
             </svg>
 
-            <span>Focus</span>
+            <span>{{ translate('Focus') }}</span>
         </a>
 
 
 
         <a href="{{ route('user.goals.index') }}"
-            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline
-    dark:text-gray-400 text-gray-600 dark:hover:bg-white/[0.06] hover:bg-black/[0.05]
-    dark:hover:text-white hover:text-gray-900 transition-all duration-200">
+            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline transition-all duration-200
+            {{ request()->routeIs('user.goals.index')
+                ? 'text-orange-600 dark:text-orange-400 nav-active-dark'
+                : 'text-gray-600 dark:text-gray-400 dark:hover:bg-white/[0.06] hover:bg-black/[0.05] dark:hover:text-white hover:text-gray-900' }}">
 
             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -122,13 +126,14 @@
                 <path d="M12 13l4.5-2.25"></path>
             </svg>
 
-            <span>Goals</span>
+            <span>{{ translate('Goals') }}</span>
         </a>
 
         <a href="{{ route('user.journals.index') }}"
-            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline
-    dark:text-gray-400 text-gray-600 dark:hover:bg-white/[0.06] hover:bg-black/[0.05]
-    dark:hover:text-white hover:text-gray-900 transition-all duration-200">
+            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline transition-all duration-200
+            {{ request()->routeIs('user.journals.index')
+                ? 'text-orange-600 dark:text-orange-400 nav-active-dark'
+                : 'text-gray-600 dark:text-gray-400 dark:hover:bg-white/[0.06] hover:bg-black/[0.05] dark:hover:text-white hover:text-gray-900' }}">
 
             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -138,13 +143,14 @@
                 <path d="M8 11h6"></path>
             </svg>
 
-            <span>Journals</span>
+            <span>{{ translate('Journals') }}</span>
         </a>
 
         <a href="{{ route('user.gamification.index') }}"
-            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline
-    dark:text-gray-400 text-gray-600 dark:hover:bg-white/[0.06] hover:bg-black/[0.05]
-    dark:hover:text-white hover:text-gray-900 transition-all duration-200">
+            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline transition-all duration-200
+            {{ request()->routeIs('user.gamification.index')
+                ? 'text-orange-600 dark:text-orange-400 nav-active-dark'
+                : 'text-gray-600 dark:text-gray-400 dark:hover:bg-white/[0.06] hover:bg-black/[0.05] dark:hover:text-white hover:text-gray-900' }}">
 
             <!-- Trophy Icon -->
             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
@@ -157,13 +163,14 @@
                 <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path>
             </svg>
 
-            <span>Gamification</span>
+            <span>{{ translate('Gamification') }}</span>
         </a>
 
         <a href="{{ route('user.calendar.index') }}"
-            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline
-          dark:text-gray-400 text-gray-600 dark:hover:bg-white/[0.06] hover:bg-black/[0.05]
-          dark:hover:text-white hover:text-gray-900 transition-all duration-200">
+            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline transition-all duration-200
+            {{ request()->routeIs('user.calendar.index')
+                ? 'text-orange-600 dark:text-orange-400 nav-active-dark'
+                : 'text-gray-600 dark:text-gray-400 dark:hover:bg-white/[0.06] hover:bg-black/[0.05] dark:hover:text-white hover:text-gray-900' }}">
 
             <!-- Calendar Icon -->
             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
@@ -174,7 +181,7 @@
                 <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
 
-            <span>Calendar</span>
+            <span>{{ translate('Calendar') }}</span>
         </a>
 
         {{--
@@ -240,7 +247,7 @@
                 <path
                     d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
             </svg>
-            <span>Settings</span>
+            <span>{{ translate('Settings') }}</span>
         </a>
 
         <a href="{{ route('logout') }}"
@@ -252,7 +259,7 @@
                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                 <path d="M17 16l4-4m0 0l-4-4m4 4H7" />
             </svg>
-            <span>Logout</span>
+            <span>{{ translate('Logout') }}</span>
         </a>
 
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
@@ -261,48 +268,77 @@
     </nav>
 
     <!-- Upgrade to Pro -->
-    <div class="mx-3 mb-3">
-        <div class="upgrade-dark dark:upgrade-dark upgrade-light rounded-2xl p-4 border dark:border-orange-500/25 border-orange-300/50"
-            id="upgradeCard">
-            <div class="flex items-center gap-2 mb-1.5">
-                <span class="text-[20px]">🚀</span>
-                <span class="text-[15px] font-bold dark:text-white text-gray-900">Upgrade to Pro</span>
+    <div class="mx-2 mb-2">
+        <div id="upgradeCard"
+            class="upgrade-dark rounded-2xl p-4 border dark:border-orange-500/25 border-orange-300/50">
+            <div class="flex items-center gap-2 mb-1">
+                <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                    <path d="M2 17l10 5 10-5" />
+                    <path d="M2 12l10 5 10-5" />
+                </svg>
+                <span
+                    class="text-[13px] font-bold dark:text-white text-gray-900">{{ translate('Upgrade to Pro') }}</span>
             </div>
-
-            <p class="text-[12.5px] dark:text-gray-400 text-gray-500 leading-relaxed mb-3">
-                Unlock unlimited power and exclusive features.
+            <p class="text-[11.5px] dark:text-gray-400 text-gray-500 leading-relaxed mb-3">
+                {{ translate('Unlock unlimited power and exclusive features.') }}
             </p>
-
             <button
-                class="w-full py-2.5 rounded-xl text-white text-[13px] font-bold btn-trans
+                class="w-full py-2 rounded-xl text-white text-[12px] font-bold btn-trans
                 bg-gradient-to-br from-orange-500 to-pink-500
                 shadow-[0_4px_14px_rgba(249,115,22,0.4)]">
-                Upgrade Now
+                {{ translate('Upgrade Now') }} →
             </button>
         </div>
     </div>
 
     <!-- User Profile -->
-    <div
-        class="flex items-center gap-3 px-4 py-4 dark:border-t dark:border-white/[0.06] border-t border-black/[0.06] flex-shrink-0">
-        <div
-            class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center text-white text-[15px] font-bold
-            bg-gradient-to-br from-orange-400 to-pink-500">
-            {{ strtoupper(substr(auth()->user()->name ?? 'L', 0, 1)) }}
-        </div>
+    {{-- Profile Card --}}
+    <div class="mx-3 mb-3 rounded-2xl flex-shrink-0 transition-all duration-300
+    dark:bg-[#1a1625] bg-white
+    dark:border dark:border-white/[0.06] border border-black/[0.06]"
+        style="">
 
-        <div class="flex-1 min-w-0">
-            <div class="text-[15px] font-bold dark:text-white text-gray-900 leading-none mb-1 truncate">
-                {{ auth()->user()->name ?? 'Leon' }}
+        <div class="flex items-center gap-3 px-4 py-3.5">
+
+            {{-- Avatar with glow ring --}}
+            <div class="relative flex-shrink-0">
+                <div class="w-11 h-11 rounded-full p-[2px]"
+                    style="background: linear-gradient(135deg, #f97316, #ec4899);
+                       box-shadow: 0 0 10px rgba(249,115,22,0.45), 0 0 20px rgba(249,115,22,0.18);">
+                    <div
+                        class="w-full h-full rounded-full overflow-hidden dark:bg-gray-800 bg-gray-200 flex items-center justify-center">
+                        @if (auth()->user()->profile_photo_path)
+                            <img src="{{ asset('storage/' . auth()->user()->profile_photo_path) }}"
+                                alt="{{ auth()->user()->name }}" class="w-full h-full object-cover rounded-full">
+                        @else
+                            <span class="dark:text-white text-gray-700 text-[15px] font-bold">
+                                {{ strtoupper(substr(auth()->user()->name ?? 'L', 0, 1)) }}
+                            </span>
+                        @endif
+                    </div>
+                </div>
             </div>
-            <div class="text-[12px] dark:text-gray-500 text-gray-400">Pro Plan</div>
-        </div>
 
-        <a href="{{ route('profile.edit') }}">
-            <svg class="w-4 h-4 dark:text-gray-500 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <polyline points="6 9 12 15 18 9" />
-            </svg>
-        </a>
+            {{-- Name & Plan --}}
+            <div class="flex-1 min-w-0">
+                <div class="text-[14px] font-bold dark:text-white text-gray-900 leading-none mb-1 truncate">
+                    {{ auth()->user()->name ?? 'Leon' }}
+                </div>
+                <div class="text-[11px] dark:text-gray-500 text-gray-400 font-medium">
+                    {{ translate('Pro Plan') }}
+                </div>
+            </div>
+
+            {{-- Chevron --}}
+            <a href="{{ route('profile.edit') }}"
+                class="flex-shrink-0 p-1.5 rounded-lg dark:hover:bg-white/[0.06] hover:bg-black/[0.05] transition-colors duration-200">
+                <svg class="w-4 h-4 dark:text-gray-500 text-gray-400" fill="none" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <polyline points="6 9 12 15 18 9" />
+                </svg>
+            </a>
+        </div>
     </div>
 </aside>

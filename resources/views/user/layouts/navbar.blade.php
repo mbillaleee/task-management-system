@@ -1,5 +1,5 @@
  <header
-     class="sticky top-0 z-30 flex items-center justify-between px-5 py-5
+     class="sticky top-0 z-30 flex items-center justify-between px-5 py-4
                 dark:bg-[#0d0b14]/90 bg-[#f0e8dc]/90
                 dark:border-b dark:border-white/[0.06] border-b border-black/[0.06]
                 backdrop-blur-xl">
@@ -40,15 +40,15 @@
      <!-- Center: Nav links -->
      <nav class="hidden md:flex items-center gap-6">
          <a href="{{ route('user.features') }}"
-             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Features</a>
+             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">{{ translate('Features') }}</a>
          <a href="{{ route('user.tools') }}"
-             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Tools</a>
+             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">{{ translate('Tools') }}</a>
          <a href="{{ route('user.pricing') }}"
-             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Pricing</a>
+             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">{{ translate('Pricing') }}</a>
          <a href="{{ route('user.about') }}"
-             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">About</a>
+             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">{{ translate('About') }}</a>
          {{-- <a href="{{ route('user.changelog') }}"
-             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Changelog</a> --}}
+             class="text-[15px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">{{ translate('Changelog') }}</a> --}}
      </nav>
 
      <!-- Right: icons + toggle -->
@@ -74,33 +74,6 @@
              <span
                  class="absolute top-[7px] right-[7px] w-[7px] h-[7px] bg-orange-500 rounded-full border-[1.5px] dark:border-[#0d0b14] border-[#f0e8dc]"></span>
          </button>
-         <!-- Theme toggle pill -->
-         <div class="flex items-center gap-0.5 rounded-full p-[3px] dark:bg-white/[0.08] bg-black/[0.07]">
-             <button id="btnLight" onclick="setTheme('light')"
-                 class="flex items-center gap-1.5 px-3 py-[5px] rounded-full text-[12px] font-semibold border-none cursor-pointer transition-all duration-200  dark:text-gray-500 text-gray-800 dark:bg-transparent bg-white shadow-sm">
-                 <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                     viewBox="0 0 24 24">
-                     <circle cx="12" cy="12" r="5" />
-                     <line x1="12" y1="1" x2="12" y2="3" />
-                     <line x1="12" y1="21" x2="12" y2="23" />
-                     <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                     <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                     <line x1="1" y1="12" x2="3" y2="12" />
-                     <line x1="21" y1="12" x2="23" y2="12" />
-                     <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                     <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-                 </svg>
-                 <span class="hidden sm:inline">Light</span>
-             </button>
-             <button id="btnDark" onclick="setTheme('dark')"
-                 class="flex items-center gap-1.5 px-3 py-[5px] rounded-full text-[12px] font-semibold border-none cursor-pointer transition-all duration-200  dark:text-white text-gray-400 dark:bg-[#1e1730] bg-transparent dark:shadow-sm">
-                 <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                     viewBox="0 0 24 24">
-                     <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-                 </svg>
-                 <span class="hidden sm:inline">Dark</span>
-             </button>
-         </div>
 
          <div class="relative inline-block text-left">
              <!-- Language Button -->
@@ -109,7 +82,7 @@
                  <i class="fas fa-language text-[#273C98] dark:text-[#05B2FC] text-lg sm:text-xl"></i>
                  <span
                      class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden sm:block">
-                     অনুবাদ
+                     {{ translate('Translate') }}
                  </span>
              </button>
 
@@ -144,6 +117,37 @@
                  </div>
              @endif
          </div>
+
+
+         <!-- Theme toggle pill -->
+         <div class="flex items-center gap-0.5 rounded-full p-[3px] dark:bg-white/[0.08] bg-black/[0.07]">
+             <button id="btnLight" onclick="setTheme('light')"
+                 class="flex items-center gap-1.5 px-3 py-[5px] rounded-full text-[12px] font-semibold border-none cursor-pointer transition-all duration-200  dark:text-gray-500 text-gray-800 dark:bg-transparent bg-white shadow-sm">
+                 <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     viewBox="0 0 24 24">
+                     <circle cx="12" cy="12" r="5" />
+                     <line x1="12" y1="1" x2="12" y2="3" />
+                     <line x1="12" y1="21" x2="12" y2="23" />
+                     <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                     <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                     <line x1="1" y1="12" x2="3" y2="12" />
+                     <line x1="21" y1="12" x2="23" y2="12" />
+                     <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                     <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                 </svg>
+                 <span class="hidden sm:inline">{{ translate('Light') }}</span>
+             </button>
+             <button id="btnDark" onclick="setTheme('dark')"
+                 class="flex items-center gap-1.5 px-3 py-[5px] rounded-full text-[12px] font-semibold border-none cursor-pointer transition-all duration-200  dark:text-white text-gray-400 dark:bg-[#1e1730] bg-transparent dark:shadow-sm">
+                 <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     viewBox="0 0 24 24">
+                     <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                 </svg>
+                 <span class="hidden sm:inline">{{ translate('Dark') }}</span>
+             </button>
+         </div>
+
+
 
          <!-- Dropdown Toggle Script -->
          <script>

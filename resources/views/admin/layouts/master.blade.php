@@ -147,13 +147,28 @@
 
         /* Sidebar active gradient line */
         .nav-active-dark {
-            background: linear-gradient(90deg, rgba(249, 115, 22, 0.18) 0%, rgba(249, 115, 22, 0.04) 100%);
+            background: linear-gradient(90deg, rgba(120, 30, 20, 0.55) 0%, rgba(80, 15, 40, 0.35) 60%, rgba(30, 10, 30, 0.15) 100%);
+            border: 1px solid rgba(249, 115, 22, 0.45);
             border-left: 3px solid #f97316;
+            box-shadow:
+                inset 0 0 20px rgba(180, 40, 20, 0.15),
+                0 0 12px rgba(249, 115, 22, 0.12);
+            border-radius: 12px;
         }
 
+        /* Light mode active — golden orange glow */
         .nav-active-light {
-            background: linear-gradient(90deg, rgba(234, 88, 12, 0.14) 0%, rgba(234, 88, 12, 0.03) 100%);
+            background: linear-gradient(105deg,
+                    rgba(251, 146, 60, 0.55) 0%,
+                    rgba(249, 115, 22, 0.35) 45%,
+                    rgba(245, 158, 11, 0.20) 100%);
+            border: 1px solid rgba(249, 115, 22, 0.60);
             border-left: 3px solid #ea580c;
+            border-radius: 12px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 200, 80, 0.30),
+                0 0 18px rgba(249, 115, 22, 0.25),
+                0 2px 8px rgba(234, 88, 12, 0.15);
         }
 
         /* Remove default nav border placeholder */
@@ -255,8 +270,8 @@
 
     <script>
         /* ─────────────────────────────────────
-                   THEME MANAGEMENT
-                ───────────────────────────────────── */
+                           THEME MANAGEMENT
+                        ───────────────────────────────────── */
         let currentTheme = localStorage.getItem('veroa-theme') || 'dark';
         let prodChart, xpChart, focusChart;
 
@@ -264,116 +279,51 @@
             currentTheme = mode;
 
             const html = document.documentElement;
-            const hero = document.getElementById('heroSection');
-            const heroSvg = document.getElementById('heroSvg');
-            const heroGradText = document.getElementById('heroGradText');
-            const socialProof = document.getElementById('socialProof');
             const upgradeCard = document.getElementById('upgradeCard');
-            const btnLight = document.getElementById('btnLight');
-            const btnDark = document.getElementById('btnDark');
 
             if (mode === 'dark') {
-
                 html.classList.remove('light');
                 html.classList.add('dark');
-
-                if (hero) {
-                    hero.classList.add('hero-dark');
-                    hero.classList.remove('hero-light');
-                    hero.classList.add('border-orange-500/[0.15]');
-                    hero.classList.remove('border-orange-200/60');
-                }
-
-                if (heroGradText) {
-                    heroGradText.classList.add('grad-text-dark');
-                    heroGradText.classList.remove('grad-text-light');
-                }
-
-                if (heroSvg) {
-                    heroSvg.classList.add('hero-svg-dark');
-                    heroSvg.classList.remove('hero-svg-light');
-                }
-
-                if (socialProof) {
-                    socialProof.classList.add('hidden');
-                    socialProof.classList.remove('flex');
-                }
 
                 if (upgradeCard) {
                     upgradeCard.classList.add('upgrade-dark');
                     upgradeCard.classList.remove('upgrade-light');
                 }
 
-                if (btnDark) {
-                    btnDark.classList.add(
-                        'dark:text-white',
-                        'dark:bg-[#1e1730]',
-                        'dark:shadow-sm'
-                    );
-                }
-
-                if (btnLight) {
-                    btnLight.classList.remove(
-                        'bg-white',
-                        'shadow-sm',
-                        'text-gray-800'
-                    );
-
-                    btnLight.classList.add('text-gray-500');
-                }
+                // Nav active: dark mode
+                document.querySelectorAll('.nav-item').forEach(el => {
+                    if (el.classList.contains('nav-active-light') || el.classList.contains('nav-active-dark')) {
+                        el.classList.remove('nav-active-light');
+                        el.classList.add('nav-active-dark');
+                        el.classList.remove('text-orange-600');
+                        el.classList.add('text-orange-400');
+                    }
+                });
 
             } else {
-
                 html.classList.remove('dark');
                 html.classList.add('light');
-
-                if (hero) {
-                    hero.classList.remove('hero-dark');
-                    hero.classList.add('hero-light');
-                    hero.classList.remove('border-orange-500/[0.15]');
-                    hero.classList.add('border-orange-200/60');
-                }
-
-                if (heroGradText) {
-                    heroGradText.classList.remove('grad-text-dark');
-                    heroGradText.classList.add('grad-text-light');
-                }
-
-                if (heroSvg) {
-                    heroSvg.classList.remove('hero-svg-dark');
-                    heroSvg.classList.add('hero-svg-light');
-                }
-
-                if (socialProof) {
-                    socialProof.classList.remove('hidden');
-                    socialProof.classList.add('flex');
-                }
 
                 if (upgradeCard) {
                     upgradeCard.classList.remove('upgrade-dark');
                     upgradeCard.classList.add('upgrade-light');
                 }
 
-                if (btnLight) {
-                    btnLight.classList.add(
-                        'bg-white',
-                        'shadow-sm',
-                        'text-gray-800'
-                    );
-
-                    btnLight.classList.remove('text-gray-500');
-                }
-
-                if (btnDark) {
-                    btnDark.classList.add('text-gray-400');
-                    btnDark.classList.remove('text-white');
-                }
+                // Nav active: light mode
+                document.querySelectorAll('.nav-item').forEach(el => {
+                    if (el.classList.contains('nav-active-light') || el.classList.contains('nav-active-dark')) {
+                        el.classList.remove('nav-active-dark');
+                        el.classList.add('nav-active-light');
+                        el.classList.remove('text-orange-400');
+                        el.classList.add('text-orange-600');
+                    }
+                });
             }
 
             localStorage.setItem('veroa-theme', mode);
-
-            rebuildCharts();
+            buildProductivityChart();
         }
+
 
         /* ─────────────────────────────────────
            SIDEBAR TOGGLE

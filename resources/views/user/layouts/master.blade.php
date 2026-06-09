@@ -147,14 +147,30 @@
         }
 
         /* Sidebar active gradient line */
+        /* Replace the existing nav-active-dark */
         .nav-active-dark {
-            background: linear-gradient(90deg, rgba(249, 115, 22, 0.18) 0%, rgba(249, 115, 22, 0.04) 100%);
+            background: linear-gradient(90deg, rgba(120, 30, 20, 0.55) 0%, rgba(80, 15, 40, 0.35) 60%, rgba(30, 10, 30, 0.15) 100%);
+            border: 1px solid rgba(249, 115, 22, 0.45);
             border-left: 3px solid #f97316;
+            box-shadow:
+                inset 0 0 20px rgba(180, 40, 20, 0.15),
+                0 0 12px rgba(249, 115, 22, 0.12);
+            border-radius: 12px;
         }
 
+        /* Light mode active — golden orange glow */
         .nav-active-light {
-            background: linear-gradient(90deg, rgba(234, 88, 12, 0.14) 0%, rgba(234, 88, 12, 0.03) 100%);
+            background: linear-gradient(105deg,
+                    rgba(251, 146, 60, 0.55) 0%,
+                    rgba(249, 115, 22, 0.35) 45%,
+                    rgba(245, 158, 11, 0.20) 100%);
+            border: 1px solid rgba(249, 115, 22, 0.60);
             border-left: 3px solid #ea580c;
+            border-radius: 12px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 200, 80, 0.30),
+                0 0 18px rgba(249, 115, 22, 0.25),
+                0 2px 8px rgba(234, 88, 12, 0.15);
         }
 
         /* Remove default nav border placeholder */
@@ -168,12 +184,23 @@
         }
 
         /* Upgrade card */
+        /* Upgrade card dark mode */
         .upgrade-dark {
             background: linear-gradient(135deg, #1c1030 0%, #1e110a 100%);
+            border: 1px solid rgba(249, 115, 22, 0.20);
+            box-shadow:
+                0 0 40px rgba(236, 72, 153, 0.15),
+                0 0 20px rgba(249, 115, 22, 0.10),
+                inset 0 0 30px rgba(120, 20, 60, 0.15);
         }
 
+        /* Upgrade card light mode */
         .upgrade-light {
             background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+            border: 1px solid rgba(249, 115, 22, 0.25);
+            box-shadow:
+                0 4px 20px rgba(249, 115, 22, 0.12),
+                0 1px 4px rgba(0, 0, 0, 0.06);
         }
 
         /* Hero bg */
@@ -268,24 +295,35 @@
 
         function buildProductivityChart() {
             const canvas = document.getElementById('productivityChart');
-
             if (!canvas || typeof Chart === 'undefined') return;
-
             if (prodChart) {
                 prodChart.destroy();
                 prodChart = null;
             }
 
-            const cfg = getChartCfg();
+            const isDark = document.documentElement.classList.contains('dark');
             const ctx = canvas.getContext('2d');
 
-            const grad1 = ctx.createLinearGradient(0, 0, 0, 130);
-            grad1.addColorStop(0, 'rgba(249,115,22,0.30)');
-            grad1.addColorStop(1, 'rgba(249,115,22,0.01)');
+            // ── Gradients ──
+            const gPink = ctx.createLinearGradient(0, 0, 0, 180);
+            gPink.addColorStop(0, isDark ? 'rgba(236,72,153,0.40)' : 'rgba(236,72,153,0.20)');
+            gPink.addColorStop(1, 'rgba(236,72,153,0.02)');
 
-            const grad2 = ctx.createLinearGradient(0, 0, 0, 130);
-            grad2.addColorStop(0, 'rgba(245,158,11,0.22)');
-            grad2.addColorStop(1, 'rgba(245,158,11,0.01)');
+            const gOra = ctx.createLinearGradient(0, 0, 0, 180);
+            gOra.addColorStop(0, isDark ? 'rgba(249,115,22,0.35)' : 'rgba(249,115,22,0.25)');
+            gOra.addColorStop(1, 'rgba(249,115,22,0.02)');
+
+            const gPurp = ctx.createLinearGradient(0, 0, 0, 180);
+            gPurp.addColorStop(0, isDark ? 'rgba(139,92,246,0.20)' : 'rgba(139,92,246,0.10)');
+            gPurp.addColorStop(1, 'rgba(139,92,246,0.01)');
+
+            // ── Theme tokens ──
+            const gridColor = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.05)';
+            const tickColor = isDark ? 'rgba(255,255,255,0.32)' : 'rgba(0,0,0,0.40)';
+            const tickHi = '#f97316'; // Fri highlight — same both modes
+            const tooltipBg = isDark ? '#1a1625' : '#ffffff';
+            const tooltipBody = isDark ? '#d1d5db' : '#374151';
+            const tooltipBorder = isDark ? 'rgba(249,115,22,0.3)' : 'rgba(249,115,22,0.4)';
 
             prodChart = new Chart(ctx, {
                 type: 'line',
@@ -293,29 +331,42 @@
                     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
                     datasets: [{
                             label: 'This week',
-                            data: [38, 52, 46, 64, 90, 70, 82],
-                            borderColor: '#f97316',
-                            backgroundColor: grad1,
-                            borderWidth: 2.5,
+                            data: [28, 62, 48, 72, 100, 100, 92],
+                            borderColor: '#ec4899',
+                            backgroundColor: gPink,
+                            borderWidth: 2.8,
                             fill: true,
                             tension: 0.45,
-                            pointRadius: 3.5,
-                            pointBackgroundColor: '#f97316',
+                            pointRadius: [3, 3, 3, 3, 0, 3, 3],
+                            pointBackgroundColor: '#ec4899',
                             pointBorderColor: 'transparent',
                             pointHoverRadius: 5,
                         },
                         {
                             label: 'Last week',
-                            data: [28, 40, 35, 52, 60, 55, 62],
-                            borderColor: cfg.line2,
-                            backgroundColor: grad2,
-                            borderWidth: 2,
+                            data: [22, 42, 32, 50, 55, 38, 28],
+                            borderColor: 'rgba(249,115,22,0.95)',
+                            backgroundColor: gOra,
+                            borderWidth: 2.2,
                             fill: true,
                             tension: 0.45,
                             pointRadius: 2.5,
-                            pointBackgroundColor: '#f59e0b',
+                            pointBackgroundColor: '#f97316',
                             pointBorderColor: 'transparent',
                             pointHoverRadius: 4,
+                        },
+                        {
+                            label: 'Prev',
+                            data: [18, 28, 24, 30, 32, 25, 20],
+                            borderColor: 'rgba(139,92,246,0.55)',
+                            backgroundColor: gPurp,
+                            borderWidth: 1.6,
+                            fill: true,
+                            tension: 0.45,
+                            pointRadius: 2,
+                            pointBackgroundColor: 'rgba(139,92,246,0.7)',
+                            pointBorderColor: 'transparent',
+                            pointHoverRadius: 3,
                         }
                     ]
                 },
@@ -331,10 +382,10 @@
                             display: false
                         },
                         tooltip: {
-                            backgroundColor: cfg.tooltipBg,
-                            titleColor: cfg.tooltipColor,
-                            bodyColor: cfg.tooltipColor,
-                            borderColor: 'rgba(249,115,22,0.3)',
+                            backgroundColor: tooltipBg,
+                            titleColor: isDark ? '#fff' : '#111827',
+                            bodyColor: tooltipBody,
+                            borderColor: tooltipBorder,
                             borderWidth: 1,
                             padding: 10,
                             cornerRadius: 10,
@@ -343,11 +394,11 @@
                     scales: {
                         x: {
                             grid: {
-                                color: cfg.grid,
+                                color: gridColor,
                                 drawBorder: false
                             },
                             ticks: {
-                                color: cfg.tick,
+                                color: (c) => c.tick.label === 'Fri' ? tickHi : tickColor,
                                 font: {
                                     size: 11,
                                     family: 'Inter'
@@ -361,11 +412,11 @@
                             min: 0,
                             max: 100,
                             grid: {
-                                color: cfg.grid,
+                                color: gridColor,
                                 drawBorder: false
                             },
                             ticks: {
-                                color: cfg.tick,
+                                color: tickColor,
                                 stepSize: 25,
                                 font: {
                                     size: 11,
@@ -395,6 +446,17 @@
                     upgradeCard.classList.add('upgrade-dark');
                     upgradeCard.classList.remove('upgrade-light');
                 }
+
+                // Nav active: dark mode
+                document.querySelectorAll('.nav-item').forEach(el => {
+                    if (el.classList.contains('nav-active-light') || el.classList.contains('nav-active-dark')) {
+                        el.classList.remove('nav-active-light');
+                        el.classList.add('nav-active-dark');
+                        el.classList.remove('text-orange-600');
+                        el.classList.add('text-orange-400');
+                    }
+                });
+
             } else {
                 html.classList.remove('dark');
                 html.classList.add('light');
@@ -403,6 +465,16 @@
                     upgradeCard.classList.remove('upgrade-dark');
                     upgradeCard.classList.add('upgrade-light');
                 }
+
+                // Nav active: light mode
+                document.querySelectorAll('.nav-item').forEach(el => {
+                    if (el.classList.contains('nav-active-light') || el.classList.contains('nav-active-dark')) {
+                        el.classList.remove('nav-active-dark');
+                        el.classList.add('nav-active-light');
+                        el.classList.remove('text-orange-400');
+                        el.classList.add('text-orange-600');
+                    }
+                });
             }
 
             localStorage.setItem('veroa-theme', mode);
