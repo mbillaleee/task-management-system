@@ -16,21 +16,22 @@ class SubscriptionController extends Controller
 
     public function index()
     {
-        $plans = SubscriptionPlan::withCount(['userSubscriptions', 'activeSubscribers'])
-            ->ordered()
-            ->get();
+        $plans = SubscriptionPlan::withCount([
+            'userSubscriptions',
+            'userSubscriptions as active_subscribers_count' => fn($q) => $q->where('status', 'active'),
+        ])->ordered()->get();
 
-        $totalSubscribers   = UserSubscription::where('status', 'active')->count();
-        $totalRevenue       = UserSubscription::where('status', 'active')->sum('amount_paid');
-        $trialUsers         = UserSubscription::where('status', 'trial')->count();
-        $cancelledCount     = UserSubscription::where('status', 'cancelled')->count();
+        $totalSubscribers = UserSubscription::where('status', 'active')->count();
+        $totalRevenue = UserSubscription::where('status', 'active')->sum('amount_paid');
+        $trialUsers = UserSubscription::where('status', 'trial')->count();
+        $cancelledCount = UserSubscription::where('status', 'cancelled')->count();
 
         return view('admin.subscriptions.index', compact(
             'plans',
             'totalSubscribers',
             'totalRevenue',
             'trialUsers',
-            'cancelledCount',
+            'cancelledCount'
         ));
     }
 
@@ -128,13 +129,17 @@ class SubscriptionController extends Controller
 
     public function destroy(SubscriptionPlan $subscription)
     {
-        if ($subscription->activeSubscribers()->count() > 0) {
-            return back()->with('error', 'Cannot delete a plan with active subscribers.');
+        $activeCount = UserSubscription::where('subscription_plan_id', $subscription->id)
+            ->where('status', 'active')
+            ->count();
+
+        if ($activeCount > 0) {
+            return back()->with('error', 'Cannot delete this plan because it has active subscribers.');
         }
 
         $subscription->delete();
 
-        return back()->with('success', 'Plan deleted.');
+        return back()->with('success', 'Plan deleted successfully.');
     }
 
     public function toggleStatus(SubscriptionPlan $subscription)
@@ -155,28 +160,49 @@ class SubscriptionController extends Controller
 
         $plans = SubscriptionPlan::ordered()->get();
 
-        return view('admin.subscriptions.subscribers', compact('subscriptions', 'plans'));
+        $stats = [
+            'active' => UserSubscription::where('status', 'active')->count(),
+            'trial' => UserSubscription::where('status', 'trial')->count(),
+            'cancelled' => UserSubscription::where('status', 'cancelled')->count(),
+            'expired' => UserSubscription::where('status', 'expired')->count(),
+            'revenue' => UserSubscription::where('status', 'active')->sum('amount_paid'),
+        ];
+
+        return view('admin.subscriptions.subscribers', compact('subscriptions', 'plans', 'stats'));
     }
 
     public function assignPlan(Request $request)
     {
         $data = $request->validate([
-            'user_id'              => 'required|exists:users,id',
+            'user_id' => 'required|exists:users,id',
             'subscription_plan_id' => 'required|exists:subscription_plans,id',
-            'billing_cycle'        => 'required|in:monthly,yearly',
-            'status'               => 'required|in:active,trial,cancelled,expired',
-            'starts_at'            => 'nullable|date',
-            'ends_at'              => 'nullable|date',
-            'amount_paid'          => 'nullable|numeric|min:0',
-            'notes'                => 'nullable|string',
+            'billing_cycle' => 'required|in:monthly,yearly',
+            'status' => 'required|in:active,trial,cancelled,expired',
+            'starts_at' => 'nullable|date',
+            'ends_at' => 'nullable|date|after_or_equal:starts_at',
+            'amount_paid' => 'nullable|numeric|min:0',
+            'notes' => 'nullable|string|max:500',
         ]);
 
-        UserSubscription::updateOrCreate(
-            ['user_id' => $data['user_id']],
-            $data
-        );
+        UserSubscription::where('user_id', $data['user_id'])
+            ->whereIn('status', ['active', 'trial'])
+            ->update([
+                'status' => 'cancelled',
+                'cancelled_at' => now(),
+            ]);
 
-        return back()->with('success', 'Subscription assigned.');
+        UserSubscription::create([
+            'user_id' => $data['user_id'],
+            'subscription_plan_id' => $data['subscription_plan_id'],
+            'billing_cycle' => $data['billing_cycle'],
+            'status' => $data['status'],
+            'amount_paid' => $data['amount_paid'] ?? 0,
+            'starts_at' => $data['starts_at'] ?? now(),
+            'ends_at' => $data['ends_at'] ?? null,
+            'notes' => $data['notes'] ?? null,
+        ]);
+
+        return back()->with('success', 'Plan assigned successfully.');
     }
 
     public function cancelSubscription(UserSubscription $userSubscription)

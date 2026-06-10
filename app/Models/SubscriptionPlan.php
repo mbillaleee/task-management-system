@@ -29,10 +29,10 @@ class SubscriptionPlan extends Model
         return $this->hasMany(UserSubscription::class);
     }
 
-    public function activeSubscribers(): HasMany
-    {
-        return $this->hasMany(UserSubscription::class)->where('status', 'active');
-    }
+    // public function activeSubscribers(): HasMany
+    // {
+    //     return $this->hasMany(UserSubscription::class)->where('status', 'active');
+    // }
 
     /** Human-readable limit or "Unlimited" */
     public function limitLabel(string $field): string

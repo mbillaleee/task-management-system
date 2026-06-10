@@ -297,12 +297,13 @@
             <p class="text-[11.5px] dark:text-gray-400 text-gray-500 leading-relaxed mb-3">
                 {{ translate('Unlock unlimited power and exclusive features.') }}
             </p>
-            <button
-                class="w-full py-2 rounded-xl text-white text-[12px] font-bold btn-trans
-                bg-gradient-to-br from-orange-500 to-pink-500
-                shadow-[0_4px_14px_rgba(249,115,22,0.4)]">
+            <a href="{{ route('user.subscription.index') }}"
+                class="block w-full text-center py-2 rounded-xl
+    text-white text-[12px] font-bold btn-trans
+    bg-gradient-to-br from-orange-500 to-pink-500
+    shadow-[0_4px_14px_rgba(249,115,22,0.4)]">
                 {{ translate('Upgrade Now') }} →
-            </button>
+            </a>
         </div>
     </div>
 

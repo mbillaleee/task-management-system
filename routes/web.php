@@ -258,17 +258,19 @@ Route::middleware(['auth','role:super_admin','setLocale'])->prefix('admin')->nam
 
 
 
-        // ─── Subscription Plans (Admin CRUD) ───
+        // ─── Subscriber Management ───
+    Route::get('/subscriptions/subscribers',               [SubscriptionController::class, 'subscribers'])       ->name('subscriptions.subscribers');
+    Route::post('/subscriptions/assign',                   [SubscriptionController::class, 'assignPlan'])        ->name('subscriptions.assign');
+    Route::patch('/subscriptions/cancel/{userSubscription}',[SubscriptionController::class, 'cancelSubscription'])->name('subscriptions.cancel');
+
+    // ─── Subscription Plans (Admin CRUD) ───
     Route::get('/subscriptions',                           [SubscriptionController::class, 'index'])             ->name('subscriptions.index');
     Route::post('/subscriptions',                          [SubscriptionController::class, 'store'])             ->name('subscriptions.store');
     Route::put('/subscriptions/{subscription}',            [SubscriptionController::class, 'update'])            ->name('subscriptions.update');
     Route::delete('/subscriptions/{subscription}',         [SubscriptionController::class, 'destroy'])           ->name('subscriptions.destroy');
     Route::post('/subscriptions/{subscription}/toggle',    [SubscriptionController::class, 'toggleStatus'])      ->name('subscriptions.toggle');
 
-    // ─── Subscriber Management ───
-    Route::get('/subscriptions/subscribers',               [SubscriptionController::class, 'subscribers'])       ->name('subscriptions.subscribers');
-    Route::post('/subscriptions/assign',                   [SubscriptionController::class, 'assignPlan'])        ->name('subscriptions.assign');
-    Route::patch('/subscriptions/cancel/{userSubscription}',[SubscriptionController::class, 'cancelSubscription'])->name('subscriptions.cancel');
+
 
 
     Route::middleware('auth')->get('/clear', function () {

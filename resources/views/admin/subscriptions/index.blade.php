@@ -210,7 +210,7 @@
                                 </span>
                             </div>
                             <div class="flex gap-2">
-                                <button onclick="openEditModal({{ $plan->toJson() }})"
+                                <button type="button" onclick='openEditModal(@json($plan))'
                                     class="px-3 py-1.5 rounded-lg text-[13px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
                                     Edit
                                 </button>
@@ -284,13 +284,24 @@
         /* ─── EDIT MODAL ─── */
         function openEditModal(plan) {
             const form = document.getElementById('editPlanForm');
-            form.action = `/admin/subscriptions/${plan.id}`;
+
+            if (!form || !plan || !plan.id) {
+                console.error('Edit form or plan ID not found.');
+                return;
+            }
+
+            // Set correct update URL
+            form.action = "{{ url('admin/subscriptions') }}/" + plan.id;
 
             const set = (name, val) => {
                 const el = form.querySelector(`[name="${name}"]`);
                 if (!el) return;
-                if (el.type === 'checkbox') el.checked = !!val;
-                else el.value = val ?? '';
+
+                if (el.type === 'checkbox') {
+                    el.checked = val == 1 || val === true || val === '1';
+                } else {
+                    el.value = val ?? '';
+                }
             };
 
             set('name', plan.name);
@@ -298,17 +309,19 @@
             set('description', plan.description);
             set('badge_label', plan.badge_label);
             set('badge_color', plan.badge_color ?? '#f97316');
-            set('price_monthly', plan.price_monthly);
-            set('price_yearly', plan.price_yearly);
-            set('currency', plan.currency);
-            set('icon', plan.icon);
+            set('price_monthly', plan.price_monthly ?? 0);
+            set('price_yearly', plan.price_yearly ?? 0);
+            set('currency', plan.currency ?? 'USD');
+            set('icon', plan.icon ?? '💎');
             set('color', plan.color ?? '#f97316');
+
             set('max_tasks', plan.max_tasks ?? -1);
             set('max_habits', plan.max_habits ?? -1);
             set('max_notes', plan.max_notes ?? -1);
             set('max_goals', plan.max_goals ?? -1);
             set('max_focus_sessions', plan.max_focus_sessions ?? -1);
             set('max_journals', plan.max_journals ?? -1);
+
             set('has_analytics', plan.has_analytics);
             set('has_calendar', plan.has_calendar);
             set('has_gamification', plan.has_gamification);
@@ -316,14 +329,17 @@
             set('has_ai_tools', plan.has_ai_tools);
             set('has_team_workspace', plan.has_team_workspace);
             set('has_priority_support', plan.has_priority_support);
+
             set('sort_order', plan.sort_order ?? 0);
             set('is_active', plan.is_active);
             set('is_featured', plan.is_featured);
 
-            // features array -> textarea
+            // Features array/string/null -> textarea
             const featEl = form.querySelector('[name="features"]');
-            if (featEl && plan.features) {
-                featEl.value = Array.isArray(plan.features) ? plan.features.join('\n') : plan.features;
+            if (featEl) {
+                featEl.value = Array.isArray(plan.features) ?
+                    plan.features.join('\n') :
+                    (plan.features ?? '');
             }
 
             document.getElementById('editModal').classList.remove('hidden');
