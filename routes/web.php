@@ -15,6 +15,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\User\TaskController;
 use App\Http\Controllers\User\TaskCategoryController;
+use App\Http\Controllers\User\TaskLabelController;
 use App\Http\Controllers\User\TaskSubtaskController;
 use App\Http\Controllers\User\TaskCommentController;
 use App\Http\Controllers\User\HabitController;
@@ -61,6 +62,10 @@ Route::middleware(['auth','setLocale'])->group(function () {
 Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.')->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'userDashboard'])->name('dashboard');
 
+    // Reorder tasks
+    Route::patch('/tasks/reorder', [TaskController::class, 'reorder'])->name('tasks.reorder');
+
+    
     Route::resource('tasks', TaskController::class);
     Route::get('all-tasks', [TaskController::class, 'allTasks'])->name('allTasks');
 
@@ -74,6 +79,9 @@ Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.
     Route::patch('subtasks/{subtask}/toggle', [TaskSubtaskController::class, 'toggle'])->name('subtasks.toggle');
     Route::delete('subtasks/{subtask}', [TaskSubtaskController::class, 'destroy'])->name('subtasks.destroy');
     Route::post('tasks/{task}/comments', [TaskCommentController::class, 'store'])->name('tasks.comments.store');
+
+    
+    Route::delete('comments/{comment}', [TaskCommentController::class, 'destroy'])->name('tasks.comments.destroy');
 
 
     Route::resource('habits', HabitController::class);

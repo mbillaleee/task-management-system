@@ -15,19 +15,37 @@ class TaskCommentController extends Controller
         abort_if($task->user_id !== auth()->id(), 403);
 
         $request->validate([
-            'comment' => 'required|string',
+            'comment' => 'required|string|max:1000',
         ]);
 
         $task->comments()->create([
             'user_id' => auth()->id(),
             'comment' => $request->comment,
         ]);
+
         TaskHistory::create([
             'task_id' => $task->id,
             'user_id' => auth()->id(),
-            'action' => 'Comment Added',
+            'action'  => 'Comment Added',
             'changes' => 'Added comment: ' . $request->comment,
         ]);
+
         return back()->with('success', 'Comment added.');
+    }
+
+    public function destroy(TaskComment $comment)
+    {
+        abort_if($comment->user_id !== auth()->id(), 403);
+
+        TaskHistory::create([
+            'task_id' => $comment->task_id,
+            'user_id' => auth()->id(),
+            'action'  => 'Comment Deleted',
+            'changes' => 'Deleted comment: ' . $comment->comment,
+        ]);
+
+        $comment->delete();
+
+        return back()->with('success', 'Comment deleted.');
     }
 }

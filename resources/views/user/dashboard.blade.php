@@ -5,7 +5,7 @@
 
         <section
             class="relative overflow-hidden rounded-2xl border dark:border-orange-500/[0.18] border-orange-200/70
-    dark:bg-[#100b18] bg-orange-50/70 px-8 py-10 min-h-[260px] transition-colors duration-500">
+                    dark:bg-[#100b18] bg-orange-50/70 px-8 py-10 min-h-[260px] transition-colors duration-500">
 
             {{-- Background Gradients --}}
             <div class="absolute inset-0 opacity-100 pointer-events-none"
