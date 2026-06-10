@@ -31,6 +31,7 @@ use App\Http\Controllers\User\JournalController;
 use App\Http\Controllers\User\JournalCategoryController;
 use App\Http\Controllers\User\CalendarController;
 use App\Http\Controllers\User\UserSubscriptionController;
+use App\Http\Controllers\User\SettingsController;
 
 
 use App\Http\Controllers\Admin\GamificationController as AdminGamificationController;
@@ -181,6 +182,15 @@ Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.
     });
 
 
+    Route::get('/settings',                 [SettingsController::class, 'index'])               ->name('settings');
+    Route::patch('/settings/account',       [SettingsController::class, 'updateAccount'])        ->name('settings.account');
+    Route::patch('/settings/password',      [SettingsController::class, 'updatePassword'])       ->name('settings.password');
+    Route::patch('/settings/appearance',    [SettingsController::class, 'updateAppearance'])     ->name('settings.appearance');
+    Route::patch('/settings/notifications', [SettingsController::class, 'updateNotifications'])  ->name('settings.notifications');
+    Route::patch('/settings/privacy',       [SettingsController::class, 'updatePrivacy'])        ->name('settings.privacy');
+    Route::delete('/settings/delete',       [SettingsController::class, 'destroy'])              ->name('settings.destroy');
+
+
     Route::get('/features', function () {
         return view('user.features');
     })->name('features');
@@ -258,6 +268,13 @@ Route::middleware(['auth','role:super_admin','setLocale'])->prefix('admin')->nam
     Route::get('/subscriptions/subscribers',               [SubscriptionController::class, 'subscribers'])       ->name('subscriptions.subscribers');
     Route::post('/subscriptions/assign',                   [SubscriptionController::class, 'assignPlan'])        ->name('subscriptions.assign');
     Route::patch('/subscriptions/cancel/{userSubscription}',[SubscriptionController::class, 'cancelSubscription'])->name('subscriptions.cancel');
+
+
+    Route::middleware('auth')->get('/clear', function () {
+        Artisan::call('optimize:clear');
+        Artisan::call('storage:link');
+        return redirect()->back()->with('success', 'Cache cleared and storage linked successfully.');
+    })->name('clear');
 
 });
 

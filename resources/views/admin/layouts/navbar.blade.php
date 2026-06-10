@@ -46,6 +46,10 @@
              class="text-[14px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">About</a>
          <a href="#"
              class="text-[14px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Changelog</a>
+
+         <a href="{{ route('admin.clear') }}"
+             class="text-[14px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Cache
+             Clear</a>
      </nav>
 
      <!-- Right: icons + toggle -->

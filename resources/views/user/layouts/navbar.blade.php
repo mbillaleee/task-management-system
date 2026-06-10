@@ -97,7 +97,7 @@
                      <div id="languageDropdown"
                          class="hidden absolute right-0 mt-2 w-36 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg z-[99]">
                          @foreach (App\Models\Language::where('active', 1)->get() as $language)
-                             <form action="{{ route('admin.languages.update.status', $language) }}" method="POST">
+                             <form action="{{ route('user.languages.update.status', $language) }}" method="POST">
                                  @csrf
                                  <button type="submit"
                                      class="w-full flex items-center justify-between text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"

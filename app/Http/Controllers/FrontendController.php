@@ -19,7 +19,8 @@ class FrontendController extends Controller
         if (auth()->check()) {
             $user = auth()->user();
 
-            if ($user->hasRole('admin')) {
+            
+            if ($user->hasRole('super_admin')) {
                 return redirect()->route('admin.dashboard');
             } elseif ($user->hasRole('user')) {
                 return redirect()->route('user.dashboard');
