@@ -139,6 +139,7 @@ Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.
 
 
     Route::resource('journals', JournalController::class);
+    Route::get('/journals-statistics', [JournalController::class, 'statistics'])->name('journals.statistics');
 
     Route::patch('/journals/{journal}/favorite', [JournalController::class, 'toggleFavorite'])->name('journals.favorite');
     Route::get('/journal-categories', [JournalCategoryController::class, 'index'])->name('journal.categories.index');
