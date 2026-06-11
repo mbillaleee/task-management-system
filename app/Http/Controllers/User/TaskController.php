@@ -8,6 +8,8 @@ use App\Models\Task;
 use App\Models\TaskCategory;
 use App\Models\TaskLabel;
 use App\Models\TaskHistory;
+use App\Services\GamificationService;
+use App\Http\Controllers\User\ChallengeController;
 
 class TaskController extends Controller
 {
@@ -113,8 +115,11 @@ class TaskController extends Controller
 
     public function update(Request $request, string $id)
     {
+        // dd($request->all());
         $task = Task::findOrFail($id);
         abort_if($task->user_id !== auth()->id(), 403);
+
+
 
         $request->validate([
             'title'               => 'required|string|max:255',
@@ -131,7 +136,8 @@ class TaskController extends Controller
             'remind_at'           => 'nullable|date',
             'labels'              => 'nullable|array',
         ]);
-
+        $oldStatus = $task->status;
+       
         $originalData = $task->getOriginal();
 
         $task->update([
@@ -149,6 +155,20 @@ class TaskController extends Controller
             'remind_at'           => $request->boolean('reminder_enabled') ? $request->remind_at : null,
             'reminder_sent_at'    => $request->boolean('reminder_enabled') ? null : $task->reminder_sent_at,
         ]);
+
+        
+        if ($task->wasChanged('status') && $task->status === 'completed') {
+
+            $xp = $task->priority === 'high' ? 25 : 15;
+
+            GamificationService::awardXp(
+                auth()->id(),
+                $xp,
+                'Task completed: ' . $task->title
+            );
+
+            ChallengeController::autoProgress(auth()->id(), 'complete_task');
+        }
 
         if ($request->has('labels')) {
             $task->labels()->sync($request->labels);
@@ -210,6 +230,18 @@ class TaskController extends Controller
 
         $oldStatus = $task->status;
         $task->update(['status' => $request->status]);
+
+        if ($request->status === 'completed' && $oldStatus !== 'completed') {
+            $xp = $task->priority === 'high' ? 25 : 15;
+
+            GamificationService::awardXp(
+                auth()->id(),
+                $xp,
+                'Task completed: ' . $task->title
+            );
+
+            ChallengeController::autoProgress(auth()->id(), 'complete_task');
+        }
 
         TaskHistory::create([
             'task_id' => $task->id,

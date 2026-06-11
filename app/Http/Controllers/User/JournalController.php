@@ -7,6 +7,8 @@ use App\Models\Journal;
 use App\Models\JournalCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Services\GamificationService;
+use App\Http\Controllers\User\ChallengeController;
 
 class JournalController extends Controller
 {
@@ -28,7 +30,7 @@ class JournalController extends Controller
 
         if ($request->mood) {
             $query->where('mood', $request->mood);
-        }
+        } 
 
         if ($request->journal_category_id) {
             $query->where('journal_category_id', $request->journal_category_id);
@@ -105,8 +107,11 @@ class JournalController extends Controller
             'is_favorite'         => $request->boolean('is_favorite'),
         ]);
 
-        return redirect()->route('user.journals.show', $journal)
-            ->with('success', 'Journal created successfully.');
+        GamificationService::awardXp(auth()->id(), 5, 'Journal written: ' . $journal->title);
+
+        ChallengeController::autoProgress(auth()->id(), 'write_journal');
+
+        return redirect()->route('user.journals.show', $journal)->with('success', 'Journal created successfully. +5 XP ✍️');
     }
 
     public function show(Journal $journal)

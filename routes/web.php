@@ -5,13 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\BlogCategoryController;
-use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ServiceCategoryController;
-use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\User\TaskController;
 use App\Http\Controllers\User\TaskCategoryController;
@@ -98,21 +93,13 @@ Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.
 
 
     Route::resource('notes', NoteController::class);
-
-    Route::post('/notes/{note}/toggle-pin', [NoteController::class, 'togglePin'])
-        ->name('notes.toggle-pin');
-
-    Route::post('/notes/{note}/toggle-favorite', [NoteController::class, 'toggleFavorite'])
-        ->name('notes.toggle-favorite');
-
-    Route::put('/notes/{note}/autosave', [NoteController::class, 'autosave'])
-        ->name('notes.autosave');
-
-    Route::resource('note-folders', NoteFolderController::class)
-        ->only(['index', 'store', 'update', 'destroy']);
-
-    Route::resource('note-categories', NoteCategoryController::class)
-        ->only(['index', 'store', 'update', 'destroy']);
+    Route::post('/notes/{note}/toggle-pin', [NoteController::class, 'togglePin'])->name('notes.toggle-pin');
+    Route::post('/notes/{note}/toggle-favorite', [NoteController::class, 'toggleFavorite'])->name('notes.toggle-favorite');
+    Route::put('/notes/{note}/autosave', [NoteController::class, 'autosave'])->name('notes.autosave');
+    Route::resource('note-folders', NoteFolderController::class)->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('note-categories', NoteCategoryController::class)->only(['index', 'store', 'update', 'destroy']);
+    Route::post('notes/{note}/tags', [NoteController::class, 'storeTag'])->name('notes.tags.store');
+    Route::delete('notes/{note}/tags/{tag}', [NoteController::class, 'destroyTag'])->name('notes.tags.destroy');
 
 
     
@@ -162,6 +149,8 @@ Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.
     // User can only JOIN challenges and update their own progress (no create/delete)
     Route::post('/challenges/{challenge}/join', [UserChallengeController::class, 'join'])->name('challenges.join');
     Route::patch('/user-challenges/{userChallenge}/progress', [UserChallengeController::class, 'progress'])->name('userChallenges.progress');
+    Route::delete('/user-challenges/{userChallenge}/leave', [UserChallengeController::class, 'leave'])->name('userChallenges.leave');
+    
 
 
     Route::post('/languages/update/status/{language}', [UserDashboardController::class, 'updateStatus'])->name('languages.update.status');

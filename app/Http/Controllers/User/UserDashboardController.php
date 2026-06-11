@@ -9,10 +9,12 @@ use App\Models\Habit;
 use App\Models\Language;
 use App\Models\SubscriptionPlan;
 use App\Models\UserSubscription;
+use App\Models\UserGamification;
+use App\Services\GamificationService;
 use Carbon\Carbon;
 
 class UserDashboardController extends Controller
-{
+{ 
     public function userDashboard()
     {
         $userId = auth()->id();
@@ -81,6 +83,18 @@ class UserDashboardController extends Controller
             default => 'Low',
         };
 
+
+        // Dashboard method-এর ভেতরে যোগ করুন
+        $gamification = UserGamification::firstOrCreate(
+            ['user_id' => $userId],
+            ['xp' => 0, 'level' => 1, 'streak_days' => 0]
+        );
+
+        $levelLabel    = GamificationService::getLevelLabel($gamification->level);
+        $levelProgress = GamificationService::getLevelProgress($gamification);
+        $userBadgesCount = \App\Models\UserBadge::where('user_id', $userId)->count();
+
+
         return view('user.dashboard', compact(
             'todayTasks',
             'topPriorities',
@@ -96,7 +110,12 @@ class UserDashboardController extends Controller
             'habitCompletionRate',
             'circleDash',
             'circleOffset',
-            'habitScoreLabel'
+            'habitScoreLabel',
+            'gamification',
+            'levelLabel',
+            'levelProgress',
+            'userBadgesCount'
+
         ));
     }
 

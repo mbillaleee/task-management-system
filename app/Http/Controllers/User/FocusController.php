@@ -7,6 +7,8 @@ use App\Models\FocusSession;
 use App\Models\FocusSessionHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Services\GamificationService;
+use App\Http\Controllers\User\ChallengeController;
 
 class FocusController extends Controller
 {
@@ -130,17 +132,29 @@ class FocusController extends Controller
         $focus = $this->findUserFocus($id);
 
         $completedMinutes = $request->completed_minutes ?? $focus->duration_minutes;
+        $xpEarned = $this->calculateXp($completedMinutes);
 
         $focus->update([
-            'status' => 'completed',
+            'status'            => 'completed',
             'completed_minutes' => $completedMinutes,
-            'completed_at' => now(),
-            'xp_earned' => $this->calculateXp($completedMinutes),
+            'completed_at'      => now(),
+            'xp_earned'         => $xpEarned,
         ]);
 
         $this->storeHistory($focus, 'Completed', 'Focus session completed.');
 
-        return back()->with('success', 'Focus session completed.');
+        // ✅ XP Award: UserGamification-এ যোগ করুন
+        GamificationService::awardXp(
+            auth()->id(),
+            $xpEarned,
+            'Focus session completed: ' . $completedMinutes . ' minutes'
+        );
+
+        if ($focus->wasChanged('status') && $focus->status === 'completed') {
+            ChallengeController::autoProgress(auth()->id(), 'finish_focus');
+        }
+
+        return back()->with('success', 'Focus session completed! You earned ' . $xpEarned . ' XP ⚡');
     }
 
     public function cancel($id)

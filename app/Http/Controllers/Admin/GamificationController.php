@@ -37,8 +37,10 @@ class GamificationController extends Controller
         // All challenges (with count of users who joined/completed)
         $challenges = Challenge::withCount([
             'users',
-            'users as completed_count' => fn($q) => $q->wherePivot('is_completed', true),
-        ])->latest()->paginate(10, ['*'], 'challenges_page');
+            'users as completed_count' => function ($q) {
+                $q->where('user_challenges.is_completed', 1);
+            },
+        ])->latest()->paginate(12);
 
         // Daily rewards
         $dailyRewards = DailyReward::orderBy('day_number')->get();

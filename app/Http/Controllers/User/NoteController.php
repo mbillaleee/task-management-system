@@ -44,6 +44,14 @@ class NoteController extends Controller
             $query->where('is_pinned', true);
         }
 
+        // Filter by tag slug
+        if ($request->filled('tag')) {
+            $query->whereHas('tags', function ($q) use ($request) {
+                $q->where('user_id', Auth::id())
+                  ->where('slug', $request->tag);
+            });
+        }
+
         $notes = $query
             ->orderByDesc('is_pinned')
             ->orderByDesc('updated_at')
@@ -51,6 +59,13 @@ class NoteController extends Controller
 
         $folders = NoteFolder::where('user_id', Auth::id())->get();
         $categories = NoteCategory::where('user_id', Auth::id())->get();
+
+        // All tags for this user (for tag filter dropdown)
+        $userTags = NoteTag::where('user_id', Auth::id())
+            ->withCount('notes')
+            ->having('notes_count', '>', 0)
+            ->orderBy('name')
+            ->get();
 
         $pinnedNotes = Note::where('user_id', Auth::id())
             ->where('is_pinned', 1)
@@ -60,7 +75,7 @@ class NoteController extends Controller
             ->where('is_favorite', 1)
             ->count();
 
-        return view('user.notes.index', compact('notes', 'folders', 'categories', 'pinnedNotes', 'favoriteNotes'));
+        return view('user.notes.index', compact('notes', 'folders', 'categories', 'userTags', 'pinnedNotes', 'favoriteNotes'));
     }
 
     public function create()
@@ -303,6 +318,74 @@ class NoteController extends Controller
         abort_if($note->user_id !== Auth::id(), 403);
     }
 
+    // ─────────────────────────────────────────────────────────────
+    // TAG MANAGEMENT — routes: notes.tags.store / notes.tags.destroy
+    // ─────────────────────────────────────────────────────────────
 
-    
+    /**
+     * Add a single tag to a note (AJAX-friendly)
+     * Route: POST /user/notes/{note}/tags
+     */
+    public function storeTag(Request $request, Note $note)
+    {
+        $this->authorizeNote($note);
+
+        $request->validate([
+            'name' => 'required|string|max:100',
+        ]);
+
+        $tagName = trim($request->name);
+        $slug    = \Illuminate\Support\Str::slug($tagName);
+
+        if (! $slug) {
+            if ($request->expectsJson()) {
+                return response()->json(['error' => 'Invalid tag name.'], 422);
+            }
+            return back()->with('error', 'Invalid tag name.');
+        }
+
+        $tag = NoteTag::firstOrCreate(
+            ['user_id' => Auth::id(), 'slug' => $slug],
+            ['name'    => $tagName]
+        );
+
+        // Attach only if not already attached
+        if (! $note->tags()->where('note_tag_id', $tag->id)->exists()) {
+            $note->tags()->attach($tag->id);
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'tag'     => [
+                    'id'   => $tag->id,
+                    'name' => $tag->name,
+                    'slug' => $tag->slug,
+                ],
+                'message' => 'Tag added.',
+            ]);
+        }
+
+        return back()->with('success', 'Tag "' . $tagName . '" added.');
+    }
+
+    /**
+     * Remove a tag from a note (detach only, does not delete the tag itself)
+     * Route: DELETE /user/notes/{note}/tags/{tag}
+     */
+    public function destroyTag(Note $note, NoteTag $tag)
+    {
+        $this->authorizeNote($note);
+
+        // Only allow detaching user's own tags
+        abort_if($tag->user_id !== Auth::id(), 403);
+
+        $note->tags()->detach($tag->id);
+
+        if (request()->expectsJson()) {
+            return response()->json(['success' => true, 'message' => 'Tag removed.']);
+        }
+
+        return back()->with('success', 'Tag removed.');
+    }
 }

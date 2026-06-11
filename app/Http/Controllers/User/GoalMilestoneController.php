@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Goal;
 use App\Models\GoalMilestone;
 use Illuminate\Http\Request;
+use App\Services\GamificationService;
 
 class GoalMilestoneController extends Controller
 {
@@ -34,11 +35,22 @@ class GoalMilestoneController extends Controller
     {
         abort_if($milestone->goal->user_id !== auth()->id(), 403);
 
+        $wasCompleted = $milestone->is_completed;
+
         $milestone->update([
-            'is_completed' => !$milestone->is_completed,
+            'is_completed' => ! $milestone->is_completed,
         ]);
 
         $this->syncGoalProgress($milestone->goal);
+
+        // ✅ XP Award: milestone complete হলে
+        if (! $wasCompleted && $milestone->is_completed) {
+            GamificationService::awardXp(
+                auth()->id(),
+                15,
+                'Milestone completed: ' . $milestone->title
+            );
+        }
 
         return back()->with('success', 'Milestone updated.');
     }

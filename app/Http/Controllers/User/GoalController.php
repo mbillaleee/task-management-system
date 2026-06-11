@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Goal;
 use App\Models\GoalCategory;
 use Illuminate\Http\Request;
+use App\Services\GamificationService;
+use App\Http\Controllers\User\ChallengeController;
 
 class GoalController extends Controller
 {
@@ -129,6 +131,13 @@ class GoalController extends Controller
         if ($request->status === 'completed' && $goal->status !== 'completed') {
             $xp += 50;
             $completedAt = now();
+        }
+
+        // ✅ XP Award to UserGamification
+        if ($request->status === 'completed' && $goal->status !== 'completed') {
+            GamificationService::awardXp(auth()->id(), 50, 'Goal completed: ' . $goal->title);
+
+            ChallengeController::autoProgress(auth()->id(), 'complete_goal');
         }
 
         if ($request->status !== 'completed') {

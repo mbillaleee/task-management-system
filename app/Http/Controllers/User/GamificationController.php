@@ -9,6 +9,8 @@ use App\Models\DailyReward;
 use App\Models\UserBadge;
 use App\Models\UserChallenge;
 use App\Models\UserGamification;
+use App\Services\GamificationService;
+use App\Http\Controllers\User\ChallengeController;
 
 class GamificationController extends Controller
 {
@@ -21,43 +23,40 @@ class GamificationController extends Controller
         $gamification = UserGamification::firstOrCreate(
             ['user_id' => auth()->id()],
             [
-                'xp'                   => 0,
-                'level'                => 1,
-                'streak_days'          => 0,
-                'last_activity_date'   => null,
-                'daily_reward_claimed' => 0,
+                'xp'                     => 0,
+                'level'                  => 1,
+                'streak_days'            => 0,
+                'max_streak_days'        => 0,
+                'last_activity_date'     => null,
+                'daily_reward_claimed'   => 0,
+                'total_tasks_completed'  => 0,
+                'total_habits_completed' => 0,
+                'total_focus_sessions'   => 0,
+                'total_goals_completed'  => 0,
+                'total_journals_written' => 0,
             ]
         );
 
-        // All active badges (to show locked/unlocked state)
-        $badges = Badge::where('is_active', true)->latest()->get();
+        $badges         = Badge::where('is_active', true)->orderBy('xp_required')->get();
+        $userBadges     = UserBadge::with('badge')->where('user_id', auth()->id())->latest()->get();
+        $challenges     = Challenge::where('is_active', true)->latest()->get();
+        $userChallenges = UserChallenge::with('challenge')->where('user_id', auth()->id())->latest()->get();
+        $dailyRewards   = DailyReward::orderBy('day_number')->get();
 
-        // Badges this user has unlocked
-        $userBadges = UserBadge::with('badge')
-            ->where('user_id', auth()->id())
-            ->latest()
-            ->get();
-
-        // All active challenges
-        $challenges = Challenge::where('is_active', true)->latest()->get();
-
-        // Challenges this user has joined
-        $userChallenges = UserChallenge::with('challenge')
-            ->where('user_id', auth()->id())
-            ->latest()
-            ->get();
-
-        // Daily rewards (for reward calendar display)
-        $dailyRewards = DailyReward::orderBy('day_number')->get();
-
-        // Level progress calculation
+        $levelProgress = GamificationService::getLevelProgress($gamification);
+        $levelLabel    = GamificationService::getLevelLabel($gamification->level);
         $nextLevelXp   = $gamification->level * 100;
-        $levelProgress = $nextLevelXp > 0
-            ? min(round(($gamification->xp / $nextLevelXp) * 100), 100)
-            : 0;
 
-        // Check if daily reward is claimable today
         $canClaimToday = ! ($gamification->last_activity_date && $gamification->last_activity_date->isToday());
+
+        // Next badge the user is working toward
+        $unlockedBadgeIds = $userBadges->pluck('badge_id');
+        $nextBadge = Badge::where('is_active', true)
+            ->whereNotIn('id', $unlockedBadgeIds)
+            ->where('badge_type', 'xp')
+            ->where('xp_required', '>', $gamification->xp)
+            ->orderBy('xp_required')
+            ->first();
 
         return view('user.gamification.index', compact(
             'gamification',
@@ -68,7 +67,9 @@ class GamificationController extends Controller
             'dailyRewards',
             'nextLevelXp',
             'levelProgress',
-            'canClaimToday'
+            'levelLabel',
+            'canClaimToday',
+            'nextBadge'
         ));
     }
 
@@ -91,19 +92,27 @@ class GamificationController extends Controller
             $gamification->streak_days = 1;
         }
 
-        // Find matching daily reward (cap at day 7)
-        $reward    = DailyReward::where('day_number', min($gamification->streak_days, 7))->first();
-        $xpReward  = $reward?->xp_reward ?? 10;
+        // Update max streak
+        if ($gamification->streak_days > ($gamification->max_streak_days ?? 0)) {
+            $gamification->max_streak_days = $gamification->streak_days;
+        }
 
-        $gamification->xp                  += $xpReward;
-        $gamification->level               = floor($gamification->xp / 100) + 1;
-        $gamification->last_activity_date  = today();
+        $reward   = DailyReward::where('day_number', min($gamification->streak_days, 7))->first();
+        $xpReward = $reward?->xp_reward ?? 10;
+
+        $gamification->last_activity_date   = today();
         $gamification->daily_reward_claimed += 1;
-        $gamification->save(); 
+        $gamification->save();
 
-        $this->unlockBadges($gamification);
+        // Award XP via service (badge check included)
+        GamificationService::awardXp(auth()->id(), $xpReward, 'Daily login reward');
 
-        return back()->with('success', 'Daily reward claimed! You earned ' . $xpReward . ' XP 🎉');
+        // Streak milestone bonus
+        GamificationService::updateStreakBonus(auth()->id(), $gamification->streak_days);
+
+        ChallengeController::autoProgress(auth()->id(), 'login_streak');
+
+        return back()->with('success', 'Daily reward claimed! +' . $xpReward . ' XP 🎉');
     }
 
     /**

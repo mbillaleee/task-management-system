@@ -325,11 +325,23 @@
                 <!-- XP -->
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100 rounded-2xl p-[18px]">
-                    <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-6">XP Progress</p>
-                    <h3 class="text-[20px] font-bold text-orange-400 mb-2">Level 24</h3>
-                    <p class="text-[14px] dark:text-gray-400 text-gray-500 mb-3">2,450 / 3,500 XP</p>
+
+                    <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-6">
+                        XP Progress
+                    </p>
+
+                    <h3 class="text-[20px] font-bold text-orange-400 mb-2">
+                        Level {{ $gamification->level ?? 1 }}
+                    </h3>
+
+                    <p class="text-[14px] dark:text-gray-400 text-gray-500 mb-3">
+                        {{ number_format($gamification->xp ?? 0) }} /
+                        {{ number_format($levelProgress['next_level_xp'] ?? 100) }} XP
+                    </p>
+
                     <div class="w-full h-[8px] rounded-full dark:bg-white/[0.08] bg-orange-100 overflow-hidden">
-                        <div class="h-full rounded-full bg-gradient-to-r from-pink-500 to-orange-500" style="width:70%">
+                        <div class="h-full rounded-full bg-gradient-to-r from-pink-500 to-orange-500"
+                            style="width: {{ $levelProgress['progress_pct'] ?? 0 }}%">
                         </div>
                     </div>
                 </div>

@@ -50,7 +50,7 @@ class NotificationController extends Controller
 
         // Redirect to the notification's URL if available
         $url = $notif->data['url'] ?? route('user.notifications.index');
-        return redirect($url);
+        return redirect()->route('user.notifications.index')->with('success', 'Notification marked as read.')->with('redirect_url', $url);
     }
 
     /** Mark all as read */
