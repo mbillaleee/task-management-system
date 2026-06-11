@@ -17,7 +17,11 @@ class SettingsController extends Controller
     public function index(Request $request)
     {
         $user        = $request->user();
-        $tab         = $request->get('tab', 'account');
+        $allowedTabs = ['account', 'appearance', 'notifications', 'privacy'];
+        $tab = $request->query('tab', 'account');
+        if (! in_array($tab, $allowedTabs)) {
+            $tab = 'account';
+        }
         $subscription = \App\Models\UserSubscription::with('plan')
             ->where('user_id', $user->id)
             ->whereIn('status', ['active', 'trial'])

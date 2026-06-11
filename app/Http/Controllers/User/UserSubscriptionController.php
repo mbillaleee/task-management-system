@@ -51,32 +51,39 @@ class UserSubscriptionController extends Controller
      */
     public function upgradeRequest(Request $request)
     {
-        $request->validate([
-            'plan_id' => 'required|exists:subscription_plans,id',
-            'message' => 'nullable|string|max:500',
-        ]);
-
-        $plan = SubscriptionPlan::findOrFail($request->plan_id);
-        $user = auth()->user();
-
-        // Log the upgrade request as a pending subscription record
-        UserSubscription::updateOrCreate(
-            [
-                'user_id' => $user->id,
-                'status'  => 'trial',
-            ],
-            [
-                'subscription_plan_id' => $plan->id,
-                'billing_cycle'        => $request->get('billing_cycle', 'monthly'),
-                'status'               => 'trial',
-                'amount_paid'          => 0,
-                'starts_at'            => now(),
-                'ends_at'              => now()->addDays(7), // 7-day trial
-                'notes'                => 'Upgrade request from user. Message: ' . ($request->message ?? '—'),
-            ]
-        );
-
-        return back()->with('success', 'Your upgrade request for the <strong>' . $plan->name . '</strong> plan has been submitted! Our team will activate it shortly.');
+        try {
+            $request->validate([
+                'plan_id' => 'required|exists:subscription_plans,id',
+                'billing_cycle' => 'nullable|in:monthly,yearly',
+                'message' => 'nullable|string|max:500',
+            ]);
+    
+            $plan = SubscriptionPlan::findOrFail($request->plan_id);
+            $user = auth()->user();
+    
+            UserSubscription::updateOrCreate(
+                [
+                    'user_id' => $user->id,
+                    'status'  => 'trial',
+                ],
+                [
+                    'subscription_plan_id' => $plan->id,
+                    'billing_cycle'        => $request->billing_cycle ?? 'monthly',
+                    'status'               => 'trial',
+                    'amount_paid'          => 0,
+                    'starts_at'            => now(),
+                    'ends_at'              => now()->addDays(7),
+                    'notes'                => 'Upgrade request from user. Message: ' . ($request->message ?? '—'),
+                ]
+            );
+    
+            return redirect()
+                ->back()
+                ->with('success', 'Your upgrade request for the ' . $plan->name . ' plan has been submitted!');
+    
+        } catch (\Throwable $e) {
+            dd($e->getMessage(), $e->getFile(), $e->getLine());
+        }
     }
 
     /**

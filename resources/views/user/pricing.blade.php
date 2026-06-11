@@ -41,11 +41,13 @@
                         {{ $currentSubscription->plan->icon ?? '💎' }}
                     </div>
                     <div>
+
                         <p class="text-[14px] font-extrabold dark:text-white text-gray-900">
                             You're on the <span
                                 style="color: {{ $currentSubscription->plan->color ?? '#f97316' }}">{{ $currentSubscription->plan->name }}</span>
                             plan
                         </p>
+
                         <p class="text-[12px] dark:text-gray-400 text-gray-500 mt-0.5">
                             {{ ucfirst($currentSubscription->billing_cycle) }} billing
                             @if ($currentSubscription->ends_at)
@@ -225,13 +227,13 @@
                                     Start Free
                                 </a>
                             @elseif($isFeatured)
-                                <a href="mailto:hello@veroa.app?subject=Upgrade to {{ $plan->name }}&body=Hi, I'd like to upgrade to the {{ $plan->name }} plan."
+                                <a href="{{ route('user.subscription.index') }}"
                                     class="mb-6 block text-center px-4 py-2.5 rounded-[10px] text-white text-[12.5px] font-bold
                                 bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
                                     Upgrade to {{ $plan->name }}
                                 </a>
                             @else
-                                <a href="mailto:hello@veroa.app?subject=Upgrade to {{ $plan->name }}&body=Hi, I'd like to upgrade to the {{ $plan->name }} plan."
+                                <a href="{{ route('user.subscription.index') }}"
                                     class="mb-6 block text-center px-4 py-2.5 rounded-[10px] text-[12.5px] font-bold
                                 dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
                                     @if ($plan->has_team_workspace)

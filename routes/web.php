@@ -32,6 +32,7 @@ use App\Http\Controllers\User\JournalCategoryController;
 use App\Http\Controllers\User\CalendarController;
 use App\Http\Controllers\User\UserSubscriptionController;
 use App\Http\Controllers\User\SettingsController;
+use App\Http\Controllers\User\NotificationController;
 
 
 use App\Http\Controllers\Admin\GamificationController as AdminGamificationController;
@@ -43,6 +44,9 @@ use App\Http\Controllers\User\ChallengeController as UserChallengeController;
 
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\SubscriptionController;
+
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -181,6 +185,17 @@ Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.
         Route::post('/upgrade',   [UserSubscriptionController::class, 'upgradeRequest']) ->name('upgrade');
         Route::post('/cancel',    [UserSubscriptionController::class, 'cancel'])         ->name('cancel');
     });
+
+
+    Route::prefix('notifications')->name('notifications.')->group(function () {
+        Route::get('/',           [NotificationController::class, 'index'])       ->name('index');
+        Route::get('/bell',       [NotificationController::class, 'bell'])        ->name('bell');
+        Route::patch('/{id}/read',[NotificationController::class, 'markRead'])    ->name('read');
+        Route::patch('/read-all', [NotificationController::class, 'markAllRead']) ->name('mark-all-read');
+        Route::delete('/clear',   [NotificationController::class, 'clearRead'])   ->name('clear-read');
+        Route::delete('/{id}',    [NotificationController::class, 'destroy'])     ->name('destroy');
+    });
+
 
 
     Route::get('/settings',                 [SettingsController::class, 'index'])               ->name('settings');

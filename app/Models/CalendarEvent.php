@@ -50,7 +50,7 @@ class CalendarEvent extends Model
 
     public function scopeOnDate($query, $date)
     {
-        return $query->where('start_date', $date);
+        return $query->whereDate('start_date', $date);
     }
 
     // ─── Accessors ────────────────────────────────────────────────────────────

@@ -12,38 +12,52 @@ class CalendarController extends Controller
     // ─── Monthly Calendar View (default) ─────────────────────────────────────
     public function index(Request $request)
     {
-        $year  = (int) $request->get('year',  now()->year);
-        $month = (int) $request->get('month', now()->month);
+        $year = (int) $request->query('year', date('Y'));
+        $month = (int) $request->query('month', date('m'));
 
-        $currentMonth = Carbon::create($year, $month, 1);
-        $prevMonth    = $currentMonth->copy()->subMonth();
-        $nextMonth    = $currentMonth->copy()->addMonth();
+        if ($year < 2000 || $year > 2100) {
+            $year = (int) date('Y');
+        }
 
-        // All events for this month
+        if ($month < 1 || $month > 12) {
+            $month = (int) date('m');
+        }
+
+        $currentMonth = Carbon::createFromDate($year, $month, 1)->startOfDay();
+        $prevMonth = $currentMonth->copy()->subMonth();
+        $nextMonth = $currentMonth->copy()->addMonth();
+
         $events = CalendarEvent::forUser(auth()->id())
             ->inMonth($year, $month)
             ->orderBy('start_date')
             ->orderBy('start_time')
             ->get()
-            ->groupBy(fn($e) => $e->start_date->format('Y-m-d'));
+            ->groupBy(function ($event) {
+                return optional($event->start_date)->format('Y-m-d');
+            });
 
-        // Build calendar grid (6 weeks × 7 days)
         $startOfGrid = $currentMonth->copy()->startOfMonth()->startOfWeek(Carbon::SUNDAY);
-        $endOfGrid   = $currentMonth->copy()->endOfMonth()->endOfWeek(Carbon::SATURDAY);
+        $endOfGrid = $currentMonth->copy()->endOfMonth()->endOfWeek(Carbon::SATURDAY);
 
         $calendarDays = [];
         $day = $startOfGrid->copy();
+
         while ($day->lte($endOfGrid)) {
             $calendarDays[] = $day->copy();
             $day->addDay();
         }
 
-        // Stats
         $stats = $this->getMonthStats($year, $month);
 
         return view('user.calendar.index', compact(
-            'year', 'month', 'currentMonth', 'prevMonth', 'nextMonth',
-            'events', 'calendarDays', 'stats'
+            'year',
+            'month',
+            'currentMonth',
+            'prevMonth',
+            'nextMonth',
+            'events',
+            'calendarDays',
+            'stats'
         ));
     }
 
