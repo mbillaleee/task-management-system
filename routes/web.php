@@ -33,6 +33,7 @@ use App\Http\Controllers\User\CalendarController;
 use App\Http\Controllers\User\UserSubscriptionController;
 use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\User\NotificationController;
+use App\Http\Controllers\User\HabitCategoryController;
 
 
 use App\Http\Controllers\Admin\GamificationController as AdminGamificationController;
@@ -93,6 +94,7 @@ Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.
     Route::get('all-habits', [HabitController::class, 'allHabits'])->name('allHabits');
     Route::get('habits-board', [HabitController::class, 'board'])->name('habits.board');
     Route::post('habits/{habit}/toggle', [HabitLogController::class, 'toggle'])->name('habits.toggle');
+    Route::resource('habit-categories', HabitCategoryController::class)->only(['store', 'update', 'destroy']);
 
 
     Route::resource('notes', NoteController::class);

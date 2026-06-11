@@ -99,7 +99,7 @@ class GamificationController extends Controller
         $gamification->level               = floor($gamification->xp / 100) + 1;
         $gamification->last_activity_date  = today();
         $gamification->daily_reward_claimed += 1;
-        $gamification->save();
+        $gamification->save(); 
 
         $this->unlockBadges($gamification);
 
