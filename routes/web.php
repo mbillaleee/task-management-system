@@ -29,6 +29,7 @@ use App\Http\Controllers\User\UserSubscriptionController;
 use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\User\NotificationController;
 use App\Http\Controllers\User\HabitCategoryController;
+use App\Http\Controllers\User\AnalyticsController;
 
 
 use App\Http\Controllers\Admin\GamificationController as AdminGamificationController;
@@ -196,6 +197,16 @@ Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.
     Route::patch('/settings/notifications', [SettingsController::class, 'updateNotifications'])  ->name('settings.notifications');
     Route::patch('/settings/privacy',       [SettingsController::class, 'updatePrivacy'])        ->name('settings.privacy');
     Route::delete('/settings/delete',       [SettingsController::class, 'destroy'])              ->name('settings.destroy');
+
+
+    Route::prefix('analytics')->name('analytics.')->group(function () {
+        Route::get('/',             [AnalyticsController::class, 'index'])->name('index');
+        Route::get('/productivity', [AnalyticsController::class, 'productivity'])->name('productivity');
+        Route::get('/habits',       [AnalyticsController::class, 'habits'])->name('habits');
+        Route::get('/focus',        [AnalyticsController::class, 'focus'])->name('focus');
+        Route::get('/weekly',       [AnalyticsController::class, 'weekly'])->name('weekly');
+        Route::get('/monthly',      [AnalyticsController::class, 'monthly'])->name('monthly');
+    });
 
 
     Route::get('/features', function () {

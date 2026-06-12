@@ -196,6 +196,18 @@
             <span>Subscription</span>
         </a>
 
+        <a href="{{ route('user.analytics.index') }}"
+            class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold cursor-pointer no-underline transition-all duration-200
+            {{ request()->routeIs('user.analytics*')
+                ? 'text-orange-600 dark:text-orange-400 nav-active-dark'
+                : 'text-gray-600 dark:text-gray-400 dark:hover:bg-white/[0.06] hover:bg-black/[0.05] dark:hover:text-white hover:text-gray-900' }}">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+            <span>{{ translate('Analytics') }}</span>
+        </a>
+
         {{--
 
         <a href="#"

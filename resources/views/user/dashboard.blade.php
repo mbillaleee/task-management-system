@@ -241,13 +241,14 @@
                 </div>
 
                 <div class="flex items-center gap-2.5">
-                    <select
+                    <select id="periodFilter"
+                        onchange="window.location.href = '{{ route('user.dashboard') }}?period=' + this.value"
                         class="px-4 py-3 rounded-xl text-[12.5px] outline-none
                         dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-600
                         border dark:border-white/[0.1] border-black/[0.12]">
-                        <option>Today</option>
-                        <option>This week</option>
-                        <option>This month</option>
+                        <option value="today" @selected($period === 'today')>Today</option>
+                        <option value="week" @selected($period === 'week')>This week</option>
+                        <option value="month" @selected($period === 'month')>This month</option>
                     </select>
 
                     <a href="{{ route('user.tasks.create') }}"
@@ -317,9 +318,10 @@
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100 rounded-2xl p-[18px] text-center">
                     <p class="text-left text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-3">Streak</p>
                     <span class="text-[46px] leading-none">🔥</span>
-                    <h3 class="text-[38px] font-extrabold dark:text-white text-gray-900 leading-none mt-1">12</h3>
+                    <h3 class="text-[38px] font-extrabold dark:text-white text-gray-900 leading-none mt-1">
+                        {{ $streakDays }}</h3>
                     <p class="text-[14px] dark:text-gray-500 text-gray-400">days</p>
-                    <p class="text-[13px] font-semibold dark:text-pink-400 text-orange-500 mt-1">Keep it hot! 🔥</p>
+                    <p class="text-[13px] font-semibold dark:text-pink-400 text-orange-500 mt-1">{{ $streakMessage }}</p>
                 </div>
 
                 <!-- XP -->
@@ -350,19 +352,29 @@
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100 rounded-2xl p-[18px]">
                     <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-5">Focus Time</p>
-                    <h3 class="text-[28px] font-extrabold dark:text-white text-gray-900 leading-none">3h 24m</h3>
-                    <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-1 mb-3">Today</p>
+                    <h3 class="text-[28px] font-extrabold dark:text-white text-gray-900 leading-none">
+                        {{ $focusTimeFormatted }}</h3>
+                    <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-1 mb-3">{{ $periodLabel }}</p>
 
-                    <svg viewBox="0 0 160 45" class="w-full h-[45px]">
+                    <svg viewBox="0 0 160 45" class="w-full h-[45px]" preserveAspectRatio="none">
                         <defs>
                             <linearGradient id="focusLine" x1="0" y1="0" x2="1" y2="0">
                                 <stop stop-color="#ec4899" />
                                 <stop offset="1" stop-color="#f97316" />
                             </linearGradient>
                         </defs>
-                        <path
-                            d="M0 35 C18 30, 18 10, 35 20 C52 30, 50 5, 70 14 C90 23, 88 38, 108 22 C128 5, 132 28, 160 12"
-                            fill="none" stroke="url(#focusLine)" stroke-width="3" stroke-linecap="round" />
+                        @php
+                            $maxVal = max(1, max($focusSparkline));
+                            $points = collect($focusSparkline)
+                                ->map(function ($v, $i) use ($maxVal) {
+                                    $x = $i * (160 / 6);
+                                    $y = 40 - ($v / $maxVal) * 32;
+                                    return round($x, 1) . ' ' . round($y, 1);
+                                })
+                                ->implode(' L ');
+                        @endphp
+                        <path d="M{{ $points }}" fill="none" stroke="url(#focusLine)" stroke-width="3"
+                            stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </div>
             </div>
@@ -378,21 +390,27 @@
                     <h3 class="text-[17px] font-bold dark:text-white text-gray-900 mb-1">Top 3 Priorities</h3>
 
                     @php
-                        $plans = [
-                            ['title' => 'Launch new landing page', 'priority' => 'High', 'color' => 'pink', 'num' => 1],
-                            ['title' => 'Workout & gym', 'priority' => 'Medium', 'color' => 'orange', 'num' => 2],
-                            ['title' => 'Read 20 pages', 'priority' => 'Low', 'color' => 'green', 'num' => 3],
-                        ];
+                        $colorMap = ['high' => 'pink', 'medium' => 'orange', 'low' => 'green'];
+                        $plans = $topPriorities->map(function ($task, $i) use ($colorMap) {
+                            return [
+                                'title' => $task->title,
+                                'priority' => ucfirst($task->priority),
+                                'color' => $colorMap[$task->priority] ?? 'orange',
+                                'num' => $i + 1,
+                                'url' => route('user.tasks.show', $task),
+                            ];
+                        });
                     @endphp
 
-                    @foreach ($plans as $plan)
-                        <div
-                            class="flex items-center gap-3 py-[13px]
+                    @forelse ($plans as $plan)
+                        <a href="{{ $plan['url'] }}" class="block">
+                            <div
+                                class="flex items-center gap-3 py-[13px]
                             {{ !$loop->last ? 'border-b dark:border-white/[0.07] border-orange-100' : '' }}">
 
-                            {{-- Dark mode: hollow pink ring | Light mode: numbered gradient circle --}}
-                            <div
-                                class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center
+                                {{-- Dark mode: hollow pink ring | Light mode: numbered gradient circle --}}
+                                <div
+                                    class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center
                                 {{-- Light mode: filled numbered circle --}}
                                 dark:border-2 dark:border-pink-500 dark:bg-transparent
                                 {{-- Dark mode hides the number --}}
@@ -404,85 +422,54 @@
                                 @elseif($plan['color'] === 'orange') bg-gradient-to-br from-orange-400 to-amber-500
                                 @else bg-gradient-to-br from-green-400 to-emerald-500 @endif">
 
-                                <span class="dark:hidden text-[12px] font-bold text-white leading-none">
-                                    {{ $plan['num'] }}
+                                    <span class="dark:hidden text-[12px] font-bold text-white leading-none">
+                                        {{ $plan['num'] }}
+                                    </span>
+                                </div>
+
+                                {{-- Title --}}
+                                <span class="flex-1 text-[13.5px] dark:text-gray-300 text-gray-700 font-medium truncate">
+                                    {{ $plan['title'] }}
                                 </span>
-                            </div>
 
-                            {{-- Title --}}
-                            <span class="flex-1 text-[13.5px] dark:text-gray-300 text-gray-700 font-medium">
-                                {{ $plan['title'] }}
-                            </span>
-
-                            {{-- Priority Badge --}}
-                            <span
-                                class="px-[11px] py-[2px] rounded-[6px] text-[12px] font-semibold border-[1.5px]
+                                {{-- Priority Badge --}}
+                                <span
+                                    class="px-[11px] py-[2px] rounded-[6px] text-[12px] font-semibold border-[1.5px]
                                 @if ($plan['color'] === 'pink') dark:text-pink-400 dark:border-pink-400 text-pink-500 border-pink-400
                                 @elseif($plan['color'] === 'orange')
                                     dark:text-orange-400 dark:border-orange-400 text-orange-500 border-orange-400
                                 @else
                                     dark:text-green-400 dark:border-green-400 text-green-500 border-green-400 @endif">
-                                {{ $plan['priority'] }}
-                            </span>
+                                    {{ $plan['priority'] }}
+                                </span>
 
-                            {{-- Drag handle dots --}}
-                            <div class="grid grid-cols-2 gap-[3.5px] opacity-40 flex-shrink-0">
-                                @for ($i = 0; $i < 6; $i++)
-                                    <span class="w-[3px] h-[3px] rounded-full dark:bg-gray-500 bg-gray-400 block"></span>
-                                @endfor
+                                {{-- Drag handle dots --}}
+                                <div class="grid grid-cols-2 gap-[3.5px] opacity-40 flex-shrink-0">
+                                    @for ($i = 0; $i < 6; $i++)
+                                        <span
+                                            class="w-[3px] h-[3px] rounded-full dark:bg-gray-500 bg-gray-400 block"></span>
+                                    @endfor
+                                </div>
                             </div>
+                        </a>
+                    @empty
+                        <div class="py-8 text-center">
+                            <p class="text-[13px] dark:text-gray-500 text-gray-400">No pending tasks. You're all caught up!
+                                🎉</p>
+                            <a href="{{ route('user.tasks.create') }}"
+                                class="inline-block mt-3 px-4 py-2 rounded-lg text-[12px] font-bold text-white
+                                bg-gradient-to-r from-orange-500 to-pink-500">
+                                + Add Task
+                            </a>
                         </div>
-                    @endforeach
+                    @endforelse
                 </div>
 
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100 rounded-2xl p-[18px]">
                     <h3 class="text-[17px] font-bold dark:text-white text-gray-900 mb-1">Activity Feed</h3>
 
-                    @php
-                        $activities = [
-                            [
-                                'title' => 'You completed a task',
-                                'desc' => 'Build new habit system',
-                                'time' => '2m ago',
-                                'bg' => '#22c55e',
-                                'svg' => '<polyline points="20 6 9 17 4 12"/>',
-                                'svgProps' =>
-                                    'fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"',
-                            ],
-                            [
-                                'title' => 'You reached a 12 day streak! 🔥',
-                                'desc' => '',
-                                'time' => '1h ago',
-                                'bg' => '#f97316',
-                                'svg' =>
-                                    '<path d="M12 2C9 7 6 9.5 6 13a6 6 0 0 0 12 0c0-3.5-3-6-6-11zm0 17a3 3 0 0 1-3-3c0-1.8 1.2-3.2 3-5 1.8 1.8 3 3.2 3 5a3 3 0 0 1-3 3z"/>',
-                                'svgProps' => 'fill="#fff" stroke="none"',
-                            ],
-                            [
-                                'title' => 'Focus session completed',
-                                'desc' => 'Deep Work Session',
-                                'time' => '2h ago',
-                                'bg' => 'linear-gradient(135deg,#e11d48,#9333ea)',
-                                'svg' =>
-                                    '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>',
-                                'svgProps' =>
-                                    'fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"',
-                            ],
-                            [
-                                'title' => 'New note created',
-                                'desc' => 'Project Ideas',
-                                'time' => '3h ago',
-                                'bg' => '#7c3aed',
-                                'svg' =>
-                                    '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>',
-                                'svgProps' =>
-                                    'fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"',
-                            ],
-                        ];
-                    @endphp
-
-                    @foreach ($activities as $activity)
+                    @forelse ($activities as $activity)
                         <div
                             class="flex items-start gap-3 py-[11px] {{ !$loop->last ? 'border-b dark:border-white/[0.07] border-black/[0.05]' : '' }}">
 
@@ -500,7 +487,7 @@
                                     {{ $activity['title'] }}
                                 </p>
                                 @if ($activity['desc'])
-                                    <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-0.5">
+                                    <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-0.5 truncate">
                                         {{ $activity['desc'] }}
                                     </p>
                                 @endif
@@ -511,7 +498,13 @@
                                 {{ $activity['time'] }}
                             </span>
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="py-8 text-center">
+                            <p class="text-[13px] dark:text-gray-500 text-gray-400">
+                                No recent activity yet. Start by completing a task or habit!
+                            </p>
+                        </div>
+                    @endforelse
                 </div>
             </div>
 
@@ -594,7 +587,7 @@
 
                         <div class="flex justify-between text-[16px] mb-1.5">
                             <span class="dark:text-gray-400 text-gray-500">
-                                Today Completed
+                                {{ $periodLabel }} Completed
                             </span>
 
                             <span class="font-bold dark:text-white text-gray-800">
@@ -613,4 +606,78 @@
             </div>
         </section>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('productivityChart');
+            if (!ctx) return;
+
+            const isDark = document.documentElement.classList.contains('dark');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: @json($chartLabels),
+                    datasets: [{
+                            label: 'This week',
+                            data: @json($thisWeekData),
+                            borderColor: '#ec4899',
+                            backgroundColor: 'rgba(236,72,153,0.08)',
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 3,
+                            pointBackgroundColor: '#ec4899',
+                        },
+                        {
+                            label: 'Last week',
+                            data: @json($lastWeekData),
+                            borderColor: '#fb923c',
+                            backgroundColor: 'rgba(251,146,60,0.06)',
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 3,
+                            pointBackgroundColor: '#fb923c',
+                            borderDash: [4, 4],
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: isDark ? '#6b7280' : '#9ca3af',
+                                font: {
+                                    size: 11
+                                }
+                            },
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1,
+                                color: isDark ? '#6b7280' : '#9ca3af',
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                color: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)'
+                            },
+                        },
+                    },
+                },
+            });
+        });
+    </script>
 @endsection
