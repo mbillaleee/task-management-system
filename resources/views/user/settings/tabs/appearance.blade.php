@@ -1,6 +1,6 @@
 @php
     $user = auth()->user();
-    $currentTheme  = $user->theme ?? 'dark';
+    $currentTheme = $user->theme ?? 'dark';
     $currentAccent = $user->accent_color ?? '#f97316';
 
     $accents = [
@@ -29,7 +29,8 @@
             <label class="theme-option cursor-pointer">
                 <input type="radio" name="theme" value="dark" {{ $currentTheme === 'dark' ? 'checked' : '' }}
                     class="sr-only peer" onchange="applyThemePreview('dark')">
-                <div class="relative p-4 rounded-xl border-2 transition-all
+                <div
+                    class="relative p-4 rounded-xl border-2 transition-all
                     peer-checked:border-orange-500 peer-checked:dark:bg-orange-500/[0.06]
                     dark:border-white/[0.08] border-black/[0.08]
                     dark:bg-[#1a1625] bg-gray-50
@@ -48,7 +49,8 @@
                         </div>
                         <div class="w-5 h-5 rounded-full border-2 dark:border-white/20 border-black/20 flex items-center justify-center peer-checked:bg-orange-500 peer-checked:border-orange-500"
                             id="darkRadioViz">
-                            <div class="w-2.5 h-2.5 rounded-full {{ $currentTheme === 'dark' ? 'bg-orange-500' : '' }}" id="darkDot"></div>
+                            <div class="w-2.5 h-2.5 rounded-full {{ $currentTheme === 'dark' ? 'bg-orange-500' : '' }}"
+                                id="darkDot"></div>
                         </div>
                     </div>
                 </div>
@@ -58,7 +60,8 @@
             <label class="theme-option cursor-pointer">
                 <input type="radio" name="theme" value="light" {{ $currentTheme === 'light' ? 'checked' : '' }}
                     class="sr-only peer" onchange="applyThemePreview('light')">
-                <div class="relative p-4 rounded-xl border-2 transition-all
+                <div
+                    class="relative p-4 rounded-xl border-2 transition-all
                     peer-checked:border-orange-500 peer-checked:bg-orange-500/[0.04]
                     dark:border-white/[0.08] border-black/[0.08]
                     dark:bg-[#1a1625] bg-gray-50
@@ -75,8 +78,10 @@
                             <p class="text-[13px] font-bold dark:text-white text-gray-900">Light Mode</p>
                             <p class="text-[11.5px] dark:text-gray-500 text-gray-400">Clean and bright</p>
                         </div>
-                        <div class="w-5 h-5 rounded-full border-2 dark:border-white/20 border-black/20 flex items-center justify-center" id="lightRadioViz">
-                            <div class="w-2.5 h-2.5 rounded-full {{ $currentTheme === 'light' ? 'bg-orange-500' : '' }}" id="lightDot"></div>
+                        <div class="w-5 h-5 rounded-full border-2 dark:border-white/20 border-black/20 flex items-center justify-center"
+                            id="lightRadioViz">
+                            <div class="w-2.5 h-2.5 rounded-full {{ $currentTheme === 'light' ? 'bg-orange-500' : '' }}"
+                                id="lightDot"></div>
                         </div>
                     </div>
                 </div>
@@ -87,14 +92,14 @@
     <div class="border-t dark:border-white/[0.06] border-black/[0.05]"></div>
 
     {{-- ── Accent Color ── --}}
-    <div>
+    {{-- <div>
         <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-1 flex items-center gap-2">
             <i class="fa-solid fa-paintbrush text-orange-400 text-[13px]"></i> Accent Color
         </h4>
         <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-4">Primary brand color across the interface.</p>
 
         <div class="flex flex-wrap gap-3">
-            @foreach($accents as $hex => $name)
+            @foreach ($accents as $hex => $name)
                 <label class="cursor-pointer group" title="{{ $name }}">
                     <input type="radio" name="accent_color" value="{{ $hex }}" class="sr-only peer"
                         {{ $currentAccent === $hex ? 'checked' : '' }}>
@@ -102,23 +107,24 @@
                         peer-checked:scale-110 peer-checked:ring-2 peer-checked:ring-offset-2 dark:peer-checked:ring-offset-[#17141f] peer-checked:ring-offset-white
                         border-transparent hover:scale-110"
                         style="background:{{ $hex }}; --tw-ring-color: {{ $hex }}">
-                        <div class="w-full h-full rounded-full flex items-center justify-center opacity-0 peer-checked:opacity-100 {{ $currentAccent === $hex ? 'opacity-100' : '' }}">
+                        <div
+                            class="w-full h-full rounded-full flex items-center justify-center opacity-0 peer-checked:opacity-100 {{ $currentAccent === $hex ? 'opacity-100' : '' }}">
                             <i class="fa-solid fa-check text-white text-[11px]"></i>
                         </div>
                     </div>
                 </label>
             @endforeach
 
-            {{-- Custom color input --}}
             <label class="cursor-pointer" title="Custom color">
-                <div class="w-9 h-9 rounded-full border-2 dark:border-white/20 border-black/10 overflow-hidden hover:scale-110 transition-transform">
+                <div
+                    class="w-9 h-9 rounded-full border-2 dark:border-white/20 border-black/10 overflow-hidden hover:scale-110 transition-transform">
                     <input type="color" name="accent_color_custom" value="{{ $currentAccent }}"
                         class="w-12 h-12 -ml-1 -mt-1 cursor-pointer border-none"
                         onchange="document.querySelectorAll('[name=accent_color]').forEach(r=>r.checked=false); this.closest('form').querySelector('[name=accent_color]') || this.form.querySelector('[name=accent_color]').value=this.value">
                 </div>
             </label>
         </div>
-    </div>
+    </div> --}}
 
     <div class="border-t dark:border-white/[0.06] border-black/[0.05]"></div>
 
@@ -134,7 +140,7 @@
             dark:bg-[#1a1625] bg-gray-50 dark:text-white text-gray-800
             dark:border dark:border-white/[0.1] border border-black/[0.09]
             focus:border-orange-400">
-            @foreach(\App\Models\Language::where('active', 1)->get() as $lang)
+            @foreach (\App\Models\Language::where('active', 1)->get() as $lang)
                 <option value="{{ $lang->language_code }}"
                     {{ ($user->language ?? 'en') === $lang->language_code ? 'selected' : '' }}>
                     {{ $lang->title }}
@@ -146,7 +152,7 @@
     <div class="border-t dark:border-white/[0.06] border-black/[0.05]"></div>
 
     {{-- ── Sidebar Compact ── --}}
-    <div class="flex items-center justify-between">
+    {{-- <div class="flex items-center justify-between">
         <div>
             <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900">Compact Sidebar</h4>
             <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-0.5">Show icons only, hide labels for more space.</p>
@@ -163,7 +169,7 @@
                     peer-checked:translate-x-5"></div>
             </div>
         </label>
-    </div>
+    </div> --}}
 
     {{-- Save --}}
     <div class="flex justify-end pt-2 border-t dark:border-white/[0.06] border-black/[0.05]">

@@ -6,7 +6,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Goals Workspace
+                    <i class="fas fa-bullseye mr-2"></i> Goals Workspace
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Track long-term goals, milestones, deadlines and achievements.
@@ -16,12 +16,12 @@
             <div class="flex items-center gap-2.5">
                 <a href="{{ route('user.goal.categories.index') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                    <i class="fas fa-list"></i> Category
+                    <i class="fas fa-list mr-2"></i> Category
                 </a>
 
                 <a href="{{ route('user.goals.create') }}"
                     class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                    + Create Goal
+                    <i class="fas fa-plus mr-2"></i> Create Goal
                 </a>
             </div>
         </div>
@@ -29,30 +29,36 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Total Goals</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-flag mr-2"></i>Total
+                    Goals</p>
                 <h3 class="text-[34px] font-black dark:text-white text-gray-900 mt-2">{{ $totalGoals }}</h3>
-                <p class="text-[13px] text-orange-400 font-bold">All saved goals</p>
+                <p class="text-[13px] text-orange-400 font-bold"><i class="fas fa-info-circle mr-2"></i> All saved goals</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Active Goals</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-play-circle mr-2"></i>
+                    Active Goals</p>
                 <h3 class="text-[34px] font-black text-pink-400 mt-2">{{ $activeGoals }}</h3>
-                <p class="text-[13px] text-pink-400 font-bold">In progress goals</p>
+                <p class="text-[13px] text-pink-400 font-bold"><i class="fas fa-info-circle mr-2"></i> In progress goals</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Completed</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i
+                        class="fas fa-check-circle mr-2"></i>Completed</p>
                 <h3 class="text-[34px] font-black text-emerald-400 mt-2">{{ $completedGoals }}</h3>
-                <p class="text-[13px] text-emerald-400 font-bold">Achievements unlocked</p>
+                <p class="text-[13px] text-emerald-400 font-bold"><i class="fas fa-info-circle mr-2"></i> Achievements
+                    unlocked</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">XP Earned</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-coins mr-2"></i>XP Earned
+                </p>
                 <h3 class="text-[34px] font-black text-yellow-400 mt-2">{{ $totalXp }}</h3>
-                <p class="text-[13px] text-yellow-400 font-bold">From goal completion</p>
+                <p class="text-[13px] text-yellow-400 font-bold"><i class="fas fa-info-circle mr-2"></i> From goal
+                    completion</p>
             </div>
         </div>
 
@@ -60,7 +66,8 @@
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
             <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-5">
                 <div>
-                    <h3 class="text-[20px] font-extrabold dark:text-white text-gray-900">All Goals</h3>
+                    <h3 class="text-[20px] font-extrabold dark:text-white text-gray-900"><i
+                            class="fas fa-bullseye mr-2"></i>All Goals</h3>
                     <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">
                         Search, filter and manage your goals.
                     </p>
@@ -98,7 +105,7 @@
 
                     <button
                         class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                        Filter
+                        <i class="fas fa-filter mr-2"></i> Filter
                     </button>
                 </form>
             </div>
@@ -139,7 +146,7 @@
                             </div>
 
                             <span class="px-2.5 py-[4px] rounded-lg text-[13px] font-bold border {{ $priorityClass }}">
-                                {{ ucfirst($goal->priority) }}
+                                <i class="fas fa-flag mr-1"></i> {{ ucfirst($goal->priority) }}
                             </span>
                         </div>
 
@@ -150,20 +157,22 @@
                         <div
                             class="relative z-10 flex items-center justify-between mt-4 pt-3 border-t dark:border-white/[0.06] border-black/[0.05]">
                             <div>
-                                <p class="text-[13px] dark:text-gray-500 text-gray-400">Deadline</p>
+                                <p class="text-[13px] dark:text-gray-500 text-gray-400"><i
+                                        class="fas fa-calendar-alt mr-2"></i> Deadline</p>
                                 <p class="text-[14px] font-semibold dark:text-gray-300 text-gray-700">
                                     {{ $goal->deadline ? $goal->deadline->format('d M, Y') : 'No deadline' }}
                                 </p>
                             </div>
 
                             <span class="px-2.5 py-[4px] rounded-lg text-[13px] font-bold {{ $statusClass }}">
-                                {{ ucwords(str_replace('_', ' ', $goal->status)) }}
+                                <i class="fas fa-info-circle mr-1"></i> {{ ucwords(str_replace('_', ' ', $goal->status)) }}
                             </span>
                         </div>
 
                         <div class="relative z-10 mt-4">
                             <div class="flex justify-between text-[13px] mb-1.5">
-                                <span class="dark:text-gray-400 text-gray-500">Progress</span>
+                                <span class="dark:text-gray-400 text-gray-500"><i class="fas fa-chart-line mr-2"></i>
+                                    Progress</span>
                                 <span class="font-bold dark:text-white text-gray-800">{{ $goal->progress }}%</span>
                             </div>
 
@@ -176,13 +185,13 @@
                         <div class="relative z-10 flex items-center justify-between gap-2 mt-4">
                             <a href="{{ route('user.goals.show', $goal) }}"
                                 class="px-3 py-2 rounded-lg text-[14px] font-bold text-white bg-gradient-to-r from-orange-500 to-pink-500">
-                                View
+                                <i class="fas fa-eye mr-2"></i> View
                             </a>
 
                             <div class="flex items-center gap-2">
                                 <a href="{{ route('user.goals.edit', $goal) }}"
                                     class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                                    Edit
+                                    <i class="fas fa-edit mr-2"></i> Edit
                                 </a>
 
                                 <form action="{{ route('user.goals.destroy', $goal) }}" method="POST">
@@ -190,7 +199,7 @@
                                     @method('DELETE')
                                     <button onclick="return confirm('Delete this goal?')"
                                         class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-red-500/[0.15] bg-red-50 text-red-500">
-                                        Delete
+                                        <i class="fas fa-trash-alt mr-2"></i> Delete
                                     </button>
                                 </form>
                             </div>

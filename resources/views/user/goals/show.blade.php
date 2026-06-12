@@ -5,7 +5,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Goal Details
+                    <i class="fas fa-tasks mr-2"></i> Goal Details
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     View milestones, progress and achievement tracking.
@@ -15,12 +15,12 @@
             <div class="flex gap-2">
                 <a href="{{ route('user.goals.edit', $goal) }}"
                     class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                    Edit Goal
+                    <i class="fas fa-edit mr-2"></i> Edit Goal
                 </a>
 
                 <a href="{{ route('user.goals.index') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                    Back
+                    <i class="fas fa-arrow-left mr-2"></i> Back
                 </a>
             </div>
         </div>
@@ -37,28 +37,31 @@
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[13px] dark:text-gray-500 text-gray-400">Status</p>
+                            <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-info-circle mr-2"></i>
+                                Status</p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ ucwords(str_replace('_', ' ', $goal->status)) }}
                             </p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[13px] dark:text-gray-500 text-gray-400">Type</p>
+                            <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-tag mr-2"></i> Type</p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ ucwords(str_replace('_', ' ', $goal->type)) }}
                             </p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[13px] dark:text-gray-500 text-gray-400">Category</p>
+                            <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-folder mr-2"></i>
+                                Category</p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ $goal->category?->name ?? 'N/A' }}
                             </p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[13px] dark:text-gray-500 text-gray-400">Deadline</p>
+                            <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-calendar-alt mr-2"></i>
+                                Deadline</p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ $goal->deadline ? $goal->deadline->format('d M, Y') : 'No deadline' }}
                             </p>
@@ -67,7 +70,8 @@
 
                     <div class="mt-6">
                         <div class="flex justify-between text-[14px] mb-2">
-                            <span class="dark:text-gray-400 text-gray-500 font-bold">Overall Progress</span>
+                            <span class="dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-chart-line mr-2"></i>
+                                Overall Progress</span>
                             <span class="dark:text-white text-gray-900 font-bold">{{ $goal->progress }}%</span>
                         </div>
 
@@ -81,7 +85,7 @@
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
                     <h3 class="text-[16px] font-bold dark:text-white text-gray-900 mb-3.5">
-                        Milestones
+                        <i class="fas fa-flag mr-2"></i> Milestones
                     </h3>
 
                     <form action="{{ route('user.goals.milestones.store', $goal) }}" method="POST"
@@ -96,7 +100,7 @@
 
                         <button
                             class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                            Add
+                            <i class="fas fa-plus mr-2"></i> Add
                         </button>
                     </form>
 
@@ -108,12 +112,15 @@
                                 @method('PATCH')
                                 <button
                                     class="text-[14px] font-medium {{ $milestone->is_completed ? 'line-through text-gray-400' : 'dark:text-gray-200 text-gray-700' }}">
-                                    {{ $milestone->is_completed ? '✓' : '○' }} {{ $milestone->title }}
+                                    <i
+                                        class="fas {{ $milestone->is_completed ? 'fa-circle-check text-emerald-500' : 'fa-clock text-orange-400' }} mr-2"></i>
+                                    {{ $milestone->title }}
                                 </button>
 
                                 @if ($milestone->due_date)
                                     <p class="text-[12px] text-gray-500 mt-1">
-                                        Due: {{ $milestone->due_date->format('d M, Y') }}
+                                        <i class="fas fa-calendar-alt mr-1"></i> Due:
+                                        {{ $milestone->due_date->format('d M, Y') }}
                                     </p>
                                 @endif
                             </form>
@@ -121,7 +128,8 @@
                             <form action="{{ route('user.goal.milestones.destroy', $milestone) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="text-[14px] font-bold text-red-500">Delete</button>
+                                <button class="text-[14px] font-bold text-red-500"><i class="fas fa-trash-alt mr-1"></i>
+                                    Delete</button>
                             </form>
                         </div>
                     @empty
@@ -133,26 +141,29 @@
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
                 <h3 class="text-[18px] font-bold dark:text-white text-gray-900 mb-4">
-                    Achievement Tracking
+                    <i class="fas fa-trophy mr-2"></i> Achievement Tracking
                 </h3>
 
                 <div class="space-y-4">
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-4">
-                        <p class="text-[13px] dark:text-gray-500 text-gray-400">XP Earned</p>
+                        <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-star mr-2"></i> XP Earned
+                        </p>
                         <h4 class="text-[28px] font-black text-yellow-400 mt-1">
                             {{ $goal->xp_earned }}
                         </h4>
                     </div>
 
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-4">
-                        <p class="text-[13px] dark:text-gray-500 text-gray-400">Completed Milestones</p>
+                        <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-flag mr-2"></i> Completed
+                            Milestones</p>
                         <h4 class="text-[28px] font-black text-emerald-400 mt-1">
                             {{ $goal->milestones->where('is_completed', true)->count() }}/{{ $goal->milestones->count() }}
                         </h4>
                     </div>
 
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-4">
-                        <p class="text-[13px] dark:text-gray-500 text-gray-400">Achievement Status</p>
+                        <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-trophy mr-2"></i>
+                            Achievement Status</p>
                         <h4
                             class="text-[16px] font-bold mt-1 {{ $goal->status === 'completed' ? 'text-emerald-400' : 'text-orange-400' }}">
                             {{ $goal->status === 'completed' ? 'Completed' : 'In Progress' }}
@@ -161,7 +172,8 @@
 
                     @if ($goal->completed_at)
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-4">
-                            <p class="text-[13px] dark:text-gray-500 text-gray-400">Completed At</p>
+                            <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-clock mr-2"></i>
+                                Completed At</p>
                             <h4 class="text-[14px] font-bold dark:text-white text-gray-900 mt-1">
                                 {{ $goal->completed_at->format('d M Y h:i A') }}
                             </h4>

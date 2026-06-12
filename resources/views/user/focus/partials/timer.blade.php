@@ -2,7 +2,7 @@
     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
     <div class="flex items-center justify-between mb-4">
         <h3 class="text-[16px] font-bold dark:text-white text-gray-900">
-            Timer Controls
+            <i class="fas fa-clock mr-2"></i> Timer Controls
         </h3>
 
         <span
@@ -27,7 +27,7 @@
                 @csrf
                 <button
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-yellow-500/[0.15] bg-yellow-50 text-yellow-500">
-                    Pause
+                    <i class="fas fa-pause mr-2"></i> Pause
                 </button>
             </form>
 
@@ -35,7 +35,7 @@
                 @csrf
                 <button
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-emerald-500/[0.15] bg-emerald-50 text-emerald-500">
-                    Complete
+                    <i class="fas fa-check mr-2"></i> Complete
                 </button>
             </form>
         @endif
@@ -45,7 +45,7 @@
                 @csrf
                 <button
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-red-500/[0.15] bg-red-50 text-red-500">
-                    Cancel
+                    <i class="fas fa-times mr-2"></i> Cancel
                 </button>
             </form>
         @endif
@@ -54,7 +54,7 @@
     @if ($focus->audio_file)
         <div class="mt-5">
             <p class="text-[13px] font-bold dark:text-gray-300 text-gray-700 mb-2">
-                Ambient Sound
+                <i class="fas fa-music mr-2"></i> Ambient Sound
             </p>
 
             <audio controls loop class="w-full">

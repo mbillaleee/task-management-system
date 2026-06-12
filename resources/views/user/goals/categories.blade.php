@@ -7,7 +7,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Goal Categories
+                    <i class="fas fa-tags mr-2"></i> Goal Categories
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Manage your goal categories for better organization.
@@ -17,12 +17,12 @@
             <div class="flex items-center gap-2.5">
                 <a href="{{ route('user.goals.index') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                    Back to Goals
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Goals
                 </a>
 
                 <button type="button" onclick="openCreateCategoryModal()"
                     class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                    + Create Category
+                    <i class="fas fa-plus mr-2"></i> Create Category
                 </button>
             </div>
         </div>
@@ -78,7 +78,7 @@
                                     '{{ $categoryColor }}'
                                 )"
                                 class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                                Edit
+                                <i class="fas fa-edit mr-2"></i> Edit
                             </button>
 
                             <form action="{{ route('user.goal.categories.destroy', $category) }}" method="POST">
@@ -86,7 +86,7 @@
                                 @method('DELETE')
                                 <button onclick="return confirm('Delete this category?')"
                                     class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-red-500/[0.15] bg-red-50 text-red-500">
-                                    Delete
+                                    <i class="fas fa-trash mr-2"></i> Delete
                                 </button>
                             </form>
                         </div>
@@ -103,7 +103,7 @@
 
                         <button type="button" onclick="openCreateCategoryModal()"
                             class="mt-4 px-5 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                            + Create Category
+                            <i class="fas fa-plus mr-2"></i> Create Category
                         </button>
                     </div>
                 @endforelse
@@ -124,7 +124,7 @@
                 <div class="flex items-center justify-between mb-4">
                     <div>
                         <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">
-                            Create Goal Category
+                            <i class="fas fa-plus mr-2"></i> Create Goal Category
                         </h3>
                         <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">
                             Add a new category for goals.
@@ -162,12 +162,12 @@
                     <div class="flex items-center justify-end gap-2 pt-2">
                         <button type="button" onclick="closeCreateCategoryModal()"
                             class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                            Cancel
+                            <i class="fas fa-times mr-2"></i> Cancel
                         </button>
 
                         <button type="submit"
                             class="px-5 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                            Save Category
+                            <i class="fas fa-save mr-2"></i> Save Category
                         </button>
                     </div>
                 </form>
@@ -182,7 +182,7 @@
                 <div class="flex items-center justify-between mb-4">
                     <div>
                         <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">
-                            Edit Goal Category
+                            <i class="fas fa-edit mr-2"></i> Edit Goal Category
                         </h3>
                         <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">
                             Update category name and color.
@@ -221,12 +221,12 @@
                     <div class="flex items-center justify-end gap-2 pt-2">
                         <button type="button" onclick="closeEditCategoryModal()"
                             class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                            Cancel
+                            <i class="fas fa-times mr-2"></i> Cancel
                         </button>
 
                         <button type="submit"
                             class="px-5 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                            Update Category
+                            <i class="fas fa-save mr-2"></i> Update Category
                         </button>
                     </div>
                 </form>

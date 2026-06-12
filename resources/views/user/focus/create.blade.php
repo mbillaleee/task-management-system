@@ -6,7 +6,7 @@
         <div class="flex items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Create Focus Session
+                    <i class="fas fa-plus-circle mr-2"></i> Create Focus Session
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Add Pomodoro, deep work, focus timer or break timer.
@@ -15,7 +15,7 @@
 
             <a href="{{ route('user.focus.index') }}"
                 class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                Back
+                <i class="fas fa-arrow-left mr-2"></i> Back
             </a>
         </div>
 

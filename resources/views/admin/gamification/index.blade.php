@@ -7,7 +7,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Gamification Overview
+                    <i class="fas fa-trophy"></i> Gamification Overview
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Platform-wide XP, badges, challenges and rewards management.
@@ -17,15 +17,15 @@
             <div class="flex items-center gap-2.5">
                 <a href="{{ route('admin.badges.index') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                    Manage Badges
+                    <i class="fas fa-medal"></i> Manage Badges
                 </a>
                 <a href="{{ route('admin.challenges.index') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                    Manage Challenges
+                    <i class="fas fa-tasks"></i> Manage Challenges
                 </a>
                 <a href="{{ route('admin.daily-rewards.index') }}"
                     class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                    Daily Rewards
+                    <i class="fas fa-gift"></i> Daily Rewards
                 </a>
             </div>
         </div>
@@ -34,37 +34,43 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Total Users</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-users"></i> Total Users
+                </p>
                 <h3 class="text-[34px] font-black dark:text-white text-gray-900 mt-2">{{ $totalUsers }}</h3>
-                <p class="text-[13px] text-orange-400 font-bold">Registered users</p>
+                <p class="text-[13px] text-orange-400 font-bold"><i class="fas fa-user-plus"></i> Registered users</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Total XP Earned</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-coins"></i> Total XP
+                    Earned</p>
                 <h3 class="text-[34px] font-black text-pink-400 mt-2">{{ number_format($totalXpEarned) }}</h3>
-                <p class="text-[13px] text-pink-400 font-bold">Platform-wide XP</p>
+                <p class="text-[13px] text-pink-400 font-bold"><i class="fas fa-globe"></i> Platform-wide XP</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Badges Given</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-medal"></i> Badges Given
+                </p>
                 <h3 class="text-[34px] font-black text-yellow-400 mt-2">{{ $totalBadgesGiven }}</h3>
-                <p class="text-[13px] text-yellow-400 font-bold">Total unlocked</p>
+                <p class="text-[13px] text-yellow-400 font-bold"><i class="fas fa-unlock"></i> Total unlocked</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Challenges Done</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-tasks"></i> Challenges
+                    Done</p>
                 <h3 class="text-[34px] font-black text-emerald-400 mt-2">{{ $totalChallengesDone }}</h3>
-                <p class="text-[13px] text-emerald-400 font-bold">Completed by users</p>
+                <p class="text-[13px] text-emerald-400 font-bold"> <i class="fas fa-check-circle"></i> Completed by users
+                </p>
             </div>
         </div>
 
         {{-- Top Users Leaderboard --}}
         <div
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-            <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-4">🏆 Top 10 Leaderboard</h3>
+            <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-4"><i class="fas fa-trophy"></i> Top 10
+                Leaderboard</h3>
 
             <div class="space-y-3">
                 @foreach ($topUsers as $i => $ug)
@@ -87,12 +93,15 @@
 
                         <div class="text-right">
                             <p class="text-[14px] font-black text-orange-400">{{ number_format($ug->xp) }} XP</p>
-                            <p class="text-[12px] dark:text-gray-500 text-gray-400">Level {{ $ug->level }}</p>
+                            <p class="text-[12px] dark:text-gray-500 text-gray-400"><i class="fas fa-level-up-alt"></i>
+                                Level {{ $ug->level }}</p>
                         </div>
 
                         <div class="text-right hidden sm:block">
-                            <p class="text-[14px] font-bold text-emerald-400">🔥 {{ $ug->streak_days }}</p>
-                            <p class="text-[12px] dark:text-gray-500 text-gray-400">streak</p>
+                            <p class="text-[14px] font-bold text-emerald-400"><i class="fas fa-fire"></i>
+                                {{ $ug->streak_days }}</p>
+                            <p class="text-[12px] dark:text-gray-500 text-gray-400"><i class="fas fa-clock"></i> Current
+                                streak</p>
                         </div>
                     </div>
                 @endforeach
@@ -106,9 +115,11 @@
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">Recent Badges</h3>
+                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"><i class="fas fa-medal"></i> Recent
+                        Badges</h3>
                     <a href="{{ route('admin.badges.index') }}"
-                        class="text-[13px] font-bold text-orange-400 hover:underline">View all</a>
+                        class="text-[13px] font-bold text-orange-400 hover:underline"><i class="fas fa-eye"></i> View
+                        all</a>
                 </div>
 
                 <div class="space-y-3">
@@ -137,9 +148,11 @@
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">Recent Challenges</h3>
+                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"><i class="fas fa-tasks"></i> Recent
+                        Challenges</h3>
                     <a href="{{ route('admin.challenges.index') }}"
-                        class="text-[13px] font-bold text-orange-400 hover:underline">View all</a>
+                        class="text-[13px] font-bold text-orange-400 hover:underline"><i class="fas fa-eye"></i> View
+                        all</a>
                 </div>
 
                 <div class="space-y-3">

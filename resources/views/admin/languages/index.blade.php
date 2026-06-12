@@ -4,17 +4,17 @@
     <section class="space-y-6">
 
         <div class="flex justify-between items-end">
-            <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Languages</h2>
+            <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-globe"></i> Languages</h2>
             <a href="{{ route('admin.language.create') }}"
                 class="px-4 py-2 rounded-[10px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow">
-                + Add Language
+                <i class="fas fa-plus"></i> Add Language
             </a>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
             @forelse($languages as $language)
                 <div
-                    class="relative hover:scale-105 transform transition-all duration-300 hover-lift dark:bg-[#1b1624] bg-white rounded-3xl p-6 border dark:border-purple-700 border-gray-200 shadow-lg shadow-pink-400/20 overflow-hidden">
+                    class="relative hover:scale-105 transform transition-all duration-300 hover-lift dark:bg-[#1b1624] bg-white rounded-3xl p-6 border dark:border-gray-200 border-gray-200 shadow-lg shadow-pink-400/20 overflow-hidden">
 
                     <!-- Background glow effect -->
                     <div
@@ -27,21 +27,23 @@
                     <div class="relative z-10 flex justify-between items-center">
                         <div>
                             <h3 class="font-extrabold text-lg sm:text-xl dark:text-white text-gray-900">
-                                {{ $language->title }}</h3>
-                            <p
-                                class="text-sm font-semibold px-2 py-1 rounded-full inline-block bg-gradient-to-r from-orange-400 to-pink-500 text-white mt-1">
-                                {{ strtoupper($language->language_code) }}
-                            </p>
+                                <i class="fas fa-globe"></i> {{ $language->title }}
+                                <p
+                                    class="text-sm font-semibold px-2 py-1 rounded-full inline-block bg-gradient-to-r from-orange-400 to-pink-500 text-white mt-1">
+                                    {{ strtoupper($language->language_code) }}
+                                </p>
+                            </h3>
+
                         </div>
 
                         <div class="flex gap-2">
                             <a href="{{ route('admin.language.edit', $language) }}"
                                 class="px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-400 to-pink-500 text-white font-semibold shadow-md hover:shadow-xl transition">
-                                Edit
+                                <i class="fas fa-edit"></i> Edit
                             </a>
                             <a href="{{ route('admin.language.translations', $language) }}"
                                 class="px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-md hover:shadow-xl transition">
-                                Translations
+                                <i class="fas fa-language"></i> Translations
                             </a>
                         </div>
                     </div>
@@ -51,7 +53,7 @@
                             <input type="checkbox" data-url="{{ route('admin.language.status') }}"
                                 value="{{ $language->id }}" name="toggle" {{ $language->active ? 'checked' : '' }}
                                 class="accent-pink-500 w-5 h-5">
-                            Active
+                            <i class="fas fa-toggle-on"></i> Active
                         </label>
                     </div>
                 </div>

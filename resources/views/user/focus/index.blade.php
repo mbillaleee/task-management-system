@@ -6,7 +6,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Focus Sessions
+                    <i class="fas fa-clock mr-2"></i> Focus Sessions
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Manage Pomodoro, deep work, focus timer and break sessions.
@@ -16,17 +16,17 @@
             <div class="flex flex-wrap items-center gap-2.5">
                 <a href="{{ route('user.focus.statistics') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                    Statistics
+                    <i class="fas fa-chart-bar mr-2"></i> Statistics
                 </a>
 
                 <a href="{{ route('user.focus.history') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                    History
+                    <i class="fas fa-history mr-2"></i> History
                 </a>
 
                 <a href="{{ route('user.focus.create') }}"
                     class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                    + Add Focus
+                    <i class="fas fa-plus mr-2"></i> Add Focus
                 </a>
             </div>
         </div>
@@ -88,14 +88,18 @@
 
                     <div class="relative z-10 grid grid-cols-2 gap-3 mt-4">
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400">Duration</p>
+                            <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                                <i class="fas fa-clock mr-2"></i> Duration
+                            </p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ $session->duration_minutes }} min
                             </p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400">Completed</p>
+                            <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                                <i class="fas fa-check-circle mr-2"></i> Completed
+                            </p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ $session->completed_minutes }} min
                             </p>
@@ -105,7 +109,9 @@
                     <div
                         class="relative z-10 flex items-center justify-between mt-4 pt-3 border-t dark:border-white/[0.06] border-black/[0.05]">
                         <div>
-                            <p class="text-[16px] dark:text-gray-500 text-gray-400">XP Earned</p>
+                            <p class="text-[16px] dark:text-gray-500 text-gray-400">
+                                <i class="fas fa-star mr-2"></i> XP Earned
+                            </p>
                             <p class="text-[14px] font-semibold dark:text-gray-300 text-gray-700">
                                 {{ $session->xp_earned }}
                             </p>
@@ -118,7 +124,9 @@
 
                     <div class="relative z-10 mt-4">
                         <div class="flex justify-between text-[16px] mb-1.5">
-                            <span class="dark:text-gray-400 text-gray-500">Progress</span>
+                            <span class="dark:text-gray-400 text-gray-500">
+                                <i class="fas fa-chart-line mr-2"></i> Progress
+                            </span>
                             <span class="font-bold dark:text-white text-gray-800">{{ $progress }}%</span>
                         </div>
 
@@ -131,13 +139,13 @@
                     <div class="relative z-10 flex items-center justify-between gap-2 mt-4">
                         <a href="{{ route('user.focus.show', $session->id) }}"
                             class="px-3 py-2 rounded-lg text-[14px] font-bold text-white bg-gradient-to-r from-orange-500 to-pink-500">
-                            View
+                            <i class="fas fa-eye mr-2"></i> View
                         </a>
 
                         <div class="flex items-center gap-2">
                             <a href="{{ route('user.focus.edit', $session->id) }}"
                                 class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                                Edit
+                                <i class="fas fa-edit mr-2"></i> Edit
                             </a>
 
                             <form action="{{ route('user.focus.destroy', $session->id) }}" method="POST">
@@ -145,7 +153,7 @@
                                 @method('DELETE')
                                 <button onclick="return confirm('Delete this focus session?')"
                                     class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-red-500/[0.15] bg-red-50 text-red-500">
-                                    Delete
+                                    <i class="fas fa-trash-alt mr-2"></i> Delete
                                 </button>
                             </form>
                         </div>

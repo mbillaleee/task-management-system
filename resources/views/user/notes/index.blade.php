@@ -16,7 +16,8 @@
 
             <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
                 <div>
-                    <p class="text-[14px] font-semibold text-orange-400 mb-2">Notes Workspace</p>
+                    <p class="text-[14px] font-semibold text-orange-400 mb-2"> <i class="fa-solid fa-sticky-note"></i> Notes
+                        Workspace</p>
                 </div>
 
                 <div class="flex items-center gap-3">
@@ -101,9 +102,9 @@
                     class="flex flex-col md:flex-row gap-2.5 w-full xl:w-auto">
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search notes..."
                         class="w-full md:w-[260px] px-4 py-3 rounded-xl text-[14px] outline-none
-            dark:bg-[#1a1625] bg-white dark:text-gray-200 text-gray-700
-            border dark:border-white/[0.1] border-orange-200
-            focus:border-orange-400 focus:ring-2 focus:ring-orange-500/20">
+                            dark:bg-[#1a1625] bg-white dark:text-gray-200 text-gray-700
+                            border dark:border-white/[0.1] border-orange-200
+                            focus:border-orange-400 focus:ring-2 focus:ring-orange-500/20">
 
                     {{-- Folder Select With Add/Edit --}}
                     <div class="flex gap-2">
@@ -111,7 +112,9 @@
                             class="w-full md:w-[180px] px-4 py-3 rounded-xl text-[14px] outline-none
                 dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700
                 border dark:border-white/[0.1] border-orange-200">
-                            <option value="">All Folders</option>
+                            <option value="">
+                                <i class="fa-solid fa-folder"></i> All Folders
+                            </option>
                             @foreach ($folders as $folder)
                                 <option value="{{ $folder->id }}" data-name="{{ $folder->name }}"
                                     @selected(request('folder') == $folder->id)>
@@ -125,9 +128,11 @@
                     <div class="flex gap-2">
                         <select name="category" id="categorySelect"
                             class="w-full md:w-[180px] px-4 py-3 rounded-xl text-[14px] outline-none
-                dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700
-                border dark:border-white/[0.1] border-orange-200">
-                            <option value="">All Categories</option>
+                                dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700
+                                border dark:border-white/[0.1] border-orange-200">
+                            <option value="">
+                                <i class="fa-solid fa-tag"></i> All Categories
+                            </option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" data-name="{{ $category->name }}"
                                     @selected(request('category') == $category->id)>
@@ -142,12 +147,15 @@
                         <div class="flex gap-2">
                             <select name="tag"
                                 class="w-full md:w-[160px] px-4 py-3 rounded-xl text-[14px] outline-none
-                dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700
-                border dark:border-white/[0.1] border-orange-200">
-                                <option value="">All Tags</option>
+                                    dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700
+                                    border dark:border-white/[0.1] border-orange-200">
+                                <option value="">
+                                    <i class="fa-solid fa-hashtag"></i> All Tags
+                                </option>
                                 @foreach ($userTags as $userTag)
                                     <option value="{{ $userTag->slug }}" @selected(request('tag') == $userTag->slug)>
-                                        #{{ $userTag->name }} ({{ $userTag->notes_count }})
+                                        <i class="fa-solid fa-hashtag"></i> {{ $userTag->name }}
+                                        ({{ $userTag->notes_count }})
                                     </option>
                                 @endforeach
                             </select>
@@ -158,7 +166,7 @@
                         class="px-5 py-3 rounded-xl text-white text-[14px] font-bold
             bg-gradient-to-r from-orange-500 to-pink-500
             shadow-[0_4px_18px_rgba(249,115,22,.35)]">
-                        Filter
+                        <i class="fa-solid fa-filter"></i> Filter
                     </button>
                 </form>
             </div>
@@ -168,15 +176,16 @@
                 <div
                     class="flex items-center gap-2 px-4 py-2.5 rounded-xl
             dark:bg-orange-500/10 bg-orange-50 border dark:border-orange-500/20 border-orange-200">
-                    <span class="text-[13px] dark:text-gray-400 text-gray-600">Filtered by tag:</span>
+                    <span class="text-[13px] dark:text-gray-400 text-gray-600"> <i class="fa-solid fa-hashtag"></i> Filtered
+                        by tag:</span>
                     <span
                         class="px-2.5 py-1 rounded-lg text-[12px] font-bold
                 dark:bg-orange-500/20 bg-orange-100 text-orange-500">
-                        #{{ request('tag') }}
+                        <i class="fa-solid fa-hashtag"></i> {{ request('tag') }}
                     </span>
                     <a href="{{ route('user.notes.index', array_filter(request()->except('tag', 'page'))) }}"
                         class="ml-auto text-[12px] text-red-400 hover:text-red-300 font-bold transition">
-                        ✕ Clear filter
+                        <i class="fa-solid fa-times"></i> Clear filter
                     </a>
                 </div>
             @endif
@@ -208,13 +217,13 @@
                         <div class="relative z-10">
                             <div class="flex items-start justify-between gap-3 mb-3">
                                 <div class="min-w-0">
-                                    <div class="flex items-center gap-2 mb-1">
+                                    <div class="flex items-center gap-2 mb-1 dark:text-gray-300 text-gray-700">
                                         @if ($note->is_pinned)
-                                            <span class="text-[18px]">📌</span>
+                                            <span class="text-[18px]"><i class="fa-solid fa-thumbtack"></i> </span>
                                         @endif
 
                                         @if ($note->is_favorite)
-                                            <span class="text-[18px]">⭐</span>
+                                            <span class="text-[18px]"><i class="fa-solid fa-heart"></i></span>
                                         @endif
                                     </div>
 
@@ -239,14 +248,14 @@
                                 @if ($note->folder)
                                     <span
                                         class="px-2.5 py-1 rounded-lg text-[12px] font-semibold dark:bg-white/[0.06] bg-gray-100 dark:text-gray-300 text-gray-600">
-                                        📁 {{ $note->folder->name }}
+                                        <i class="fa-solid fa-folder"></i> {{ $note->folder->name }}
                                     </span>
                                 @endif
 
                                 @if ($note->category)
                                     <span
                                         class="px-2.5 py-1 rounded-lg text-[12px] font-semibold dark:bg-pink-500/[0.12] bg-pink-50 text-pink-500">
-                                        {{ $note->category->name }}
+                                        <i class="fa-solid fa-tag"></i> {{ $note->category->name }}
                                     </span>
                                 @endif
                             </div>
@@ -258,7 +267,7 @@
                                             class="px-2 py-1 rounded-lg text-[11px] font-semibold transition
                                         dark:bg-[#21192c] bg-orange-50 dark:text-gray-400 text-orange-600
                                         hover:dark:bg-orange-500/20 hover:bg-orange-100 hover:text-orange-500">
-                                            #{{ $tag->name }}
+                                            <i class="fa-solid fa-hashtag"></i> {{ $tag->name }}
                                         </a>
                                     @endforeach
                                 </div>
@@ -276,13 +285,13 @@
                                     dark:text-white text-gray-700
                                     border dark:border-white/[0.1] border-gray-200
                                     dark:bg-white/[0.03] bg-white">
-                                        View
+                                        <i class="fa-solid fa-eye"></i> View
                                     </a>
 
                                     <a href="{{ route('user.notes.edit', $note) }}"
                                         class="px-3 py-2 rounded-lg text-[12px] font-bold text-white
                                     bg-gradient-to-r from-orange-500 to-pink-500">
-                                        Edit
+                                        <i class="fa-solid fa-edit"></i> Edit
                                     </a>
                                 </div>
                             </div>
@@ -292,15 +301,17 @@
                     <div class="md:col-span-2 xl:col-span-3">
                         <div
                             class="rounded-2xl p-10 text-center dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-orange-100">
-                            <div class="text-[52px] mb-3">📝</div>
-                            <h3 class="text-[22px] font-extrabold dark:text-white text-gray-900">No notes found</h3>
-                            <p class="text-[14px] dark:text-gray-500 text-gray-500 mt-2">Start by creating your first note.
+                            <div class="text-[52px] mb-3"><i class="fa-solid fa-sticky-note"></i></div>
+                            <h3 class="text-[22px] font-extrabold dark:text-white text-gray-900"><i
+                                    class="fa-solid fa-info-circle"></i> No notes found</h3>
+                            <p class="text-[14px] dark:text-gray-500 text-gray-500 mt-2"> Start by creating your first
+                                note.
                             </p>
 
                             <a href="{{ route('user.notes.create') }}"
                                 class="inline-flex mt-5 px-6 py-3 rounded-xl text-white text-[14px] font-bold
                             bg-gradient-to-r from-orange-500 to-pink-500">
-                                + Create Note
+                                <i class="fa-solid fa-plus"></i> Create Note
                             </a>
                         </div>
                     </div>

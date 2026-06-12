@@ -4,7 +4,8 @@
     <section class="space-y-6">
         <div
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-6">
-            <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900 mb-4">Create Language</h2>
+            <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900 mb-4"> <i class="fas fa-plus"></i> Create
+                Language</h2>
 
             <form action="{{ route('admin.language.store') }}" method="POST">
                 @csrf
@@ -32,11 +33,11 @@
                     <div class="flex justify-end gap-2 pt-3">
                         <a href="{{ route('admin.languages') }}"
                             class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                            Cancel
+                            <i class="fas fa-times"></i> Cancel
                         </a>
                         <button type="submit"
                             class="px-5 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                            Save
+                            <i class="fas fa-save"></i> Save
                         </button>
                     </div>
                 </div>

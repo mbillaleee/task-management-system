@@ -13,7 +13,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Focus Details
+                    <i class="fas fa-info-circle mr-2"></i> Focus Details
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     View timer, progress, sound mode and activity history.
@@ -23,17 +23,17 @@
             <div class="flex flex-wrap gap-2">
                 <a href="{{ route('user.focus.fullscreen', $focus->id) }}"
                     class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                    Fullscreen
+                    <i class="fas fa-expand mr-2"></i> Fullscreen
                 </a>
 
                 <a href="{{ route('user.focus.edit', $focus->id) }}"
                     class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                    Edit Focus
+                    <i class="fas fa-edit mr-2"></i> Edit Focus
                 </a>
 
                 <a href="{{ route('user.focus.index') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                    Back
+                    <i class="fas fa-arrow-left mr-2"></i> Back
                 </a>
             </div>
         </div>
@@ -63,28 +63,28 @@
 
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
                             <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                                <p class="text-[14px] dark:text-gray-500 text-gray-400">Status</p>
+                                <p class="text-[14px] dark:text-gray-500 text-gray-400"> <i class="fas fa-clock mr-2"></i> Status</p>
                                 <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                     {{ ucfirst($focus->status) }}
                                 </p>
                             </div>
 
                             <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                                <p class="text-[14px] dark:text-gray-500 text-gray-400">Type</p>
+                                <p class="text-[14px] dark:text-gray-500 text-gray-400"> <i class="fas fa-tag mr-2"></i> Type</p>
                                 <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                     {{ ucwords(str_replace('_', ' ', $focus->type)) }}
                                 </p>
                             </div>
 
                             <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                                <p class="text-[14px] dark:text-gray-500 text-gray-400">Sound</p>
+                                <p class="text-[14px] dark:text-gray-500 text-gray-400"> <i class="fas fa-volume-up mr-2"></i> Sound</p>
                                 <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                     {{ ucwords(str_replace('_', ' ', $focus->ambient_sound ?? 'none')) }}
                                 </p>
                             </div>
 
                             <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                                <p class="text-[14px] dark:text-gray-500 text-gray-400">XP</p>
+                                <p class="text-[14px] dark:text-gray-500 text-gray-400"> <i class="fas fa-star mr-2"></i> XP</p>
                                 <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                     {{ $focus->xp_earned }}
                                 </p>
@@ -110,7 +110,7 @@
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
                     <h3 class="text-[16px] font-bold dark:text-white text-gray-900 mb-3.5">
-                        Session History
+                        <i class="fas fa-history mr-2"></i> Session History
                     </h3>
 
                     <div class="space-y-4">
@@ -143,47 +143,59 @@
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
                 <h3 class="text-[18px] font-bold dark:text-white text-gray-900 mb-4">
-                    Time Overview
+                    <i class="fas fa-chart-line mr-2"></i> Time Overview
                 </h3>
 
                 <div class="space-y-3">
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                        <p class="text-[14px] dark:text-gray-500 text-gray-400">Duration</p>
+                        <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                            <i class="fas fa-clock mr-2"></i> Duration
+                        </p>
                         <p class="text-[18px] font-extrabold dark:text-white text-gray-900">
                             {{ $focus->duration_minutes }} min
                         </p>
                     </div>
 
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                        <p class="text-[14px] dark:text-gray-500 text-gray-400">Completed</p>
+                        <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                            <i class="fas fa-check-circle mr-2"></i> Completed
+                        </p>
                         <p class="text-[18px] font-extrabold dark:text-white text-gray-900">
                             {{ $focus->completed_minutes }} min
                         </p>
                     </div>
 
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                        <p class="text-[14px] dark:text-gray-500 text-gray-400">Fullscreen</p>
+                        <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                            <i class="fas fa-expand mr-2"></i> Fullscreen
+                        </p>
                         <p class="text-[14px] font-bold dark:text-white text-gray-800">
                             {{ $focus->fullscreen_mode ? 'Enabled' : 'Disabled' }}
                         </p>
                     </div>
 
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                        <p class="text-[14px] dark:text-gray-500 text-gray-400">Distraction Free</p>
+                        <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                            <i class="fas fa-ban mr-2"></i> Distraction Free
+                        </p>
                         <p class="text-[14px] font-bold dark:text-white text-gray-800">
                             {{ $focus->distraction_free ? 'Enabled' : 'Disabled' }}
                         </p>
                     </div>
 
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                        <p class="text-[14px] dark:text-gray-500 text-gray-400">Started At</p>
+                        <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                            <i class="fas fa-clock mr-2"></i> Started At
+                        </p>
                         <p class="text-[14px] font-bold dark:text-white text-gray-800">
                             {{ $focus->started_at ? $focus->started_at->format('d M Y h:i A') : 'Not started' }}
                         </p>
                     </div>
 
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                        <p class="text-[14px] dark:text-gray-500 text-gray-400">Completed At</p>
+                        <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                            <i class="fas fa-check-circle mr-2"></i> Completed At
+                        </p>
                         <p class="text-[14px] font-bold dark:text-white text-gray-800">
                             {{ $focus->completed_at ? $focus->completed_at->format('d M Y h:i A') : 'Not completed' }}
                         </p>

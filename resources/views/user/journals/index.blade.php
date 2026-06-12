@@ -6,7 +6,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Journal Workspace
+                    <i class="fas fa-book-open mr-2"></i> Journal Workspace
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Daily journal, mood tracking, gratitude and personal reflections.
@@ -26,7 +26,7 @@
 
                 <a href="{{ route('user.journals.create') }}"
                     class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                    + New Entry
+                    <i class="fas fa-plus"></i> New Entry
                 </a>
             </div>
         </div>
@@ -35,35 +35,40 @@
         <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Total Journals</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-book mr-2"></i> Total
+                    Journals</p>
                 <h3 class="text-[34px] font-black dark:text-white text-gray-900 mt-2">{{ $totalJournals }}</h3>
                 <p class="text-[13px] text-orange-400 font-bold">All personal logs</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Today</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-calendar-day mr-2"></i>
+                    Today</p>
                 <h3 class="text-[34px] font-black text-pink-400 mt-2">{{ $todayJournals }}</h3>
                 <p class="text-[13px] text-pink-400 font-bold">Today's entries</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Gratitude</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-heart mr-2"></i>
+                    Gratitude</p>
                 <h3 class="text-[34px] font-black text-emerald-400 mt-2">{{ $gratitudeCount }}</h3>
                 <p class="text-[13px] text-emerald-400 font-bold">Gratitude journals</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Favorites</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-star mr-2"></i> Favorites
+                </p>
                 <h3 class="text-[34px] font-black text-yellow-400 mt-2">{{ $favoriteCount }}</h3>
                 <p class="text-[13px] text-yellow-400 font-bold">Important logs</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Writing Streak</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-fire mr-2"></i> Writing
+                    Streak</p>
                 <h3 class="text-[34px] font-black text-purple-400 mt-2">{{ $writingStreak }}</h3>
                 <p class="text-[13px] text-purple-400 font-bold">
                     {{ $writingStreak === 1 ? 'day' : 'days' }} in a row
@@ -76,7 +81,8 @@
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
             <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-5">
                 <div>
-                    <h3 class="text-[20px] font-extrabold dark:text-white text-gray-900">Timeline View</h3>
+                    <h3 class="text-[20px] font-extrabold dark:text-white text-gray-900"><i class="fas fa-history mr-2"></i>
+                        Timeline View</h3>
                     <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">
                         Search, filter and manage journal entries.
                     </p>
@@ -121,12 +127,13 @@
                     <div class="flex gap-2">
                         <button
                             class="flex-1 px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                            Filter
+                            <i class="fas fa-filter mr-1"></i> Filter
                         </button>
                         @if (request()->hasAny(['search', 'type', 'mood', 'journal_category_id', 'journal_date', 'favorites']))
                             <a href="{{ route('user.journals.index') }}"
                                 class="px-3 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-600">
-                                ✕
+                                <i class="fas fa-times mr-1"></i> Clear
+                            </a>
                             </a>
                         @endif
                     </div>
@@ -137,22 +144,23 @@
             <div class="flex flex-wrap items-center gap-2 mb-5">
                 <a href="{{ route('user.journals.index') }}"
                     class="px-3 py-1.5 rounded-lg text-[12px] font-bold {{ !request()->hasAny(['type', 'mood', 'favorites']) ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white' : 'dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-600' }}">
-                    All
+                    <i class="fas fa-list mr-1"></i> All
                 </a>
                 @foreach ([
-            'daily' => '📝 Daily',
-            'gratitude' => '🙏 Gratitude',
-            'reflection' => '💭 Reflection',
-            'personal_log' => '📔 Personal Log',
-        ] as $val => $label)
+            'daily' => ['icon' => 'fas fa-calendar-day', 'label' => 'Daily'],
+            'gratitude' => ['icon' => 'fas fa-heart', 'label' => 'Gratitude'],
+            'reflection' => ['icon' => 'fas fa-lightbulb', 'label' => 'Reflection'],
+            'personal_log' => ['icon' => 'fas fa-book-open', 'label' => 'Personal Log'],
+        ] as $val => $item)
                     <a href="{{ route('user.journals.index', ['type' => $val]) }}"
                         class="px-3 py-1.5 rounded-lg text-[12px] font-bold {{ request('type') === $val ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white' : 'dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-600' }}">
-                        {{ $label }}
+                        <i class="{{ $item['icon'] }} mr-1.5"></i>
+                        {{ $item['label'] }}
                     </a>
                 @endforeach
                 <a href="{{ route('user.journals.index', ['favorites' => 1]) }}"
                     class="px-3 py-1.5 rounded-lg text-[12px] font-bold {{ request('favorites') ? 'bg-gradient-to-r from-yellow-400 to-orange-400 text-white' : 'dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-600' }}">
-                    ★ Favorites
+                    <i class="fas fa-star mr-2"></i> Favorites
                 </a>
             </div>
 
@@ -187,12 +195,12 @@
                                             {{ $journal->title }}
                                         </h3>
                                         @if ($journal->is_favorite)
-                                            <span class="text-yellow-400 text-[14px]">★</span>
+                                            <span class="text-yellow-400 text-[14px]"><i class="fas fa-star"></i></span>
                                         @endif
                                         @if ($journal->is_private)
                                             <span
                                                 class="px-1.5 py-[2px] rounded text-[10px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-400 text-gray-500">
-                                                🔒 Private
+                                                <i class="fas fa-lock mr-1"></i> Private
                                             </span>
                                         @endif
                                     </div>
@@ -224,7 +232,7 @@
                                 class="flex items-center justify-between mt-4 pt-4 border-t dark:border-white/[0.06] border-black/[0.05]">
                                 <a href="{{ route('user.journals.show', $journal) }}"
                                     class="px-3 py-2 rounded-lg text-[14px] font-bold text-white bg-gradient-to-r from-orange-500 to-pink-500">
-                                    View
+                                    <i class="fas fa-eye mr-1"></i> View
                                 </a>
 
                                 <div class="flex items-center gap-2">
@@ -239,7 +247,7 @@
 
                                     <a href="{{ route('user.journals.edit', $journal) }}"
                                         class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                                        Edit
+                                        <i class="fas fa-edit mr-1"></i> Edit
                                     </a>
 
                                     <form action="{{ route('user.journals.destroy', $journal) }}" method="POST">
@@ -247,7 +255,7 @@
                                         @method('DELETE')
                                         <button onclick="return confirm('Delete this journal entry?')"
                                             class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-red-500/[0.15] bg-red-50 text-red-500">
-                                            Delete
+                                            <i class="fas fa-trash-alt mr-1"></i> Delete
                                         </button>
                                     </form>
                                 </div>

@@ -105,7 +105,7 @@
     {{-- Gratitude Notes --}}
     <div>
         <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
-            🙏 Gratitude Notes
+            <i class="fas fa-heart mr-1"></i> Gratitude Notes
             <span class="font-normal dark:text-gray-500 text-gray-400 ml-1">(optional)</span>
         </label>
         <textarea name="gratitude_notes" rows="3" placeholder="Write 3 things you are grateful for today…"
@@ -117,13 +117,13 @@
         <label class="flex items-center gap-2 text-[14px] font-bold dark:text-gray-300 text-gray-700 cursor-pointer">
             <input type="checkbox" name="is_private" value="1" @checked(old('is_private', $journal->is_private ?? true))
                 class="w-4 h-4 accent-orange-500">
-            🔒 Private
+            <i class="fas fa-lock mr-1"></i> Private
         </label>
 
         <label class="flex items-center gap-2 text-[14px] font-bold dark:text-gray-300 text-gray-700 cursor-pointer">
             <input type="checkbox" name="is_favorite" value="1" @checked(old('is_favorite', $journal->is_favorite ?? false))
                 class="w-4 h-4 accent-yellow-400">
-            ★ Mark as Favorite
+            <i class="fas fa-star mr-1"></i> Mark as Favorite
         </label>
     </div>
 
@@ -131,11 +131,11 @@
     <div class="flex items-center justify-end gap-2 pt-3">
         <a href="{{ route('user.journals.index') }}"
             class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-            Cancel
+            <i class="fas fa-times mr-1"></i> Cancel
         </a>
         <button type="submit"
             class="px-5 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-            Save Journal
+            <i class="fas fa-save mr-1"></i> Save Journal
         </button>
     </div>
 </section>

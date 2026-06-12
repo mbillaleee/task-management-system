@@ -7,7 +7,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    My Subscription
+                    <i class="fas fa-cube mr-2"></i> My Subscription
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Manage your plan, view usage, and explore upgrades.
@@ -105,11 +105,13 @@
                                 <div
                                     class="flex flex-wrap items-center gap-3 mt-2 text-[12px] dark:text-gray-500 text-gray-400">
                                     <span><i class="fas fa-calendar-alt mr-1 text-orange-400"></i>
-                                        Started {{ $currentSubscription->starts_at?->format('M d, Y') ?? 'N/A' }}
+                                        Started
+                                        {{ $currentSubscription->starts_at?->format('M d, Y') ?? 'N/A' }}
                                     </span>
                                     @if ($currentSubscription->ends_at)
                                         <span><i class="fas fa-clock mr-1 text-pink-400"></i>
-                                            Renews {{ $currentSubscription->ends_at->format('M d, Y') }}
+                                            Renews
+                                            {{ $currentSubscription->ends_at->format('M d, Y') }}
                                         </span>
                                     @else
                                         <span><i class="fas fa-infinity mr-1 text-emerald-400"></i> No expiry</span>
@@ -146,7 +148,7 @@
                                 @if ($isFree)
                                     <a href="{{ route('user.pricing') }}"
                                         class="px-4 py-2 rounded-[10px] text-white text-[12px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_12px_rgba(249,115,22,0.35)]">
-                                        ⚡ Upgrade Now
+                                        <i class="fas fa-arrow-up mr-1"></i> Upgrade Now
                                     </a>
                                 @endif
                             </div>
@@ -158,13 +160,13 @@
                         <div class="mt-5 pt-4 border-t dark:border-white/[0.06] border-black/[0.05]">
                             <p
                                 class="text-[11px] font-bold uppercase tracking-wider dark:text-gray-500 text-gray-400 mb-2.5">
-                                Plan Includes
+                                <i class="fas fa-check-circle mr-1"></i> Plan Includes
                             </p>
                             <div class="flex flex-wrap gap-2">
                                 @foreach ($plan->features as $feat)
                                     <span
                                         class="flex items-center gap-1.5 text-[12px] font-semibold px-2.5 py-1 rounded-lg
-                                 dark:bg-white/[0.05] bg-gray-100 dark:text-gray-300 text-gray-600">
+                                         dark:bg-white/[0.05] bg-gray-100 dark:text-gray-300 text-gray-600">
                                         <span style="color:{{ $planColor }}">✓</span> {{ $feat }}
                                     </span>
                                 @endforeach
@@ -184,7 +186,7 @@
                 </p>
                 <a href="{{ route('user.pricing') }}"
                     class="inline-block px-5 py-2.5 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                    View Plans
+                    <i class="fas fa-eye mr-1"></i> View Plans
                 </a>
             </div>
         @endif
@@ -194,7 +196,7 @@
     ═══════════════════════════════════════════════════════════════ --}}
         <div class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
             <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-4">
-                Usage This Month
+                <i class="fas fa-chart-line mr-1"></i> Usage This Month
             </h3>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 @foreach ($usageStats as $stat)
@@ -266,11 +268,11 @@
                 <div class="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-5">
                     <div>
                         <div class="flex items-center gap-2 mb-2">
-                            <span class="text-[24px]">👑</span>
+                            <span class="text-[24px]"><i class="fas fa-crown"></i></span>
                             <span
                                 class="text-[14px] font-bold px-2.5 py-0.5 rounded-full
                                  bg-orange-500/20 text-orange-400 border border-orange-500/30">
-                                Upgrade to Pro
+                                <i class="fas fa-arrow-up mr-1"></i> Upgrade to Pro
                             </span>
                         </div>
                         <h3 class="text-[20px] font-extrabold dark:text-white text-gray-900 mb-1">
@@ -283,7 +285,7 @@
                         <div class="flex flex-wrap gap-3 mt-3">
                             @foreach (['Unlimited tasks & habits', 'Advanced analytics', 'Custom themes', 'Priority support'] as $feat)
                                 <span class="flex items-center gap-1.5 text-[12px] dark:text-gray-300 text-gray-600">
-                                    <span class="text-orange-400">✓</span> {{ $feat }}
+                                    <span class="text-orange-400"><i class="fas fa-check"></i></span> {{ $feat }}
                                 </span>
                             @endforeach
                         </div>
@@ -296,7 +298,7 @@
                           bg-gradient-to-r from-orange-500 to-pink-500
                           shadow-[0_4px_18px_rgba(249,115,22,0.42)]
                           hover:shadow-[0_6px_24px_rgba(249,115,22,0.55)] transition-shadow">
-                            Upgrade Now →
+                            Upgrade Now <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                 </div>
@@ -309,10 +311,13 @@
         @if ($availablePlans->count() > 1)
             <div class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900">Available Plans</h3>
+                    <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900">
+                        <i class="fas fa-list mr-2"></i> Available Plans
+                    </h3>
                     <a href="{{ route('user.pricing') }}"
                         class="text-[13px] font-bold text-orange-400 hover:text-orange-500">
-                        Full comparison <i class="fas fa-arrow-right ml-1 text-[11px]"></i>
+                        <i class="fas fa-sync-alt mr-1"></i> Full comparison <i
+                            class="fas fa-arrow-right ml-1 text-[11px]"></i>
                     </a>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -335,7 +340,7 @@
                                 <div
                                     class="absolute top-3 right-3 px-2 py-0.5 rounded-md text-[10px] font-bold
                             dark:bg-emerald-500/20 bg-emerald-100 dark:text-emerald-400 text-emerald-600">
-                                    ✓ Current
+                                    <i class="fas fa-check"></i> Current
                                 </div>
                             @elseif($plan->is_featured && $plan->badge_label)
                                 <div class="absolute top-3 right-3 px-2 py-0.5 rounded-md text-[10px] font-bold text-white"
@@ -363,7 +368,7 @@
                                     <div
                                         class="w-full py-2 rounded-lg text-center text-[12px] font-bold
                                 dark:bg-emerald-500/10 bg-emerald-50 dark:text-emerald-400 text-emerald-600">
-                                        ✓ Your Current Plan
+                                        <i class="fas fa-check"></i> Your Current Plan
                                     </div>
                                 @elseif($isFree)
                                     <a href="{{ route('user.dashboard') }}"
@@ -399,7 +404,7 @@
         @if ($subscriptionHistory->count() > 0)
             <div class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
                 <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-4">
-                    Subscription History
+                    <i class="fas fa-history mr-2"></i> Subscription History
                 </h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-[13px]">
@@ -407,22 +412,28 @@
                             <tr class="border-b dark:border-white/[0.07] border-black/[0.07]">
                                 <th
                                     class="text-left py-2.5 px-3 font-bold dark:text-gray-400 text-gray-500 text-[12px] uppercase tracking-wider">
-                                    Plan</th>
+                                    <i class="fas fa-box mr-1"></i> Plan
+                                </th>
                                 <th
                                     class="text-left py-2.5 px-3 font-bold dark:text-gray-400 text-gray-500 text-[12px] uppercase tracking-wider">
-                                    Billing</th>
+                                    <i class="fas fa-file-invoice mr-1"></i> Billing
+                                </th>
                                 <th
                                     class="text-left py-2.5 px-3 font-bold dark:text-gray-400 text-gray-500 text-[12px] uppercase tracking-wider">
-                                    Status</th>
+                                    <i class="fas fa-info-circle mr-1"></i> Status
+                                </th>
                                 <th
                                     class="text-left py-2.5 px-3 font-bold dark:text-gray-400 text-gray-500 text-[12px] uppercase tracking-wider">
-                                    Started</th>
+                                    <i class="fas fa-clock mr-1"></i> Started
+                                </th>
                                 <th
                                     class="text-left py-2.5 px-3 font-bold dark:text-gray-400 text-gray-500 text-[12px] uppercase tracking-wider">
-                                    Expires</th>
+                                    <i class="fas fa-calendar-alt mr-1"></i> Expires
+                                </th>
                                 <th
                                     class="text-right py-2.5 px-3 font-bold dark:text-gray-400 text-gray-500 text-[12px] uppercase tracking-wider">
-                                    Paid</th>
+                                    <i class="fas fa-dollar-sign mr-1"></i> Paid
+                                </th>
                             </tr>
                         </thead>
                         <tbody>

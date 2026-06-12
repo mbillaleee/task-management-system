@@ -112,12 +112,12 @@
 
 <label class="flex items-center gap-2 text-[14px] font-bold dark:text-gray-300 text-gray-700 cursor-pointer">
     <input type="checkbox" name="is_active" value="1" id="{{ $prefix }}active" checked>
-    Active Challenge
+    <i class="fas fa-toggle-on"></i> Active Challenge
 </label>
 
 <div class="flex justify-end">
     <button type="submit"
         class="px-5 py-2.5 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-        Save Challenge
+        <i class="fas fa-save"></i> Save Challenge
     </button>
 </div>

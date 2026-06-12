@@ -60,7 +60,7 @@ class CalendarController extends Controller
             'stats'
         ));
     }
-
+ 
     // ─── Weekly View ──────────────────────────────────────────────────────────
     public function week(Request $request)
     {
@@ -80,9 +80,9 @@ class CalendarController extends Controller
             ->get()
             ->groupBy(fn($e) => $e->start_date->format('Y-m-d'));
 
-        // Time slots: 6am → 11pm
+        // Time slots: 12am → 11pm (24 hours)
         $timeSlots = [];
-        for ($h = 6; $h <= 23; $h++) {
+        for ($h = 0; $h <= 23; $h++) {
             $timeSlots[] = Carbon::createFromTime($h, 0)->format('g:i A');
         }
 
@@ -90,8 +90,14 @@ class CalendarController extends Controller
         $nextWeek = $startOfWeek->copy()->addWeek();
 
         return view('user.calendar.week', compact(
-            'date', 'startOfWeek', 'endOfWeek', 'weekDays',
-            'events', 'timeSlots', 'prevWeek', 'nextWeek'
+            'date',
+            'startOfWeek',
+            'endOfWeek',
+            'weekDays',
+            'events',
+            'timeSlots',
+            'prevWeek',
+            'nextWeek'
         ));
     }
 

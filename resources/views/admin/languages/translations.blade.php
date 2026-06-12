@@ -5,7 +5,8 @@
 
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[22px] font-extrabold dark:text-white text-gray-900">{{ $language->title }} Translations</h2>
+                <h2 class="text-[22px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-language"></i>
+                    {{ $language->title }} Translations</h2>
                 <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-0.5">
                     Edit translations for {{ $language->title }} language.
                 </p>
@@ -47,7 +48,7 @@
                     <button type="submit"
                         class="px-6 py-3 rounded-[12px] text-white text-[14px] font-bold
                            bg-gradient-to-r from-orange-500 to-pink-500 shadow-lg hover:shadow-xl transition-all duration-300">
-                        Save Translations
+                        <i class="fas fa-save"></i> Save Translations
                     </button>
                 </div>
 

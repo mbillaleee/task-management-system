@@ -7,7 +7,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Gamification
+                    <i class="fas fa-trophy mr-2"></i> Gamification
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Your XP, levels, badges, challenges and daily rewards.
@@ -19,7 +19,10 @@
                 <button
                     class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)] disabled:opacity-50 disabled:cursor-not-allowed"
                     {{ !$canClaimToday ? 'disabled' : '' }}>
-                    {{ $canClaimToday ? '🎁 Claim Daily Reward' : '✓ Claimed Today' }}
+
+                    <i class="fas {{ $canClaimToday ? 'fa-gift' : 'fa-badge-check' }} mr-1"></i>
+
+                    {{ $canClaimToday ? 'Claim Daily Reward' : 'Reward Claimed' }}
                 </button>
             </form>
         </div>
@@ -41,7 +44,8 @@
         <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 font-bold">Total XP</p>
+                <p class="text-[13px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-star mr-2"></i> Total XP
+                </p>
                 <h3 class="text-[30px] font-black dark:text-white text-gray-900 mt-1">{{ number_format($gamification->xp) }}
                 </h3>
                 <p class="text-[12px] text-orange-400 font-bold">Experience points</p>
@@ -49,14 +53,16 @@
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 font-bold">Current Rank</p>
+                <p class="text-[13px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-crown mr-2"></i> Current
+                    Rank</p>
                 <h3 class="text-[30px] font-black text-pink-400 mt-1">{{ $levelLabel }}</h3>
                 <p class="text-[12px] text-pink-400 font-bold">Level {{ $gamification->level }}</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 font-bold">Streak 🔥</p>
+                <p class="text-[13px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-fire mr-2"></i> Streak
+                </p>
                 <h3 class="text-[30px] font-black text-emerald-400 mt-1">{{ $gamification->streak_days }}</h3>
                 <p class="text-[12px] text-emerald-400 font-bold">
                     days in a row
@@ -68,7 +74,8 @@
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 font-bold">Badges 🏅</p>
+                <p class="text-[13px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-trophy mr-2"></i> Badges
+                </p>
                 <h3 class="text-[30px] font-black text-yellow-400 mt-1">{{ $userBadges->count() }}</h3>
                 <p class="text-[12px] text-yellow-400 font-bold">
                     unlocked
@@ -80,12 +87,13 @@
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 font-bold">Challenges ⚡</p>
+                <p class="text-[13px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-bolt mr-2"></i>
+                    Challenges </p>
                 <h3 class="text-[30px] font-black text-purple-400 mt-1">
                     {{ $userChallenges->where('is_completed', true)->count() }}
                 </h3>
                 <p class="text-[12px] text-purple-400 font-bold">
-                    completed
+                    <i class="fas fa-check mr-1"></i> completed
                     <span class="text-gray-400 font-normal">/ {{ $userChallenges->count() }} joined</span>
                 </p>
             </div>
@@ -96,7 +104,8 @@
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
             <div class="flex justify-between text-[14px] mb-2">
                 <span class="dark:text-gray-400 text-gray-500 font-bold">
-                    Level {{ $gamification->level }} → Level {{ $gamification->level + 1 }}
+                    Level {{ $gamification->level }} <i class="fas fa-arrow-right mx-2"></i> Level
+                    {{ $gamification->level + 1 }}
                     <span class="text-orange-400 ml-1">({{ $levelLabel }})</span>
                 </span>
                 <span class="dark:text-white text-gray-900 font-bold">{{ $levelProgress['progress_pct'] }}%</span>
@@ -130,7 +139,8 @@
                 $gamification->total_journals_written > 0)
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-4">📊 Your Activity</h3>
+                <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-4"><i
+                        class="fas fa-chart-bar mr-2"></i> Your Activity</h3>
                 <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
                     @foreach ([['Tasks', $gamification->total_tasks_completed, '✅', 'text-blue-400'], ['Habits', $gamification->total_habits_completed, '🔁', 'text-green-400'], ['Focus', $gamification->total_focus_sessions, '⏱', 'text-purple-400'], ['Goals', $gamification->total_goals_completed, '🎯', 'text-yellow-400'], ['Journals', $gamification->total_journals_written, '📔', 'text-pink-400']] as [$label, $val, $icon, $color])
                         <div class="text-center dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
@@ -148,7 +158,8 @@
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">🗓 Daily Reward Track</h3>
+                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"><i
+                            class="fas fa-calendar-alt mr-2"></i> Daily Reward Track</h3>
                     <span class="text-[13px] dark:text-gray-500 text-gray-400">
                         Streak: <span class="text-orange-400 font-bold">{{ $gamification->streak_days }} days</span>
                     </span>
@@ -176,9 +187,11 @@
                                 +{{ $reward->xp_reward }} XP
                             </p>
                             @if ($isPast)
-                                <p class="text-[10px] text-emerald-400 font-bold mt-1">✓ Done</p>
+                                <p class="text-[10px] text-emerald-400 font-bold mt-1"><i class="fas fa-check mr-1"></i>
+                                    Done</p>
                             @elseif ($isCurrent)
-                                <p class="text-[10px] text-orange-400 font-bold mt-1 animate-pulse">Today!</p>
+                                <p class="text-[10px] text-orange-400 font-bold mt-1 animate-pulse"><i
+                                        class="fas fa-star mr-1"></i> Today!</p>
                             @endif
                         </div>
                     @endforeach
@@ -193,7 +206,8 @@
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">🏅 My Badges</h3>
+                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"><i class="fas fa-trophy mr-2"></i>
+                        My Badges</h3>
                     <span class="text-[13px] dark:text-gray-500 text-gray-400">
                         {{ $userBadges->count() }} / {{ $badges->count() }} unlocked
                     </span>
@@ -216,7 +230,8 @@
                                         {{ $ub->badge->description }}
                                     </p>
                                 </div>
-                                <span class="text-[11px] font-bold text-emerald-400 shrink-0">✓ Unlocked</span>
+                                <span class="text-[11px] font-bold text-emerald-400 shrink-0"><i
+                                        class="fas fa-check mr-1"></i> Unlocked</span>
                             </div>
                         @endforeach
                     </div>
@@ -232,9 +247,11 @@
                     <div
                         class="{{ $userBadges->count() ? 'pt-4 border-t dark:border-white/[0.06] border-black/[0.05]' : '' }}">
                         @if ($userBadges->count())
-                            <p class="text-[13px] font-bold dark:text-gray-400 text-gray-500 mb-3">🔒 Locked Badges</p>
+                            <p class="text-[13px] font-bold dark:text-gray-400 text-gray-500 mb-3"><i
+                                    class="fas fa-lock mr-2"></i> Locked Badges</p>
                         @else
-                            <p class="text-[13px] font-bold dark:text-gray-400 text-gray-500 mb-3">Earn XP to unlock badges!
+                            <p class="text-[13px] font-bold dark:text-gray-400 text-gray-500 mb-3"><i
+                                    class="fas fa-coins mr-2"></i> Earn XP to unlock badges!
                             </p>
                         @endif
 
@@ -303,7 +320,8 @@
             {{-- My Challenges --}}
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-4">⚡ My Challenges</h3>
+                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-4"><i
+                        class="fas fa-tasks mr-2"></i> My Challenges</h3>
 
                 <div class="space-y-3">
                     @forelse($userChallenges as $uc)
@@ -338,7 +356,7 @@
                                         @if ($uc->is_completed)
                                             <span
                                                 class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full shrink-0">
-                                                ✓ Done
+                                                <i class="fas fa-check mr-1"></i> Done
                                             </span>
                                         @else
                                             <span
@@ -348,7 +366,7 @@
                                             @if ($isAuto)
                                                 <span
                                                     class="text-[10px] font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full shrink-0">
-                                                    ⚡ Auto
+                                                    <i class="fas fa-bolt mr-1"></i> Auto
                                                 </span>
                                             @endif
                                         @endif
@@ -403,7 +421,7 @@
                                         class="w-full px-3 py-2 rounded-lg text-[13px] dark:bg-[#1a1625] bg-white dark:text-white border dark:border-white/[0.1] border-black/[0.1] outline-none">
                                     <button
                                         class="px-4 py-2 rounded-lg text-white text-[13px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shrink-0">
-                                        + Add
+                                        <i class="fas fa-plus mr-1"></i> Add
                                     </button>
                                 </form>
                             @endif
@@ -430,7 +448,8 @@
         @if ($availableChallenges->count())
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-4">🎯 Available Challenges</h3>
+                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-4"><i
+                        class="fas fa-tasks mr-2"></i> Available Challenges</h3>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
                     @foreach ($availableChallenges as $challenge)
@@ -440,8 +459,8 @@
                             <div class="flex items-start justify-between gap-2 mb-1">
                                 <h4 class="text-[15px] font-bold dark:text-white text-gray-900">{{ $challenge->title }}
                                 </h4>
-                                <span class="text-[12px] font-bold text-orange-400 shrink-0">+{{ $challenge->xp_reward }}
-                                    XP</span>
+                                <span class="text-[12px] font-bold text-orange-400 shrink-0">
+                                    <i class="fas fa-coins mr-1"></i> {{ $challenge->xp_reward }} XP</span>
                             </div>
 
                             <p class="text-[13px] dark:text-gray-500 text-gray-400 mb-1">
@@ -458,7 +477,7 @@
                                 </span>
                                 @if ($challenge->end_date)
                                     <span class="text-[11px] text-red-400 font-bold">
-                                        Ends {{ $challenge->end_date->format('d M') }}
+                                        <i class="fas fa-clock mr-1"></i> Ends {{ $challenge->end_date->format('d M') }}
                                     </span>
                                 @endif
                             </div>
@@ -467,7 +486,7 @@
                                 @csrf
                                 <button
                                     class="w-full px-3 py-2 rounded-lg text-[13px] font-bold text-white bg-gradient-to-r from-orange-500 to-pink-500">
-                                    Join Challenge
+                                    <i class="fas fa-tasks mr-1"></i> Join Challenge
                                 </button>
                             </form>
                         </div>

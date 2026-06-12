@@ -55,13 +55,13 @@
      <div class="flex items-center gap-2">
 
          {{-- Search --}}
-         <button type="button" class="top-action-btn">
+         {{-- <button type="button" class="top-action-btn">
              <svg class="w-[17px] h-[17px]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                  stroke-linejoin="round" viewBox="0 0 24 24">
                  <circle cx="11" cy="11" r="8" />
                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
              </svg>
-         </button>
+         </button> --}}
 
          {{-- Notifications --}}
          <a href="{{ route('user.notifications.index') }}"
@@ -123,8 +123,8 @@
 
              <button type="button" id="btnLight" onclick="setTheme('light')"
                  class="theme-action-btn dark:text-gray-400 text-gray-800 dark:bg-transparent bg-white shadow-sm">
-                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
-                     stroke-linecap="round" viewBox="0 0 24 24">
+                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     viewBox="0 0 24 24">
                      <circle cx="12" cy="12" r="5" />
                      <line x1="12" y1="1" x2="12" y2="3" />
                      <line x1="12" y1="21" x2="12" y2="23" />

@@ -6,7 +6,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    My Habits
+                    <i class="fas fa-repeat mr-1"></i> My Habits
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Build consistency with daily and weekly habit tracking.
@@ -16,7 +16,7 @@
             <div class="flex items-center gap-2.5">
                 <a href="{{ route('user.habits.board') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                    Board View
+                    <i class="fas fa-th-large mr-1"></i> Board View
                 </a>
 
                 <a href="{{ route('user.allHabits') }}"
@@ -26,7 +26,7 @@
 
                 <a href="{{ route('user.habits.create') }}"
                     class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                    + Add Habit
+                    <i class="fas fa-plus"></i> Add Habit
                 </a>
             </div>
         </div>
@@ -63,7 +63,7 @@
                         </div>
 
                         <span class="px-2.5 py-[4px] rounded-lg text-[15px] font-bold border {{ $typeClass }}">
-                            {{ ucfirst($habit->type) }}
+                            <i class="fas fa-arrow-up mr-1"></i> {{ ucfirst($habit->type) }}
                         </span>
                     </div>
 
@@ -100,14 +100,14 @@
                         @if ($completed)
                             <span
                                 class="px-2.5 py-[4px] rounded-lg text-[15px] font-bold dark:bg-emerald-500/[0.15] bg-emerald-50 text-emerald-500">
-                                Completed
+                                <i class="fas fa-check mr-1"></i> Completed
                             </span>
                         @else
                             <form action="{{ route('user.habits.toggle', $habit) }}" method="POST">
                                 @csrf
                                 <button
                                     class="px-3 py-2 rounded-lg text-[14px] font-bold text-white bg-gradient-to-r from-orange-500 to-pink-500">
-                                    Mark Done
+                                    <i class="fas fa-check mr-1"></i> Mark Done
                                 </button>
                             </form>
                         @endif
@@ -116,13 +116,13 @@
                     <div class="relative z-10 flex items-center justify-between gap-2 mt-4">
                         <a href="{{ route('user.habits.show', $habit) }}"
                             class="px-3 py-2 rounded-lg text-[14px] font-bold text-white bg-gradient-to-r from-orange-500 to-pink-500">
-                            View
+                            <i class="fas fa-eye mr-1"></i> View
                         </a>
 
                         <div class="flex items-center gap-2">
                             <a href="{{ route('user.habits.edit', $habit) }}"
                                 class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                                Edit
+                                <i class="fas fa-edit mr-1"></i> Edit
                             </a>
 
                             <form action="{{ route('user.habits.destroy', $habit) }}" method="POST">
@@ -130,7 +130,7 @@
                                 @method('DELETE')
                                 <button onclick="return confirm('Delete this habit?')"
                                     class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-red-500/[0.15] bg-red-50 text-red-500">
-                                    Delete
+                                    <i class="fas fa-trash-alt mr-1"></i> Delete
                                 </button>
                             </form>
                         </div>

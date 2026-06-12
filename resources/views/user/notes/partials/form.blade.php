@@ -13,11 +13,10 @@
 
             <div class="mb-5">
                 <label class="block text-[14px] font-bold dark:text-gray-300 text-gray-700 mb-2">
-                    Note Title
+                    <i class="fa-solid fa-sticky-note"></i> Note Title
                 </label>
 
-                <input type="text" name="title"
-                    value="{{ old('title', $note->title ?? '') }}"
+                <input type="text" name="title" value="{{ old('title', $note->title ?? '') }}"
                     placeholder="Enter note title..."
                     class="w-full px-4 py-3 rounded-xl text-[15px] outline-none
                     dark:bg-[#100b18] bg-orange-50/60
@@ -33,11 +32,10 @@
 
             <div>
                 <label class="block text-[14px] font-bold dark:text-gray-300 text-gray-700 mb-2">
-                    Content
+                    <i class="fa-solid fa-align-left"></i> Content
                 </label>
 
-                <textarea name="content" rows="18"
-                    placeholder="Write your note here..."
+                <textarea name="content" rows="18" placeholder="Write your note here..."
                     class="w-full px-4 py-4 rounded-xl text-[15px] leading-[1.8] outline-none resize-y
                     dark:bg-[#100b18] bg-orange-50/60
                     dark:text-gray-200 text-gray-800
@@ -53,16 +51,17 @@
         <!-- Sidebar Settings -->
         <div class="space-y-4">
 
-            <div class="rounded-2xl p-5 dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100">
+            <div
+                class="rounded-2xl p-5 dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100">
                 <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-4">
-                    Organization
+                    <i class="fa-solid fa-folder-open"></i> Organization
                 </h3>
 
                 <div class="space-y-4">
 
                     <div>
                         <label class="block text-[13px] font-bold dark:text-gray-400 text-gray-600 mb-2">
-                            Folder
+                            <i class="fa-solid fa-folder"></i> Folder
                         </label>
 
                         <select name="note_folder_id"
@@ -71,9 +70,8 @@
                             dark:text-gray-300 text-gray-700
                             border dark:border-white/[0.1] border-orange-200">
                             <option value="">No Folder</option>
-                            @foreach($folders as $folder)
-                                <option value="{{ $folder->id }}"
-                                    @selected(old('note_folder_id', $note->note_folder_id ?? '') == $folder->id)>
+                            @foreach ($folders as $folder)
+                                <option value="{{ $folder->id }}" @selected(old('note_folder_id', $note->note_folder_id ?? '') == $folder->id)>
                                     {{ $folder->name }}
                                 </option>
                             @endforeach
@@ -82,7 +80,7 @@
 
                     <div>
                         <label class="block text-[13px] font-bold dark:text-gray-400 text-gray-600 mb-2">
-                            Category
+                            <i class="fa-solid fa-list"></i> Category
                         </label>
 
                         <select name="note_category_id"
@@ -91,9 +89,8 @@
                             dark:text-gray-300 text-gray-700
                             border dark:border-white/[0.1] border-orange-200">
                             <option value="">No Category</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}"
-                                    @selected(old('note_category_id', $note->note_category_id ?? '') == $category->id)>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" @selected(old('note_category_id', $note->note_category_id ?? '') == $category->id)>
                                     {{ $category->name }}
                                 </option>
                             @endforeach
@@ -102,11 +99,10 @@
 
                     <div>
                         <label class="block text-[13px] font-bold dark:text-gray-400 text-gray-600 mb-2">
-                            Tags
+                            <i class="fa-solid fa-tags"></i> Tags
                         </label>
 
-                        <input type="text" name="tags"
-                            value="{{ old('tags', $selectedTags) }}"
+                        <input type="text" name="tags" value="{{ old('tags', $selectedTags) }}"
                             placeholder="work, idea, personal"
                             class="w-full px-4 py-3 rounded-xl text-[14px] outline-none
                             dark:bg-[#100b18] bg-orange-50/60
@@ -120,16 +116,17 @@
                 </div>
             </div>
 
-            <div class="rounded-2xl p-5 dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100">
+            <div
+                class="rounded-2xl p-5 dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100">
                 <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-4">
-                    Note Settings
+                    <i class="fa-solid fa-cog"></i> Note Settings
                 </h3>
 
                 <div class="space-y-4">
 
                     <div>
                         <label class="block text-[13px] font-bold dark:text-gray-400 text-gray-600 mb-2">
-                            Type
+                            <i class="fa-solid fa-file-alt"></i> Type
                         </label>
 
                         <select name="type"
@@ -148,7 +145,7 @@
 
                     <div>
                         <label class="block text-[13px] font-bold dark:text-gray-400 text-gray-600 mb-2">
-                            Status
+                            <i class="fa-solid fa-flag"></i> Status
                         </label>
 
                         <select name="status"
@@ -157,20 +154,20 @@
                             dark:text-gray-300 text-gray-700
                             border dark:border-white/[0.1] border-orange-200">
                             <option value="draft" @selected(old('status', $note->status ?? 'draft') == 'draft')>
-                                Draft
+                                <i class="fa-solid fa-clock"></i> Draft
                             </option>
                             <option value="published" @selected(old('status', $note->status ?? '') == 'published')>
-                                Published
+                                <i class="fa-solid fa-paper-plane"></i> Published
                             </option>
                             <option value="archived" @selected(old('status', $note->status ?? '') == 'archived')>
-                                Archived
+                                <i class="fa-solid fa-archive"></i> Archived
                             </option>
                         </select>
                     </div>
 
                     <label class="flex items-center justify-between gap-3 cursor-pointer">
                         <span class="text-[14px] font-bold dark:text-gray-300 text-gray-700">
-                            Pin Note
+                            <i class="fa-solid fa-thumbtack"></i> Pin Note
                         </span>
 
                         <input type="checkbox" name="is_pinned" value="1"
@@ -180,7 +177,7 @@
 
                     <label class="flex items-center justify-between gap-3 cursor-pointer">
                         <span class="text-[14px] font-bold dark:text-gray-300 text-gray-700">
-                            Add to Favorite
+                            <i class="fa-solid fa-heart"></i> Add to Favorite
                         </span>
 
                         <input type="checkbox" name="is_favorite" value="1"

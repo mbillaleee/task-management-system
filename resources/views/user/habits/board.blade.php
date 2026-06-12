@@ -6,7 +6,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Habit Board
+                    <i class="fas fa-th-large mr-1"></i> Habit Board
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Manage habits by daily and weekly frequency.
@@ -16,12 +16,12 @@
             <div class="flex gap-2">
                 <a href="{{ route('user.habits.index') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                    List View
+                    <i class="fas fa-list mr-1"></i> List View
                 </a>
 
                 <a href="{{ route('user.habits.create') }}"
                     class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                    + Add Habit
+                    <i class="fas fa-plus mr-1"></i> Add Habit
                 </a>
             </div>
         </div>
@@ -55,39 +55,39 @@
 
                                     <span
                                         class="text-[12px] font-bold {{ $habit->type === 'positive' ? 'text-emerald-500' : 'text-red-500' }}">
-                                        {{ ucfirst($habit->type) }}
+                                        <i class="fas fa-arrow-up mr-1"></i> {{ ucfirst($habit->type) }}
                                     </span>
                                 </div>
 
                                 <div class="flex flex-wrap gap-1.5 mt-3">
                                     <span
                                         class="px-2 py-[3px] rounded-md text-[11px] font-semibold dark:bg-white/[0.06] bg-white dark:text-gray-300 text-gray-600">
-                                        {{ $habit->category?->name ?? 'General' }}
+                                        <i class="fas fa-folder mr-1"></i> {{ $habit->category?->name ?? 'General' }}
                                     </span>
 
                                     <span
                                         class="px-2 py-[3px] rounded-md text-[11px] font-semibold dark:bg-orange-500/[0.15] bg-orange-50 text-orange-500">
-                                        🔥 {{ $habit->streak?->current_streak ?? 0 }} streak
+                                        <i class="fas fa-fire mr-1"></i> {{ $habit->streak?->current_streak ?? 0 }} streak
                                     </span>
                                 </div>
 
                                 <div class="flex items-center justify-between mt-3">
                                     @if ($habit->todayLog?->is_completed)
                                         <span class="text-[12px] font-bold text-emerald-500">
-                                            Completed Today
+                                            <i class="fas fa-check-circle mr-1"></i> Completed Today
                                         </span>
                                     @else
                                         <form action="{{ route('user.habits.toggle', $habit) }}" method="POST">
                                             @csrf
                                             <button class="text-[12px] font-bold text-orange-400">
-                                                Mark Complete
+                                                <i class="fas fa-check mr-1"></i> Mark Complete
                                             </button>
                                         </form>
                                     @endif
 
                                     <a href="{{ route('user.habits.show', $habit) }}"
                                         class="text-[12px] font-bold text-pink-500">
-                                        View
+                                        <i class="fas fa-eye mr-1"></i> View
                                     </a>
                                 </div>
                             </div>

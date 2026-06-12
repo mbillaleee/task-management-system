@@ -7,7 +7,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">
-                    Subscription Plans
+                    <i class="fas fa-list"></i> Subscription Plans
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Manage pricing tiers, features, and subscriber access.
@@ -20,7 +20,7 @@
                 </a>
                 <button onclick="openCreateModal()"
                     class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                    + New Plan
+                    <i class="fas fa-plus"></i> New Plan
                 </button>
             </div>
         </div>
@@ -97,7 +97,7 @@
                     started.</p>
                 <button onclick="openCreateModal()"
                     class="mt-4 px-5 py-2.5 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                    + Create Plan
+                    <i class="fas fa-plus"></i> Create Plan
                 </button>
             </div>
         @else
@@ -212,14 +212,14 @@
                             <div class="flex gap-2">
                                 <button type="button" onclick='openEditModal(@json($plan))'
                                     class="px-3 py-1.5 rounded-lg text-[13px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                                    Edit
+                                    <i class="fas fa-edit"></i> Edit
                                 </button>
                                 <form action="{{ route('admin.subscriptions.destroy', $plan) }}" method="POST"
                                     onsubmit="return confirm('Delete plan {{ $plan->name }}? This cannot be undone.')">
                                     @csrf @method('DELETE')
                                     <button
                                         class="px-3 py-1.5 rounded-lg text-[13px] font-bold dark:bg-red-500/[0.15] bg-red-50 text-red-500">
-                                        Delete
+                                        <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </form>
                             </div>
@@ -237,7 +237,8 @@
             <div
                 class="w-full max-w-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-6 my-auto">
                 <div class="flex justify-between items-center mb-5">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">Create Subscription Plan</h3>
+                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-plus"></i> Create
+                        Subscription Plan</h3>
                     <button onclick="closeCreateModal()"
                         class="dark:text-gray-400 text-gray-500 hover:text-gray-700 dark:hover:text-white text-xl">✕</button>
                 </div>
@@ -256,7 +257,8 @@
             <div
                 class="w-full max-w-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-6 my-auto">
                 <div class="flex justify-between items-center mb-5">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">Edit Subscription Plan</h3>
+                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-edit"></i> Edit
+                        Subscription Plan</h3>
                     <button onclick="closeEditModal()"
                         class="dark:text-gray-400 text-gray-500 hover:text-gray-700 dark:hover:text-white text-xl">✕</button>
                 </div>

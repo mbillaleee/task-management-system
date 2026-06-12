@@ -28,16 +28,16 @@
                             class="px-3 py-1 rounded-lg text-[12px] font-bold
                         dark:bg-orange-500/[0.14] bg-orange-50 text-orange-500
                         border dark:border-orange-500/[0.22] border-orange-200">
-                            {{ ucfirst($note->status) }}
+                            <i class="fa-solid fa-info-circle"></i> {{ ucfirst($note->status) }}
                         </span>
                     </div>
 
                     <h1 class="text-[34px] sm:text-[42px] font-extrabold leading-[1.1] dark:text-white text-gray-900">
-                        {{ $note->title }}
+                        <i class="fa-solid fa-sticky-note"></i> {{ $note->title }}
                     </h1>
 
                     <p class="text-[14px] dark:text-gray-500 text-gray-500 mt-3">
-                        Last edited:
+                        <i class="fa-solid fa-clock"></i> Last edited:
                         {{ $note->last_edited_at ? $note->last_edited_at->format('d M Y, h:i A') : $note->updated_at->format('d M Y, h:i A') }}
                     </p>
                 </div>
@@ -47,14 +47,14 @@
                         class="px-5 py-3 rounded-xl text-[14px] font-bold
                     dark:text-white text-gray-800 border dark:border-white/[0.14] border-orange-200
                     dark:bg-white/[0.03] bg-white/70">
-                        ← Back
+                        <i class="fa-solid fa-arrow-left"></i> Back
                     </a>
 
                     <a href="{{ route('user.notes.edit', $note) }}"
                         class="px-5 py-3 rounded-xl text-white text-[14px] font-bold
                     bg-gradient-to-r from-orange-500 to-pink-500
                     shadow-[0_4px_18px_rgba(249,115,22,.35)]">
-                        Edit Note
+                        <i class="fa-solid fa-edit"></i> Edit Note
                     </a>
                 </div>
             </div>
@@ -74,7 +74,7 @@
 
                     <div class="prose max-w-none dark:prose-invert">
                         <div class="text-[15px] leading-[1.9] dark:text-gray-300 text-gray-700 whitespace-pre-line">
-                            {{ $note->content ?: 'No content added yet.' }}
+                            <i class="fa-solid fa-align-left"></i> {{ $note->content ?: 'No content added yet.' }}
                         </div>
                     </div>
                 </div>
@@ -140,8 +140,8 @@
                                     <button type="submit" title="Remove tag"
                                         onclick="return confirm('Remove tag #{{ $tag->name }}?')"
                                         class="text-[14px] leading-none dark:text-gray-600 text-gray-400
-                                    hover:text-red-400 transition ml-0.5 opacity-0 group-hover:opacity-100">
-                                        ×
+                                    hover:text-red-400 transition ml-0.5 opacity-0- group-hover:opacity-100">
+                                        <i class="fa-solid fa-xmark text-xl- text-red-900"></i>
                                     </button>
                                 </form>
                             </div>
@@ -163,7 +163,7 @@
                         <button type="submit"
                             class="px-3 py-2 rounded-lg text-white text-[13px] font-bold
                         bg-gradient-to-r from-orange-500 to-pink-500 shrink-0">
-                            + Add
+                            <i class="fa-solid fa-plus"></i> Add
                         </button>
                     </form>
                     <p class="text-[11px] dark:text-gray-600 text-gray-400 mt-1.5">
@@ -179,7 +179,7 @@
                             class="w-full px-4 py-3 rounded-xl text-[14px] font-bold
                         dark:text-white text-gray-800 border dark:border-white/[0.12] border-orange-200
                         dark:bg-white/[0.03] bg-white">
-                            {{ $note->is_pinned ? 'Unpin Note' : 'Pin Note' }}
+                            <i class="fa-solid fa-thumbtack"></i> {{ $note->is_pinned ? 'Unpin Note' : 'Pin Note' }}
                         </button>
                     </form>
 
@@ -199,7 +199,7 @@
                         <button onclick="return confirm('Delete this note?')"
                             class="w-full px-4 py-3 rounded-xl text-[14px] font-bold
                         bg-red-500/10 text-red-500 border border-red-500/20">
-                            Delete Note
+                            <i class="fa-solid fa-trash-can"></i> Delete Note
                         </button>
                     </form>
                 </div>

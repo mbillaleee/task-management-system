@@ -36,45 +36,23 @@
 
      <!-- Center: Nav links -->
      <nav class="hidden md:flex items-center gap-6">
-         <a href="#"
-             class="text-[14px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Features</a>
-         <a href="#"
-             class="text-[14px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Tools</a>
-         <a href="#"
-             class="text-[14px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Pricing</a>
-         <a href="#"
-             class="text-[14px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">About</a>
-         <a href="#"
-             class="text-[14px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Changelog</a>
+         {{-- <a href="#" class="text-[14px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Features</a> --}}
 
-         <a href="{{ route('admin.clear') }}"
+         {{-- <a href="{{ route('admin.clear') }}"
              class="text-[14px] font-medium dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors no-underline">Cache
-             Clear</a>
+             Clear</a> --}}
      </nav>
 
      <!-- Right: icons + toggle -->
      <div class="flex items-center gap-2">
          <!-- Search -->
-         <button
+         <a href="{{ route('admin.clear') }}"
              class="w-[34px] h-[34px] flex items-center justify-center rounded-[8px] border-none bg-transparent cursor-pointer
-                        dark:text-gray-400 text-gray-500 dark:hover:bg-white/[0.06] hover:bg-black/[0.05] dark:hover:text-white hover:text-gray-900 transition-colors">
-             <svg class="w-[17px] h-[17px]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                 stroke-linejoin="round" viewBox="0 0 24 24">
-                 <circle cx="11" cy="11" r="8" />
-                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
-             </svg>
-         </button>
-         <!-- Bell -->
-         <button
-             class="relative w-[34px] h-[34px] flex items-center justify-center rounded-[8px] border-none bg-transparent cursor-pointer dark:text-gray-400 text-gray-500 dark:hover:bg-white/[0.06] hover:bg-black/[0.05] dark:hover:text-white hover:text-gray-900 transition-colors">
-             <svg class="w-[17px] h-[17px]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                 stroke-linejoin="round" viewBox="0 0 24 24">
-                 <path
-                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-             </svg>
-             <span
-                 class="absolute top-[7px] right-[7px] w-[7px] h-[7px] bg-orange-500 rounded-full border-[1.5px] dark:border-[#0d0b14] border-[#f0e8dc]"></span>
-         </button>
+    dark:text-gray-400 text-gray-500 dark:hover:bg-white/[0.06] hover:bg-black/[0.05]
+    dark:hover:text-orange-400 hover:text-orange-500 transition-colors"
+             title="Clear Cache">
+             <i class="fas fa-rotate-right"></i>
+         </a>
 
          <div class="relative inline-block text-left">
              <!-- Language Button -->

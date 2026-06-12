@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Focus Mode</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Free CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body class="min-h-screen bg-[#0f0c16] text-white overflow-hidden">
@@ -18,7 +20,7 @@
 
             <div>
                 <p class="text-[14px] text-gray-500 font-bold uppercase tracking-[3px]">
-                    Distraction Free Focus Mode
+                    <i class="fas fa-ban mr-2"></i> Distraction Free Focus Mode
                 </p>
 
                 <h1 class="text-[32px] md:text-[42px] font-extrabold mt-3">
@@ -39,10 +41,11 @@
 
                 <div class="relative z-10">
                     <h2 id="timerText" class="text-[54px] md:text-[72px] font-extrabold tracking-[-2px]">
+                        <i class="fas fa-clock mr-2"></i>
                         {{ str_pad($focus->duration_minutes, 2, '0', STR_PAD_LEFT) }}:00
                     </h2>
                     <p class="text-[14px] text-gray-500 font-bold mt-2">
-                        {{ ucfirst($focus->status) }}
+                        <i class="fas fa-clock mr-2"></i> {{ ucfirst($focus->status) }}
                     </p>
                 </div>
             </div>
@@ -50,22 +53,22 @@
             <div class="flex flex-wrap justify-center gap-3">
                 <button onclick="startTimer()"
                     class="px-6 py-3 rounded-[12px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                    Start
+                    <i class="fas fa-play mr-2"></i> Start
                 </button>
 
                 <button onclick="pauseTimer()"
                     class="px-6 py-3 rounded-[12px] text-[14px] font-bold bg-white/[0.07] text-gray-300">
-                    Pause
+                    <i class="fas fa-pause mr-2"></i> Pause
                 </button>
 
                 <button onclick="resetTimer()"
                     class="px-6 py-3 rounded-[12px] text-[14px] font-bold bg-white/[0.07] text-gray-300">
-                    Reset
+                    <i class="fas fa-redo mr-2"></i> Reset
                 </button>
 
                 <a href="{{ route('user.focus.show', $focus->id) }}"
                     class="px-6 py-3 rounded-[12px] text-[14px] font-bold bg-red-500/[0.15] text-red-400">
-                    Exit
+                    <i class="fas fa-times mr-2"></i> Exit
                 </a>
             </div>
 

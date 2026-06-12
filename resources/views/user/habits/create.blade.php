@@ -7,7 +7,7 @@
         <div class="flex items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Create Habit
+                    <i class="fas fa-plus mr-1"></i> Create Habit
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Add a positive or negative habit with daily or weekly frequency.
@@ -16,7 +16,7 @@
             <a href="{{ route('user.habits.index') }}"
                 class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white
                 dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                Back
+                <i class="fas fa-arrow-left mr-1"></i> Back
             </a>
         </div>
 
@@ -50,7 +50,7 @@
                     <button type="submit"
                         class="flex-shrink-0 px-4 py-2 rounded-[8px] text-[13px] font-bold text-white
                         bg-gradient-to-r from-orange-500 to-pink-500 whitespace-nowrap">
-                        + Add
+                        <i class="fas fa-plus mr-1"></i> Add
                     </button>
                 </div>
             </form>

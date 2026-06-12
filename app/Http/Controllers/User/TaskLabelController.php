@@ -43,6 +43,7 @@ class TaskLabelController extends Controller
 
     public function destroy(TaskLabel $taskLabel)
     {
+        
         abort_if($taskLabel->user_id !== auth()->id(), 403);
 
         $taskLabel->delete();

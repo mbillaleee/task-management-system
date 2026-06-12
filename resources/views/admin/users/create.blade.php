@@ -8,7 +8,8 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Create New User</h2>
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-user-plus"></i> Create
+                    New User</h2>
                 <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-1">
                     Add a new user account and assign roles with a clean admin experience.
                 </p>

@@ -108,13 +108,13 @@
         <label
             class="px-3 py-2 rounded-[10px] text-[14px] font-bold cursor-pointer dark:bg-white/[0.06] bg-gray-100 dark:text-gray-300 text-gray-600">
             <input type="checkbox" name="fullscreen_mode" value="1" class="mr-1.5" @checked(old('fullscreen_mode', $focus->fullscreen_mode ?? false))>
-            Fullscreen Focus Mode
+            <i class="fas fa-expand mr-2"></i> Fullscreen Focus Mode
         </label>
 
         <label
             class="px-3 py-2 rounded-[10px] text-[14px] font-bold cursor-pointer dark:bg-white/[0.06] bg-gray-100 dark:text-gray-300 text-gray-600">
             <input type="checkbox" name="distraction_free" value="1" class="mr-1.5" @checked(old('distraction_free', $focus->distraction_free ?? false))>
-            Distraction-Free UI
+            <i class="fas fa-ban mr-2"></i> Distraction-Free UI
         </label>
     </div>
 
@@ -122,13 +122,13 @@
         <a href="{{ route('user.focus.index') }}"
             class="px-4 py-2 rounded-[10px] text-[14px] font-bold
             dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-            Cancel
+            <i class="fas fa-times mr-2"></i> Cancel
         </a>
 
         <button type="submit"
             class="px-5 py-2 rounded-[10px] text-white text-[14px] font-bold
             bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-            Save Focus
+            <i class="fas fa-save mr-2"></i> Save Focus
         </button>
     </div>
 

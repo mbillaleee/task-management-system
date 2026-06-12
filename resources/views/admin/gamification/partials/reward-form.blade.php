@@ -30,6 +30,6 @@
 <div class="flex justify-end">
     <button type="submit"
         class="px-5 py-2.5 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-        Save Reward
+        <i class="fas fa-save"></i> Save Reward
     </button>
 </div>

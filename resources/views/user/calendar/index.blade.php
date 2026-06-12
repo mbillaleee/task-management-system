@@ -7,10 +7,10 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Calendar
+                    <i class="fas fa-calendar-alt mr-2"></i> Calendar
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
-                    Plan events, schedule blocks, and manage your time.
+                    <i class="fas fa-info-circle mr-1"></i> Plan events, schedule blocks, and manage your time.
                 </p>
             </div>
             <div class="flex flex-wrap items-center gap-2.5">
@@ -18,27 +18,24 @@
                 <div class="flex items-center dark:bg-white/[0.06] bg-black/[0.05] rounded-[10px] p-1 gap-1">
                     <a href="{{ route('user.calendar.index', ['year' => $year, 'month' => $month]) }}"
                         class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 text-white">
-                        Month
+                        <i class="fas fa-calendar mr-1"></i> Month
                     </a>
                     <a href="{{ route('user.calendar.week') }}"
                         class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
-                        Week
+                        <i class="fas fa-calendar-week mr-1"></i> Week
                     </a>
                     <a href="{{ route('user.calendar.day') }}"
                         class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
-                        Day
+                        <i class="fas fa-calendar-day mr-1"></i> Day
                     </a>
                     <a href="{{ route('user.calendar.timeline') }}"
                         class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
-                        Timeline
+                        <i class="fas fa-list mr-1"></i> Timeline
                     </a>
                 </div>
                 <button onclick="openCreateModal()"
                     class="flex items-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                    </svg>
-                    Add Event
+                    <i class="fas fa-plus mr-1"></i> Add Event
                 </button>
             </div>
         </div>
@@ -131,8 +128,9 @@
                             </span>
                             @if ($dayEvents->count() > 0)
                                 <span
-                                    class="text-[10px] font-bold dark:text-gray-500 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    +
+                                    class="text-[10px] font-bold dark:text-gray-500 text-gray-400 opacity-100 group-hover:opacity-100 transition-opacity">
+                                    <i class="fas fa-plus mr-1"></i> {{ $dayEvents->count() }}
+                                    {{ Str::plural('event', $dayEvents->count()) }}
                                 </span>
                             @endif
                         </div>
@@ -186,7 +184,7 @@
 
                             @if ($dayEvents->count() > 3)
                                 <div class="text-[11px] font-bold dark:text-gray-500 text-gray-400 px-1.5">
-                                    +{{ $dayEvents->count() - 3 }} more
+                                    <i class="fas fa-plus mr-1"></i> {{ $dayEvents->count() - 3 }} more
                                 </div>
                             @endif
                         </div>

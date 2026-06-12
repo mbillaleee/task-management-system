@@ -7,7 +7,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Features
+                    <i class="fa-solid fa-star"></i> Features
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Explore all powerful tools designed to improve your productivity.
@@ -17,7 +17,7 @@
             <a href="{{ route('user.tasks.create') }}"
                 class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[14px] font-bold
             bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                + Start Planning
+                <i class="fa-solid fa-plus"></i> Start Planning
             </a>
         </div>
 
@@ -40,7 +40,7 @@
                     class="text-[28px] sm:text-[36px] md:text-[46px] leading-tight font-extrabold tracking-[-1.5px] mt-5 dark:text-white text-gray-900">
                     One system. <br>
                     <span class="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">
-                        Infinite potential.
+                        <i class="fa-solid fa-infinity"></i> Infinite potential.
                     </span>
                 </h1>
 
@@ -52,13 +52,13 @@
                     <a href="{{ route('user.tasks.index') }}"
                         class="px-5 py-2.5 rounded-[10px] text-white text-[14px] font-bold
                     bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                        View Tasks
+                        <i class="fa-solid fa-tasks"></i> View Tasks
                     </a>
 
-                    <a href="#feature-list"
+                    <a href="{{ route('user.habits.index') }}"
                         class="px-5 py-2.5 rounded-[10px] text-[14px] font-bold
                     dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                        See Features
+                        <i class="fa-solid fa-list"></i> Habits
                     </a>
                 </div>
             </div>

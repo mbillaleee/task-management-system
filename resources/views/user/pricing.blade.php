@@ -7,7 +7,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Pricing
+                    <i class="fas fa-tag mr-2"></i> Pricing
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Choose the right plan for your productivity journey.
@@ -18,11 +18,11 @@
             <div class="flex items-center gap-2 p-1 rounded-[12px] dark:bg-white/[0.06] bg-gray-100">
                 <button type="button" id="monthlyBtn" onclick="setBillingCycle('monthly')"
                     class="px-4 py-2 rounded-[10px] text-[12px] font-bold text-white bg-gradient-to-r from-orange-500 to-pink-500 transition-all">
-                    Monthly
+                    <i class="fas fa-calendar-alt mr-1"></i> Monthly
                 </button>
                 <button type="button" id="yearlyBtn" onclick="setBillingCycle('yearly')"
                     class="px-4 py-2 rounded-[10px] text-[12px] font-bold dark:text-gray-400 text-gray-500 transition-all">
-                    Yearly
+                    <i class="fas fa-calendar-check mr-1"></i> Yearly
                     <span
                         class="ml-1 px-1.5 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/20 text-emerald-400">Save</span>
                 </button>
@@ -51,9 +51,10 @@
                         <p class="text-[12px] dark:text-gray-400 text-gray-500 mt-0.5">
                             {{ ucfirst($currentSubscription->billing_cycle) }} billing
                             @if ($currentSubscription->ends_at)
-                                · Renews {{ $currentSubscription->ends_at->format('M d, Y') }}
+                                <i class="fas fa-sync-alt mr-1"></i> Renews
+                                {{ $currentSubscription->ends_at->format('M d, Y') }}
                             @endif
-                            · <span
+                            <i class="fas fa-info-circle mr-1"></i> <span
                                 class="font-bold
                             {{ $currentSubscription->status === 'active' ? 'text-emerald-400' : 'text-blue-400' }}">
                                 {{ ucfirst($currentSubscription->status) }}
@@ -64,7 +65,7 @@
                 <div class="relative z-10 flex-shrink-0">
                     <span
                         class="px-3 py-1.5 rounded-lg text-[12px] font-bold dark:bg-white/[0.07] bg-white/80 dark:text-gray-300 text-gray-600 border dark:border-white/[0.08] border-black/[0.08]">
-                        Current Plan
+                        <i class="fas fa-star mr-1"></i> Current Plan
                     </span>
                 </div>
             </div>
@@ -79,7 +80,7 @@
             <div class="relative z-10 max-w-2xl">
                 <span
                     class="px-3 py-1 rounded-full text-[11px] font-bold bg-orange-500/[0.15] text-orange-400 border border-orange-500/20">
-                    Simple & Transparent Pricing
+                    <i class="fas fa-info-circle mr-1"></i> Simple & Transparent Pricing
                 </span>
                 <h1
                     class="text-[24px] sm:text-[32px] md:text-[44px] leading-tight font-extrabold tracking-[-1.4px] mt-5 dark:text-white text-gray-900">
@@ -100,7 +101,8 @@
             <div
                 class="p-12 text-center rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07]">
                 <div class="text-4xl mb-3">💎</div>
-                <p class="text-[16px] font-bold dark:text-white text-gray-900">Plans coming soon</p>
+                <p class="text-[16px] font-bold dark:text-white text-gray-900"><i class="fas fa-info-circle mr-1"></i> Plans
+                    coming soon</p>
                 <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">Our pricing tiers are being set up. Check back
                     shortly.</p>
             </div>
@@ -152,7 +154,7 @@
                             <div
                                 class="absolute top-4 right-4 px-2.5 py-[4px] rounded-lg text-[11px] font-bold z-10
                             bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                                ✓ Current
+                                <i class="fas fa-check mr-1"></i> Current
                             </div>
                         @endif
 
@@ -205,7 +207,8 @@
                                             <div class="mt-1">
                                                 <span
                                                     class="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">
-                                                    Save ${{ number_format($savings, 2) }} vs monthly
+                                                    <i class="fas fa-save mr-1"></i> Save ${{ number_format($savings, 2) }}
+                                                    vs monthly
                                                 </span>
                                             </div>
                                         @endif
@@ -218,7 +221,7 @@
                                 <div
                                     class="mb-6 block text-center px-4 py-2.5 rounded-[10px] text-[12.5px] font-bold
                                 bg-emerald-500/10 text-emerald-400 border border-emerald-500/25">
-                                    ✓ Your Current Plan
+                                    <i class="fas fa-check mr-1"></i> Your Current Plan
                                 </div>
                             @elseif($isFree)
                                 <a href="{{ route('user.dashboard') }}"
@@ -276,7 +279,8 @@
                                 @foreach ($limitLines as $line)
                                     <div class="flex items-center gap-2.5">
                                         <span
-                                            class="{{ $isFeatured ? 'text-orange-400' : 'text-emerald-400' }} text-[13px] flex-shrink-0">✓</span>
+                                            class="{{ $isFeatured ? 'text-orange-400' : 'text-emerald-400' }} text-[13px] flex-shrink-0"><i
+                                                class="fas fa-check"></i></span>
                                         <p
                                             class="text-[12.5px] {{ $isFeatured ? 'dark:text-gray-300 text-gray-600' : 'dark:text-gray-400 text-gray-500' }}">
                                             {{ $line }}
@@ -300,7 +304,8 @@
                                     @if ($plan->$flag)
                                         <div class="flex items-center gap-2.5">
                                             <span
-                                                class="{{ $isFeatured ? 'text-orange-400' : 'text-emerald-400' }} text-[13px] flex-shrink-0">✓</span>
+                                                class="{{ $isFeatured ? 'text-orange-400' : 'text-emerald-400' }} text-[13px] flex-shrink-0"><i
+                                                    class="fas fa-check"></i></span>
                                             <p
                                                 class="text-[12.5px] {{ $isFeatured ? 'dark:text-gray-300 text-gray-600' : 'dark:text-gray-400 text-gray-500' }}">
                                                 {{ $label }}
@@ -314,7 +319,8 @@
                                     @foreach ($plan->features as $feat)
                                         <div class="flex items-center gap-2.5">
                                             <span
-                                                class="{{ $isFeatured ? 'text-orange-400' : 'text-emerald-400' }} text-[13px] flex-shrink-0">✓</span>
+                                                class="{{ $isFeatured ? 'text-orange-400' : 'text-emerald-400' }} text-[13px] flex-shrink-0"><i
+                                                    class="fas fa-check"></i></span>
                                             <p
                                                 class="text-[12.5px] {{ $isFeatured ? 'dark:text-gray-300 text-gray-600' : 'dark:text-gray-400 text-gray-500' }}">
                                                 {{ $feat }}
@@ -326,7 +332,8 @@
                                 {{-- Light/dark mode always --}}
                                 <div class="flex items-center gap-2.5">
                                     <span
-                                        class="{{ $isFeatured ? 'text-orange-400' : 'text-emerald-400' }} text-[13px] flex-shrink-0">✓</span>
+                                        class="{{ $isFeatured ? 'text-orange-400' : 'text-emerald-400' }} text-[13px] flex-shrink-0"><i
+                                            class="fas fa-check"></i></span>
                                     <p
                                         class="text-[12.5px] {{ $isFeatured ? 'dark:text-gray-300 text-gray-600' : 'dark:text-gray-400 text-gray-500' }}">
                                         Light & dark mode
@@ -356,10 +363,10 @@
                                     <th
                                         class="px-4 py-3 text-center font-extrabold
                                     {{ $plan->is_featured ? 'dark:text-orange-400 text-orange-500' : 'dark:text-white text-gray-900' }}">
-                                        {{ $plan->icon ?? '' }} {{ $plan->name }}
+                                        <i class="fas fa-check mr-1"></i> {{ $plan->icon ?? '' }} {{ $plan->name }}
                                         @if ($currentPlanId === $plan->id)
-                                            <span class="block text-[10px] font-bold text-emerald-400 mt-0.5">✓
-                                                Current</span>
+                                            <span class="block text-[10px] font-bold text-emerald-400 mt-0.5"><i
+                                                    class="fas fa-check mr-1"></i> Current</span>
                                         @endif
                                     </th>
                                 @endforeach
@@ -391,9 +398,11 @@
                                         <td class="px-4 py-2.5 text-center">
                                             @if (!empty($row['bool']))
                                                 @if ($plan->{$row['field']})
-                                                    <span class="text-emerald-400 font-bold">✓</span>
+                                                    <span class="text-emerald-400 font-bold"><i
+                                                            class="fas fa-check"></i></span>
                                                 @else
-                                                    <span class="dark:text-gray-600 text-gray-300">—</span>
+                                                    <span class="dark:text-gray-600 text-gray-300"><i
+                                                            class="fas fa-times"></i></span>
                                                 @endif
                                             @else
                                                 @php $val = $plan->{$row['field']} ?? -1; @endphp
@@ -422,7 +431,7 @@
                     @foreach (['Task management with labels and subtasks', 'Habit streak and daily completion tracking', 'Focus sessions and productivity insights', 'XP progress, levels and activity history'] as $item)
                         <div
                             class="flex items-start gap-3 py-2 border-b last:border-b-0 dark:border-white/[0.06] border-black/[0.05]">
-                            <span class="text-orange-400 flex-shrink-0">✓</span>
+                            <span class="text-orange-400 flex-shrink-0"><i class="fas fa-check"></i> </span>
                             <p class="text-[12.5px] dark:text-gray-400 text-gray-500">{{ $item }}</p>
                         </div>
                     @endforeach
@@ -431,7 +440,7 @@
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[15px] font-bold dark:text-white text-gray-900 mb-4">Frequently Asked</h3>
+                <h3 class="text-[15px] font-bold dark:text-white text-gray-900 mb-4"> Frequently Asked Questions</h3>
                 <div class="space-y-4">
                     @foreach ([['q' => 'Can I start for free?', 'a' => 'Yes, the free plan is available for basic productivity tracking with no credit card required.'], ['q' => 'Can I upgrade later?', 'a' => 'Yes, you can upgrade to any paid plan anytime. Your existing data is always preserved.'], ['q' => 'Can I switch billing cycle?', 'a' => 'Absolutely — you can switch between monthly and yearly billing at renewal time.'], ['q' => 'Is my data private?', 'a' => 'Your tasks, notes and analytics stay fully protected inside your personal workspace.']] as $faq)
                         <div class="border-b dark:border-white/[0.06] border-black/[0.05] pb-3 last:border-b-0 last:pb-0">

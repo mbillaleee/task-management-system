@@ -6,7 +6,8 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Users Management</h2>
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-users"></i> Users
+                    Management</h2>
                 <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-1">Manage system users, roles, and permissions.</p>
             </div>
             <div class="flex flex-wrap gap-2">

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veroa Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -39,9 +40,13 @@
             <div>
                 <label class="block text-gray-700 dark:text-gray-300 mb-1 font-semibold">Password</label>
                 <div class="relative">
-                    <input type="password" placeholder="Enter your password" name="password"
-                        class="w-full px-5 py-3 rounded-xl border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-orange-400 focus:outline-none dark:bg-gray-700 dark:text-white transition-colors">
-                    <span class="absolute right-4 top-3 cursor-pointer text-gray-400">👁️</span>
+                    <input id="passwordInput" type="password" placeholder="Enter your password" name="password"
+                        class="w-full px-5 py-3 pr-12 rounded-xl border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-orange-400 focus:outline-none dark:bg-gray-700 dark:text-white transition-colors">
+
+                    <button type="button" id="togglePassword"
+                        class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-orange-400 transition-colors">
+                        <i id="passwordIcon" class="fas fa-eye"></i>
+                    </button>
                 </div>
             </div>
 
@@ -66,6 +71,24 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.classList.add('dark'); // Force dark mode
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.documentElement.classList.add('dark');
+
+            const passwordInput = document.getElementById('passwordInput');
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordIcon = document.getElementById('passwordIcon');
+
+            togglePassword.addEventListener('click', () => {
+                const isPassword = passwordInput.type === 'password';
+
+                passwordInput.type = isPassword ? 'text' : 'password';
+                passwordIcon.classList.toggle('fa-eye');
+                passwordIcon.classList.toggle('fa-eye-slash');
+            });
         });
     </script>
 

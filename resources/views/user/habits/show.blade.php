@@ -7,7 +7,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Habit Details
+                    <i class="fas fa-info-circle mr-1"></i> Habit Details
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Streak, heatmap and completion history.
@@ -16,11 +16,11 @@
             <div class="flex gap-2">
                 <a href="{{ route('user.habits.edit', $habit) }}"
                     class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                    Edit Habit
+                    <i class="fas fa-edit mr-1"></i> Edit Habit
                 </a>
                 <a href="{{ route('user.habits.index') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                    Back
+                    <i class="fas fa-arrow-left mr-1"></i> Back
                 </a>
             </div>
         </div>
@@ -39,7 +39,7 @@
                                 {{ $habit->title }}
                             </h3>
                             <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-0.5">
-                                {{ $habit->category?->name ?? 'General' }}
+                                <i class="fas fa-folder mr-1"></i> {{ $habit->category?->name ?? 'General' }}
                             </p>
                         </div>
 
@@ -50,7 +50,7 @@
                                     : 'dark:bg-red-500/[0.15] bg-red-50 text-red-500 border-red-500/20';
                         @endphp
                         <span class="px-2.5 py-1 rounded-lg text-[12px] font-bold border {{ $typeClass }}">
-                            {{ ucfirst($habit->type) }}
+                            <i class="fas fa-arrow-up mr-1"></i> {{ ucfirst($habit->type) }}
                         </span>
                     </div>
 
@@ -60,24 +60,28 @@
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[12px] dark:text-gray-500 text-gray-400">Frequency</p>
+                            <p class="text-[12px] dark:text-gray-500 text-gray-400"> <i class="fas fa-sync-alt mr-1"></i>
+                                Frequency</p>
                             <p class="text-[13px] font-bold dark:text-white text-gray-800">{{ ucfirst($habit->frequency) }}
                             </p>
                         </div>
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[12px] dark:text-gray-500 text-gray-400">Status</p>
+                            <p class="text-[12px] dark:text-gray-500 text-gray-400"> <i class="fas fa-info-circle mr-1"></i>
+                                Status</p>
                             <p class="text-[13px] font-bold {{ $habit->status ? 'text-emerald-500' : 'text-red-400' }}">
                                 {{ $habit->status ? 'Active' : 'Inactive' }}
                             </p>
                         </div>
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[12px] dark:text-gray-500 text-gray-400">Started</p>
+                            <p class="text-[12px] dark:text-gray-500 text-gray-400"> <i
+                                    class="fas fa-calendar-alt mr-1"></i> Started</p>
                             <p class="text-[13px] font-bold dark:text-white text-gray-800">
                                 {{ $habit->start_date ? $habit->start_date->format('d M Y') : '—' }}
                             </p>
                         </div>
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[12px] dark:text-gray-500 text-gray-400">30-day Rate</p>
+                            <p class="text-[12px] dark:text-gray-500 text-gray-400"> <i class="fas fa-chart-line mr-1"></i>
+                                30-day Rate</p>
                             <p class="text-[13px] font-bold text-orange-400">{{ $habit->completion_rate }}%</p>
                         </div>
                     </div>
@@ -171,7 +175,7 @@
                                 <span
                                     class="px-2.5 py-1 rounded-lg text-[11px] font-bold
                                     dark:bg-emerald-500/[0.15] bg-emerald-50 text-emerald-500">
-                                    ✓ Done
+                                    <i class="fas fa-check mr-1"></i> Done
                                 </span>
                             </div>
                         @empty
@@ -195,7 +199,8 @@
 
                     <div class="space-y-3">
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-4 text-center">
-                            <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-1">Current Streak</p>
+                            <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-1"> <i class="fas fa-fire mr-1"></i>
+                                Current Streak</p>
                             <h4 class="text-[36px] font-extrabold dark:text-white text-gray-900 leading-none">
                                 {{ $habit->streak?->current_streak ?? 0 }}
                             </h4>
@@ -203,7 +208,8 @@
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-4 text-center">
-                            <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-1">Best Streak</p>
+                            <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-1"> <i class="fas fa-trophy mr-1"></i>
+                                Best Streak</p>
                             <h4 class="text-[36px] font-extrabold text-orange-400 leading-none">
                                 {{ $habit->streak?->best_streak ?? 0 }}
                             </h4>
@@ -211,7 +217,8 @@
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[12px] dark:text-gray-500 text-gray-400">Last Completed</p>
+                            <p class="text-[12px] dark:text-gray-500 text-gray-400"> <i
+                                    class="fas fa-calendar-check mr-1"></i> Last Completed</p>
                             <p class="text-[13px] font-bold dark:text-white text-gray-800 mt-1">
                                 {{ $habit->streak?->last_completed_date
                                     ? $habit->streak->last_completed_date->format('d M, Y')
@@ -220,7 +227,8 @@
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[12px] dark:text-gray-500 text-gray-400">Total Completions</p>
+                            <p class="text-[12px] dark:text-gray-500 text-gray-400"> <i
+                                    class="fas fa-check-circle mr-1"></i> Total Completions</p>
                             <p class="text-[13px] font-bold dark:text-white text-gray-800 mt-1">
                                 {{ $logs->count() }} times
                             </p>
@@ -242,7 +250,8 @@
                                 <p class="text-[13px] font-bold dark:text-gray-200 text-gray-700">
                                     {{ \Carbon\Carbon::createFromFormat('H:i:s', $habit->remind_time)->format('h:i A') }}
                                 </p>
-                                <p class="text-[11px] dark:text-gray-500 text-gray-400">Every day</p>
+                                <p class="text-[11px] dark:text-gray-500 text-gray-400"> <i
+                                        class="fas fa-sync-alt mr-1"></i> Every day</p>
                             </div>
                         </div>
                     @else

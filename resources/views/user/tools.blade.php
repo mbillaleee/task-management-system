@@ -7,7 +7,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Tools
+                    <i class="fa-solid fa-tools"></i> Tools
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Quick productivity tools to help you work smarter every day.
@@ -17,7 +17,7 @@
             <a href="{{ route('user.tasks.create') }}"
                 class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold
             bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                + Add Task
+                <i class="fa-solid fa-plus"></i> Add Task
             </a>
         </div>
 
@@ -33,7 +33,7 @@
                 <span
                     class="px-3 py-1 rounded-full text-[11px] font-bold
                 bg-pink-500/[0.15] text-pink-400 border border-pink-500/20">
-                    Productivity Toolkit
+                    <i class="fa-solid fa-tools"></i> Productivity Toolkit
                 </span>
 
                 <h1
@@ -139,7 +139,7 @@
                         <button
                             class="mt-4 w-full px-3 py-2 rounded-[10px] text-[14px] font-bold
                         dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                            Open Tool
+                            <i class="fa-solid fa-arrow-right"></i> Open Tool
                         </button>
                     </div>
                 </div>

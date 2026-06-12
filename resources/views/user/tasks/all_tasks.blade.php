@@ -6,17 +6,17 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    My Tasks
+                    <i class="fas fa-tasks"></i> My Tasks
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
-                    Organize your workflow with priority based task cards.
+                    <i class="fas fa-info-circle"></i> Organize your workflow with priority based task cards.
                 </p>
             </div>
 
             <div class="flex items-center gap-2.5">
                 <a href="{{ route('user.tasks.kanban') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                    Kanban View
+                    <i class="fas fa-columns"></i> Kanban View
                 </a>
 
                 <a href="{{ route('user.tasks.index') }}"
@@ -26,7 +26,7 @@
 
                 <a href="{{ route('user.tasks.create') }}"
                     class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_4px_16px_rgba(249,115,22,0.38)]">
-                    + Add Task
+                    <i class="fas fa-plus"></i> Add Task
                 </a>
             </div>
         </div>
@@ -60,15 +60,15 @@
                     <div class="relative z-10 flex items-start justify-between gap-3">
                         <div>
                             <h3 class="text-[16px] font-bold dark:text-white text-gray-900 leading-snug">
-                                {{ $task->title }}
+                                <i class="fas fa-tasks"></i> {{ $task->title }}
                             </h3>
                             <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-1">
-                                {{ $task->category?->name ?? 'Uncategorized' }}
+                                <i class="fas fa-folder"></i> {{ $task->category?->name ?? 'Uncategorized' }}
                             </p>
                         </div>
 
                         <span class="px-2.5 py-[4px] rounded-lg text-[15px] font-bold border {{ $priorityClass }}">
-                            {{ ucfirst($task->priority) }}
+                            <i class="fas fa-flag"></i> {{ ucfirst($task->priority) }}
                         </span>
                     </div>
 
@@ -103,7 +103,7 @@
                             @endphp
 
                             <span class="px-2.5 py-[4px] rounded-md text-[15px] font-semibold {{ $colorClass }}">
-                                #{{ strtolower($label->name) }}
+                                <i class="fas fa-tag"></i> {{ strtolower($label->name) }}
                             </span>
 
                         @empty
@@ -111,7 +111,7 @@
                             <span
                                 class="px-2.5 py-[4px] rounded-md text-[15px] font-semibold
             bg-gray-100 text-gray-500 dark:bg-white/10 dark:text-gray-400 border border-white/10">
-                                No Label
+                                <i class="fas fa-tag"></i> No Label
                             </span>
                         @endforelse
 
@@ -120,20 +120,21 @@
                     <div
                         class="relative z-10 flex items-center justify-between mt-4 pt-3 border-t dark:border-white/[0.06] border-black/[0.05]">
                         <div>
-                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Due Date</p>
+                            <p class="text-[16px] dark:text-gray-500 text-gray-400"><i class="fas fa-calendar-alt"></i> Due
+                                Date</p>
                             <p class="text-[14px] font-semibold dark:text-gray-300 text-gray-700">
                                 {{ $task->due_date ? $task->due_date->format('d M, Y') : 'No deadline' }}
                             </p>
                         </div>
 
                         <span class="px-2.5 py-[4px] rounded-lg text-[15px] font-bold {{ $statusClass }}">
-                            {{ ucfirst(str_replace('_', ' ', $task->status)) }}
+                            <i class="fas fa-info-circle"></i> {{ ucfirst(str_replace('_', ' ', $task->status)) }}
                         </span>
                     </div>
 
                     <div class="relative z-10 mt-4">
                         <div class="flex justify-between text-[16px] mb-1.5">
-                            <span class="dark:text-gray-400 text-gray-500">Subtasks</span>
+                            <span class="dark:text-gray-400 text-gray-500"> <i class="fas fa-tasks"></i> Subtasks</span>
                             <span class="font-bold dark:text-white text-gray-800">
                                 {{ $completedSubtasks }}/{{ $totalSubtasks }}
                             </span>
@@ -148,13 +149,13 @@
                     <div class="relative z-10 flex items-center justify-between gap-2 mt-4">
                         <a href="{{ route('user.tasks.show', $task) }}"
                             class="px-3 py-2 rounded-lg text-[14px] font-bold text-white bg-gradient-to-r from-orange-500 to-pink-500">
-                            View
+                            <i class="fas fa-eye"></i> View
                         </a>
 
                         <div class="flex items-center gap-2">
                             <a href="{{ route('user.tasks.edit', $task) }}"
                                 class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                                Edit
+                                <i class="fas fa-edit"></i> Edit
                             </a>
 
                             <form action="{{ route('user.tasks.destroy', $task) }}" method="POST">
@@ -162,7 +163,7 @@
                                 @method('DELETE')
                                 <button onclick="return confirm('Delete this task?')"
                                     class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-red-500/[0.15] bg-red-50 text-red-500">
-                                    Delete
+                                    <i class="fas fa-trash"></i> Delete
                                 </button>
                             </form>
                         </div>
@@ -171,8 +172,10 @@
             @empty
                 <div
                     class="col-span-full hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-8 text-center">
-                    <h3 class="text-[16px] font-bold dark:text-white text-gray-900">No tasks found</h3>
-                    <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-1">Create your first task to get started.</p>
+                    <h3 class="text-[16px] font-bold dark:text-white text-gray-900"><i class="fas fa-tasks"></i> No tasks
+                        found</h3>
+                    <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-1"><i class="fas fa-info-circle"></i> Create
+                        your first task to get started.</p>
                 </div>
             @endforelse
         </div>

@@ -6,7 +6,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Focus Statistics
+                    <i class="fas fa-chart-bar mr-2"></i> Focus Statistics
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Track your focus time, XP, completed sessions and daily performance.
@@ -15,7 +15,7 @@
 
             <a href="{{ route('user.focus.index') }}"
                 class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                Back
+                <i class="fas fa-arrow-left mr-2"></i> Back
             </a>
         </div>
 
@@ -24,7 +24,7 @@
         <div
             class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
             <h3 class="text-[18px] font-bold dark:text-white text-gray-900 mb-4">
-                Last 7 Days Focus
+                <i class="fas fa-history mr-2"></i> Last 7 Days Focus
             </h3>
 
             <div class="space-y-3">
@@ -37,10 +37,10 @@
                     <div>
                         <div class="flex justify-between text-[14px] mb-1">
                             <span class="dark:text-gray-400 text-gray-500">
-                                {{ \Carbon\Carbon::parse($day->date)->format('d M') }}
+                                <i class="fas fa-calendar mr-2"></i> {{ \Carbon\Carbon::parse($day->date)->format('d M') }}
                             </span>
                             <span class="font-bold dark:text-white text-gray-800">
-                                {{ $day->minutes }} min
+                                <i class="fas fa-clock mr-2"></i> {{ $day->minutes }} min
                             </span>
                         </div>
 
@@ -51,7 +51,7 @@
                     </div>
                 @empty
                     <p class="text-[14px] dark:text-gray-500 text-gray-400">
-                        No completed focus data found.
+                        <i class="fas fa-info-circle mr-2"></i> No completed focus data found.
                     </p>
                 @endforelse
             </div>

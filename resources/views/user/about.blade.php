@@ -19,7 +19,7 @@
                     <span
                         class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold
                     bg-orange-500/[0.14] text-orange-400 border border-orange-500/[0.25] mb-4">
-                        About Veroa
+                        <i class="fa-solid fa-info-circle"></i> About Veroa
                     </span>
 
                     <h1 class="text-[34px] sm:text-[42px] font-extrabold leading-[1.1] dark:text-white text-gray-900">
@@ -55,7 +55,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-3.5">
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-6">
-                <div class="text-[36px] mb-3">🎯</div>
+                <div class="text-[36px] mb-3"><i class="fa-solid fa-bullseye"></i></div>
                 <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-2">Our Mission</h3>
                 <p class="text-[12.5px] leading-[1.8] dark:text-gray-400 text-gray-500">
                     To help people organize their day, improve consistency, and turn productivity
@@ -65,7 +65,7 @@
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-6">
-                <div class="text-[36px] mb-3">🚀</div>
+                <div class="text-[36px] mb-3"><i class="fa-solid fa-rocket"></i></div>
                 <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-2">Our Vision</h3>
                 <p class="text-[12.5px] leading-[1.8] dark:text-gray-400 text-gray-500">
                     To become a complete life operating system where tasks, habits, notes,
@@ -134,25 +134,27 @@
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <p class="text-[12px] dark:text-gray-400 text-gray-500">Modules</p>
+                <p class="text-[12px] dark:text-gray-400 text-gray-500"><i class="fa-solid fa-cubes"></i> Modules</p>
                 <h3 class="text-[30px] font-extrabold text-orange-400 mt-2">12+</h3>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <p class="text-[12px] dark:text-gray-400 text-gray-500">Productivity Tools</p>
+                <p class="text-[12px] dark:text-gray-400 text-gray-500"><i class="fa-solid fa-tools"></i> Productivity Tools
+                </p>
                 <h3 class="text-[30px] font-extrabold text-pink-500 mt-2">30+</h3>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <p class="text-[12px] dark:text-gray-400 text-gray-500">Dashboard Widgets</p>
+                <p class="text-[12px] dark:text-gray-400 text-gray-500"><i class="fa-solid fa-th-large"></i> Dashboard
+                    Widgets</p>
                 <h3 class="text-[30px] font-extrabold text-emerald-500 mt-2">20+</h3>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <p class="text-[12px] dark:text-gray-400 text-gray-500">Focus System</p>
+                <p class="text-[12px] dark:text-gray-400 text-gray-500"><i class="fa-solid fa-bolt"></i> Focus System</p>
                 <h3 class="text-[30px] font-extrabold text-orange-500 mt-2">Pro</h3>
             </div>
         </div>

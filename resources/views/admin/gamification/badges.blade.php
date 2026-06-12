@@ -6,18 +6,18 @@
         {{-- Header --}}
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Badges</h2>
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900"><i class="fas fa-medal"></i> Badges</h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400">Create and manage achievement badges.</p>
             </div>
 
             <div class="flex gap-2">
                 <a href="{{ route('admin.gamification.index') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                    ← Back
+                    <i class="fas fa-arrow-left"></i> Back
                 </a>
                 <button onclick="openCreateBadgeModal()"
                     class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                    + Create Badge
+                    <i class="fas fa-plus"></i> Create Badge
                 </button>
             </div>
         </div>
@@ -80,7 +80,7 @@
                                     '{{ $badge->is_active ? 1 : 0 }}'
                                 )"
                                 class="px-3 py-2 rounded-lg text-[13px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                                Edit
+                                <i class="fas fa-edit"></i> Edit
                             </button>
 
                             <form action="{{ route('admin.badges.destroy', $badge) }}" method="POST"
@@ -89,7 +89,7 @@
                                 @method('DELETE')
                                 <button
                                     class="px-3 py-2 rounded-lg text-[13px] font-bold dark:bg-red-500/[0.15] bg-red-50 text-red-500">
-                                    Delete
+                                    <i class="fas fa-trash"></i> Delete
                                 </button>
                             </form>
                         </div>
@@ -114,7 +114,8 @@
             <div
                 class="w-full max-w-lg dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-5">
                 <div class="flex justify-between mb-4">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">Create Badge</h3>
+                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-plus"></i> Create
+                        Badge</h3>
                     <button onclick="closeCreateBadgeModal()" class="text-gray-400 hover:text-gray-600 text-xl">✕</button>
                 </div>
 
@@ -132,7 +133,8 @@
             <div
                 class="w-full max-w-lg dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-5">
                 <div class="flex justify-between mb-4">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">Edit Badge</h3>
+                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-edit"></i> Edit
+                        Badge</h3>
                     <button onclick="closeEditBadgeModal()" class="text-gray-400 hover:text-gray-600 text-xl">✕</button>
                 </div>
 

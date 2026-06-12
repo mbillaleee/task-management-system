@@ -5,7 +5,8 @@
 
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Daily Rewards</h2>
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-gift"></i> Daily
+                    Rewards</h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400">Configure streak-based daily login rewards (Day 1–7).
                 </p>
             </div>
@@ -13,11 +14,11 @@
             <div class="flex gap-2">
                 <a href="{{ route('admin.gamification.index') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                    ← Back
+                    <i class="fas fa-arrow-left"></i> Back
                 </a>
                 <button onclick="openCreateRewardModal()"
                     class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                    + Add Reward
+                    <i class="fas fa-plus"></i> Add Reward
                 </button>
             </div>
         </div>
@@ -60,7 +61,7 @@
                                 '{{ addslashes($reward->icon) }}'
                             )"
                             class="px-3 py-2 rounded-lg text-[13px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                            Edit
+                            <i class="fas fa-edit"></i> Edit
                         </button>
 
                         <form action="{{ route('admin.daily-rewards.destroy', $reward) }}" method="POST"
@@ -69,7 +70,7 @@
                             @method('DELETE')
                             <button
                                 class="px-3 py-2 rounded-lg text-[13px] font-bold dark:bg-red-500/[0.15] bg-red-50 text-red-500">
-                                Delete
+                                <i class="fas fa-trash"></i> Delete
                             </button>
                         </form>
                     </div>
@@ -89,7 +90,8 @@
             class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
             <div class="w-full max-w-md dark:bg-[#17141f] bg-white border dark:border-white/[0.08] rounded-2xl p-5">
                 <div class="flex justify-between mb-4">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">Add Daily Reward</h3>
+                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-plus"></i> Add
+                        Daily Reward</h3>
                     <button onclick="closeCreateRewardModal()" class="text-gray-400 hover:text-gray-600 text-xl">✕</button>
                 </div>
                 <form action="{{ route('admin.daily-rewards.store') }}" method="POST" class="space-y-4">
@@ -104,7 +106,8 @@
             class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
             <div class="w-full max-w-md dark:bg-[#17141f] bg-white border dark:border-white/[0.08] rounded-2xl p-5">
                 <div class="flex justify-between mb-4">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">Edit Daily Reward</h3>
+                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-edit"></i> Edit
+                        Daily Reward</h3>
                     <button onclick="closeEditRewardModal()" class="text-gray-400 hover:text-gray-600 text-xl">✕</button>
                 </div>
                 <form id="editRewardForm" method="POST" class="space-y-4">

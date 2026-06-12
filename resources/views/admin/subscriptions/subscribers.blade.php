@@ -6,18 +6,19 @@
         {{-- ── Header ── --}}
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">Subscribers</h2>
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-users"></i> Subscribers
+                </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">View and manage individual user subscriptions.
                 </p>
             </div>
             <div class="flex gap-2">
                 <a href="{{ route('admin.subscriptions.index') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                    ← Plans
+                    <i class="fas fa-arrow-left"></i> Plans
                 </a>
                 <button onclick="openAssignModal()"
                     class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                    + Assign Plan
+                    <i class="fas fa-plus"></i> Assign Plan
                 </button>
             </div>
         </div>
@@ -40,7 +41,7 @@
             class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl overflow-hidden">
             <div class="p-4 border-b dark:border-white/[0.06] border-black/[0.05] flex items-center justify-between">
                 <p class="text-[14px] font-bold dark:text-white text-gray-900">
-                    All Subscriptions
+                    <i class="fas fa-list"></i> All Subscriptions
                     <span
                         class="ml-2 px-2 py-0.5 rounded-lg text-[12px] dark:bg-white/[0.07] bg-gray-100 dark:text-gray-400 text-gray-500">
                         {{ $subscriptions->total() }}
@@ -54,25 +55,32 @@
                         <tr class="dark:border-b dark:border-white/[0.05] border-b border-black/[0.05]">
                             <th
                                 class="px-4 py-3 text-left text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
-                                User</th>
+                                <i class="fas fa-user"></i> User
+                            </th>
                             <th
                                 class="px-4 py-3 text-left text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
-                                Plan</th>
+                                <i class="fas fa-list"></i> Plan
+                            </th>
                             <th
                                 class="px-4 py-3 text-left text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
-                                Billing</th>
+                                <i class="fas fa-circle-dollar-to-slot"></i> Billing
+                            </th>
                             <th
                                 class="px-4 py-3 text-left text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
-                                Status</th>
+                                <i class="fas fa-info-circle"></i> Status
+                            </th>
                             <th
                                 class="px-4 py-3 text-left text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
-                                Amount</th>
+                                <i class="fas fa-coins"></i> Amount
+                            </th>
                             <th
                                 class="px-4 py-3 text-left text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
-                                Ends</th>
+                                <i class="fas fa-clock"></i> Ends
+                            </th>
                             <th
                                 class="px-4 py-3 text-right text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
-                                Actions</th>
+                                <i class="fas fa-cog"></i> Actions
+                            </th>
                         </tr>
                     </thead>
                     <tbody class="divide-y dark:divide-white/[0.04] divide-black/[0.04]">
@@ -154,7 +162,7 @@
                             <tr>
                                 <td colspan="7"
                                     class="px-4 py-12 text-center dark:text-gray-500 text-gray-400 text-[14px]">
-                                    No subscriptions found.
+                                    <i class="fas fa-info-circle mr-2"></i> No subscriptions found.
                                 </td>
                             </tr>
                         @endforelse

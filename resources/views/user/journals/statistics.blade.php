@@ -7,7 +7,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
-                    Journal Statistics
+                    <i class="fas fa-chart-bar mr-2"></i> Journal Statistics
                 </h2>
                 <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
                     Writing streak, mood trends and monthly overview.
@@ -15,7 +15,7 @@
             </div>
             <a href="{{ route('user.journals.index') }}"
                 class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-                ← Back to Journals
+                <i class="fas fa-arrow-left mr-1"></i> Back to Journals
             </a>
         </div>
 
@@ -23,28 +23,32 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Total Entries</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"> <i class="fas fa-file-alt mr-1"></i>
+                    Total Entries</p>
                 <h3 class="text-[34px] font-black dark:text-white text-gray-900 mt-2">{{ $totalJournals }}</h3>
                 <p class="text-[13px] text-orange-400 font-bold">All time</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Writing Streak</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"> <i class="fas fa-fire mr-1"></i> Writing
+                    Streak</p>
                 <h3 class="text-[34px] font-black text-purple-400 mt-2">{{ $writingStreak }}</h3>
                 <p class="text-[13px] text-purple-400 font-bold">days in a row</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">This Month</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"> <i class="fas fa-calendar-alt mr-1"></i>
+                    This Month</p>
                 <h3 class="text-[34px] font-black text-pink-400 mt-2">{{ $thisMonthCount }}</h3>
                 <p class="text-[13px] text-pink-400 font-bold">{{ now()->format('F') }}</p>
             </div>
 
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold">Total Words</p>
+                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"> <i class="fas fa-font mr-1"></i> Total
+                    Words</p>
                 <h3 class="text-[34px] font-black text-emerald-400 mt-2">{{ number_format($totalWords) }}</h3>
                 <p class="text-[13px] text-emerald-400 font-bold">approximate</p>
             </div>
@@ -55,7 +59,8 @@
             {{-- Monthly chart --}}
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-1">Monthly Activity</h3>
+                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-1"> <i
+                        class="fas fa-calendar-alt mr-1"></i> Monthly Activity</h3>
                 <p class="text-[13px] dark:text-gray-500 text-gray-400 mb-5">Entries written per month (last 12 months)</p>
 
                 @php $maxMonthly = max(array_values($months) ?: [1]); @endphp
@@ -80,7 +85,8 @@
             {{-- Mood distribution --}}
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-1">Mood Distribution</h3>
+                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-1"> <i class="fas fa-smile mr-1"></i>
+                    Mood Distribution</h3>
                 <p class="text-[13px] dark:text-gray-500 text-gray-400 mb-5">How you have been feeling across all entries
                 </p>
 
@@ -140,30 +146,61 @@
             {{-- Journal types breakdown --}}
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-1">Entry Types</h3>
+                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-1"> <i class="fas fa-list mr-1"></i>
+                    Entry Types</h3>
                 <p class="text-[13px] dark:text-gray-500 text-gray-400 mb-5">Breakdown by journal type</p>
 
                 @php
                     $typeLabels = [
-                        'daily' => ['📝 Daily Journal', '#f97316'],
-                        'gratitude' => ['🙏 Gratitude', '#10b981'],
-                        'reflection' => ['💭 Reflection', '#8b5cf6'],
-                        'personal_log' => ['📔 Personal Log', '#3b82f6'],
+                        'daily' => [
+                            'icon' => 'fas fa-calendar-day',
+                            'label' => 'Daily Journal',
+                            'color' => '#f97316',
+                        ],
+                        'gratitude' => [
+                            'icon' => 'fas fa-heart',
+                            'label' => 'Gratitude',
+                            'color' => '#10b981',
+                        ],
+                        'reflection' => [
+                            'icon' => 'fas fa-lightbulb',
+                            'label' => 'Reflection',
+                            'color' => '#8b5cf6',
+                        ],
+                        'personal_log' => [
+                            'icon' => 'fas fa-book-open',
+                            'label' => 'Personal Log',
+                            'color' => '#3b82f6',
+                        ],
                     ];
+
                     $typeTotal = array_sum($byType);
                 @endphp
 
                 @if (empty($byType))
-                    <p class="text-[14px] dark:text-gray-500 text-gray-400 text-center py-8">No entries yet.</p>
+                    <p class="text-[14px] dark:text-gray-500 text-gray-400 text-center py-8">
+                        No entries yet.
+                    </p>
                 @else
                     <div class="grid grid-cols-2 gap-3">
-                        @foreach ($typeLabels as $key => [$label, $color])
-                            @php $count = $byType[$key] ?? 0; @endphp
+                        @foreach ($typeLabels as $key => $item)
+                            @php
+                                $count = $byType[$key] ?? 0;
+                                $color = $item['color'];
+                            @endphp
+
                             <div class="rounded-xl p-4 border dark:border-white/[0.07] border-black/[0.07]"
                                 style="background: {{ $color }}11;">
-                                <p class="text-[13px] font-bold dark:text-gray-300 text-gray-600">{{ $label }}</p>
+
+                                <p class="text-[13px] font-bold dark:text-gray-300 text-gray-600 flex items-center gap-2">
+                                    <i class="{{ $item['icon'] }}" style="color: {{ $color }}"></i>
+                                    {{ $item['label'] }}
+                                </p>
+
                                 <h4 class="text-[28px] font-black mt-1" style="color: {{ $color }}">
-                                    {{ $count }}</h4>
+                                    {{ $count }}
+                                </h4>
+
                                 <p class="text-[11px] font-bold dark:text-gray-500 text-gray-400 mt-0.5">
                                     {{ $typeTotal > 0 ? round(($count / $typeTotal) * 100) : 0 }}% of total
                                 </p>
@@ -176,7 +213,8 @@
             {{-- Best writing days --}}
             <div
                 class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-1">Most Active Days</h3>
+                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-1"> <i
+                        class="fas fa-calendar-day mr-1"></i> Most Active Days</h3>
                 <p class="text-[13px] dark:text-gray-500 text-gray-400 mb-5">Which day of the week you write most</p>
 
                 @php $maxDay = max(array_values($dayData) ?: [1]); @endphp
