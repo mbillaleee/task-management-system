@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
             'setLocale' => \App\Http\Middleware\SetLocale::class,
+            'impersonate' => \App\Http\Middleware\ImpersonateMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

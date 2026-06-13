@@ -51,9 +51,9 @@
                     </div>
 
                     <div class="flex flex-wrap gap-4 text-[13px] dark:text-gray-500 text-gray-500">
-                        <span><b class="text-orange-400 mr-1">✓</b>No credit card</span>
-                        <span><b class="text-pink-400 mr-1">✓</b>Free forever</span>
-                        <span><b class="text-amber-400 mr-1">✓</b>Cancel anytime</span>
+                        <span><b class="text-orange-400 mr-1"><i class="fas fa-times"></i></b>No credit card</span>
+                        <span><b class="text-pink-400 mr-1"><i class="fas fa-check"></i></b>Free forever</span>
+                        <span><b class="text-amber-400 mr-1"><i class="fas fa-check"></i></b>Cancel anytime</span>
                     </div>
                 </div>
 
@@ -231,7 +231,8 @@
             <!-- Header -->
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                    <h2 class="text-[40px] font-extrabold dark:text-white text-gray-900">Dashboard</h2>
+                    <h2 class="text-[40px] font-extrabold dark:text-white text-gray-900"><i class="fas fa-home"></i>
+                        Dashboard</h2>
                     <p class="text-[20px] font-semibold dark:text-white text-gray-800 mt-1">
                         Welcome to, {{ auth()->user()->name ?? 'Leon' }}! 👋
                     </p>
@@ -246,16 +247,19 @@
                         class="px-4 py-3 rounded-xl text-[12.5px] outline-none
                         dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-600
                         border dark:border-white/[0.1] border-black/[0.12]">
-                        <option value="today" @selected($period === 'today')>Today</option>
-                        <option value="week" @selected($period === 'week')>This week</option>
-                        <option value="month" @selected($period === 'month')>This month</option>
+                        <option value="today" @selected($period === 'today')> <i class="fas fa-calendar-day"></i> Today
+                        </option>
+                        <option value="week" @selected($period === 'week')> <i class="fas fa-calendar-week"></i> This
+                            week</option>
+                        <option value="month" @selected($period === 'month')> <i class="fas fa-calendar-month"></i> This
+                            month</option>
                     </select>
 
                     <a href="{{ route('user.tasks.create') }}"
                         class="px-5 py-2.5 rounded-xl text-white text-[16px] font-bold
                         bg-gradient-to-r from-orange-500 to-pink-500
                         shadow-[0_4px_18px_rgba(249,115,22,.45)]">
-                        + Add Task
+                        <i class="fas fa-plus"></i> Add Task
                     </a>
                 </div>
             </div>
@@ -267,7 +271,8 @@
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100 rounded-2xl p-[18px] flex flex-col items-center">
 
-                    <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-3 self-center">Daily Score</p>
+                    <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-3 self-center"><i
+                            class="fas fa-chart-line"></i> Daily Score</p>
 
                     {{-- Ring --}}
                     <div class="relative w-[120px] h-[120px]">
@@ -302,13 +307,13 @@
                     {{-- Label --}}
                     <p class="text-[13px] font-semibold dark:text-pink-400 text-orange-500 mt-3">
                         @if ($dailyProgress >= 90)
-                            Amazing work! 🔥
+                            <i class="fas fa-star"></i> Amazing work!
                         @elseif($dailyProgress >= 70)
-                            Great job!
+                            <i class="fas fa-thumbs-up"></i> Great job!
                         @elseif($dailyProgress >= 40)
-                            Keep going!
+                            <i class="fas fa-clock"></i> Keep going!
                         @else
-                            Let's start!
+                            <i class="fas fa-play"></i> Let's start!
                         @endif
                     </p>
                 </div>
@@ -316,8 +321,11 @@
                 <!-- Streak -->
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100 rounded-2xl p-[18px] text-center">
-                    <p class="text-left text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-3">Streak</p>
-                    <span class="text-[46px] leading-none">🔥</span>
+                    <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-3 self-center"><i
+                            class="fas fa-fire text-orange-500 dark:text-orange-400"></i> Streak
+                    </p>
+                    <span class="text-[46px] leading-none"><i
+                            class="fas fa-fire text-orange-500 dark:text-orange-400"></i></span>
                     <h3 class="text-[38px] font-extrabold dark:text-white text-gray-900 leading-none mt-1">
                         {{ $streakDays }}</h3>
                     <p class="text-[14px] dark:text-gray-500 text-gray-400">days</p>
@@ -329,7 +337,7 @@
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100 rounded-2xl p-[18px]">
 
                     <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-6">
-                        XP Progress
+                        <i class="fas fa-star text-orange-500 dark:text-orange-400"></i> XP Progress
                     </p>
 
                     <h3 class="text-[20px] font-bold text-orange-400 mb-2">
@@ -351,7 +359,8 @@
                 <!-- Focus Time -->
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100 rounded-2xl p-[18px]">
-                    <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-5">Focus Time</p>
+                    <p class="text-[14px] font-semibold dark:text-gray-400 text-gray-500 mb-5 self-center"><i
+                            class="fas fa-clock text-orange-500 dark:text-orange-400"></i> Focus Time</p>
                     <h3 class="text-[28px] font-extrabold dark:text-white text-gray-900 leading-none">
                         {{ $focusTimeFormatted }}</h3>
                     <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-1 mb-3">{{ $periodLabel }}</p>
@@ -387,7 +396,8 @@
                     class="hover:-translate-y-1 transition-transform duration-200
                         dark:bg-[#1a1625] bg-white border dark:border-white/[0.07] border-orange-100 rounded-2xl p-[18px]">
 
-                    <h3 class="text-[17px] font-bold dark:text-white text-gray-900 mb-1">Top 3 Priorities</h3>
+                    <h3 class="text-[17px] font-bold dark:text-white text-gray-900 mb-1"> <i class="fas fa-tasks"></i> Top
+                        6 Priorities</h3>
 
                     @php
                         $colorMap = ['high' => 'pink', 'medium' => 'orange', 'low' => 'green'];
@@ -410,21 +420,16 @@
 
                                 {{-- Dark mode: hollow pink ring | Light mode: numbered gradient circle --}}
                                 <div
-                                    class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center
-                                {{-- Light mode: filled numbered circle --}}
-                                dark:border-2 dark:border-pink-500 dark:bg-transparent
-                                {{-- Dark mode hides the number --}}
-                                @if ($plan['color'] === 'pink') dark:border-pink-500
-                                @elseif($plan['color'] === 'orange') dark:border-orange-400
-                                @else dark:border-green-400 @endif
-
-                                @if ($plan['color'] === 'pink') bg-gradient-to-br from-orange-400 to-pink-500
-                                @elseif($plan['color'] === 'orange') bg-gradient-to-br from-orange-400 to-amber-500
-                                @else bg-gradient-to-br from-green-400 to-emerald-500 @endif">
-
-                                    <span class="dark:hidden text-[12px] font-bold text-white leading-none">
+                                    class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center  dark:bg-transparent dark:border-2
+                                        @if ($plan['color'] === 'pink') bg-gradient-to-br from-orange-400 to-pink-500  dark:border-pink-500
+                                        @elseif($plan['color'] === 'orange')
+                                            bg-gradient-to-br from-orange-400 to-amber-500  dark:border-orange-400
+                                        @else
+                                            bg-gradient-to-br from-green-400 to-emerald-500  dark:border-green-400 @endif">
+                                    <spanb class="text-[12px] font-bold leading-none text-white dark:text-white">
                                         {{ $plan['num'] }}
-                                    </span>
+                                        </span>
+
                                 </div>
 
                                 {{-- Title --}}
@@ -459,7 +464,7 @@
                             <a href="{{ route('user.tasks.create') }}"
                                 class="inline-block mt-3 px-4 py-2 rounded-lg text-[12px] font-bold text-white
                                 bg-gradient-to-r from-orange-500 to-pink-500">
-                                + Add Task
+                                <i class="fas fa-plus"></i> Add Task
                             </a>
                         </div>
                     @endforelse
@@ -467,7 +472,8 @@
 
                 <div
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100 rounded-2xl p-[18px]">
-                    <h3 class="text-[17px] font-bold dark:text-white text-gray-900 mb-1">Activity Feed</h3>
+                    <h3 class="text-[17px] font-bold dark:text-white text-gray-900 mb-1"> <i class="fas fa-history"></i>
+                        Activity Feed</h3>
 
                     @forelse ($activities as $activity)
                         <div
@@ -521,17 +527,17 @@
 
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-[17px] font-bold dark:text-white text-gray-900">
-                            Productivity Overview
+                            <i class="fas fa-chart-line"></i> Productivity Overview
                         </h3>
                         {{-- Legend --}}
                         <div class="flex items-center gap-4 text-[12px] dark:text-gray-500 text-gray-400">
                             <span class="flex items-center gap-1.5">
                                 <span class="w-3 h-[2.5px] rounded-full bg-pink-500 inline-block"></span>
-                                This week
+                                <i class="fas fa-calendar-week"></i> This week
                             </span>
                             <span class="flex items-center gap-1.5">
                                 <span class="w-3 h-[2.5px] rounded-full bg-orange-400 inline-block"></span>
-                                Last week
+                                <i class="fas fa-calendar-week"></i> Last week
                             </span>
                         </div>
                     </div>
@@ -546,7 +552,7 @@
                     class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px] flex flex-col items-center">
 
                     <h3 class="text-[20px] font-bold dark:text-white text-gray-900 self-start mb-3.5">
-                        Habit Score
+                        <i class="fas fa-star text-orange-500 dark:text-orange-400"></i> Habit Score
                     </h3>
 
                     <!-- Ring -->

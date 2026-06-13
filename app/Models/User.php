@@ -59,6 +59,26 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\TaskLabel::class);
     }
+    
+    public function habits()
+    {
+        return $this->hasMany(Habit::class);
+    }
+
+    public function habitCategories()
+    {
+        return $this->hasMany(HabitCategory::class);
+    }
+
+    public function habitLogs()
+    {
+        return $this->hasMany(HabitLog::class);
+    }
+
+    public function habitStreaks()
+    {
+        return $this->hasMany(HabitStreak::class);
+    }
 
 
     public function notes()

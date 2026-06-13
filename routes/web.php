@@ -232,6 +232,17 @@ Route::middleware(['auth','role:user','setLocale'])->prefix('user')->name('user.
 
 Route::middleware(['auth','role:super_admin','setLocale'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('users', UserController::class);
+    // ── Extra Admin Actions ──────────────────────────────────────────────────────
+    Route::patch('users/{user}/toggle-status',  [UserController::class, 'toggleStatus'])  ->name('users.toggle-status');
+    Route::patch('users/{user}/reset-password', [UserController::class, 'resetPassword']) ->name('users.reset-password');
+    Route::post('users/{user}/impersonate',     [UserController::class, 'impersonate'])   ->name('users.impersonate');
+
+    // ── Stop Impersonating (outside admin prefix — accessible to any auth user) ──
+    // Add this OUTSIDE the admin group:
+    Route::post('/impersonate/stop', [UserController::class, 'stopImpersonate'])->middleware(['auth', 'setLocale'])->name('impersonate.stop');
+
+
+
     Route::resource('permissions', PermissionController::class);
     Route::resource('roles', RoleController::class);
 

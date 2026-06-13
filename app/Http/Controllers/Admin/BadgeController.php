@@ -16,6 +16,7 @@ class BadgeController extends Controller
     {
         $badges = Badge::withCount('users')->latest()->paginate(12);
 
+        
         return view('admin.gamification.badges', compact('badges'));
     }
 

@@ -25,51 +25,70 @@ class UserDashboardController extends Controller
     {
         $userId = auth()->id();
 
-        // ── Period filter: today | week | month ─────────────────
-        $period = in_array($request->get('period'), ['today', 'week', 'month'])
-            ? $request->get('period')
-            : 'today';
+        $period = $request->input('period', 'today');
 
-        [$rangeStart, $rangeEnd, $periodLabel] = match ($period) {
-            'week'  => [now()->startOfWeek(), now()->endOfWeek(), 'This Week'],
-            'month' => [now()->startOfMonth(), now()->endOfMonth(), 'This Month'],
-            default => [today()->startOfDay(), today()->endOfDay(), 'Today'],
-        };
+        if (!in_array($period, ['today', 'week', 'month'], true)) {
+            $period = 'today';
+        }
 
-        // ── Tasks within selected period ────────────────────────
+        if ($period === 'week') {
+            $rangeStart  = now()->copy()->startOfWeek();
+            $rangeEnd    = now()->copy()->endOfWeek();
+            $periodLabel = 'This Week';
+        } elseif ($period === 'month') {
+            $rangeStart  = now()->copy()->startOfMonth();
+            $rangeEnd    = now()->copy()->endOfMonth();
+            $periodLabel = 'This Month';
+        } else {
+            $rangeStart  = today()->copy()->startOfDay();
+            $rangeEnd    = today()->copy()->endOfDay();
+            $periodLabel = 'Today';
+        }
+
         $todayTasks = Task::with(['category', 'labels'])
             ->where('user_id', $userId)
-            ->whereBetween('due_date', [$rangeStart->toDateString(), $rangeEnd->toDateString()])
+            ->whereBetween('due_date', [
+                $rangeStart->toDateString(),
+                $rangeEnd->toDateString()
+            ])
             ->orderByRaw("FIELD(priority, 'high', 'medium', 'low')")
             ->get();
 
-        // ── Top 3 Priorities (real, pending/in_progress tasks) ──
         $topPriorities = Task::with('category')
             ->where('user_id', $userId)
             ->whereIn('status', ['pending', 'in_progress'])
             ->orderByRaw("FIELD(priority, 'high', 'medium', 'low')")
             ->orderBy('due_date')
-            ->limit(3)
+            ->limit(6)
             ->get();
 
-        $completedTaskCount = Task::where('user_id', $userId)->where('status', 'completed')->count();
-        $pendingTaskCount   = Task::where('user_id', $userId)->where('status', 'pending')->count();
+        $completedTaskCount = Task::where('user_id', $userId)
+            ->where('status', 'completed')
+            ->count();
+
+        $pendingTaskCount = Task::where('user_id', $userId)
+            ->where('status', 'pending')
+            ->count();
 
         $overdueTasks = Task::where('user_id', $userId)
             ->whereDate('due_date', '<', today())
             ->where('status', '!=', 'completed')
             ->count();
 
-        $todayTotal     = $todayTasks->count();
+        $todayTotal = $todayTasks->count();
+
         $todayCompleted = Task::where('user_id', $userId)
-            ->whereBetween('due_date', [$rangeStart->toDateString(), $rangeEnd->toDateString()])
+            ->whereBetween('due_date', [
+                $rangeStart->toDateString(),
+                $rangeEnd->toDateString()
+            ])
             ->where('status', 'completed')
             ->count();
 
-        $dailyProgress = $todayTotal > 0 ? round(($todayCompleted / $todayTotal) * 100) : 0;
+        $dailyProgress = $todayTotal > 0
+            ? round(($todayCompleted / $todayTotal) * 100)
+            : 0;
 
-
-        // ── Habits ──────────────────────────────────────────────
         $todayHabits = Habit::with('todayLog')
             ->where('user_id', $userId)
             ->where('status', true)
@@ -78,20 +97,29 @@ class UserDashboardController extends Controller
         $totalHabits = $todayHabits->count();
 
         if ($period === 'today') {
-            $completedToday = $todayHabits->filter(fn($habit) => $habit->todayLog?->is_completed)->count();
-            $habitDenominator = $totalHabits;
+            $completedToday = $todayHabits->filter(function ($habit) {
+                return optional($habit->todayLog)->is_completed;
+            })->count();
+
+            $habitDenominator = max(1, $totalHabits);
         } else {
-            // For week/month: count distinct habit-days completed vs possible
             $habitIds = $todayHabits->pluck('id');
 
             $completedToday = HabitLog::whereIn('habit_id', $habitIds)
                 ->where('is_completed', true)
-                ->whereBetween('log_date', [$rangeStart->toDateString(), $rangeEnd->toDateString()])
+                ->whereBetween('log_date', [
+                    $rangeStart->toDateString(),
+                    $rangeEnd->toDateString()
+                ])
                 ->count();
 
-            $daysInRange = $rangeStart->diffInDays($rangeEnd) + 1;
-            // cap "today" at actual elapsed days so future days don't deflate the rate
-            $elapsedDays = min($daysInRange, today()->diffInDays($rangeStart) >= 0 ? today()->diffInDays($rangeStart) + 1 : $daysInRange);
+            $daysInRange = $rangeStart->copy()->diffInDays($rangeEnd) + 1;
+
+            $actualEnd = today()->lt($rangeEnd) ? today() : $rangeEnd;
+
+            $elapsedDays = $rangeStart->gt(today())
+                ? 0
+                : ($rangeStart->copy()->diffInDays($actualEnd) + 1);
 
             $habitDenominator = max(1, $totalHabits * $elapsedDays);
         }
@@ -100,70 +128,74 @@ class UserDashboardController extends Controller
             ? round(($completedToday / $habitDenominator) * 100)
             : 0;
 
-        $circleDash   = 314.16;
+        $circleDash = 314.16;
         $circleOffset = $circleDash - ($circleDash * $habitCompletionRate / 100);
 
-        $habitScoreLabel = match (true) {
-            $habitCompletionRate >= 90 => 'Excellent',
-            $habitCompletionRate >= 70 => 'Good',
-            $habitCompletionRate >= 40 => 'Average',
-            default => 'Low',
-        };
+        if ($habitCompletionRate >= 90) {
+            $habitScoreLabel = 'Excellent';
+        } elseif ($habitCompletionRate >= 70) {
+            $habitScoreLabel = 'Good';
+        } elseif ($habitCompletionRate >= 40) {
+            $habitScoreLabel = 'Average';
+        } else {
+            $habitScoreLabel = 'Low';
+        }
 
-
-        // ── Gamification: XP, Level, Streak ─────────────────────
         $gamification = UserGamification::firstOrCreate(
             ['user_id' => $userId],
             ['xp' => 0, 'level' => 1, 'streak_days' => 0]
         );
 
-        $levelLabel      = GamificationService::getLevelLabel($gamification->level);
-        $levelProgress   = GamificationService::getLevelProgress($gamification);
+        $levelLabel = GamificationService::getLevelLabel($gamification->level);
+        $levelProgress = GamificationService::getLevelProgress($gamification);
         $userBadgesCount = UserBadge::where('user_id', $userId)->count();
 
         $streakDays = $gamification->streak_days;
-        $streakMessage = match (true) {
-            $streakDays >= 30 => 'Unstoppable! 🚀',
-            $streakDays >= 7  => 'Keep it hot! 🔥',
-            $streakDays >= 1  => 'Great start!',
-            default           => 'Start your streak today!',
-        };
 
+        if ($streakDays >= 30) {
+            $streakMessage = 'Unstoppable!';
+        } elseif ($streakDays >= 7) {
+            $streakMessage = 'Keep it hot!';
+        } elseif ($streakDays >= 1) {
+            $streakMessage = 'Great start!';
+        } else {
+            $streakMessage = 'Start your streak today!';
+        }
 
-        // ── Focus Time (within selected period) ──────────────────
         $periodFocusMinutes = (int) FocusSession::where('user_id', $userId)
             ->where('status', 'completed')
-            ->whereBetween('completed_at', [$rangeStart, $rangeEnd])
+            ->whereBetween('completed_at', [
+                $rangeStart->copy()->startOfDay(),
+                $rangeEnd->copy()->endOfDay()
+            ])
             ->sum('completed_minutes');
 
-        $focusMinutesToday  = $periodFocusMinutes;
+        $focusMinutesToday = $periodFocusMinutes;
         $focusTimeFormatted = $this->formatMinutes($focusMinutesToday);
 
-        // Mini sparkline data — last 7 days focus minutes (for the wavy chart)
         $focusSparkline = [];
+
         for ($i = 6; $i >= 0; $i--) {
-            $date = today()->subDays($i);
+            $date = today()->copy()->subDays($i);
+
             $focusSparkline[] = (int) FocusSession::where('user_id', $userId)
                 ->where('status', 'completed')
                 ->whereDate('completed_at', $date)
                 ->sum('completed_minutes');
         }
 
-
-        // ── Productivity Chart: This week vs Last week ──────────
-        // "Productivity" = tasks completed per day
         $thisWeekData = [];
         $lastWeekData = [];
-        $chartLabels  = [];
+        $chartLabels = [];
 
-        $startOfThisWeek = now()->startOfWeek();
-        $startOfLastWeek = now()->subWeek()->startOfWeek();
+        $startOfThisWeek = now()->copy()->startOfWeek();
+        $startOfLastWeek = now()->copy()->subWeek()->startOfWeek();
 
         for ($i = 0; $i < 7; $i++) {
             $thisDay = $startOfThisWeek->copy()->addDays($i);
             $lastDay = $startOfLastWeek->copy()->addDays($i);
 
-            $chartLabels[]  = $thisDay->format('D');
+            $chartLabels[] = $thisDay->format('D');
 
             $thisWeekData[] = Task::where('user_id', $userId)
                 ->where('status', 'completed')
@@ -176,10 +208,7 @@ class UserDashboardController extends Controller
                 ->count();
         }
 
-
-        // ── Activity Feed (merged from all modules, last 7 days) ─
         $activities = $this->buildActivityFeed($userId);
-
 
         return view('user.dashboard', compact(
             'period',

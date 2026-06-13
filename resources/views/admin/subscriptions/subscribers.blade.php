@@ -36,6 +36,50 @@
             </div>
         @endif
 
+        {{-- ── Per-Plan Revenue Breakdown ── --}}
+        @if ($planRevenue->isNotEmpty())
+            <div class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
+                <p class="text-[13px] font-bold dark:text-white text-gray-900 mb-4">
+                    <i class="fas fa-chart-bar mr-1.5 text-orange-400"></i> Revenue by Plan
+                </p>
+                <div class="space-y-3">
+                    @php $maxRev = $planRevenue->max('revenue_total') ?: 1; @endphp
+                    @foreach ($planRevenue as $pr)
+                        <div class="flex items-center gap-3">
+                            <div class="w-7 h-7 rounded-lg flex items-center justify-center text-sm flex-shrink-0"
+                                style="background: {{ $pr->color ?? '#f97316' }}22;">
+                                {{ $pr->icon ?? '💎' }}
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span
+                                        class="text-[13px] font-bold dark:text-white text-gray-900">{{ $pr->name }}</span>
+                                    <div class="flex items-center gap-3 text-[12px]">
+                                        <span class="dark:text-gray-400 text-gray-500">{{ $pr->active_count ?? 0 }}
+                                            subs</span>
+                                        @php $expiring = $expiringSoonByPlan[$pr->id] ?? 0; @endphp
+                                        @if ($expiring > 0)
+                                            <span
+                                                class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400">
+                                                <i class="fas fa-clock text-[9px]"></i> {{ $expiring }} expiring soon
+                                            </span>
+                                        @endif
+                                        <span
+                                            class="font-extrabold text-orange-400">${{ number_format($pr->revenue_total ?? 0, 2) }}</span>
+                                    </div>
+                                </div>
+                                <div class="h-1.5 dark:bg-white/[0.06] bg-gray-100 rounded-full overflow-hidden">
+                                    <div class="h-full rounded-full"
+                                        style="width: {{ $maxRev > 0 ? round((($pr->revenue_total ?? 0) / $maxRev) * 100) : 0 }}%; background: {{ $pr->color ?? '#f97316' }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
         {{-- ── Table ── --}}
         <div
             class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl overflow-hidden">
@@ -135,9 +179,43 @@
                                     ${{ number_format($sub->amount_paid, 2) }}
                                 </td>
 
-                                {{-- Ends --}}
-                                <td class="px-4 py-3 dark:text-gray-400 text-gray-500">
-                                    {{ $sub->ends_at ? $sub->ends_at->format('M d, Y') : '—' }}
+                                {{-- Expiry / Renewal --}}
+                                <td class="px-4 py-3">
+                                    @if ($sub->ends_at)
+                                        @php
+                                            $daysLeft = now()->diffInDays($sub->ends_at, false);
+                                        @endphp
+                                        <p class="text-[13px] dark:text-gray-300 text-gray-700 font-bold leading-tight">
+                                            {{ $sub->ends_at->format('M d, Y') }}
+                                        </p>
+                                        @if ($sub->status === 'active')
+                                            @if ($daysLeft < 0)
+                                                <span
+                                                    class="inline-flex items-center gap-1 mt-0.5 px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-500/10 text-red-400">
+                                                    <i class="fas fa-circle-exclamation text-[9px]"></i> Expired
+                                                </span>
+                                            @elseif ($daysLeft <= 7)
+                                                <span
+                                                    class="inline-flex items-center gap-1 mt-0.5 px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-500/10 text-red-400">
+                                                    <i class="fas fa-clock text-[9px]"></i> {{ $daysLeft }}d left
+                                                </span>
+                                            @elseif ($daysLeft <= 30)
+                                                <span
+                                                    class="inline-flex items-center gap-1 mt-0.5 px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400">
+                                                    <i class="fas fa-clock text-[9px]"></i> {{ $daysLeft }}d left
+                                                </span>
+                                            @else
+                                                <span
+                                                    class="text-[11px] dark:text-gray-500 text-gray-400">{{ $daysLeft }}d
+                                                    remaining</span>
+                                            @endif
+                                        @endif
+                                    @else
+                                        <span class="dark:text-gray-500 text-gray-400">—</span>
+                                        @if ($sub->status === 'active')
+                                            <p class="text-[10px] dark:text-gray-600 text-gray-400 mt-0.5">No expiry</p>
+                                        @endif
+                                    @endif
                                 </td>
 
                                 {{-- Actions --}}

@@ -71,14 +71,14 @@
                         <div class="flex gap-2">
                             <button type="button"
                                 onclick="openEditBadgeModal(
-                                    '{{ $badge->id }}',
-                                    '{{ addslashes($badge->name) }}',
-                                    '{{ addslashes($badge->description) }}',
-                                    '{{ addslashes($badge->icon) }}',
-                                    '{{ $badge->color }}',
-                                    '{{ $badge->xp_required }}',
-                                    '{{ $badge->is_active ? 1 : 0 }}'
-                                )"
+        {{ $badge->id }},
+        @js($badge->name),
+        @js($badge->description),
+        @js($badge->icon),
+        @js($badge->color),
+        {{ $badge->xp_required }},
+        {{ $badge->is_active ? 1 : 0 }}
+    )"
                                 class="px-3 py-2 rounded-lg text-[13px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
                                 <i class="fas fa-edit"></i> Edit
                             </button>
@@ -159,11 +159,11 @@
 
         function openEditBadgeModal(id, name, description, icon, color, xp, active) {
             document.getElementById('editBadgeForm').action = `/admin/badges/${id}`;
-            document.getElementById('edit_badge_name').value = name;
-            document.getElementById('edit_badge_description').value = description;
-            document.getElementById('edit_badge_icon').value = icon;
+            document.getElementById('edit_badge_name').value = name ?? '';
+            document.getElementById('edit_badge_description').value = description ?? '';
+            document.getElementById('edit_badge_icon').value = icon ?? '';
             document.getElementById('edit_badge_color').value = color || '#f97316';
-            document.getElementById('edit_badge_xp').value = xp;
+            document.getElementById('edit_badge_xp').value = xp ?? 0;
             document.getElementById('edit_badge_active').checked = active == 1;
             document.getElementById('editBadgeModal').classList.remove('hidden');
         }

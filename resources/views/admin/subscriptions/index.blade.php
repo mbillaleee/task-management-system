@@ -197,18 +197,30 @@
                         </div>
 
                         {{-- Footer --}}
+                        {{-- Revenue per plan --}}
                         <div
-                            class="relative z-10 flex items-center justify-between mt-auto pt-4 border-t dark:border-white/[0.06] border-black/[0.05]">
-                            <div class="flex items-center gap-2">
-                                <span
-                                    class="px-2 py-1 rounded-lg text-[12px] font-bold
-                                {{ $plan->is_active ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400' }}">
-                                    {{ $plan->is_active ? 'Active' : 'Inactive' }}
-                                </span>
-                                <span class="text-[11px] dark:text-gray-500 text-gray-400">
-                                    {{ $plan->active_subscribers_count ?? 0 }} subs
-                                </span>
+                            class="relative z-10 flex items-center gap-3 py-3 border-t dark:border-white/[0.06] border-black/[0.05] mt-auto">
+                            <div class="flex-1 dark:bg-white/[0.04] bg-gray-50 rounded-xl px-3 py-2 text-center">
+                                <p class="text-[15px] font-extrabold dark:text-white text-gray-900 leading-tight">
+                                    {{ $plan->active_subscribers_count ?? 0 }}
+                                </p>
+                                <p class="text-[10px] dark:text-gray-500 text-gray-400 uppercase tracking-wide">Active Subs
+                                </p>
                             </div>
+                            <div class="flex-1 dark:bg-orange-500/[0.08] bg-orange-50 rounded-xl px-3 py-2 text-center">
+                                <p class="text-[15px] font-extrabold text-orange-400 leading-tight">
+                                    ${{ number_format($plan->revenue_total ?? 0, 2) }}
+                                </p>
+                                <p class="text-[10px] dark:text-gray-500 text-gray-400 uppercase tracking-wide">Revenue</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="relative z-10 flex items-center justify-between pt-3 border-t dark:border-white/[0.06] border-black/[0.05]">
+                            <span
+                                class="px-2 py-1 rounded-lg text-[12px] font-bold {{ $plan->is_active ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400' }}">
+                                {{ $plan->is_active ? 'Active' : 'Inactive' }}
+                            </span>
                             <div class="flex gap-2">
                                 <button type="button" onclick='openEditModal(@json($plan))'
                                     class="px-3 py-1.5 rounded-lg text-[13px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
