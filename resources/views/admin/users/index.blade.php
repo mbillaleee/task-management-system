@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('admin')
-    <section class="flex-1 p-4 sm:p-5 flex flex-col gap-5">
+    <section class="flex-1 flex flex-col gap-5">
 
         {{-- ── Header ────────────────────────────────────────────────────────────── --}}
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -9,7 +9,7 @@
                 <h2 class="text-[22px] font-extrabold dark:text-white text-gray-900">
                     <i class="fas fa-users text-orange-500 mr-2"></i> User Management
                 </h2>
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-0.5">
+                <p class="text-[13px] dark:text-gray-400 text-gray-800 mt-0.5">
                     Manage all users, roles, suspension, passwords and impersonation.
                 </p>
             </div>
@@ -42,7 +42,7 @@
             @endphp
             @foreach ($statsCards as $card)
                 <div
-                    class="hover-lift p-4 rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 flex items-center gap-3">
+                    class="hover-lift p-4 rounded-2xl veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border flex items-center gap-3">
                     <div
                         class="w-10 h-10 rounded-xl bg-{{ $card['color'] }}-500/15 flex items-center justify-center shrink-0">
                         <i class="fas {{ $card['icon'] }} text-{{ $card['color'] }}-500 text-[16px]"></i>
@@ -50,7 +50,7 @@
                     <div>
                         <div class="text-[20px] font-extrabold dark:text-white text-gray-900 leading-none">
                             {{ $card['value'] }}</div>
-                        <div class="text-[11px] dark:text-gray-400 text-gray-500 mt-0.5">{{ $card['label'] }}</div>
+                        <div class="text-[11px] dark:text-gray-400 text-gray-800 mt-0.5">{{ $card['label'] }}</div>
                     </div>
                 </div>
             @endforeach
@@ -72,10 +72,10 @@
 
         {{-- ── Filter & Search ─────────────────────────────────────────────────── --}}
         <form method="GET" action="{{ route('admin.users.index') }}"
-            class="p-4 rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 flex flex-wrap gap-3 items-end">
+            class="p-4 rounded-2xl  veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border flex flex-wrap gap-3 items-end">
             <div class="flex-1 min-w-[180px]">
                 <label
-                    class="block text-[11px] font-semibold dark:text-gray-400 text-gray-500 mb-1 uppercase tracking-wide">Search</label>
+                    class="block text-[11px] font-semibold dark:text-gray-400 text-gray-800 mb-1 uppercase tracking-wide">Search</label>
                 <div class="relative">
                     <i
                         class="fas fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[12px]"></i>
@@ -85,7 +85,7 @@
             </div>
             <div class="min-w-[140px]">
                 <label
-                    class="block text-[11px] font-semibold dark:text-gray-400 text-gray-500 mb-1 uppercase tracking-wide">Role</label>
+                    class="block text-[11px] font-semibold dark:text-gray-400 text-gray-800 mb-1 uppercase tracking-wide">Role</label>
                 <select name="role"
                     class="w-full px-3 py-2 rounded-xl text-[13px] dark:bg-[#0f0c17] bg-gray-50 border dark:border-white/[0.07] border-gray-200 dark:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500/40">
                     <option value="">All Roles</option>
@@ -98,7 +98,7 @@
             </div>
             <div class="min-w-[140px]">
                 <label
-                    class="block text-[11px] font-semibold dark:text-gray-400 text-gray-500 mb-1 uppercase tracking-wide">Status</label>
+                    class="block text-[11px] font-semibold dark:text-gray-400 text-gray-800 mb-1 uppercase tracking-wide">Status</label>
                 <select name="status"
                     class="w-full px-3 py-2 rounded-xl text-[13px] dark:bg-[#0f0c17] bg-gray-50 border dark:border-white/[0.07] border-gray-200 dark:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500/40">
                     <option value="">All Status</option>
@@ -119,25 +119,25 @@
         </form>
 
         {{-- ── Users Table ─────────────────────────────────────────────────────── --}}
-        <div class="rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 overflow-hidden">
+        <div class="rounded-2xl  veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-[13px]">
                     <thead>
                         <tr class="border-b dark:border-white/[0.06] border-gray-100">
-                            <th class="text-left px-5 py-3.5 dark:text-gray-400 text-gray-500 font-semibold">#</th>
-                            <th class="text-left px-5 py-3.5 dark:text-gray-400 text-gray-500 font-semibold">User</th>
-                            <th class="text-left px-5 py-3.5 dark:text-gray-400 text-gray-500 font-semibold">Role</th>
-                            <th class="text-left px-5 py-3.5 dark:text-gray-400 text-gray-500 font-semibold">Plan</th>
-                            <th class="text-center px-5 py-3.5 dark:text-gray-400 text-gray-500 font-semibold">XP / Level
+                            <th class="text-left px-5 py-3.5 dark:text-gray-400 text-gray-800 font-semibold">#</th>
+                            <th class="text-left px-5 py-3.5 dark:text-gray-400 text-gray-800 font-semibold">User</th>
+                            <th class="text-left px-5 py-3.5 dark:text-gray-400 text-gray-800 font-semibold">Role</th>
+                            <th class="text-left px-5 py-3.5 dark:text-gray-400 text-gray-800 font-semibold">Plan</th>
+                            <th class="text-center px-5 py-3.5 dark:text-gray-400 text-gray-800 font-semibold">XP / Level
                             </th>
-                            <th class="text-center px-5 py-3.5 dark:text-gray-400 text-gray-500 font-semibold">Status</th>
-                            <th class="text-right px-5 py-3.5 dark:text-gray-400 text-gray-500 font-semibold">Actions</th>
+                            <th class="text-center px-5 py-3.5 dark:text-gray-400 text-gray-800 font-semibold">Status</th>
+                            <th class="text-right px-5 py-3.5 dark:text-gray-400 text-gray-800 font-semibold">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y dark:divide-white/[0.04] divide-gray-50">
                         @forelse ($data as $user)
                             <tr class="hover:dark:bg-white/[0.02] hover:bg-gray-50/60 transition">
-                                <td class="px-5 py-3.5 dark:text-gray-500 text-gray-400 font-mono">
+                                <td class="px-5 py-3.5 dark:text-gray-500 text-gray-800 font-mono">
                                     {{ $data->firstItem() + $loop->index }}
                                 </td>
                                 <td class="px-5 py-3.5">
@@ -154,7 +154,7 @@
                                         <div>
                                             <div class="font-semibold dark:text-white text-gray-900">{{ $user->name }}
                                             </div>
-                                            <div class="text-[11px] dark:text-gray-500 text-gray-400">{{ $user->email }}
+                                            <div class="text-[11px] dark:text-gray-500 text-gray-800">{{ $user->email }}
                                             </div>
                                         </div>
                                     </div>

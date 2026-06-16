@@ -8,12 +8,12 @@
             <div>
                 <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-users"></i> Subscribers
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">View and manage individual user subscriptions.
+                <p class="text-[14px] dark:text-gray-500 text-gray-800 mt-0.5">View and manage individual user subscriptions.
                 </p>
             </div>
             <div class="flex gap-2">
                 <a href="{{ route('admin.subscriptions.index') }}"
-                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
+                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-white text-gray-800 border dark:border-white/[0.08] border-black/[0.08]">
                     <i class="fas fa-arrow-left"></i> Plans
                 </a>
                 <button onclick="openAssignModal()"
@@ -38,8 +38,8 @@
 
         {{-- ── Per-Plan Revenue Breakdown ── --}}
         @if ($planRevenue->isNotEmpty())
-            <div class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[13px] font-bold dark:text-white text-gray-900 mb-4">
+            <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-5">
+                <p class="text-[13px] font-bold dark:text-white text-gray-800 mb-4">
                     <i class="fas fa-chart-bar mr-1.5 text-orange-400"></i> Revenue by Plan
                 </p>
                 <div class="space-y-3">
@@ -53,9 +53,9 @@
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center justify-between mb-1">
                                     <span
-                                        class="text-[13px] font-bold dark:text-white text-gray-900">{{ $pr->name }}</span>
+                                        class="text-[13px] font-bold dark:text-white text-gray-800">{{ $pr->name }}</span>
                                     <div class="flex items-center gap-3 text-[12px]">
-                                        <span class="dark:text-gray-400 text-gray-500">{{ $pr->active_count ?? 0 }}
+                                        <span class="dark:text-white text-gray-800">{{ $pr->active_count ?? 0 }}
                                             subs</span>
                                         @php $expiring = $expiringSoonByPlan[$pr->id] ?? 0; @endphp
                                         @if ($expiring > 0)
@@ -68,7 +68,7 @@
                                             class="font-extrabold text-orange-400">${{ number_format($pr->revenue_total ?? 0, 2) }}</span>
                                     </div>
                                 </div>
-                                <div class="h-1.5 dark:bg-white/[0.06] bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-1.5 dark:bg-white/[0.06] bg-gray-400 rounded-full overflow-hidden">
                                     <div class="h-full rounded-full"
                                         style="width: {{ $maxRev > 0 ? round((($pr->revenue_total ?? 0) / $maxRev) * 100) : 0 }}%; background: {{ $pr->color ?? '#f97316' }}">
                                     </div>
@@ -81,13 +81,12 @@
         @endif
 
         {{-- ── Table ── --}}
-        <div
-            class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl overflow-hidden">
+        <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl overflow-hidden">
             <div class="p-4 border-b dark:border-white/[0.06] border-black/[0.05] flex items-center justify-between">
-                <p class="text-[14px] font-bold dark:text-white text-gray-900">
+                <p class="text-[14px] font-bold dark:text-white text-gray-800">
                     <i class="fas fa-list"></i> All Subscriptions
                     <span
-                        class="ml-2 px-2 py-0.5 rounded-lg text-[12px] dark:bg-white/[0.07] bg-gray-100 dark:text-gray-400 text-gray-500">
+                        class="ml-2 px-2 py-0.5 rounded-lg text-[12px] dark:bg-white/[0.07] bg-gray-400 dark:text-white text-gray-800 font-bold">
                         {{ $subscriptions->total() }}
                     </span>
                 </p>
@@ -98,31 +97,31 @@
                     <thead>
                         <tr class="dark:border-b dark:border-white/[0.05] border-b border-black/[0.05]">
                             <th
-                                class="px-4 py-3 text-left text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
+                                class="px-4 py-3 text-left text-[12px] font-bold dark:text-white text-gray-800 uppercase tracking-wide">
                                 <i class="fas fa-user"></i> User
                             </th>
                             <th
-                                class="px-4 py-3 text-left text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
+                                class="px-4 py-3 text-left text-[12px] font-bold dark:text-white text-gray-800 uppercase tracking-wide">
                                 <i class="fas fa-list"></i> Plan
                             </th>
                             <th
-                                class="px-4 py-3 text-left text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
+                                class="px-4 py-3 text-left text-[12px] font-bold dark:text-white text-gray-800 uppercase tracking-wide">
                                 <i class="fas fa-circle-dollar-to-slot"></i> Billing
                             </th>
                             <th
-                                class="px-4 py-3 text-left text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
+                                class="px-4 py-3 text-left text-[12px] font-bold dark:text-white text-gray-800 uppercase tracking-wide">
                                 <i class="fas fa-info-circle"></i> Status
                             </th>
                             <th
-                                class="px-4 py-3 text-left text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
+                                class="px-4 py-3 text-left text-[12px] font-bold dark:text-white text-gray-800 uppercase tracking-wide">
                                 <i class="fas fa-coins"></i> Amount
                             </th>
                             <th
-                                class="px-4 py-3 text-left text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
+                                class="px-4 py-3 text-left text-[12px] font-bold dark:text-white text-gray-800 uppercase tracking-wide">
                                 <i class="fas fa-clock"></i> Ends
                             </th>
                             <th
-                                class="px-4 py-3 text-right text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wide">
+                                class="px-4 py-3 text-right text-[12px] font-bold dark:text-white text-gray-800 uppercase tracking-wide">
                                 <i class="fas fa-cog"></i> Actions
                             </th>
                         </tr>
@@ -140,7 +139,7 @@
                                         <div>
                                             <p class="font-bold dark:text-white text-gray-900 leading-tight">
                                                 {{ $sub->user->name ?? 'Deleted User' }}</p>
-                                            <p class="text-[11px] dark:text-gray-500 text-gray-400">
+                                            <p class="text-[11px] dark:text-white text-gray-800">
                                                 {{ $sub->user->email ?? '—' }}</p>
                                         </div>
                                     </div>
@@ -154,14 +153,14 @@
                                             {{ $sub->plan->icon ?? '' }} {{ $sub->plan->name }}
                                         </span>
                                     @else
-                                        <span class="dark:text-gray-500 text-gray-400">—</span>
+                                        <span class="dark:text-white text-gray-800">—</span>
                                     @endif
                                 </td>
 
                                 {{-- Billing --}}
                                 <td class="px-4 py-3">
                                     <span
-                                        class="px-2 py-0.5 rounded-md text-[11px] font-bold dark:bg-white/[0.06] bg-gray-100 dark:text-gray-300 text-gray-600 capitalize">
+                                        class="px-2 py-0.5 rounded-md text-[11px] font-bold dark:bg-white/[0.06] bg-gray-100 dark:text-white text-gray-600 capitalize">
                                         {{ $sub->billing_cycle }}
                                     </span>
                                 </td>
@@ -185,7 +184,7 @@
                                         @php
                                             $daysLeft = now()->diffInDays($sub->ends_at, false);
                                         @endphp
-                                        <p class="text-[13px] dark:text-gray-300 text-gray-700 font-bold leading-tight">
+                                        <p class="text-[13px] dark:text-white text-gray-700 font-bold leading-tight">
                                             {{ $sub->ends_at->format('M d, Y') }}
                                         </p>
                                         @if ($sub->status === 'active')
@@ -206,12 +205,12 @@
                                                 </span>
                                             @else
                                                 <span
-                                                    class="text-[11px] dark:text-gray-500 text-gray-400">{{ $daysLeft }}d
+                                                    class="text-[11px] dark:text-white text-gray-800">{{ $daysLeft }}d
                                                     remaining</span>
                                             @endif
                                         @endif
                                     @else
-                                        <span class="dark:text-gray-500 text-gray-400">—</span>
+                                        <span class="dark:text-white text-gray-800">—</span>
                                         @if ($sub->status === 'active')
                                             <p class="text-[10px] dark:text-gray-600 text-gray-400 mt-0.5">No expiry</p>
                                         @endif
@@ -238,8 +237,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7"
-                                    class="px-4 py-12 text-center dark:text-gray-500 text-gray-400 text-[14px]">
+                                <td colspan="7" class="px-4 py-12 text-center dark:text-white text-gray-800 text-[14px]">
                                     <i class="fas fa-info-circle mr-2"></i> No subscriptions found.
                                 </td>
                             </tr>
@@ -259,9 +257,9 @@
          ASSIGN PLAN MODAL
     ══════════════════════════════════════════════ --}}
         <div id="assignModal"
-            class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
+            class="hidden fixed inset-0 z-50 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border flex items-center justify-center px-4">
             <div
-                class="w-full max-w-lg dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-6">
+                class="w-full max-w-lg veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-6">
                 <div class="flex justify-between items-center mb-5">
                     <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">Assign Subscription Plan</h3>
                     <button onclick="closeAssignModal()"
@@ -273,7 +271,7 @@
 
                     {{-- User search --}}
                     <div>
-                        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
+                        <label class="block text-[12px] font-bold dark:text-white text-gray-700 mb-1.5">
                             Select User <span class="text-red-400">*</span>
                         </label>
 
@@ -293,7 +291,7 @@
 
                     {{-- Plan --}}
                     <div>
-                        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Plan <span
+                        <label class="block text-[12px] font-bold dark:text-white text-gray-700 mb-1.5">Plan <span
                                 class="text-red-400">*</span></label>
                         <select name="subscription_plan_id" required
                             class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-gray-50 dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1] focus:border-orange-400 transition">
@@ -309,7 +307,7 @@
                     {{-- Billing & Status --}}
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Billing
+                            <label class="block text-[12px] font-bold dark:text-white text-gray-700 mb-1.5">Billing
                                 Cycle</label>
                             <select name="billing_cycle"
                                 class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-gray-50 dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1] focus:border-orange-400 transition">
@@ -318,8 +316,7 @@
                             </select>
                         </div>
                         <div>
-                            <label
-                                class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Status</label>
+                            <label class="block text-[12px] font-bold dark:text-white text-gray-700 mb-1.5">Status</label>
                             <select name="status"
                                 class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-gray-50 dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1] focus:border-orange-400 transition">
                                 <option value="active">Active</option>
@@ -333,13 +330,13 @@
                     {{-- Dates --}}
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Starts
+                            <label class="block text-[12px] font-bold dark:text-white text-gray-700 mb-1.5">Starts
                                 At</label>
                             <input type="date" name="starts_at"
                                 class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-gray-50 dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1] focus:border-orange-400 transition">
                         </div>
                         <div>
-                            <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Ends
+                            <label class="block text-[12px] font-bold dark:text-white text-gray-700 mb-1.5">Ends
                                 At</label>
                             <input type="date" name="ends_at"
                                 class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-gray-50 dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1] focus:border-orange-400 transition">
@@ -348,13 +345,13 @@
 
                     {{-- Amount + Notes --}}
                     <div>
-                        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Amount Paid
+                        <label class="block text-[12px] font-bold dark:text-white text-gray-700 mb-1.5">Amount Paid
                             ($)</label>
                         <input type="number" name="amount_paid" value="0" min="0" step="0.01"
                             class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-gray-50 dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1] focus:border-orange-400 transition">
                     </div>
                     <div>
-                        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Notes</label>
+                        <label class="block text-[12px] font-bold dark:text-white text-gray-700 mb-1.5">Notes</label>
                         <textarea name="notes" rows="2" placeholder="Admin notes (optional)..."
                             class="w-full px-3.5 py-2.5 rounded-[10px] text-[13px] outline-none resize-none dark:bg-[#1a1625] bg-gray-50 dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1] focus:border-orange-400 transition"></textarea>
                     </div>

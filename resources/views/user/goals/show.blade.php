@@ -7,7 +7,7 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     <i class="fas fa-tasks mr-2"></i> Goal Details
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     View milestones, progress and achievement tracking.
                 </p>
             </div>
@@ -27,17 +27,16 @@
 
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
             <div class="xl:col-span-2 space-y-4">
-                <div
-                    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+                <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-[18px]">
                     <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">{{ $goal->title }}</h3>
 
-                    <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-3 leading-relaxed">
+                    <p class="text-[14px] dark:text-white text-gray-800 mt-3 leading-relaxed">
                         {{ $goal->description ?? 'No description added.' }}
                     </p>
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-info-circle mr-2"></i>
+                            <p class="text-[13px] dark:text-white text-gray-800"><i class="fas fa-info-circle mr-2"></i>
                                 Status</p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ ucwords(str_replace('_', ' ', $goal->status)) }}
@@ -45,14 +44,14 @@
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-tag mr-2"></i> Type</p>
+                            <p class="text-[13px] dark:text-white text-gray-800"><i class="fas fa-tag mr-2"></i> Type</p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ ucwords(str_replace('_', ' ', $goal->type)) }}
                             </p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-folder mr-2"></i>
+                            <p class="text-[13px] dark:text-white text-gray-800"><i class="fas fa-folder mr-2"></i>
                                 Category</p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ $goal->category?->name ?? 'N/A' }}
@@ -60,7 +59,7 @@
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-calendar-alt mr-2"></i>
+                            <p class="text-[13px] dark:text-white text-gray-800"><i class="fas fa-calendar-alt mr-2"></i>
                                 Deadline</p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ $goal->deadline ? $goal->deadline->format('d M, Y') : 'No deadline' }}
@@ -70,20 +69,19 @@
 
                     <div class="mt-6">
                         <div class="flex justify-between text-[14px] mb-2">
-                            <span class="dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-chart-line mr-2"></i>
+                            <span class="dark:text-white text-gray-800 font-bold"><i class="fas fa-chart-line mr-2"></i>
                                 Overall Progress</span>
                             <span class="dark:text-white text-gray-900 font-bold">{{ $goal->progress }}%</span>
                         </div>
 
-                        <div class="w-full h-[10px] rounded-full dark:bg-white/[0.08] bg-gray-100 overflow-hidden">
+                        <div class="w-full h-[10px] rounded-full dark:bg-white/[0.08] bg-gray-400 overflow-hidden">
                             <div class="h-full rounded-full bg-gradient-to-r from-orange-500 to-pink-500"
                                 style="width: {{ $goal->progress }}%"></div>
                         </div>
                     </div>
                 </div>
 
-                <div
-                    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+                <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-[18px]">
                     <h3 class="text-[16px] font-bold dark:text-white text-gray-900 mb-3.5">
                         <i class="fas fa-flag mr-2"></i> Milestones
                     </h3>
@@ -133,20 +131,19 @@
                             </form>
                         </div>
                     @empty
-                        <p class="text-center text-gray-500 py-6">No milestones added yet.</p>
+                        <p class="text-center dark:text-white text-gray-800 py-6">No milestones added yet.</p>
                     @endforelse
                 </div>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+            <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-[18px]">
                 <h3 class="text-[18px] font-bold dark:text-white text-gray-900 mb-4">
                     <i class="fas fa-trophy mr-2"></i> Achievement Tracking
                 </h3>
 
                 <div class="space-y-4">
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-4">
-                        <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-star mr-2"></i> XP Earned
+                        <p class="text-[13px] dark:text-white text-gray-800"><i class="fas fa-star mr-2"></i> XP Earned
                         </p>
                         <h4 class="text-[28px] font-black text-yellow-400 mt-1">
                             {{ $goal->xp_earned }}
@@ -154,7 +151,7 @@
                     </div>
 
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-4">
-                        <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-flag mr-2"></i> Completed
+                        <p class="text-[13px] dark:text-white text-gray-800"><i class="fas fa-flag mr-2"></i> Completed
                             Milestones</p>
                         <h4 class="text-[28px] font-black text-emerald-400 mt-1">
                             {{ $goal->milestones->where('is_completed', true)->count() }}/{{ $goal->milestones->count() }}
@@ -162,7 +159,7 @@
                     </div>
 
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-4">
-                        <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-trophy mr-2"></i>
+                        <p class="text-[13px] dark:text-white text-gray-800"><i class="fas fa-trophy mr-2"></i>
                             Achievement Status</p>
                         <h4
                             class="text-[16px] font-bold mt-1 {{ $goal->status === 'completed' ? 'text-emerald-400' : 'text-orange-400' }}">
@@ -172,7 +169,7 @@
 
                     @if ($goal->completed_at)
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-4">
-                            <p class="text-[13px] dark:text-gray-500 text-gray-400"><i class="fas fa-clock mr-2"></i>
+                            <p class="text-[13px] dark:text-white text-gray-800"><i class="fas fa-clock mr-2"></i>
                                 Completed At</p>
                             <h4 class="text-[14px] font-bold dark:text-white text-gray-900 mt-1">
                                 {{ $goal->completed_at->format('d M Y h:i A') }}

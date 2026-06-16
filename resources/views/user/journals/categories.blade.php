@@ -29,7 +29,10 @@
 
         {{-- Category List --}}
         <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+            class="hover-lift dark:border-pink-500/15 bg-[#f7e4c3]/75
+            dark:bg-[#080612]  backdrop-blur-xl  p-6  space-y-6
+            shadow-[inset_0_1px_0_rgba(255,255,255,.65),0_20px_50px_rgba(180,95,20,.12),0_8px_20px_rgba(255,140,20,.08)]
+            dark:shadow-[inset_0_1px_0_rgba(255,255,255,.03)] rounded-2xl p-[18px]">
             <div class="flex items-center justify-between mb-5">
                 <div>
                     <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">
@@ -47,8 +50,7 @@
                         $categoryColor = $category->color ?? '#f97316';
                     @endphp
 
-                    <div
-                        class="relative overflow-hidden hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4">
+                    <div class="relative overflow-hidden hover-lift veroa-card rounded-2xl p-4">
 
                         <div class="absolute top-0 right-0 w-24 h-24 blur-3xl opacity-20"
                             style="background: {{ $categoryColor }}"></div>
@@ -120,8 +122,7 @@
         {{-- Create Modal --}}
         <div id="createCategoryModal"
             class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
-            <div
-                class="w-full max-w-md dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-5 shadow-2xl">
+            <div class="w-full max-w-md veroa-card rounded-2xl p-5 shadow-2xl">
                 <div class="flex items-center justify-between mb-4">
                     <div>
                         <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">
@@ -178,8 +179,7 @@
         {{-- Edit Modal --}}
         <div id="editCategoryModal"
             class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
-            <div
-                class="w-full max-w-md dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-5 shadow-2xl">
+            <div class="w-full max-w-md veroa-card rounded-2xl p-5 shadow-2xl">
                 <div class="flex items-center justify-between mb-4">
                     <div>
                         <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">

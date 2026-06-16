@@ -1,6 +1,6 @@
-@extends('user.layouts.master')
+@extends('admin.layouts.master')
 
-@section('user')
+@section('admin')
     <section class="flex-1 p-4 sm:p-5 flex flex-col gap-4">
 
         <!-- Header -->
@@ -13,8 +13,7 @@
         </div>
 
         <!-- Profile Update Form -->
-        <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 rounded-2xl p-5 mt-4">
+        <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-5 mt-4">
             <form method="POST" action="{{ route('profile.update') }}" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @csrf
                 @method('patch')
@@ -53,8 +52,7 @@
             </form>
         </div>
 
-        <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 rounded-2xl p-5 mt-4">
+        <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-5 mt-4">
 
             <form method="POST" action="{{ route('profile.update.account') }}" enctype="multipart/form-data"
                 class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -214,8 +212,7 @@
         </div>
 
         <!-- Password Update Form -->
-        <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 rounded-2xl p-5 mt-4">
+        <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-5 mt-4">
             <form method="POST" action="{{ route('password.update') }}" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @csrf
                 @method('put')

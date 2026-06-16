@@ -3,16 +3,7 @@
 @section('user')
     <div class="space-y-5">
 
-        <section
-            class="relative overflow-hidden rounded-2xl border dark:border-orange-500/[0.18] border-orange-200/70
-        dark:bg-[#100b18] bg-orange-50/70 px-6 py-6">
-
-            <div class="absolute inset-0 opacity-40 pointer-events-none"
-                style="background:
-            radial-gradient(circle at 80% 40%, rgba(236,72,153,.30), transparent 35%),
-            radial-gradient(circle at 25% 70%, rgba(249,115,22,.25), transparent 32%);">
-            </div>
-
+        <section class="relative overflow-hidden rounded-2xl border  veroa-card px-6 py-6">
             <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                     <p class="text-[14px] font-semibold text-orange-400 mb-2"> <i class="fa-solid fa-edit"></i> Edit Note</p>

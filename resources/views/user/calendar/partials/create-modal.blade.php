@@ -1,14 +1,15 @@
-<div id="createModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 dark:bg-black/40 bg-black/40"
+<div id="createModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4"
     onclick="if(event.target===this) closeCreateModal()">
-    <div class="absolute inset-0 dark:bg-black/70 bg-black/40 backdrop-blur-sm"></div>
+
     <div
-        class="relative w-full max-w-3xl dark:bg-[#0f0b18] bg-white border dark:border-white/[0.1] border-black/[0.08] rounded-3xl shadow-2xl overflow-hidden">
+        class="relative w-full max-w-3xl veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-3xl shadow-2xl overflow-hidden">
         <form id="eventForm" action="{{ route('user.calendar.store') }}" method="POST"
             class="relative p-6 space-y-5 overflow-y-auto max-h-[75vh] sm:max-h-[85vh]">
             @csrf
             <div class="flex items-center justify-between gap-4">
                 <div>
-                    <h3 id="modalTitle" class="text-xl font-bold dark:text-white text-gray-900">Add Event</h3>
+                    <h3 id="modalTitle" class="text-xl font-bold dark:text-white text-gray-900"><i
+                            class="fas fa-plus mr-2"></i> Add Event</h3>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Create or update calendar events.</p>
                 </div>
                 <button type="button" onclick="closeCreateModal()"
@@ -157,9 +158,11 @@
             <div
                 class="flex flex-col sm:flex-row items-center justify-end gap-3 pt-3 border-t border-black/[0.08] dark:border-white/[0.08]">
                 <button type="button" onclick="closeCreateModal()"
-                    class="inline-flex items-center justify-center rounded-2xl border border-black/[0.1] dark:border-white/[0.12] px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-black/[0.05] dark:hover:bg-white/[0.08] transition">Cancel</button>
+                    class="inline-flex items-center justify-center rounded-2xl border border-black/[0.1] dark:border-white/[0.12] px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-black/[0.05] dark:hover:bg-white/[0.08] transition"><i
+                        class="fas fa-times mr-2"></i>Cancel</button>
                 <button type="submit" id="submitBtn"
-                    class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-pink-500 text-white px-5 py-3 text-sm font-semibold shadow-sm hover:shadow-md transition">Create
+                    class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-pink-500 text-white px-5 py-3 text-sm font-semibold shadow-sm hover:shadow-md transition"><i
+                        class="fas fa-plus mr-2"></i>Create
                     Event</button>
             </div>
         </form>

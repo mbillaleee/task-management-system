@@ -6,18 +6,20 @@
         {{-- Header + Period Filter --}}
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-                <h2 class="text-[22px] font-extrabold dark:text-white text-gray-900">✅ Productivity Analytics</h2>
-                <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-0.5">Task completion trends, priorities & streaks.
+                <h2 class="text-[22px] font-extrabold dark:text-white text-gray-800">
+                    <i class="fas fa-chart-line text-blue-400 dark:text-blue-400"></i> Productivity Analytics
+                </h2>
+                <p class="text-[13px] dark:text-white text-gray-800 mt-0.5">Task completion trends, priorities & streaks.
                 </p>
             </div>
             <div class="flex items-center gap-2">
                 <a href="{{ route('user.analytics.index') }}"
-                    class="px-3 py-2 rounded-xl text-[13px] dark:bg-white/[0.06] bg-gray-100 dark:text-gray-300 text-gray-600 font-bold">←
+                    class="px-3 py-2 rounded-xl text-[13px] dark:bg-white/[0.06] bg-gray-100 dark:text-white text-gray-800 font-bold">←
                     Overview</a>
                 @foreach ([7, 30, 90] as $p)
                     <a href="{{ route('user.analytics.productivity', ['period' => $p]) }}"
                         class="px-3 py-2 rounded-xl text-[13px] font-bold transition
-                {{ $period == $p ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white' : 'dark:bg-white/[0.06] bg-gray-100 dark:text-gray-300 text-gray-600' }}">
+                {{ $period == $p ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white' : 'dark:bg-white/[0.06] bg-gray-100 dark:text-white text-gray-800' }}">
                         {{ $p }}d
                     </a>
                 @endforeach
@@ -26,19 +28,64 @@
 
         {{-- Summary Cards --}}
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            @php $cards = [['v' => $completedInPeriod, 'l' => 'Completed', 's' => "last {$period} days", 'c' => 'text-emerald-400'], ['v' => $avgPerDay, 'l' => 'Avg / Day', 's' => 'tasks completed', 'c' => 'text-orange-400'], ['v' => $overdueRate . '%', 'l' => 'Overdue Rate', 's' => 'of tasks with deadline', 'c' => 'text-red-400'], ['v' => $completionStreak . 'd', 'l' => 'Active Streak', 's' => 'consecutive days', 'c' => 'text-purple-400']]; @endphp
+
+            @php
+                $cards = [
+                    [
+                        'v' => $completedInPeriod,
+                        'l' => 'Completed',
+                        's' => "last {$period} days",
+                        'c' => 'text-emerald-400',
+                    ],
+                    [
+                        'v' => $avgPerDay,
+                        'l' => 'Avg / Day',
+                        's' => 'tasks completed',
+                        'c' => 'text-orange-400',
+                    ],
+                    [
+                        'v' => $overdueRate . '%',
+                        'l' => 'Overdue Rate',
+                        's' => 'of tasks with deadline',
+                        'c' => 'text-red-400',
+                    ],
+                    [
+                        'v' => $completionStreak . 'd',
+                        'l' => 'Active Streak',
+                        's' => 'consecutive days',
+                        'c' => 'text-purple-400',
+                    ],
+                ];
+            @endphp
+
             @foreach ($cards as $c)
-                <div class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-4">
-                    <p class="text-[26px] font-black {{ $c['c'] }}">{{ $c['v'] }}</p>
-                    <p class="text-[13px] font-bold dark:text-white text-gray-900">{{ $c['l'] }}</p>
-                    <p class="text-[11px] dark:text-gray-500 text-gray-400">{{ $c['s'] }}</p>
+                <div
+                    class="veroa-card rounded-2xl border p-5 flex flex-col items-center justify-center text-center
+                shadow-[0_20px_60px_rgba(0,0,0,0.20)] hover:-translate-y-1 transition">
+
+                    <!-- VALUE -->
+                    <p class="text-[30px] font-black {{ $c['c'] }} leading-tight">
+                        {{ $c['v'] }}
+                    </p>
+
+                    <!-- TITLE -->
+                    <p class="text-[13px] font-bold dark:text-white text-gray-800 mt-1">
+                        {{ $c['l'] }}
+                    </p>
+
+                    <!-- SUB TEXT -->
+                    <p class="text-[11px] text-gray-800 dark:text-white mt-0.5">
+                        {{ $c['s'] }}
+                    </p>
+
                 </div>
             @endforeach
+
         </div>
 
         {{-- Tasks Completed Per Day Chart --}}
-        <div class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-5">
-            <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-4">Tasks Completed — Last
+        <div class="veroa-card rounded-2xl border p-5">
+            <h3 class="text-[16px] font-extrabold dark:text-white text-gray-800 mb-4">Tasks Completed — Last
                 {{ $period }} Days</h3>
             @php
                 $maxCount = max(1, collect($taskChart)->max('count'));
@@ -51,11 +98,11 @@
                         @if ($day['count'] > 0)
                             <span class="text-[9px] text-orange-400 font-bold">{{ $day['count'] }}</span>
                         @endif
-                        <div class="w-full rounded-t transition-all {{ $day['date'] === now()->format('Y-m-d') ? 'bg-gradient-to-t from-orange-500 to-pink-500' : 'dark:bg-white/[0.12] bg-orange-100' }}"
+                        <div class="w-full rounded-t transition-all {{ $day['date'] === now()->format('Y-m-d') ? 'bg-gradient-to-t from-orange-500 to-pink-500' : 'dark:bg-white/[0.12] bg-orange-300' }}"
                             style="height:{{ max(3, round(($day['count'] / $maxCount) * 90)) }}px"></div>
                         @if ($i % $showEvery === 0)
                             <span
-                                class="text-[9px] dark:text-gray-600 text-gray-400">{{ $day['count'] > 0 ? substr($day['label'], 0, 5) : '' }}</span>
+                                class="text-[9px] dark:text-white text-gray-800">{{ $day['count'] > 0 ? substr($day['label'], 0, 5) : '' }}</span>
                         @endif
                     </div>
                 @endforeach
@@ -64,8 +111,8 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {{-- Priority Breakdown --}}
-            <div class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-5">
-                <h3 class="text-[15px] font-extrabold dark:text-white text-gray-900 mb-4">Priority Breakdown</h3>
+            <div class="veroa-card rounded-2xl border p-5">
+                <h3 class="text-[15px] font-extrabold dark:text-white text-gray-800 mb-4">Priority Breakdown</h3>
                 @php
                     $priorityColors = ['high' => 'bg-red-500', 'medium' => 'bg-orange-400', 'low' => 'bg-emerald-500'];
                     $priorityTotal = max(1, $priorityBreakdown->sum());
@@ -80,10 +127,11 @@
                             <div class="flex justify-between text-[13px] mb-1">
                                 <span
                                     class="font-bold dark:text-gray-300 text-gray-700 capitalize">{{ $p }}</span>
-                                <span class="dark:text-gray-500 text-gray-400">{{ $cnt }}
-                                    ({{ $pct }}%)</span>
+                                <span class="dark:text-white text-gray-800">{{ $cnt }}
+                                    ({{ $pct }}%)
+                                </span>
                             </div>
-                            <div class="h-2 rounded-full dark:bg-white/10 bg-gray-100 overflow-hidden">
+                            <div class="h-2 rounded-full dark:bg-white/10 bg-gray-400 overflow-hidden">
                                 <div class="{{ $priorityColors[$p] ?? 'bg-gray-400' }} h-full rounded-full"
                                     style="width:{{ $pct }}%"></div>
                             </div>
@@ -93,8 +141,8 @@
             </div>
 
             {{-- Status Breakdown --}}
-            <div class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-5">
-                <h3 class="text-[15px] font-extrabold dark:text-white text-gray-900 mb-4">Status Overview</h3>
+            <div class="veroa-card rounded-2xl border p-5">
+                <h3 class="text-[15px] font-extrabold dark:text-white text-gray-800 mb-4">Status Overview</h3>
                 @php
                     $statusColors = [
                         'completed' => 'bg-emerald-500',
@@ -111,10 +159,11 @@
                             <div class="flex justify-between text-[13px] mb-1">
                                 <span
                                     class="font-bold dark:text-gray-300 text-gray-700 capitalize">{{ str_replace('_', ' ', $status) }}</span>
-                                <span class="dark:text-gray-500 text-gray-400">{{ $cnt }}
-                                    ({{ $pct }}%)</span>
+                                <span class="dark:text-white text-gray-800">{{ $cnt }}
+                                    ({{ $pct }}%)
+                                </span>
                             </div>
-                            <div class="h-2 rounded-full dark:bg-white/10 bg-gray-100 overflow-hidden">
+                            <div class="h-2 rounded-full dark:bg-white/10 bg-gray-400 overflow-hidden">
                                 <div class="{{ $statusColors[$status] ?? 'bg-orange-400' }} h-full rounded-full"
                                     style="width:{{ $pct }}%"></div>
                             </div>
@@ -124,8 +173,8 @@
             </div>
 
             {{-- Category Breakdown --}}
-            <div class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-5">
-                <h3 class="text-[15px] font-extrabold dark:text-white text-gray-900 mb-4">Top Categories</h3>
+            <div class="veroa-card rounded-2xl border p-5">
+                <h3 class="text-[15px] font-extrabold dark:text-white text-gray-800 mb-4">Top Categories</h3>
                 @php $catMax = max(1, $categoryBreakdown->max('count')); @endphp
                 <div class="space-y-3">
                     @forelse($categoryBreakdown as $cat)
@@ -133,15 +182,15 @@
                             <div class="flex justify-between text-[13px] mb-1">
                                 <span
                                     class="font-bold dark:text-gray-300 text-gray-700 truncate max-w-[130px]">{{ $cat->name }}</span>
-                                <span class="dark:text-gray-500 text-gray-400">{{ $cat->count }}</span>
+                                <span class="dark:text-white text-gray-800">{{ $cat->count }}</span>
                             </div>
-                            <div class="h-2 rounded-full dark:bg-white/10 bg-gray-100 overflow-hidden">
+                            <div class="h-2 rounded-full dark:bg-white/10 bg-gray-400 overflow-hidden">
                                 <div class="bg-gradient-to-r from-orange-500 to-pink-500 h-full rounded-full"
                                     style="width:{{ round(($cat->count / $catMax) * 100) }}%"></div>
                             </div>
                         </div>
                     @empty
-                        <p class="text-[13px] dark:text-gray-500 text-gray-400">No category data yet.</p>
+                        <p class="text-[13px] dark:text-white text-gray-800">No category data yet.</p>
                     @endforelse
                 </div>
             </div>

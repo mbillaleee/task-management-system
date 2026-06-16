@@ -8,14 +8,14 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     <i class="fas fa-th-large mr-1"></i> Habit Board
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Manage habits by daily and weekly frequency.
                 </p>
             </div>
 
             <div class="flex gap-2">
                 <a href="{{ route('user.habits.index') }}"
-                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
+                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800">
                     <i class="fas fa-list mr-1"></i> List View
                 </a>
 
@@ -28,27 +28,29 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             @foreach (['daily' => 'Daily Habits', 'weekly' => 'Weekly Habits'] as $frequency => $title)
-                <div class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4">
+                <div
+                    class="dark:bg-[#080612]  backdrop-blur-xl  p-6  space-y-6
+                   shadow-[0_20px_60px_rgba(0,0,0,0.25)]
+                    dark:shadow-[inset_0_1px_0_rgba(255,255,255,.03)] rounded-2xl p-4">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-[16px] font-bold dark:text-white text-gray-900">{{ $title }}</h3>
 
                         <span
-                            class="px-2 py-[3px] rounded-md text-[12px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-600">
+                            class="px-2 py-[3px] rounded-md text-[12px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800">
                             {{ isset($habits[$frequency]) ? count($habits[$frequency]) : 0 }}
                         </span>
                     </div>
 
                     <div class="space-y-3">
                         @forelse (($habits[$frequency] ?? []) as $habit)
-                            <div
-                                class="dark:bg-white/[0.05] bg-gray-50 border dark:border-white/[0.06] border-black/[0.05] rounded-xl p-3">
+                            <div class="hover-lift veroa-card rounded-xl p-3">
                                 <div class="flex items-start justify-between gap-3">
                                     <div>
-                                        <h4 class="text-[14px] font-bold dark:text-white text-gray-900">
+                                        <h4 class="text-[14px] font-bold dark:text-white text-gray-800">
                                             {{ $habit->title }}
                                         </h4>
 
-                                        <p class="text-[12px] dark:text-gray-500 text-gray-500 mt-1">
+                                        <p class="text-[12px] dark:text-white text-gray-800 mt-1">
                                             {{ \Illuminate\Support\Str::limit($habit->description, 55) }}
                                         </p>
                                     </div>
@@ -61,7 +63,7 @@
 
                                 <div class="flex flex-wrap gap-1.5 mt-3">
                                     <span
-                                        class="px-2 py-[3px] rounded-md text-[11px] font-semibold dark:bg-white/[0.06] bg-white dark:text-gray-300 text-gray-600">
+                                        class="px-2 py-[3px] rounded-md text-[11px] font-semibold dark:bg-white/[0.06] bg-white dark:text-white text-gray-800">
                                         <i class="fas fa-folder mr-1"></i> {{ $habit->category?->name ?? 'General' }}
                                     </span>
 

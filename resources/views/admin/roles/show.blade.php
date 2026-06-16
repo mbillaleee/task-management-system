@@ -41,8 +41,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
             <!-- Role Info Card -->
-            <div
-                class="hover-lift relative dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 rounded-2xl p-5 text-center">
+            <div class="hover-lift relative  veroa-card border rounded-2xl p-5 text-center">
                 {{-- Gradient overlay --}}
                 <div
                     class="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-500 to-pink-500 opacity-5 pointer-events-none">
@@ -68,8 +67,7 @@
             </div>
 
             <!-- Permissions List -->
-            <div
-                class="lg:col-span-2 hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 rounded-2xl p-5">
+            <div class="lg:col-span-2 hover-lift  veroa-card border rounded-2xl p-5">
                 <h3 class="text-[16px] font-bold dark:text-white text-gray-900 mb-4">
                     <i class="fas fa-shield-alt text-orange-500 mr-2"></i> Assigned Permissions
                 </h3>

@@ -19,7 +19,10 @@ class SubscriptionController extends Controller
         $plans = SubscriptionPlan::withCount([
             'userSubscriptions',
             'userSubscriptions as active_subscribers_count' => fn($q) => $q->where('status', 'active'),
-        ])->ordered()->get();
+        ])->withSum(
+            ['userSubscriptions as revenue_total' => fn($q) => $q->where('status', 'active')],
+            'amount_paid'
+        )->ordered()->get();
 
         $totalSubscribers = UserSubscription::where('status', 'active')->count();
         $totalRevenue = UserSubscription::where('status', 'active')->sum('amount_paid');
@@ -160,6 +163,22 @@ class SubscriptionController extends Controller
 
         $plans = SubscriptionPlan::ordered()->get();
 
+        // Per-plan revenue breakdown
+        $planRevenue = SubscriptionPlan::withCount([
+            'userSubscriptions as active_count' => fn($q) => $q->where('status', 'active'),
+        ])->withSum(
+            ['userSubscriptions as revenue_total' => fn($q) => $q->where('status', 'active')],
+            'amount_paid'
+        )->ordered()->get();
+
+        // Expiring within 30 days per plan
+        $expiringSoonByPlan = UserSubscription::where('status', 'active')
+            ->whereNotNull('ends_at')
+            ->where('ends_at', '<=', now()->addDays(30))
+            ->selectRaw('subscription_plan_id, count(*) as cnt')
+            ->groupBy('subscription_plan_id')
+            ->pluck('cnt', 'subscription_plan_id');
+
         $stats = [
             'active' => UserSubscription::where('status', 'active')->count(),
             'trial' => UserSubscription::where('status', 'trial')->count(),
@@ -168,7 +187,7 @@ class SubscriptionController extends Controller
             'revenue' => UserSubscription::where('status', 'active')->sum('amount_paid'),
         ];
 
-        return view('admin.subscriptions.subscribers', compact('subscriptions', 'plans', 'stats'));
+        return view('admin.subscriptions.subscribers', compact('subscriptions', 'plans', 'stats', 'planRevenue', 'expiringSoonByPlan'));
     }
 
     public function assignPlan(Request $request)

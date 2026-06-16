@@ -5,20 +5,22 @@
 
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-                <h2 class="text-[22px] font-extrabold dark:text-white text-gray-900">📅 Monthly Report</h2>
-                <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-0.5">{{ $monthLabel }}</p>
+                <h2 class="text-[22px] font-extrabold dark:text-white text-gray-800"><i
+                        class="fas fa-calendar-alt text-blue-400 dark:text-blue-400"></i> Monthly Report</h2>
+                <p class="text-[13px] dark:text-white text-gray-800 mt-0.5">{{ $monthLabel }}</p>
             </div>
             <div class="flex items-center gap-2">
                 <a href="{{ route('user.analytics.index') }}"
-                    class="px-3 py-2 rounded-xl text-[13px] dark:bg-white/[0.06] bg-gray-100 dark:text-gray-300 text-gray-600 font-bold">←
+                    class="px-3 py-2 rounded-xl text-[13px] dark:bg-white/[0.06] bg-gray-100 dark:text-white text-gray-800 font-bold">←
                     Overview</a>
                 @if ($monthOffset > 0)
                     <a href="{{ route('user.analytics.monthly', ['month' => $monthOffset - 1]) }}"
-                        class="px-3 py-2 rounded-xl text-[13px] dark:bg-white/[0.06] bg-gray-100 dark:text-gray-300 text-gray-600 font-bold">Newer
-                        →</a>
+                        class="px-3 py-2 rounded-xl text-[13px] dark:bg-white/[0.06] bg-gray-100 dark:text-white text-gray-800 font-bold"><i
+                            class="fas fa-arrow-left"></i> Newer</a>
                 @endif
                 <a href="{{ route('user.analytics.monthly', ['month' => $monthOffset + 1]) }}"
-                    class="px-3 py-2 rounded-xl text-[13px] dark:bg-white/[0.06] bg-gray-100 dark:text-gray-300 text-gray-600 font-bold">←
+                    class="px-3 py-2 rounded-xl text-[13px] dark:bg-white/[0.06] bg-gray-100 dark:text-white text-gray-800 font-bold"><i
+                        class="fas fa-arrow-left"></i>
                     Older</a>
             </div>
         </div>
@@ -27,7 +29,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
             @php $totals = [['v' => $monthTasks, 'l' => 'Tasks Done', 'c' => $taskChange, 'icon' => '✅', 'color' => 'text-emerald-400'], ['v' => $monthHabits, 'l' => 'Habit Logs', 'c' => null, 'icon' => '🔥', 'color' => 'text-orange-400'], ['v' => round($monthFocus / 60, 1) . 'h', 'l' => 'Focus Time', 'c' => $focusChange, 'icon' => '⏱', 'color' => 'text-blue-400'], ['v' => $monthJournal, 'l' => 'Journals', 'c' => null, 'icon' => '✍️', 'color' => 'text-purple-400'], ['v' => $monthGoals, 'l' => 'Goals Done', 'c' => null, 'icon' => '🎯', 'color' => 'text-pink-400']]; @endphp
             @foreach ($totals as $t)
-                <div class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-4">
+                <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl border p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="text-xl">{{ $t['icon'] }}</span>
                         @if ($t['c'] !== null)
@@ -46,9 +48,8 @@
 
         {{-- Top Habit --}}
         @if ($topHabit && $topHabit->month_completions > 0)
-            <div
-                class="dark:bg-gradient-to-r dark:from-orange-500/10 dark:to-pink-500/10 bg-orange-50 rounded-2xl border dark:border-orange-500/20 border-orange-200 p-5 flex items-center gap-4">
-                <div class="text-3xl">🏅</div>
+            <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl border p-5 flex items-center gap-4">
+                <div class="text-3xl"><i class="fas fa-trophy text-orange-400 dark:text-orange-400"></i></div>
                 <div>
                     <p class="text-[12px] font-bold dark:text-gray-400 text-gray-500">Top Habit This Month</p>
                     <p class="text-[18px] font-extrabold dark:text-white text-gray-900">{{ $topHabit->title }}</p>
@@ -59,7 +60,7 @@
         @endif
 
         {{-- Calendar Heatmap --}}
-        <div class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-5">
+        <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl border p-5">
             <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-4">Daily Activity — {{ $monthLabel }}
             </h3>
             @php
@@ -102,7 +103,7 @@
         </div>
 
         {{-- Daily Focus Bar Chart --}}
-        <div class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-5">
+        <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl border p-5">
             <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-4">Focus Time Per Day —
                 {{ $monthLabel }}</h3>
             @php $maxFocusDay = max(1, collect($days)->max('focus')); @endphp

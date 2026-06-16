@@ -6,17 +6,17 @@
         {{-- Header --}}
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
+                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-800">
                     <i class="fas fa-tags mr-2"></i> Goal Categories
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Manage your goal categories for better organization.
                 </p>
             </div>
 
             <div class="flex items-center gap-2.5">
                 <a href="{{ route('user.goals.index') }}"
-                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
+                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-white text-gray-800 border dark:border-white/[0.08] border-black/[0.08]">
                     <i class="fas fa-arrow-left mr-2"></i> Back to Goals
                 </a>
 
@@ -29,13 +29,16 @@
 
         {{-- Category List --}}
         <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+            class="hover-lift dark:border-pink-500/15 bg-[#f7e4c3]/75
+            dark:bg-[#080612]  backdrop-blur-xl  p-6  space-y-6
+            shadow-[0_20px_60px_rgba(0,0,0,0.25)]
+            dark:shadow-[inset_0_1px_0_rgba(255,255,255,.03)] rounded-2xl p-[18px]">
             <div class="flex items-center justify-between mb-5">
                 <div>
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">
+                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-700">
                         All Categories
                     </h3>
-                    <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">
+                    <p class="text-[13px] dark:text-white text-gray-800 mt-1">
                         Create, edit and delete goal categories.
                     </p>
                 </div>
@@ -48,9 +51,7 @@
                     @endphp
 
                     <div
-                        class="relative overflow-hidden hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4">
-                        <div class="absolute top-0 right-0 w-24 h-24 blur-3xl opacity-20"
-                            style="background: {{ $categoryColor }}"></div>
+                        class="relative overflow-hidden hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-4">
 
                         <div class="relative z-10 flex items-start justify-between gap-3">
                             <div>
@@ -58,7 +59,7 @@
                                     {{ $category->name }}
                                 </h4>
 
-                                <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">
+                                <p class="text-[13px] dark:text-white text-gray-800 mt-1">
                                     {{ $category->goals_count ?? $category->goals->count() }} goals
                                 </p>
                             </div>
@@ -77,7 +78,7 @@
                                     '{{ addslashes($category->name) }}',
                                     '{{ $categoryColor }}'
                                 )"
-                                class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
+                                class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800">
                                 <i class="fas fa-edit mr-2"></i> Edit
                             </button>
 
@@ -119,20 +120,19 @@
         {{-- Create Modal --}}
         <div id="createCategoryModal"
             class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
-            <div
-                class="w-full max-w-md dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-5 shadow-2xl">
+            <div class="w-full max-w-md veroa-card rounded-2xl p-5 shadow-2xl">
                 <div class="flex items-center justify-between mb-4">
                     <div>
-                        <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">
+                        <h3 class="text-[18px] font-extrabold dark:text-white text-gray-800">
                             <i class="fas fa-plus mr-2"></i> Create Goal Category
                         </h3>
-                        <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">
+                        <p class="text-[13px] dark:text-white text-gray-800 mt-1">
                             Add a new category for goals.
                         </p>
                     </div>
 
                     <button type="button" onclick="closeCreateCategoryModal()"
-                        class="w-9 h-9 rounded-lg dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700 font-bold">
+                        class="w-9 h-9 rounded-lg dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800 font-bold">
                         ✕
                     </button>
                 </div>
@@ -141,7 +141,7 @@
                     @csrf
 
                     <div>
-                        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
+                        <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">
                             Category Name
                         </label>
                         <input type="text" name="name" placeholder="Example: Career, Health, Finance"
@@ -149,7 +149,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
+                        <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">
                             Category Color
                         </label>
 
@@ -161,7 +161,7 @@
 
                     <div class="flex items-center justify-end gap-2 pt-2">
                         <button type="button" onclick="closeCreateCategoryModal()"
-                            class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
+                            class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800">
                             <i class="fas fa-times mr-2"></i> Cancel
                         </button>
 
@@ -176,21 +176,20 @@
 
         {{-- Edit Modal --}}
         <div id="editCategoryModal"
-            class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
-            <div
-                class="w-full max-w-md dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-5 shadow-2xl">
+            class="hidden fixed inset-0 z-50 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-sm flex items-center justify-center px-4">
+            <div class="w-full max-w-md veroa-card rounded-2xl p-5 shadow-2xl">
                 <div class="flex items-center justify-between mb-4">
                     <div>
-                        <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">
+                        <h3 class="text-[18px] font-extrabold dark:text-white text-gray-800">
                             <i class="fas fa-edit mr-2"></i> Edit Goal Category
                         </h3>
-                        <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">
+                        <p class="text-[13px] dark:text-white text-gray-800 mt-1">
                             Update category name and color.
                         </p>
                     </div>
 
                     <button type="button" onclick="closeEditCategoryModal()"
-                        class="w-9 h-9 rounded-lg dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700 font-bold">
+                        class="w-9 h-9 rounded-lg dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800 font-bold">
                         ✕
                     </button>
                 </div>
@@ -200,7 +199,7 @@
                     @method('PUT')
 
                     <div>
-                        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
+                        <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">
                             Category Name
                         </label>
                         <input type="text" id="editCategoryName" name="name"
@@ -208,19 +207,18 @@
                     </div>
 
                     <div>
-                        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
+                        <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">
                             Category Color
                         </label>
 
                         <input type="color" id="editCategoryColor" name="color" value="#f97316"
                             class="w-full h-12 rounded-[10px] cursor-pointer outline-none
-                            dark:bg-[#1a1625] bg-white
-                            dark:border dark:border-white/[0.1] border border-black/[0.1]">
+                            dark:bg-[#1a1625] bg-white border border-black/[0.1]">
                     </div>
 
                     <div class="flex items-center justify-end gap-2 pt-2">
                         <button type="button" onclick="closeEditCategoryModal()"
-                            class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
+                            class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800">
                             <i class="fas fa-times mr-2"></i> Cancel
                         </button>
 

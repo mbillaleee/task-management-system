@@ -8,7 +8,7 @@
         <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-1 flex items-center gap-2">
             <i class="fa-solid fa-eye text-orange-400 text-[13px]"></i> Profile Visibility
         </h4>
-        <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-4">Control what others can see on your profile.</p>
+        <p class="text-[12px] dark:text-white text-gray-800 mb-4">Control what others can see on your profile.</p>
 
         <div class="space-y-1">
             @php
@@ -44,7 +44,7 @@
                         </div>
                         <div>
                             <p class="text-[13px] font-bold dark:text-white text-gray-900">{{ $t['label'] }}</p>
-                            <p class="text-[11.5px] dark:text-gray-500 text-gray-400">{{ $t['sub'] }}</p>
+                            <p class="text-[11.5px] dark:text-white text-gray-800">{{ $t['sub'] }}</p>
                         </div>
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
@@ -72,7 +72,7 @@
         <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-1 flex items-center gap-2">
             <i class="fa-solid fa-shield-halved text-orange-400 text-[13px]"></i> Security
         </h4>
-        <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-4">Protect your account with additional security
+        <p class="text-[12px] dark:text-white text-gray-800 mb-4">Protect your account with additional security
             layers.</p>
 
         {{-- 2FA --}}
@@ -85,7 +85,7 @@
                 </div>
                 <div>
                     <p class="text-[13px] font-bold dark:text-white text-gray-900">Two-Factor Authentication</p>
-                    <p class="text-[11.5px] dark:text-gray-500 text-gray-400">Require a code from your phone to log in
+                    <p class="text-[11.5px] dark:text-white text-gray-800">Require a code from your phone to log in
                     </p>
                 </div>
             </div>
@@ -112,7 +112,7 @@
         <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-1 flex items-center gap-2">
             <i class="fa-solid fa-computer text-orange-400 text-[13px]"></i> Active Sessions
         </h4>
-        <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-4">Devices currently logged in to your account.</p>
+        <p class="text-[12px] dark:text-white text-gray-800 mb-4">Devices currently logged in to your account.</p>
 
         {{-- Current session --}}
         <div
@@ -126,7 +126,7 @@
                         This device
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
                     </p>
-                    <p class="text-[11.5px] dark:text-gray-500 text-gray-400">
+                    <p class="text-[11.5px] dark:text-white text-gray-800">
                         {{ request()->ip() }} ·
                         {{ request()->header('User-Agent') ? substr(request()->header('User-Agent'), 0, 40) . '...' : 'Unknown browser' }}
                     </p>
@@ -153,11 +153,11 @@
         <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-1 flex items-center gap-2">
             <i class="fa-solid fa-download text-orange-400 text-[13px]"></i> Data & Export
         </h4>
-        <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-4">Download or manage your personal data.</p>
+        <p class="text-[12px] dark:text-white text-gray-800 mb-4">Download or manage your personal data.</p>
 
         <div class="flex flex-wrap gap-2">
             <button type="button" disabled
-                class="px-4 py-2 rounded-[10px] text-[12px] font-bold dark:bg-white/[0.06] bg-gray-100 dark:text-gray-500 text-gray-400 cursor-not-allowed opacity-60">
+                class="px-4 py-2 rounded-[10px] text-[12px] font-bold dark:bg-white/[0.06] bg-gray-100 dark:text-white text-gray-800 cursor-not-allowed opacity-60">
                 <i class="fa-solid fa-file-export mr-1.5 text-[11px]"></i> Export Data (coming soon)
             </button>
         </div>

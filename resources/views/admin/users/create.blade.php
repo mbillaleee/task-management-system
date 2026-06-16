@@ -3,7 +3,7 @@
 @section('admin')
 
 
-    <section class="flex-1 p-4 sm:p-5 flex flex-col gap-4">
+    <section class="flex-1 flex flex-col gap-4">
 
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -36,7 +36,7 @@
         @endif
 
         <!-- Main Card -->
-        <div class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 rounded-2xl p-5">
+        <div class="hover-lift  veroa-card border rounded-2xl p-5">
             <h3 class="text-[16px] font-bold dark:text-white text-gray-900 mb-4">
                 <i class="fas fa-user-plus text-orange-500 mr-2"></i> User Information
             </h3>
@@ -54,7 +54,7 @@
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
                             <span class="px-3 text-gray-400 dark:text-gray-500"><i class="fas fa-user"></i></span>
                             <input type="text" name="name" placeholder="Enter full name" value="{{ old('name') }}"
-                                class="w-full px-3 py-2 dark:bg-[#1a1625] dark:text-white focus:outline-none">
+                                class="w-full px-3 py-2 dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 dark:border dark:border-white/[0.1] border border-black/[0.1]">
                         </div>
                         <small class="text-[12px] text-gray-500 dark:text-gray-400">Enter the user's full name.</small>
                     </div>
@@ -68,7 +68,7 @@
                             <span class="px-3 text-gray-400 dark:text-gray-500"><i class="fas fa-envelope"></i></span>
                             <input type="email" name="email" placeholder="Enter email address"
                                 value="{{ old('email') }}"
-                                class="w-full px-3 py-2 dark:bg-[#1a1625] dark:text-white focus:outline-none">
+                                class="w-full px-3 py-2 dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 dark:border dark:border-white/[0.1] border border-black/[0.1]">
                         </div>
                         <small class="text-[12px] text-gray-500 dark:text-gray-400">Enter a valid email address.</small>
                     </div>
@@ -81,7 +81,7 @@
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
                             <span class="px-3 text-gray-400 dark:text-gray-500"><i class="fas fa-user"></i></span>
                             <input type="file" name="profile"
-                                class="w-full px-3 py-2 dark:bg-[#1a1625] dark:text-white focus:outline-none">
+                                class="w-full px-3 py-2 dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 dark:border dark:border-white/[0.1] border border-black/[0.1]">
                         </div>
                         <small class="text-[12px] text-gray-500 dark:text-gray-400">Upload user profile picture.</small>
                     </div>
@@ -94,7 +94,7 @@
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
                             <span class="px-3 text-gray-400 dark:text-gray-500"><i class="fas fa-lock"></i></span>
                             <input type="password" name="password" placeholder="Enter password"
-                                class="w-full px-3 py-2 dark:bg-[#1a1625] dark:text-white focus:outline-none">
+                                class="w-full px-3 py-2 dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 dark:border dark:border-white/[0.1] border border-black/[0.1]">
                         </div>
                         <small class="text-[12px] text-gray-500 dark:text-gray-400">Use a strong password for
                             security.</small>
@@ -108,7 +108,7 @@
                             class="flex items-center border rounded-lg overflow-hidden dark:border-white/20 border-gray-300">
                             <span class="px-3 text-gray-400 dark:text-gray-500"><i class="fas fa-shield-alt"></i></span>
                             <input type="password" name="confirm-password" placeholder="Confirm password"
-                                class="w-full px-3 py-2 dark:bg-[#1a1625] dark:text-white focus:outline-none">
+                                class="w-full px-3 py-2 dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 dark:border dark:border-white/[0.1] border border-black/[0.1]">
                         </div>
                         <small class="text-[12px] text-gray-500 dark:text-gray-400">Re-enter password for
                             confirmation.</small>

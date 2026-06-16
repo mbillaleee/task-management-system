@@ -8,19 +8,19 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     <i class="fas fa-book-open mr-2"></i> Journal Workspace
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Daily journal, mood tracking, gratitude and personal reflections.
                 </p>
             </div>
 
             <div class="flex items-center gap-2.5">
                 <a href="{{ route('user.journal.categories.index') }}"
-                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
+                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-white text-gray-800 border dark:border-white/[0.08] border-black/[0.08]">
                     <i class="fas fa-list"></i> Categories
                 </a>
 
                 <a href="{{ route('user.journals.statistics') }}"
-                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
+                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-white text-gray-800 border dark:border-white/[0.08] border-black/[0.08]">
                     <i class="fas fa-chart-bar"></i> Statistics
                 </a>
 
@@ -33,41 +33,36 @@
 
         {{-- Stats --}}
         <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-book mr-2"></i> Total
+            <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-5">
+                <p class="text-[14px] dark:text-white text-gray-800 font-bold"><i class="fas fa-book mr-2"></i> Total
                     Journals</p>
                 <h3 class="text-[34px] font-black dark:text-white text-gray-900 mt-2">{{ $totalJournals }}</h3>
                 <p class="text-[13px] text-orange-400 font-bold">All personal logs</p>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-calendar-day mr-2"></i>
+            <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-5">
+                <p class="text-[14px] dark:text-white text-gray-800 font-bold"><i class="fas fa-calendar-day mr-2"></i>
                     Today</p>
                 <h3 class="text-[34px] font-black text-pink-400 mt-2">{{ $todayJournals }}</h3>
                 <p class="text-[13px] text-pink-400 font-bold">Today's entries</p>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-heart mr-2"></i>
+            <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-5">
+                <p class="text-[14px] dark:text-white text-gray-800 font-bold"><i class="fas fa-heart mr-2"></i>
                     Gratitude</p>
                 <h3 class="text-[34px] font-black text-emerald-400 mt-2">{{ $gratitudeCount }}</h3>
                 <p class="text-[13px] text-emerald-400 font-bold">Gratitude journals</p>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-star mr-2"></i> Favorites
+            <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-5">
+                <p class="text-[14px] dark:text-white text-gray-800 font-bold"><i class="fas fa-star mr-2"></i> Favorites
                 </p>
                 <h3 class="text-[34px] font-black text-yellow-400 mt-2">{{ $favoriteCount }}</h3>
                 <p class="text-[13px] text-yellow-400 font-bold">Important logs</p>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-fire mr-2"></i> Writing
+            <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-5">
+                <p class="text-[14px] dark:text-white text-gray-800 font-bold"><i class="fas fa-fire mr-2"></i> Writing
                     Streak</p>
                 <h3 class="text-[34px] font-black text-purple-400 mt-2">{{ $writingStreak }}</h3>
                 <p class="text-[13px] text-purple-400 font-bold">
@@ -78,12 +73,15 @@
 
         {{-- Filter + List --}}
         <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+            class="hover-lift dark:border-pink-500/15 bg-[#f7e4c3]/75
+            dark:bg-[#080612]  backdrop-blur-xl  p-6  space-y-6
+            shadow-[0_20px_60px_rgba(0,0,0,0.25)]
+            dark:shadow-[inset_0_1px_0_rgba(255,255,255,.03)] rounded-2xl p-[18px]">
             <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-5">
                 <div>
                     <h3 class="text-[20px] font-extrabold dark:text-white text-gray-900"><i class="fas fa-history mr-2"></i>
                         Timeline View</h3>
-                    <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">
+                    <p class="text-[13px] dark:text-white text-gray-800 mt-1">
                         Search, filter and manage journal entries.
                     </p>
                 </div>
@@ -93,7 +91,7 @@
                         class="col-span-2 md:col-span-3 lg:col-span-1 px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
 
                     <select name="type"
-                        class="px-3.5 py-2.5 rounded-[10px] text-[14px] dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.1] border-black/[0.1]">
+                        class="px-3.5 py-2.5 rounded-[10px] text-[14px] dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 border dark:border-white/[0.1] border-black/[0.1]">
                         <option value="">All Types</option>
                         <option value="daily" @selected(request('type') == 'daily')>Daily</option>
                         <option value="gratitude" @selected(request('type') == 'gratitude')>Gratitude</option>
@@ -102,7 +100,7 @@
                     </select>
 
                     <select name="mood"
-                        class="px-3.5 py-2.5 rounded-[10px] text-[14px] dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.1] border-black/[0.1]">
+                        class="px-3.5 py-2.5 rounded-[10px] text-[14px] dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 border dark:border-white/[0.1] border-black/[0.1]">
                         <option value="">All Moods</option>
                         @foreach (['happy', 'calm', 'neutral', 'sad', 'angry', 'stressed', 'excited'] as $mood)
                             <option value="{{ $mood }}" @selected(request('mood') == $mood)>
@@ -112,7 +110,7 @@
                     </select>
 
                     <select name="journal_category_id"
-                        class="px-3.5 py-2.5 rounded-[10px] text-[14px] dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.1] border-black/[0.1]">
+                        class="px-3.5 py-2.5 rounded-[10px] text-[14px] dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 border dark:border-white/[0.1] border-black/[0.1]">
                         <option value="">All Categories</option>
                         @foreach ($categories as $cat)
                             <option value="{{ $cat->id }}" @selected(request('journal_category_id') == $cat->id)>
@@ -122,7 +120,7 @@
                     </select>
 
                     <input type="date" name="journal_date" value="{{ request('journal_date') }}"
-                        class="px-3.5 py-2.5 rounded-[10px] text-[14px] dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.1] border-black/[0.1]">
+                        class="px-3.5 py-2.5 rounded-[10px] text-[14px] dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 border dark:border-white/[0.1] border-black/[0.1]">
 
                     <div class="flex gap-2">
                         <button
@@ -131,7 +129,7 @@
                         </button>
                         @if (request()->hasAny(['search', 'type', 'mood', 'journal_category_id', 'journal_date', 'favorites']))
                             <a href="{{ route('user.journals.index') }}"
-                                class="px-3 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-600">
+                                class="px-3 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800 border dark:border-white/[0.1] border-black/[0.1]">
                                 <i class="fas fa-times mr-1"></i> Clear
                             </a>
                             </a>
@@ -143,7 +141,7 @@
             {{-- Quick filter tabs --}}
             <div class="flex flex-wrap items-center gap-2 mb-5">
                 <a href="{{ route('user.journals.index') }}"
-                    class="px-3 py-1.5 rounded-lg text-[12px] font-bold {{ !request()->hasAny(['type', 'mood', 'favorites']) ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white' : 'dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-600' }}">
+                    class="px-3 py-1.5 rounded-lg text-[12px] font-bold {{ !request()->hasAny(['type', 'mood', 'favorites']) ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white' : 'dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800' }}">
                     <i class="fas fa-list mr-1"></i> All
                 </a>
                 @foreach ([
@@ -153,13 +151,13 @@
             'personal_log' => ['icon' => 'fas fa-book-open', 'label' => 'Personal Log'],
         ] as $val => $item)
                     <a href="{{ route('user.journals.index', ['type' => $val]) }}"
-                        class="px-3 py-1.5 rounded-lg text-[12px] font-bold {{ request('type') === $val ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white' : 'dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-600' }}">
+                        class="px-3 py-1.5 rounded-lg text-[12px] font-bold {{ request('type') === $val ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white' : 'dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800' }}">
                         <i class="{{ $item['icon'] }} mr-1.5"></i>
                         {{ $item['label'] }}
                     </a>
                 @endforeach
                 <a href="{{ route('user.journals.index', ['favorites' => 1]) }}"
-                    class="px-3 py-1.5 rounded-lg text-[12px] font-bold {{ request('favorites') ? 'bg-gradient-to-r from-yellow-400 to-orange-400 text-white' : 'dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-600' }}">
+                    class="px-3 py-1.5 rounded-lg text-[12px] font-bold {{ request('favorites') ? 'bg-gradient-to-r from-yellow-400 to-orange-400 text-white' : 'dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800' }}">
                     <i class="fas fa-star mr-2"></i> Favorites
                 </a>
             </div>
@@ -186,12 +184,11 @@
                         <div class="absolute left-0 top-2 w-[12px] h-[12px] rounded-full shadow-lg"
                             style="background: {{ $categoryColor }}"></div>
 
-                        <div
-                            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4">
+                        <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-4">
                             <div class="flex items-start justify-between gap-3">
                                 <div class="flex-1 min-w-0">
                                     <div class="flex items-center gap-2 flex-wrap">
-                                        <h3 class="text-[16px] font-bold dark:text-white text-gray-900">
+                                        <h3 class="text-[16px] font-bold dark:text-white text-gray-800">
                                             {{ $journal->title }}
                                         </h3>
                                         @if ($journal->is_favorite)
@@ -199,13 +196,13 @@
                                         @endif
                                         @if ($journal->is_private)
                                             <span
-                                                class="px-1.5 py-[2px] rounded text-[10px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-400 text-gray-500">
+                                                class="px-1.5 py-[2px] rounded text-[10px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800">
                                                 <i class="fas fa-lock mr-1"></i> Private
                                             </span>
                                         @endif
                                     </div>
 
-                                    <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">
+                                    <p class="text-[13px] dark:text-white text-gray-800 mt-1">
                                         {{ $journal->journal_date->format('d M, Y') }} •
                                         {{ ucwords(str_replace('_', ' ', $journal->type)) }}
                                         @if ($journal->category)
@@ -223,7 +220,7 @@
                             </div>
 
                             @if ($journal->content)
-                                <p class="text-[14px] dark:text-gray-400 text-gray-500 leading-relaxed mt-3">
+                                <p class="text-[14px] dark:text-white text-gray-800 leading-relaxed mt-3">
                                     {{ \Illuminate\Support\Str::limit(strip_tags($journal->content), 160) }}
                                 </p>
                             @endif
@@ -240,13 +237,13 @@
                                         @csrf
                                         @method('PATCH')
                                         <button
-                                            class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
+                                            class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800">
                                             {{ $journal->is_favorite ? '★ Saved' : '☆ Save' }}
                                         </button>
                                     </form>
 
                                     <a href="{{ route('user.journals.edit', $journal) }}"
-                                        class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
+                                        class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800">
                                         <i class="fas fa-edit mr-1"></i> Edit
                                     </a>
 
@@ -263,11 +260,10 @@
                         </div>
                     </div>
                 @empty
-                    <div
-                        class="dark:bg-white/[0.03] bg-gray-50 border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-10 text-center">
+                    <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-10 text-center">
                         <div class="text-5xl mb-3">📔</div>
                         <h3 class="text-[18px] font-bold dark:text-white text-gray-900">No journals found</h3>
-                        <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">
+                        <p class="text-[13px] dark:text-white text-gray-800 mt-1">
                             @if (request()->hasAny(['search', 'type', 'mood', 'journal_category_id', 'journal_date', 'favorites']))
                                 No entries match your current filters.
                             @else

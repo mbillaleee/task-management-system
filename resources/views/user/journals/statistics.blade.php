@@ -6,10 +6,10 @@
         {{-- Header --}}
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
+                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-800">
                     <i class="fas fa-chart-bar mr-2"></i> Journal Statistics
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Writing streak, mood trends and monthly overview.
                 </p>
             </div>
@@ -21,33 +21,29 @@
 
         {{-- Top stat cards --}}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"> <i class="fas fa-file-alt mr-1"></i>
+            <div class="hover-lift veroa-card rounded-2xl p-5">
+                <p class="text-[14px] dark:text-white text-gray-800 font-bold"> <i class="fas fa-file-alt mr-1"></i>
                     Total Entries</p>
                 <h3 class="text-[34px] font-black dark:text-white text-gray-900 mt-2">{{ $totalJournals }}</h3>
                 <p class="text-[13px] text-orange-400 font-bold">All time</p>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"> <i class="fas fa-fire mr-1"></i> Writing
+            <div class="hover-lift veroa-card rounded-2xl p-5">
+                <p class="text-[14px] dark:text-white text-gray-800 font-bold"> <i class="fas fa-fire mr-1"></i> Writing
                     Streak</p>
                 <h3 class="text-[34px] font-black text-purple-400 mt-2">{{ $writingStreak }}</h3>
                 <p class="text-[13px] text-purple-400 font-bold">days in a row</p>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"> <i class="fas fa-calendar-alt mr-1"></i>
+            <div class="hover-lift veroa-card rounded-2xl p-5">
+                <p class="text-[14px] dark:text-white text-gray-800 font-bold"> <i class="fas fa-calendar-alt mr-1"></i>
                     This Month</p>
                 <h3 class="text-[34px] font-black text-pink-400 mt-2">{{ $thisMonthCount }}</h3>
                 <p class="text-[13px] text-pink-400 font-bold">{{ now()->format('F') }}</p>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"> <i class="fas fa-font mr-1"></i> Total
+            <div class="hover-lift veroa-card rounded-2xl p-5">
+                <p class="text-[14px] dark:text-white text-gray-800 font-bold"> <i class="fas fa-font mr-1"></i> Total
                     Words</p>
                 <h3 class="text-[34px] font-black text-emerald-400 mt-2">{{ number_format($totalWords) }}</h3>
                 <p class="text-[13px] text-emerald-400 font-bold">approximate</p>
@@ -57,24 +53,23 @@
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
 
             {{-- Monthly chart --}}
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+            <div class="hover-lift veroa-card rounded-2xl p-[18px]">
                 <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-1"> <i
                         class="fas fa-calendar-alt mr-1"></i> Monthly Activity</h3>
-                <p class="text-[13px] dark:text-gray-500 text-gray-400 mb-5">Entries written per month (last 12 months)</p>
+                <p class="text-[13px] dark:text-white text-gray-800 mb-5">Entries written per month (last 12 months)</p>
 
                 @php $maxMonthly = max(array_values($months) ?: [1]); @endphp
                 <div class="flex items-end gap-2 h-40">
                     @foreach ($months as $month => $count)
                         @php $pct = $maxMonthly > 0 ? ($count / $maxMonthly) * 100 : 0; @endphp
                         <div class="flex flex-col items-center gap-1 flex-1">
-                            <span class="text-[10px] dark:text-gray-500 text-gray-400 font-bold">
+                            <span class="text-[10px] dark:text-white text-gray-800 font-bold">
                                 {{ $count > 0 ? $count : '' }}
                             </span>
                             <div class="w-full rounded-t-md transition-all"
                                 style="height: {{ max($pct, 4) }}%; background: linear-gradient(to top, #f97316, #ec4899); min-height: 4px;">
                             </div>
-                            <span class="text-[9px] dark:text-gray-600 text-gray-400 font-bold">
+                            <span class="text-[9px] dark:text-white text-gray-800 font-bold">
                                 {{ \Carbon\Carbon::createFromFormat('Y-m', $month)->format('M') }}
                             </span>
                         </div>
@@ -83,11 +78,10 @@
             </div>
 
             {{-- Mood distribution --}}
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-1"> <i class="fas fa-smile mr-1"></i>
+            <div class="hover-lift veroa-card rounded-2xl p-[18px]">
+                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-800 mb-1"> <i class="fas fa-smile mr-1"></i>
                     Mood Distribution</h3>
-                <p class="text-[13px] dark:text-gray-500 text-gray-400 mb-5">How you have been feeling across all entries
+                <p class="text-[13px] dark:text-white text-gray-800 mb-5">How you have been feeling across all entries
                 </p>
 
                 @php
@@ -113,7 +107,7 @@
                 @endphp
 
                 @if (empty($moodData))
-                    <p class="text-[14px] dark:text-gray-500 text-gray-400 text-center py-8">
+                    <p class="text-[14px] dark:text-white text-gray-800 text-center py-8">
                         No mood data recorded yet.
                     </p>
                 @else
@@ -129,7 +123,7 @@
                                     <span class="text-[13px] font-bold dark:text-gray-300 text-gray-700">
                                         {{ $emoji }} {{ ucfirst($mood) }}
                                     </span>
-                                    <span class="text-[12px] font-bold dark:text-gray-400 text-gray-500">
+                                    <span class="text-[12px] font-bold dark:text-white text-gray-800">
                                         {{ $count }} ({{ $pct }}%)
                                     </span>
                                 </div>
@@ -144,11 +138,10 @@
             </div>
 
             {{-- Journal types breakdown --}}
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-1"> <i class="fas fa-list mr-1"></i>
+            <div class="hover-lift veroa-card rounded-2xl p-[18px]">
+                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-800 mb-1"> <i class="fas fa-list mr-1"></i>
                     Entry Types</h3>
-                <p class="text-[13px] dark:text-gray-500 text-gray-400 mb-5">Breakdown by journal type</p>
+                <p class="text-[13px] dark:text-white text-gray-800 mb-5">Breakdown by journal type</p>
 
                 @php
                     $typeLabels = [
@@ -178,7 +171,7 @@
                 @endphp
 
                 @if (empty($byType))
-                    <p class="text-[14px] dark:text-gray-500 text-gray-400 text-center py-8">
+                    <p class="text-[14px] dark:text-white text-gray-800 text-center py-8">
                         No entries yet.
                     </p>
                 @else
@@ -201,7 +194,7 @@
                                     {{ $count }}
                                 </h4>
 
-                                <p class="text-[11px] font-bold dark:text-gray-500 text-gray-400 mt-0.5">
+                                <p class="text-[11px] font-bold dark:text-white text-gray-800 mt-0.5">
                                     {{ $typeTotal > 0 ? round(($count / $typeTotal) * 100) : 0 }}% of total
                                 </p>
                             </div>
@@ -211,16 +204,15 @@
             </div>
 
             {{-- Best writing days --}}
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-1"> <i
+            <div class="hover-lift veroa-card rounded-2xl p-[18px]">
+                <h3 class="text-[18px] font-extrabold dark:text-white text-gray-800 mb-1"> <i
                         class="fas fa-calendar-day mr-1"></i> Most Active Days</h3>
-                <p class="text-[13px] dark:text-gray-500 text-gray-400 mb-5">Which day of the week you write most</p>
+                <p class="text-[13px] dark:text-white text-gray-800 mb-5">Which day of the week you write most</p>
 
                 @php $maxDay = max(array_values($dayData) ?: [1]); @endphp
 
                 @if (empty($dayData))
-                    <p class="text-[14px] dark:text-gray-500 text-gray-400 text-center py-8">No data yet.</p>
+                    <p class="text-[14px] dark:text-white text-gray-800 text-center py-8">No data yet.</p>
                 @else
                     <div class="space-y-3">
                         @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as $day)
@@ -229,14 +221,14 @@
                                 $pct = $maxDay > 0 ? round(($count / $maxDay) * 100) : 0;
                             @endphp
                             <div class="flex items-center gap-3">
-                                <span class="text-[12px] font-bold dark:text-gray-400 text-gray-500 w-24 flex-shrink-0">
+                                <span class="text-[12px] font-bold dark:text-white text-gray-800 w-24 flex-shrink-0">
                                     {{ substr($day, 0, 3) }}
                                 </span>
                                 <div class="flex-1 bg-gray-100 dark:bg-white/[0.06] rounded-full h-2">
                                     <div class="h-2 rounded-full bg-gradient-to-r from-orange-500 to-pink-500"
                                         style="width: {{ $pct }}%;"></div>
                                 </div>
-                                <span class="text-[12px] font-bold dark:text-gray-400 text-gray-500 w-6 text-right">
+                                <span class="text-[12px] font-bold dark:text-white text-gray-800 w-6 text-right">
                                     {{ $count }}
                                 </span>
                             </div>

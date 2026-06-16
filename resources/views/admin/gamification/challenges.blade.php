@@ -6,9 +6,9 @@
         {{-- Header --}}
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-tasks"></i> Challenges
+                <h2 class="text-[20px] font-extrabold dark:text-white text-gray-800"> <i class="fas fa-tasks"></i> Challenges
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400">Manage daily, weekly and monthly challenges.</p>
+                <p class="text-[14px] dark:text-white text-gray-800">Manage daily, weekly and monthly challenges.</p>
             </div>
 
             <div class="flex gap-2">
@@ -34,14 +34,13 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
             @forelse($challenges as $challenge)
                 <div
-                    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-orange-500 blur-3xl opacity-20"></div>
+                    class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-4 relative overflow-hidden">
 
                     <div class="relative z-10">
                         <div class="flex items-start justify-between gap-3">
                             <div>
-                                <h3 class="text-[16px] font-bold dark:text-white text-gray-900">{{ $challenge->title }}</h3>
-                                <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-0.5">
+                                <h3 class="text-[16px] font-bold dark:text-white text-gray-800">{{ $challenge->title }}</h3>
+                                <p class="text-[13px] dark:text-white text-gray-800 mt-0.5">
                                     {{ ucfirst($challenge->type) }} Challenge
                                 </p>
                             </div>
@@ -51,14 +50,14 @@
                             </span>
                         </div>
 
-                        <p class="text-[14px] dark:text-gray-400 text-gray-500 leading-relaxed mt-3">
+                        <p class="text-[14px] dark:text-white text-gray-800 leading-relaxed mt-3">
                             {{ \Illuminate\Support\Str::limit($challenge->description, 100) }}
                         </p>
 
                         <div class="grid grid-cols-3 gap-2 mt-4">
                             <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3 text-center">
                                 <p class="text-[11px] text-gray-400"> <i class="fas fa-target"></i> Target</p>
-                                <p class="text-[14px] font-bold dark:text-white text-gray-900">
+                                <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                     {{ $challenge->target_value }}</p>
                             </div>
                             <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3 text-center">
@@ -113,7 +112,7 @@
             @empty
                 <div
                     class="col-span-full p-10 text-center rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07]">
-                    <p class="text-[18px] font-bold dark:text-white text-gray-900">No challenges created yet.</p>
+                    <p class="text-[18px] font-bold dark:text-white text-gray-800">No challenges created yet.</p>
                 </div>
             @endforelse
         </div>
@@ -123,14 +122,13 @@
 
         {{-- CREATE MODAL --}}
         <div id="createChallengeModal"
-            class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
+            class="hidden fixed inset-0 z-50 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border flex items-center justify-center px-4">
             <div
-                class="w-full max-w-xl dark:bg-[#17141f] bg-white border dark:border-white/[0.08] rounded-2xl p-5 max-h-[90vh] overflow-y-auto">
+                class="w-full max-w-xl veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-5 max-h-[90vh] overflow-y-auto">
                 <div class="flex justify-between mb-4">
                     <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-plus"></i> Create
                         Challenge</h3>
-                    <button onclick="closeCreateChallengeModal()"
-                        class="text-gray-400 hover:text-gray-600 text-xl">✕</button>
+                    <button onclick="closeCreateChallengeModal()" class="text-gray-800 hover:text-white text-xl">✕</button>
                 </div>
                 <form action="{{ route('admin.challenges.store') }}" method="POST" class="space-y-4">
                     @csrf
@@ -141,13 +139,13 @@
 
         {{-- EDIT MODAL --}}
         <div id="editChallengeModal"
-            class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
+            class="hidden fixed inset-0 z-50 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border flex items-center justify-center px-4">
             <div
-                class="w-full max-w-xl dark:bg-[#17141f] bg-white border dark:border-white/[0.08] rounded-2xl p-5 max-h-[90vh] overflow-y-auto">
+                class="w-full max-w-xl veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-5 max-h-[90vh] overflow-y-auto">
                 <div class="flex justify-between mb-4">
-                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-edit"></i> Edit
+                    <h3 class="text-[18px] font-extrabold dark:text-white text-gray-800"> <i class="fas fa-edit"></i> Edit
                         Challenge</h3>
-                    <button onclick="closeEditChallengeModal()" class="text-gray-400 hover:text-gray-600 text-xl">✕</button>
+                    <button onclick="closeEditChallengeModal()" class="text-gray-800 hover:text-gray-500 text-xl">✕</button>
                 </div>
                 <form id="editChallengeForm" method="POST" class="space-y-4">
                     @csrf

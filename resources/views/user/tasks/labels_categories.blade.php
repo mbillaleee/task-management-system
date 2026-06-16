@@ -11,14 +11,14 @@
             <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                 <i class="fas fa-folder mr-1 text-orange-400"></i> Task Categories & Labels
             </h2>
-            <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+            <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                 Manage your task categories and labels for better organization.
             </p>
         </div>
 
         <div class="flex items-center gap-2.5">
             <a href="{{ route('user.tasks.index') }}"
-                class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
+                class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-white text-gray-800 border dark:border-white/[0.08] border-black/[0.08]">
                 <i class="fas fa-arrow-left mr-1"></i> Back to Tasks
             </a>
         </div>
@@ -27,8 +27,8 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
 
         {{-- Quick Add Category --}}
-        <div class="dark:bg-white/[0.03] bg-gray-50 rounded-xl p-3.5 border dark:border-white/[0.06] border-black/[0.05]">
-            <p class="text-[11px] font-bold dark:text-gray-400 text-gray-500 uppercase tracking-wider mb-2.5">
+        <div class="veroa-card rounded-2xl p-3.5 border dark:border-white/[0.06] border-black/[0.05]">
+            <p class="text-[11px] font-bold dark:text-white text-gray-800 uppercase tracking-wider mb-2.5">
                 <i class="fas fa-folder mr-1 text-orange-400"></i> Add Category
             </p>
             <form action="{{ route('user.task-categories.store') }}" method="POST">
@@ -80,8 +80,8 @@
         </div>
 
         {{-- Quick Add Label --}}
-        <div class="dark:bg-white/[0.03] bg-gray-50 rounded-xl p-3.5 border dark:border-white/[0.06] border-black/[0.05]">
-            <p class="text-[11px] font-bold dark:text-gray-400 text-gray-500 uppercase tracking-wider mb-2.5">
+        <div class="veroa-card rounded-2xl p-3.5 border dark:border-white/[0.06] border-black/[0.05]">
+            <p class="text-[11px] font-bold dark:text-white text-gray-800 uppercase tracking-wider mb-2.5">
                 <i class="fas fa-tag mr-1 text-orange-400"></i> Add Label
             </p>
             <form action="{{ route('user.task-labels.store') }}" method="POST">
@@ -110,8 +110,7 @@
                 <div class="flex flex-wrap gap-1.5 mt-2.5">
                     @foreach ($labels as $lbl)
                         <span
-                            class="px-2 py-1 rounded-md text-[11px] font-semibold
-                        dark:bg-white/[0.06] bg-white border"
+                            class="px-2 py-1 rounded-md text-[11px] text-black dark:text-white font-semibold dark:bg-white/[0.06] bg-white border"
                             style="border-color: {{ $lbl->color }}">
                             <i class="fas fa-tag mr-1"></i> {{ strtolower($lbl->name) }}
                             <a href="#" class="ml-2 text-red-700 hover:text-red-700 transition-colors duration-200"

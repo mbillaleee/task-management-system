@@ -89,6 +89,7 @@ class UserDashboardController extends Controller
             ? round(($todayCompleted / $todayTotal) * 100)
             : 0;
 
+
         $todayHabits = Habit::with('todayLog')
             ->where('user_id', $userId)
             ->where('status', true)
@@ -197,15 +198,19 @@ class UserDashboardController extends Controller
 
             $chartLabels[] = $thisDay->format('D');
 
-            $thisWeekData[] = Task::where('user_id', $userId)
-                ->where('status', 'completed')
-                ->whereDate('updated_at', $thisDay)
-                ->count();
+            $thisWeekData[] =
+    (Task::where('user_id', $userId)->whereDate('updated_at', $thisDay)->where('status', 'completed')->count() * 2)
+    +
+    (HabitLog::where('user_id', $userId)->whereDate('log_date', $thisDay)->where('is_completed', true)->count() * 1)
+    +
+    (Goal::where('user_id', $userId)->whereDate('updated_at', $thisDay)->count() * 3);
 
-            $lastWeekData[] = Task::where('user_id', $userId)
-                ->where('status', 'completed')
-                ->whereDate('updated_at', $lastDay)
-                ->count();
+            $lastWeekData[] =
+    (Task::where('user_id', $userId)->whereDate('updated_at', $lastDay)->where('status', 'completed')->count() * 2)
+    +
+    (HabitLog::where('user_id', $userId)->whereDate('log_date', $lastDay)->where('is_completed', true)->count() * 1)
+    +
+    (Goal::where('user_id', $userId)->whereDate('updated_at', $lastDay)->count() * 3);
         }
 
         $activities = $this->buildActivityFeed($userId);

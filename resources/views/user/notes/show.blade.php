@@ -3,16 +3,7 @@
 @section('user')
     <div class="space-y-5">
 
-        <section
-            class="relative overflow-hidden rounded-2xl border dark:border-orange-500/[0.18] border-orange-200/70
-        dark:bg-[#100b18] bg-orange-50/70 px-6 py-6">
-
-            <div class="absolute inset-0 opacity-40 pointer-events-none"
-                style="background:
-            radial-gradient(circle at 80% 35%, rgba(236,72,153,.30), transparent 35%),
-            radial-gradient(circle at 25% 75%, rgba(249,115,22,.25), transparent 32%);">
-            </div>
-
+        <section class="relative overflow-hidden rounded-2xl border  veroa-card px-6 py-6">
             <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
                 <div>
                     <div class="flex items-center gap-2 mb-3">
@@ -64,17 +55,15 @@
 
             <!-- Content -->
             <section
-                class="rounded-2xl border dark:border-orange-500/[0.18] border-orange-200
-            dark:bg-[#0f0b18] bg-orange-50/50 p-5 shadow-[0_0_35px_rgba(249,115,22,.12)]">
+                class="rounded-2xl border dark:border-pink-500/15 bg-[#f7e4c3]/75
+            dark:bg-[#080612]  backdrop-blur-xl  p-6  space-y-6
+            shadow-[inset_0_1px_0_rgba(255,255,255,.65),0_20px_50px_rgba(180,95,20,.12),0_8px_20px_rgba(255,140,20,.08)]
+            dark:shadow-[inset_0_1px_0_rgba(255,255,255,.03)] p-6">
 
-                <div
-                    class="rounded-2xl p-6 min-h-[420px]
-                dark:bg-[#17141f] bg-white
-                border dark:border-pink-500/[0.18] border-orange-100">
-
+                <div class="rounded-2xl p-6 min-h-[420px]  veroa-card">
                     <div class="prose max-w-none dark:prose-invert">
                         <div class="text-[15px] leading-[1.9] dark:text-gray-300 text-gray-700 whitespace-pre-line">
-                            <i class="fa-solid fa-align-left"></i> {{ $note->content ?: 'No content added yet.' }}
+                            <i class="fa-solid fa-align-left"></i> {!! $note->content ?: 'No content added yet.' !!}
                         </div>
                     </div>
                 </div>
@@ -83,8 +72,7 @@
             <!-- Sidebar -->
             <aside class="space-y-4">
 
-                <div
-                    class="rounded-2xl p-5 dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100">
+                <div class="rounded-2xl p-5 veroa-card">
                     <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-4">
                         Note Details
                     </h3>
@@ -113,8 +101,7 @@
                     </div>
                 </div>
 
-                <div
-                    class="rounded-2xl p-5 dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100">
+                <div class="rounded-2xl p-5 veroa-card">
                     <h3
                         class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-3 flex items-center justify-between">
                         Tags
@@ -171,8 +158,7 @@
                     </p>
                 </div>
 
-                <div
-                    class="rounded-2xl p-5 dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100 space-y-3">
+                <div class="rounded-2xl p-5 veroa-card space-y-3">
                     <form action="{{ route('user.notes.toggle-pin', $note) }}" method="POST">
                         @csrf
                         <button

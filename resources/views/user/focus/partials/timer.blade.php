@@ -1,5 +1,4 @@
-<div
-    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+<div class="hover-lift veroa-card rounded-2xl p-[18px]">
     <div class="flex items-center justify-between mb-4">
         <h3 class="text-[16px] font-bold dark:text-white text-gray-900">
             <i class="fas fa-clock mr-2"></i> Timer Controls

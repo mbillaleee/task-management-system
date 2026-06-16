@@ -37,6 +37,8 @@ class GamificationController extends Controller
             ]
         );
 
+        
+
         $badges         = Badge::where('is_active', true)->orderBy('xp_required')->get();
         $userBadges     = UserBadge::with('badge')->where('user_id', auth()->id())->latest()->get();
         $challenges     = Challenge::where('is_active', true)->latest()->get();

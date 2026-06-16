@@ -7,22 +7,22 @@
 @endphp
 
 <div>
-    <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Challenge Title</label>
+    <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">Challenge Title</label>
     <input type="text" name="title" id="{{ $prefix }}title"
         class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
 </div>
 
 <div>
-    <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Description</label>
+    <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">Description</label>
     <textarea name="description" id="{{ $prefix }}description" rows="3"
         class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none resize-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]"></textarea>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     <div>
-        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Type</label>
+        <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">Type</label>
         <select name="type" id="{{ $prefix }}type"
-            class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 dark:border dark:border-white/[0.1] border border-black/[0.1]">
+            class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
             <option value="daily">Daily</option>
             <option value="weekly">Weekly</option>
             <option value="monthly">Monthly</option>
@@ -30,19 +30,19 @@
     </div>
 
     <div>
-        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Target Value</label>
+        <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">Target Value</label>
         <input type="number" name="target_value" id="{{ $prefix }}target_value" value="1" min="1"
             class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
     </div>
 
     <div>
-        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">XP Reward</label>
+        <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">XP Reward</label>
         <input type="number" name="xp_reward" id="{{ $prefix }}xp_reward" value="10" min="1"
             class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
     </div>
 
     <div class="md:col-span-3">
-        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
+        <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">
             Challenge Action
             <span class="font-normal dark:text-gray-500 text-gray-400 ml-1">
                 — How will progress increase?
@@ -50,7 +50,7 @@
         </label>
 
         <select name="challenge_action" id="{{ $prefix }}challenge_action"
-            class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.1] border-black/[0.1] outline-none">
+            class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 border dark:border-white/[0.1] border-black/[0.1] outline-none">
 
             <option value="manual" @selected($selectedChallengeAction === 'manual')>
                 ✍️ Manual — User will manually add progress
@@ -81,7 +81,7 @@
             </option>
         </select>
 
-        <p class="text-[11px] dark:text-gray-500 text-gray-400 mt-1">
+        <p class="text-[11px] dark:text-white text-gray-800 mt-1">
             If Auto is selected, progress will increase automatically based on user activity — no manual input required.
         </p>
 
@@ -92,25 +92,25 @@
 </div>
 
 <div>
-    <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Reward Title</label>
+    <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">Reward Title</label>
     <input type="text" name="reward_title" id="{{ $prefix }}reward_title"
         class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div>
-        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Start Date</label>
+        <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">Start Date</label>
         <input type="date" name="start_date" id="{{ $prefix }}start_date"
             class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
     </div>
     <div>
-        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">End Date</label>
+        <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">End Date</label>
         <input type="date" name="end_date" id="{{ $prefix }}end_date"
             class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
     </div>
 </div>
 
-<label class="flex items-center gap-2 text-[14px] font-bold dark:text-gray-300 text-gray-700 cursor-pointer">
+<label class="flex items-center gap-2 text-[14px] font-bold dark:text-white text-gray-800 cursor-pointer">
     <input type="checkbox" name="is_active" value="1" id="{{ $prefix }}active" checked>
     <i class="fas fa-toggle-on"></i> Active Challenge
 </label>

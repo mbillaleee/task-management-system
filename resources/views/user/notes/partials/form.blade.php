@@ -3,13 +3,14 @@
 @endphp
 
 <section
-    class="rounded-2xl border dark:border-orange-500/[0.18] border-orange-200
-    dark:bg-[#0f0b18] bg-orange-50/50 p-5 shadow-[0_0_35px_rgba(249,115,22,.12)]">
+    class="rounded-2xl border dark:border-pink-500/15 bg-[#f7e4c3]/75
+            veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-xl  p-6  space-y-6
+            dark:shadow-[inset_0_1px_0_rgba(255,255,255,.03)]">
 
     <div class="grid grid-cols-1 xl:grid-cols-[1fr_340px] gap-5">
 
         <!-- Main Form -->
-        <div class="rounded-2xl p-5 dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100">
+        <div class="rounded-2xl p-5 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
 
             <div class="mb-5">
                 <label class="block text-[14px] font-bold dark:text-gray-300 text-gray-700 mb-2">
@@ -19,7 +20,7 @@
                 <input type="text" name="title" value="{{ old('title', $note->title ?? '') }}"
                     placeholder="Enter note title..."
                     class="w-full px-4 py-3 rounded-xl text-[15px] outline-none
-                    dark:bg-[#100b18] bg-orange-50/60
+                    dark:bg-[#1A1625] bg-orange-50/60
                     dark:text-white text-gray-900
                     border dark:border-white/[0.1] border-orange-200
                     focus:border-orange-400 focus:ring-2 focus:ring-orange-500/20"
@@ -37,7 +38,7 @@
 
                 <textarea name="content" rows="18" placeholder="Write your note here..."
                     class="w-full px-4 py-4 rounded-xl text-[15px] leading-[1.8] outline-none resize-y
-                    dark:bg-[#100b18] bg-orange-50/60
+                    dark:bg-[#1A1625] bg-orange-50/60
                     dark:text-gray-200 text-gray-800
                     border dark:border-white/[0.1] border-orange-200
                     focus:border-orange-400 focus:ring-2 focus:ring-orange-500/20">{{ old('content', $note->content ?? '') }}</textarea>
@@ -51,8 +52,7 @@
         <!-- Sidebar Settings -->
         <div class="space-y-4">
 
-            <div
-                class="rounded-2xl p-5 dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100">
+            <div class="rounded-2xl p-5 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
                 <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-4">
                     <i class="fa-solid fa-folder-open"></i> Organization
                 </h3>
@@ -66,7 +66,7 @@
 
                         <select name="note_folder_id"
                             class="w-full px-4 py-3 rounded-xl text-[14px] outline-none
-                            dark:bg-[#100b18] bg-orange-50/60
+                            dark:bg-[#1A1625] bg-orange-50/60
                             dark:text-gray-300 text-gray-700
                             border dark:border-white/[0.1] border-orange-200">
                             <option value="">No Folder</option>
@@ -85,7 +85,7 @@
 
                         <select name="note_category_id"
                             class="w-full px-4 py-3 rounded-xl text-[14px] outline-none
-                            dark:bg-[#100b18] bg-orange-50/60
+                            dark:bg-[#1A1625] bg-orange-50/60
                             dark:text-gray-300 text-gray-700
                             border dark:border-white/[0.1] border-orange-200">
                             <option value="">No Category</option>
@@ -105,19 +105,18 @@
                         <input type="text" name="tags" value="{{ old('tags', $selectedTags) }}"
                             placeholder="work, idea, personal"
                             class="w-full px-4 py-3 rounded-xl text-[14px] outline-none
-                            dark:bg-[#100b18] bg-orange-50/60
+                            dark:bg-[#1A1625] bg-orange-50/60
                             dark:text-gray-300 text-gray-700
                             border dark:border-white/[0.1] border-orange-200">
 
-                        <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-2">
+                        <p class="text-[12px] dark:text-white text-gray-800 mt-2">
                             Separate tags with comma.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div
-                class="rounded-2xl p-5 dark:bg-[#17141f] bg-white border dark:border-pink-500/[0.18] border-orange-100">
+            <div class="rounded-2xl p-5 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
                 <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900 mb-4">
                     <i class="fa-solid fa-cog"></i> Note Settings
                 </h3>
@@ -131,7 +130,7 @@
 
                         <select name="type"
                             class="w-full px-4 py-3 rounded-xl text-[14px] outline-none
-                            dark:bg-[#100b18] bg-orange-50/60
+                            dark:bg-[#1A1625] bg-orange-50/60
                             dark:text-gray-300 text-gray-700
                             border dark:border-white/[0.1] border-orange-200">
                             <option value="text" @selected(old('type', $note->type ?? 'text') == 'text')>
@@ -150,7 +149,7 @@
 
                         <select name="status"
                             class="w-full px-4 py-3 rounded-xl text-[14px] outline-none
-                            dark:bg-[#100b18] bg-orange-50/60
+                            dark:bg-[#1A1625] bg-orange-50/60
                             dark:text-gray-300 text-gray-700
                             border dark:border-white/[0.1] border-orange-200">
                             <option value="draft" @selected(old('status', $note->status ?? 'draft') == 'draft')>

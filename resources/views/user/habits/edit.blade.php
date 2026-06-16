@@ -6,30 +6,30 @@
         {{-- Header --}}
         <div class="flex items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
+                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-800">
                     <i class="fas fa-edit mr-1"></i> Edit Habit
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Update habit category, type, frequency and reminder settings.
                 </p>
             </div>
             <div class="flex items-center gap-2">
                 <a href="{{ route('user.habits.show', $habit) }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white
-                    dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
+                    dark:text-white text-gray-800 border dark:border-white/[0.08] border-black/[0.08]">
                     <i class="fas fa-eye mr-1"></i> View Habit
                 </a>
                 <a href="{{ route('user.habits.index') }}"
                     class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white
-                    dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
+                    dark:text-white text-gray-800 border dark:border-white/[0.08] border-black/[0.08]">
                     <i class="fas fa-arrow-left mr-1"></i> Back
                 </a>
             </div>
         </div>
 
         {{-- ─── Quick Add Category (separate form, outside main form) ── --}}
-        <div class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4">
-            <p class="text-[11px] font-bold dark:text-gray-400 text-gray-500 uppercase tracking-wider mb-3">
+        <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-4">
+            <p class="text-[11px] font-bold dark:text-white text-gray-800 uppercase tracking-wider mb-3">
                 <i class="fas fa-folder mr-1 text-orange-400"></i> Quick Add Category
             </p>
 
@@ -68,7 +68,7 @@
                     @foreach ($categories as $cat)
                         <div
                             class="group flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[12px]
-                            dark:bg-white/[0.06] bg-gray-50 dark:text-gray-300 text-gray-600
+                            dark:bg-white/[0.06] bg-gray-50 dark:text-white text-gray-800
                             border dark:border-white/[0.08] border-black/[0.06]">
                             <span class="w-2 h-2 rounded-full flex-shrink-0"
                                 style="background-color:{{ $cat->color ?? '#888' }}"></span>
@@ -93,8 +93,7 @@
         </div>
 
         {{-- ─── Main Habit Form ─────────────────────────────────────── --}}
-        <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+        <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-[18px]">
             <form action="{{ route('user.habits.update', $habit) }}" method="POST">
                 @csrf
                 @method('PUT')

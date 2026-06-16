@@ -22,7 +22,7 @@
         <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-1 flex items-center gap-2">
             <i class="fa-solid fa-circle-half-stroke text-orange-400 text-[13px]"></i> Theme Mode
         </h4>
-        <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-4">Choose between dark and light interface.</p>
+        <p class="text-[12px] dark:text-white text-gray-800 mb-4">Choose between dark and light interface.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {{-- Dark --}}
@@ -45,7 +45,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-[13px] font-bold dark:text-white text-gray-900">Dark Mode</p>
-                            <p class="text-[11.5px] dark:text-gray-500 text-gray-400">Easy on the eyes</p>
+                            <p class="text-[11.5px] dark:text-white text-gray-800">Easy on the eyes</p>
                         </div>
                         <div class="w-5 h-5 rounded-full border-2 dark:border-white/20 border-black/20 flex items-center justify-center peer-checked:bg-orange-500 peer-checked:border-orange-500"
                             id="darkRadioViz">
@@ -76,7 +76,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-[13px] font-bold dark:text-white text-gray-900">Light Mode</p>
-                            <p class="text-[11.5px] dark:text-gray-500 text-gray-400">Clean and bright</p>
+                            <p class="text-[11.5px] dark:text-white text-gray-800">Clean and bright</p>
                         </div>
                         <div class="w-5 h-5 rounded-full border-2 dark:border-white/20 border-black/20 flex items-center justify-center"
                             id="lightRadioViz">
@@ -96,7 +96,7 @@
         <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-1 flex items-center gap-2">
             <i class="fa-solid fa-paintbrush text-orange-400 text-[13px]"></i> Accent Color
         </h4>
-        <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-4">Primary brand color across the interface.</p>
+        <p class="text-[12px] dark:text-white text-gray-800 mb-4">Primary brand color across the interface.</p>
 
         <div class="flex flex-wrap gap-3">
             @foreach ($accents as $hex => $name)
@@ -133,7 +133,7 @@
         <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-1 flex items-center gap-2">
             <i class="fa-solid fa-language text-orange-400 text-[13px]"></i> Language
         </h4>
-        <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-4">Interface display language.</p>
+        <p class="text-[12px] dark:text-white text-gray-800 mb-4">Interface display language.</p>
 
         <select name="language"
             class="w-full sm:w-64 px-3.5 py-2.5 rounded-[10px] text-[13.5px] outline-none transition
@@ -155,7 +155,7 @@
     {{-- <div class="flex items-center justify-between">
         <div>
             <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900">Compact Sidebar</h4>
-            <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-0.5">Show icons only, hide labels for more space.</p>
+            <p class="text-[12px] dark:text-white text-gray-800 mt-0.5">Show icons only, hide labels for more space.</p>
         </div>
         <label class="relative inline-flex items-center cursor-pointer">
             <input type="checkbox" name="sidebar_compact" value="1"

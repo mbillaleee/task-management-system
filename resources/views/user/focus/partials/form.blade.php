@@ -111,11 +111,11 @@
             <i class="fas fa-expand mr-2"></i> Fullscreen Focus Mode
         </label>
 
-        <label
+        {{-- <label
             class="px-3 py-2 rounded-[10px] text-[14px] font-bold cursor-pointer dark:bg-white/[0.06] bg-gray-100 dark:text-gray-300 text-gray-600">
             <input type="checkbox" name="distraction_free" value="1" class="mr-1.5" @checked(old('distraction_free', $focus->distraction_free ?? false))>
             <i class="fas fa-ban mr-2"></i> Distraction-Free UI
-        </label>
+        </label> --}}
     </div>
 
     <div class="flex items-center justify-end gap-2 pt-3">

@@ -3,7 +3,7 @@
 @section('admin')
 
 
-    <section class="flex-1 p-4 sm:p-5 flex flex-col gap-4">
+    <section class="flex-1 flex flex-col gap-4">
 
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -36,7 +36,7 @@
         @endif
 
         <!-- Main Card -->
-        <div class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 rounded-2xl p-5">
+        <div class="hover-lift  veroa-card border rounded-2xl p-5">
             <h3 class="text-[16px] font-bold dark:text-white text-gray-900 mb-4">
                 <i class="fas fa-user-edit text-orange-500 mr-2"></i> Update User Information
             </h3>

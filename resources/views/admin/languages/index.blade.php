@@ -11,10 +11,10 @@
             </a>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 ">
             @forelse($languages as $language)
                 <div
-                    class="relative hover:scale-105 transform transition-all duration-300 hover-lift dark:bg-[#1b1624] bg-white rounded-3xl p-6 border dark:border-gray-200 border-gray-200 shadow-lg shadow-pink-400/20 overflow-hidden">
+                    class="relative hover:scale-105 transform transition-all duration-300 hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-3xl p-6  overflow-hidden">
 
                     <!-- Background glow effect -->
                     <div

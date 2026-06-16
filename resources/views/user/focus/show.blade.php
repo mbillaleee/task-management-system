@@ -15,7 +15,7 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     <i class="fas fa-info-circle mr-2"></i> Focus Details
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     View timer, progress, sound mode and activity history.
                 </p>
             </div>
@@ -48,43 +48,47 @@
 
             <div class="xl:col-span-2 space-y-4">
                 <div
-                    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px] relative overflow-hidden">
+                    class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-[18px] relative overflow-hidden">
                     <div class="absolute top-0 right-0 w-28 h-28 bg-orange-500 blur-3xl opacity-20"></div>
 
                     <div class="relative z-10">
-                        <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">
+                        <h3 class="text-[18px] font-extrabold dark:text-white text-gray-800">
                             {{ $focus->title ?? 'Untitled Session' }}
                         </h3>
 
-                        <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-3 leading-relaxed">
+                        <p class="text-[14px] dark:text-white text-gray-800 mt-3 leading-relaxed">
                             {{ ucwords(str_replace('_', ' ', $focus->type)) }} session with
                             {{ ucwords(str_replace('_', ' ', $focus->ambient_sound ?? 'none')) }} ambient sound.
                         </p>
 
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
                             <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                                <p class="text-[14px] dark:text-gray-500 text-gray-400"> <i class="fas fa-clock mr-2"></i> Status</p>
+                                <p class="text-[14px] dark:text-white text-gray-800"> <i class="fas fa-clock mr-2"></i>
+                                    Status</p>
                                 <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                     {{ ucfirst($focus->status) }}
                                 </p>
                             </div>
 
                             <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                                <p class="text-[14px] dark:text-gray-500 text-gray-400"> <i class="fas fa-tag mr-2"></i> Type</p>
+                                <p class="text-[14px] dark:text-white text-gray-800"> <i class="fas fa-tag mr-2"></i>
+                                    Type</p>
                                 <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                     {{ ucwords(str_replace('_', ' ', $focus->type)) }}
                                 </p>
                             </div>
 
                             <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                                <p class="text-[14px] dark:text-gray-500 text-gray-400"> <i class="fas fa-volume-up mr-2"></i> Sound</p>
+                                <p class="text-[14px] dark:text-white text-gray-800"> <i class="fas fa-volume-up mr-2"></i>
+                                    Sound</p>
                                 <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                     {{ ucwords(str_replace('_', ' ', $focus->ambient_sound ?? 'none')) }}
                                 </p>
                             </div>
 
                             <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                                <p class="text-[14px] dark:text-gray-500 text-gray-400"> <i class="fas fa-star mr-2"></i> XP</p>
+                                <p class="text-[14px] dark:text-white text-gray-800"> <i class="fas fa-star mr-2"></i> XP
+                                </p>
                                 <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                     {{ $focus->xp_earned }}
                                 </p>
@@ -93,11 +97,11 @@
 
                         <div class="mt-5">
                             <div class="flex justify-between text-[16px] mb-1.5">
-                                <span class="dark:text-gray-400 text-gray-500">Progress</span>
+                                <span class="dark:text-white text-gray-800">Progress</span>
                                 <span class="font-bold dark:text-white text-gray-800">{{ $progress }}%</span>
                             </div>
 
-                            <div class="w-full h-[9px] rounded-full dark:bg-white/[0.08] bg-gray-100 overflow-hidden">
+                            <div class="w-full h-[9px] rounded-full dark:bg-white bg-gray-400 overflow-hidden">
                                 <div class="h-full rounded-full bg-gradient-to-r from-orange-500 to-pink-500"
                                     style="width: {{ $progress }}%"></div>
                             </div>
@@ -107,8 +111,7 @@
 
                 @include('user.focus.partials.timer', ['focus' => $focus])
 
-                <div
-                    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+                <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-[18px]">
                     <h3 class="text-[16px] font-bold dark:text-white text-gray-900 mb-3.5">
                         <i class="fas fa-history mr-2"></i> Session History
                     </h3>
@@ -125,7 +128,7 @@
                                     {{ $history->action }}
                                 </h4>
 
-                                <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-1">
+                                <p class="text-[12px] dark:text-white text-gray-800 mt-1">
                                     {{ $history->description }}
                                 </p>
 
@@ -134,21 +137,20 @@
                                 </p>
                             </div>
                         @empty
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400">No history found.</p>
+                            <p class="text-[14px] dark:text-white text-gray-800">No history found.</p>
                         @endforelse
                     </div>
                 </div>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+            <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-[18px]">
                 <h3 class="text-[18px] font-bold dark:text-white text-gray-900 mb-4">
                     <i class="fas fa-chart-line mr-2"></i> Time Overview
                 </h3>
 
                 <div class="space-y-3">
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                        <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                        <p class="text-[14px] dark:text-white text-gray-800">
                             <i class="fas fa-clock mr-2"></i> Duration
                         </p>
                         <p class="text-[18px] font-extrabold dark:text-white text-gray-900">
@@ -157,7 +159,7 @@
                     </div>
 
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                        <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                        <p class="text-[14px] dark:text-white text-gray-800">
                             <i class="fas fa-check-circle mr-2"></i> Completed
                         </p>
                         <p class="text-[18px] font-extrabold dark:text-white text-gray-900">
@@ -166,7 +168,7 @@
                     </div>
 
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                        <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                        <p class="text-[14px] dark:text-white text-gray-800">
                             <i class="fas fa-expand mr-2"></i> Fullscreen
                         </p>
                         <p class="text-[14px] font-bold dark:text-white text-gray-800">
@@ -174,17 +176,17 @@
                         </p>
                     </div>
 
-                    <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                        <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                    {{-- <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
+                        <p class="text-[14px] dark:text-white text-gray-800">
                             <i class="fas fa-ban mr-2"></i> Distraction Free
                         </p>
                         <p class="text-[14px] font-bold dark:text-white text-gray-800">
                             {{ $focus->distraction_free ? 'Enabled' : 'Disabled' }}
                         </p>
-                    </div>
+                    </div> --}}
 
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                        <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                        <p class="text-[14px] dark:text-white text-gray-800">
                             <i class="fas fa-clock mr-2"></i> Started At
                         </p>
                         <p class="text-[14px] font-bold dark:text-white text-gray-800">
@@ -193,7 +195,7 @@
                     </div>
 
                     <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                        <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                        <p class="text-[14px] dark:text-white text-gray-800">
                             <i class="fas fa-check-circle mr-2"></i> Completed At
                         </p>
                         <p class="text-[14px] font-bold dark:text-white text-gray-800">

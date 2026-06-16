@@ -5,17 +5,13 @@
 
         {{-- Header --}}
         <section
-            class="relative overflow-hidden rounded-2xl border dark:border-orange-500/[0.18] border-orange-200/70
-        dark:bg-[#100b18] bg-orange-50/70 px-6 py-6">
-            <div class="absolute inset-0 pointer-events-none opacity-50"
-                style="background: radial-gradient(circle at 75% 40%, rgba(236,72,153,.25), transparent 40%),
-            radial-gradient(circle at 20% 70%, rgba(249,115,22,.22), transparent 38%);">
-            </div>
+            class="relative overflow-hidden rounded-2xl border veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] px-6 py-6">
+
             <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h1 class="text-[28px] font-extrabold dark:text-white text-gray-900"><i class="fas fa-chart-line"></i>
+                    <h1 class="text-[28px] font-extrabold dark:text-white text-gray-800"><i class="fas fa-chart-line"></i>
                         Analytics Overview</h1>
-                    <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-1">Your complete productivity at a glance.</p>
+                    <p class="text-[14px] dark:text-white text-gray-800 mt-1">Your complete productivity at a glance.</p>
                 </div>
                 <div class="flex flex-wrap gap-2">
                     <a href="{{ route('user.analytics.productivity') }}"
@@ -40,23 +36,23 @@
         {{-- Productivity Score --}}
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div
-                class="md:col-span-1 dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-5 flex flex-col items-center justify-center text-center">
+                class="md:col-span-1 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl border p-5 flex flex-col items-center justify-center text-center">
                 <div class="relative w-28 h-28 mb-3">
                     <svg class="w-28 h-28 -rotate-90" viewBox="0 0 120 120">
                         <circle cx="60" cy="60" r="50" fill="none" stroke-width="10"
-                            class="dark:stroke-white/10 stroke-gray-100" />
+                            class="dark:stroke-white/10 stroke-gray-400" />
                         <circle cx="60" cy="60" r="50" fill="none" stroke-width="10"
                             stroke-dasharray="{{ round($productivityScore * 3.14) }} 314" class="stroke-orange-500"
                             stroke-linecap="round" />
                     </svg>
                     <div class="absolute inset-0 flex flex-col items-center justify-center">
                         <span class="text-[26px] font-black dark:text-white text-gray-900">{{ $productivityScore }}</span>
-                        <span class="text-[10px] dark:text-gray-500 text-gray-400 font-bold">/100</span>
+                        <span class="text-[10px] dark:text-white text-gray-800 font-bold">/100</span>
                     </div>
                 </div>
                 <p class="text-[14px] font-extrabold dark:text-white text-gray-900"><i class="fas fa-chart-line"></i>
                     Productivity Score</p>
-                <p class="text-[11px] dark:text-gray-500 text-gray-400 mt-1">Tasks · Habits · Goals · Focus</p>
+                <p class="text-[11px] dark:text-white text-gray-800 mt-1">Tasks · Habits · Goals · Focus</p>
             </div>
 
             <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -95,7 +91,7 @@
 
                 @foreach ($stats as $s)
                     <div
-                        class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-4 flex flex-col justify-between">
+                        class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl border p-4 flex flex-col justify-between">
 
                         <div class="flex items-center justify-between mb-3">
                             <div
@@ -113,7 +109,7 @@
                                 {{ $s['value'] }}
                             </p>
 
-                            <p class="text-[12px] dark:text-gray-400 text-gray-500 font-bold mt-0.5">
+                            <p class="text-[12px] dark:text-white text-gray-500 font-bold mt-0.5">
                                 {{ $s['label'] }}
                             </p>
                         </div>
@@ -123,55 +119,83 @@
         </div>
 
         {{-- Weekly Activity Chart (bar) --}}
-        <div class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-5">
-            <h3 class="text-[17px] font-extrabold dark:text-white text-gray-900 mb-5"><i class="fas fa-calendar-alt"></i>
-                Last 7 Days Activity</h3>
+        <div
+            class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl border p-5
+            bg-[#fbefd9]/85 border-orange-200/60
+            dark:bg-[#0f0a1c] dark:border-pink-500/15">
+
+            <h3 class="text-[17px] font-extrabold dark:text-white text-[#151515] mb-5">
+                <i class="fas fa-calendar-alt text-[#ff8a12] dark:text-[#ff2fa8]"></i>
+                Last 7 Days Activity
+            </h3>
+
             <div class="grid grid-cols-7 gap-2 items-end" style="height:140px">
-                @php $maxVal = max(1, collect($weeklyActivity)->max(fn($d) => $d['tasks'] + $d['habits'])); @endphp
+                @php
+                    $maxVal = max(1, collect($weeklyActivity)->max(fn($d) => $d['tasks'] + $d['habits']));
+                @endphp
+
                 @foreach ($weeklyActivity as $day)
                     @php
                         $total = $day['tasks'] + $day['habits'];
                         $pct = round(($total / $maxVal) * 100);
                         $isToday = $day['date'] === now()->format('Y-m-d');
                     @endphp
+
                     <div class="flex flex-col items-center gap-1">
-                        <span class="text-[11px] dark:text-gray-500 text-gray-400">{{ $total > 0 ? $total : '' }}</span>
-                        <div class="w-full rounded-t-lg transition-all {{ $isToday ? 'bg-gradient-to-t from-orange-500 to-pink-500' : 'dark:bg-white/[0.1] bg-orange-100' }}"
-                            style="height:{{ max(6, $pct) }}%"></div>
+                        <span class="text-[11px] dark:text-gray-500 text-[#8b7355]">
+                            {{ $total > 0 ? $total : '' }}
+                        </span>
+
+                        <div class="w-full rounded-t-lg transition-all
+                            {{ $isToday
+                                ? 'bg-gradient-to-t from-[#ff8a12] via-[#ff6b2c] to-[#ff2fa8] shadow-[0_0_12px_rgba(255,138,18,.35)] dark:shadow-[0_0_14px_rgba(255,47,168,.30)]'
+                                : 'dark:bg-[#21152f] bg-[#f9d9b1]' }}"
+                            style="height:{{ max(6, $pct) }}%">
+                        </div>
+
                         <span
-                            class="text-[11px] font-bold {{ $isToday ? 'text-orange-400' : 'dark:text-gray-500 text-gray-400' }}">{{ $day['label'] }}</span>
+                            class="text-[11px] font-bold
+                            {{ $isToday ? 'text-[#ff8a12] dark:text-[#ff2fa8]' : 'dark:text-gray-500 text-[#8b7355]' }}">
+                            {{ $day['label'] }}
+                        </span>
                     </div>
                 @endforeach
             </div>
-            <div class="flex gap-4 mt-4 text-[12px] dark:text-gray-500 text-gray-400">
-                <span><span class="inline-block w-3 h-3 rounded bg-orange-500 mr-1"></span><i class="fas fa-circle"></i>
-                    Today</span>
-                <span><span class="inline-block w-3 h-3 rounded dark:bg-white/10 bg-orange-100 mr-1"></span><i
-                        class="fas fa-circle"></i> Other
-                    days</span>
+
+            <div class="flex gap-4 mt-4 text-[12px] dark:text-gray-500 text-[#8b7355]">
+                <span class="flex items-center">
+                    <span class="inline-block w-3 h-3 rounded bg-gradient-to-r from-[#ff8a12] to-[#ff2fa8] mr-1"></span>
+                    Today
+                </span>
+
+                <span class="flex items-center">
+                    <span class="inline-block w-3 h-3 rounded dark:bg-[#21152f] bg-[#f9d9b1] mr-1"></span>
+                    Other days
+                </span>
+
                 <span class="ml-auto">Bar = tasks + habits combined</span>
             </div>
         </div>
 
         {{-- Bottom Stats Row --}}
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-5">
-                <p class="text-[13px] dark:text-gray-500 text-gray-400 font-bold mb-1"><i class="fas fa-star"></i> XP Earned
+            <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl border p-5">
+                <p class="text-[13px] dark:text-white text-gray-800 font-bold mb-1"><i class="fas fa-star"></i> XP Earned
                 </p>
                 <p class="text-[32px] font-black text-orange-400">{{ number_format($totalXp) }}</p>
-                <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-1">Level {{ $level }}</p>
+                <p class="text-[12px] dark:text-white text-gray-800 mt-1">Level {{ $level }}</p>
             </div>
-            <div class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-5">
-                <p class="text-[13px] dark:text-gray-500 text-gray-400 font-bold mb-1"><i class="fas fa-book"></i> Journals
+            <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl border p-5">
+                <p class="text-[13px] dark:text-white text-gray-800 font-bold mb-1"><i class="fas fa-book"></i> Journals
                     Written</p>
                 <p class="text-[32px] font-black text-purple-400">{{ $totalJournals }}</p>
-                <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-1">{{ $journalStreak }} day writing streak</p>
+                <p class="text-[12px] dark:text-white text-gray-800 mt-1">{{ $journalStreak }} day writing streak</p>
             </div>
-            <div class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07] p-5">
-                <p class="text-[13px] dark:text-gray-500 text-gray-400 font-bold mb-1"><i class="fas fa-trophy"></i> Most
+            <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl border p-5">
+                <p class="text-[13px] dark:text-white text-gray-800 font-bold mb-1"><i class="fas fa-trophy"></i> Most
                     Productive Day</p>
                 <p class="text-[32px] font-black text-emerald-400">{{ $topDay ?? '–' }}</p>
-                <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-1">Based on task completions</p>
+                <p class="text-[12px] dark:text-white text-gray-800 mt-1">Based on task completions</p>
             </div>
         </div>
 
@@ -208,7 +232,7 @@
             ],
         ] as $link)
                 <a href="{{ route($link['route']) }}"
-                    class="dark:bg-[#17141f] bg-white rounded-2xl border dark:border-white/[0.07] border-black/[0.07]
+                    class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl border
                     p-4 hover:dark:border-orange-500/30 hover:border-orange-300 transition group">
                     <div
                         class="w-11 h-11 rounded-xl flex items-center justify-center
@@ -221,7 +245,7 @@
                         {{ $link['label'] }}
                     </p>
 
-                    <p class="text-[11px] dark:text-gray-500 text-gray-400 mt-0.5">
+                    <p class="text-[11px] dark:text-white text-gray-800 mt-0.5">
                         {{ $link['sub'] }}
                     </p>
                 </a>

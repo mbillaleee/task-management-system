@@ -5,10 +5,10 @@
 
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
+                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-800">
                     <i class="fas fa-history mr-2"></i> Focus Session History
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     View all created, started, paused, completed and cancelled focus activities.
                 </p>
             </div>
@@ -19,8 +19,7 @@
             </a>
         </div>
 
-        <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+        <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-[18px]">
             <div class="space-y-5">
                 @forelse($histories as $history)
                     <div class="relative pl-5">
@@ -35,7 +34,7 @@
                                 <i class="fas fa-info-circle mr-2"></i> {{ $history->action }}
                             </h4>
 
-                            <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-1">
+                            <p class="text-[13px] dark:text-white text-gray-800 mt-1">
                                 {{ $history->description }}
                             </p>
 
@@ -44,7 +43,7 @@
                                     {{ $history->focusSession?->title ?? 'Deleted Session' }}
                                 </span>
 
-                                <span class="text-[12px] dark:text-gray-600 text-gray-400">
+                                <span class="text-[12px] dark:text-white text-gray-800">
                                     <i class="fas fa-clock mr-2"></i> {{ $history->created_at->format('d M Y h:i A') }}
                                 </span>
                             </div>
@@ -53,7 +52,7 @@
                 @empty
                     <div class="text-center py-8">
                         <h3 class="text-[16px] font-bold dark:text-white text-gray-900">No history found</h3>
-                        <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-1">
+                        <p class="text-[12px] dark:text-white text-gray-800 mt-1">
                             <i class="fas fa-info-circle mr-2"></i> Focus activity history will appear here.
                         </p>
                     </div>

@@ -8,19 +8,19 @@
             <div>
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900"><i
                         class="fas fa-calendar-alt mr-2"></i> Calendar</h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">Timeline — chronological view of all your
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">Timeline — chronological view of all your
                     events.</p>
             </div>
             <div class="flex flex-wrap items-center gap-2.5">
                 <div class="flex items-center dark:bg-white/[0.06] bg-black/[0.05] rounded-[10px] p-1 gap-1">
                     <a href="{{ route('user.calendar.index') }}"
-                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
+                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-white text-gray-800 dark:hover:text-white hover:text-gray-900 transition-colors">
                         <i class="fas fa-calendar mr-1"></i>Month</a>
                     <a href="{{ route('user.calendar.week') }}"
-                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
+                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-white text-gray-800 dark:hover:text-white hover:text-gray-900 transition-colors">
                         <i class="fas fa-calendar-week mr-1"></i>Week</a>
                     <a href="{{ route('user.calendar.day') }}"
-                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
+                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-white text-gray-800 dark:hover:text-white hover:text-gray-900 transition-colors">
                         <i class="fas fa-calendar-day mr-1"></i>Day</a>
                     <a href="{{ route('user.calendar.timeline') }}"
                         class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 text-white">
@@ -35,19 +35,18 @@
         </div>
 
         {{-- Month nav --}}
-        <div
-            class="flex items-center justify-between dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl px-5 py-4">
+        <div class="flex items-center justify-between veroa-card rounded-2xl px-5 py-4">
             <a href="{{ route('user.calendar.timeline', ['year' => $prevMonth->year, 'month' => $prevMonth->month]) }}"
-                class="w-9 h-9 flex items-center justify-center rounded-xl dark:bg-white/[0.06] bg-black/[0.05] dark:text-gray-300 text-gray-600 hover:dark:bg-white/[0.1] transition-colors">
+                class="w-9 h-9 flex items-center justify-center rounded-xl dark:bg-white/[0.06] bg-black/[0.05] dark:text-white text-gray-800 hover:dark:bg-white/[0.1] transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                 </svg>
             </a>
-            <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">
+            <h3 class="text-[18px] font-extrabold dark:text-white text-gray-800">
                 {{ $startDate->format('F Y') }}
             </h3>
             <a href="{{ route('user.calendar.timeline', ['year' => $nextMonth->year, 'month' => $nextMonth->month]) }}"
-                class="w-9 h-9 flex items-center justify-center rounded-xl dark:bg-white/[0.06] bg-black/[0.05] dark:text-gray-300 text-gray-600 hover:dark:bg-white/[0.1] transition-colors">
+                class="w-9 h-9 flex items-center justify-center rounded-xl dark:bg-white/[0.06] bg-black/[0.05] dark:text-white text-gray-800 hover:dark:bg-white/[0.1] transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
@@ -56,27 +55,23 @@
 
         {{-- Summary bar --}}
         <div class="grid grid-cols-3 gap-3">
-            <div
-                class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4 text-center">
+            <div class="veroa-card rounded-2xl p-4 text-center">
                 <p class="text-[28px] font-black text-orange-400">{{ $events->count() }}</p>
-                <p class="text-[12px] font-bold dark:text-gray-500 text-gray-400 mt-0.5"> Total Events</p>
+                <p class="text-[12px] font-bold dark:text-white text-gray-800 mt-0.5"> Total Events</p>
             </div>
-            <div
-                class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4 text-center">
+            <div class="veroa-card rounded-2xl p-4 text-center">
                 <p class="text-[28px] font-black text-blue-400">{{ $events->where('status', 'upcoming')->count() }}</p>
-                <p class="text-[12px] font-bold dark:text-gray-500 text-gray-400 mt-0.5">Upcoming</p>
+                <p class="text-[12px] font-bold dark:text-white text-gray-800 mt-0.5">Upcoming</p>
             </div>
-            <div
-                class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4 text-center">
+            <div class="veroa-card rounded-2xl p-4 text-center">
                 <p class="text-[28px] font-black text-emerald-400">{{ $events->where('status', 'completed')->count() }}</p>
-                <p class="text-[12px] font-bold dark:text-gray-500 text-gray-400 mt-0.5">Completed</p>
+                <p class="text-[12px] font-bold dark:text-white text-gray-800 mt-0.5">Completed</p>
             </div>
         </div>
 
         {{-- Timeline body --}}
         @if ($events->count() === 0)
-            <div
-                class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-16 text-center">
+            <div class="veroa-card rounded-2xl p-16 text-center">
                 <div
                     class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-orange-500/20 to-pink-500/20 flex items-center justify-center">
                     <svg class="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -88,7 +83,7 @@
                     </svg>
                 </div>
                 <h3 class="text-[17px] font-extrabold dark:text-white text-gray-900">No events this month</h3>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-1 mb-5">Start adding events to see them here.</p>
+                <p class="text-[14px] dark:text-white text-gray-800 mt-1 mb-5">Start adding events to see them here.</p>
                 <button onclick="openCreateModal()"
                     class="px-5 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
                     + Add First Event
@@ -111,14 +106,14 @@
                             <div class="w-24 sm:w-32 flex-shrink-0 flex flex-col items-end pr-4 pt-4">
                                 <div class="text-right">
                                     <p
-                                        class="text-[11px] font-bold uppercase tracking-wider {{ $isToday ? 'text-orange-400' : ($isPast ? 'dark:text-gray-600 text-gray-300' : 'dark:text-gray-500 text-gray-400') }}">
+                                        class="text-[11px] font-bold uppercase tracking-wider {{ $isToday ? 'text-orange-400' : ($isPast ? 'dark:text-white text-gray-800' : 'dark:text-white text-gray-800') }}">
                                         {{ $dayDate->format('D') }}
                                     </p>
                                     <p
-                                        class="text-[22px] font-extrabold {{ $isToday ? 'text-orange-400' : ($isPast ? 'dark:text-gray-600 text-gray-300' : 'dark:text-white text-gray-900') }}">
+                                        class="text-[22px] font-extrabold {{ $isToday ? 'text-orange-400' : ($isPast ? 'dark:text-white text-gray-800' : 'dark:text-white text-gray-900') }}">
                                         {{ $dayDate->format('j') }}
                                     </p>
-                                    <p class="text-[11px] dark:text-gray-600 text-gray-300 font-medium">
+                                    <p class="text-[11px] dark:text-white text-gray-800 font-medium">
                                         {{ $dayDate->format('M') }}</p>
                                 </div>
                             </div>
@@ -138,7 +133,7 @@
                             {{-- Right: events --}}
                             <div class="flex-1 pt-1 pb-6 pl-4 space-y-2">
                                 @if ($isToday && $dayEvs->count() === 0)
-                                    <div class="text-[13px] dark:text-gray-500 text-gray-400 font-medium italic pt-2">Today
+                                    <div class="text-[13px] dark:text-white text-gray-800 font-medium italic pt-2">Today
                                         — no events scheduled</div>
                                 @endif
                                 @foreach ($dayEvs->sortBy('start_time') as $ev)

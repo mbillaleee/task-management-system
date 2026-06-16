@@ -9,7 +9,7 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     <i class="fas fa-calendar-alt mr-2"></i> Calendar
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     <i class="fas fa-info-circle mr-1"></i> Plan events, schedule blocks, and manage your time.
                 </p>
             </div>
@@ -21,15 +21,15 @@
                         <i class="fas fa-calendar mr-1"></i> Month
                     </a>
                     <a href="{{ route('user.calendar.week') }}"
-                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
+                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-white text-gray-800 dark:hover:text-white hover:text-gray-900 transition-colors">
                         <i class="fas fa-calendar-week mr-1"></i> Week
                     </a>
                     <a href="{{ route('user.calendar.day') }}"
-                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
+                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-white text-gray-800 dark:hover:text-white hover:text-gray-900 transition-colors">
                         <i class="fas fa-calendar-day mr-1"></i> Day
                     </a>
                     <a href="{{ route('user.calendar.timeline') }}"
-                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
+                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-white text-gray-800 dark:hover:text-white hover:text-gray-900 transition-colors">
                         <i class="fas fa-list mr-1"></i> Timeline
                     </a>
                 </div>
@@ -58,17 +58,15 @@
                 ];
             @endphp
             @foreach ($statItems as $s)
-                <div
-                    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4">
-                    <p class="text-[13px] dark:text-gray-400 text-gray-500 font-bold">{{ $s['label'] }}</p>
+                <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-4">
+                    <p class="text-[13px] dark:text-white text-gray-800 font-bold">{{ $s['label'] }}</p>
                     <h3 class="text-[30px] font-black {{ $s['color'] }} mt-1">{{ $s['value'] }}</h3>
                 </div>
             @endforeach
         </div>
 
         {{-- ── Month navigation ────────────────────────────────────────────── --}}
-        <div
-            class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl overflow-hidden">
+        <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl overflow-hidden">
             <div class="flex items-center justify-between px-5 py-4 border-b dark:border-white/[0.07] border-black/[0.07]">
                 <a href="{{ route('user.calendar.index', ['year' => $prevMonth->year, 'month' => $prevMonth->month]) }}"
                     class="w-9 h-9 flex items-center justify-center rounded-xl dark:bg-white/[0.06] bg-black/[0.05] dark:text-gray-300 text-gray-600 dark:hover:bg-white/[0.1] hover:bg-black/[0.08] transition-colors">
@@ -80,7 +78,7 @@
                     <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">
                         {{ $currentMonth->format('F Y') }}
                     </h3>
-                    <p class="text-[12px] dark:text-gray-500 text-gray-400">
+                    <p class="text-[12px] dark:text-white text-gray-800">
                         {{ now()->format('l, F j, Y') }}
                     </p>
                 </div>
@@ -96,7 +94,7 @@
             <div class="grid grid-cols-7 border-b dark:border-white/[0.07] border-black/[0.07]">
                 @foreach (['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] as $d)
                     <div
-                        class="py-2.5 text-center text-[12px] font-bold dark:text-gray-500 text-gray-400 uppercase tracking-wider">
+                        class="py-2.5 text-center text-[12px] font-bold dark:text-white text-gray-800 uppercase tracking-wider">
                         {{ $d }}
                     </div>
                 @endforeach
@@ -128,7 +126,7 @@
                             </span>
                             @if ($dayEvents->count() > 0)
                                 <span
-                                    class="text-[10px] font-bold dark:text-gray-500 text-gray-400 opacity-100 group-hover:opacity-100 transition-opacity">
+                                    class="text-[10px] font-bold dark:text-white text-gray-800 opacity-100 group-hover:opacity-100 transition-opacity">
                                     <i class="fas fa-plus mr-1"></i> {{ $dayEvents->count() }}
                                     {{ Str::plural('event', $dayEvents->count()) }}
                                 </span>
@@ -183,7 +181,7 @@
                             @endforeach
 
                             @if ($dayEvents->count() > 3)
-                                <div class="text-[11px] font-bold dark:text-gray-500 text-gray-400 px-1.5">
+                                <div class="text-[11px] font-bold dark:text-white text-gray-800 px-1.5">
                                     <i class="fas fa-plus mr-1"></i> {{ $dayEvents->count() - 3 }} more
                                 </div>
                             @endif

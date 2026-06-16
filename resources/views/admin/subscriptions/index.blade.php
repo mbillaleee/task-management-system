@@ -9,13 +9,13 @@
                 <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900">
                     <i class="fas fa-list"></i> Subscription Plans
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Manage pricing tiers, features, and subscriber access.
                 </p>
             </div>
             <div class="flex gap-2">
                 <a href="{{ route('admin.subscriptions.subscribers') }}"
-                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
+                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-800 border dark:border-white/[0.08] border-black/[0.08]">
                     <i class="fa-solid fa-users mr-1.5 text-[13px]"></i> Subscribers
                 </a>
                 <button onclick="openCreateModal()"
@@ -74,14 +74,14 @@
             @endphp
             @foreach ($stats as $s)
                 <div
-                    class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4 flex items-center gap-3">
+                    class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl border p-4 flex items-center gap-3">
                     <div class="{{ $s['bg'] }} w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0">
                         <i class="fa-solid {{ $s['icon'] }} {{ $s['color'] }} text-[16px]"></i>
                     </div>
                     <div>
-                        <p class="text-[20px] font-extrabold dark:text-white text-gray-900 leading-tight">
+                        <p class="text-[20px] font-extrabold dark:text-white text-gray-800 leading-tight">
                             {{ $s['value'] }}</p>
-                        <p class="text-[12px] dark:text-gray-500 text-gray-400">{{ $s['label'] }}</p>
+                        <p class="text-[12px] dark:text-white text-gray-800">{{ $s['label'] }}</p>
                     </div>
                 </div>
             @endforeach
@@ -90,10 +90,10 @@
         {{-- ── Plans Grid ── --}}
         @if ($plans->isEmpty())
             <div
-                class="p-10 text-center rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07]">
+                class="p-10 text-center rounded-2xl dark:bg-[#17141f] bg-white border  veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
                 <div class="text-5xl mb-3">💎</div>
-                <p class="text-[18px] font-bold dark:text-white text-gray-900">No plans yet</p>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-1">Create your first subscription plan to get
+                <p class="text-[18px] font-bold dark:text-white text-gray-800">No plans yet</p>
+                <p class="text-[14px] dark:text-white text-gray-800 mt-1">Create your first subscription plan to get
                     started.</p>
                 <button onclick="openCreateModal()"
                     class="mt-4 px-5 py-2.5 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
@@ -103,13 +103,11 @@
         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                 @foreach ($plans as $plan)
-                    <div class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5 relative overflow-hidden flex flex-col
+                    <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-5 relative overflow-hidden flex flex-col
                     {{ $plan->is_featured ? 'ring-2' : '' }}"
                         style="{{ $plan->is_featured ? 'ring-color:' . $plan->color . '80;' : '' }}">
 
                         {{-- Ambient glow --}}
-                        <div class="absolute top-0 right-0 w-28 h-28 blur-3xl opacity-15 pointer-events-none"
-                            style="background: {{ $plan->color }}"></div>
 
                         {{-- Featured ribbon --}}
                         @if ($plan->is_featured)
@@ -126,16 +124,16 @@
                                 {{ $plan->icon ?? '💎' }}
                             </div>
                             <div>
-                                <h3 class="text-[17px] font-extrabold dark:text-white text-gray-900">{{ $plan->name }}
+                                <h3 class="text-[17px] font-extrabold dark:text-white text-gray-800">{{ $plan->name }}
                                 </h3>
-                                <p class="text-[12px] dark:text-gray-500 text-gray-400">{{ $plan->slug }}</p>
+                                <p class="text-[12px] dark:text-white text-gray-800">{{ $plan->slug }}</p>
                             </div>
                         </div>
 
                         {{-- Pricing --}}
                         <div class="flex items-end gap-4 mb-4 relative z-10">
                             <div>
-                                <span class="text-[26px] font-extrabold dark:text-white text-gray-900">
+                                <span class="text-[26px] font-extrabold dark:text-white text-gray-800">
                                     @if ($plan->price_monthly == 0)
                                         Free
                                     @else
@@ -143,11 +141,11 @@
                                     @endif
                                 </span>
                                 @if ($plan->price_monthly > 0)
-                                    <span class="text-[13px] dark:text-gray-500 text-gray-400">/mo</span>
+                                    <span class="text-[13px] dark:text-white text-gray-800">/mo</span>
                                 @endif
                             </div>
                             @if ($plan->price_yearly > 0)
-                                <div class="text-[12px] dark:text-gray-500 text-gray-400 mb-1">
+                                <div class="text-[12px] dark:text-white text-gray-800 mb-1">
                                     ${{ number_format($plan->price_yearly, 2) }}/yr
                                     @if ($plan->yearlySavings() > 0)
                                         <span class="text-emerald-400 font-bold ml-1">Save
@@ -159,7 +157,7 @@
 
                         {{-- Description --}}
                         @if ($plan->description)
-                            <p class="text-[13px] dark:text-gray-400 text-gray-500 mb-4 relative z-10 line-clamp-2">
+                            <p class="text-[13px] dark:text-gray-400 text-gray-800 mb-4 relative z-10 line-clamp-2">
                                 {{ $plan->description }}
                             </p>
                         @endif
@@ -178,9 +176,9 @@
                             @endphp
                             @foreach ($flags as $key => $label)
                                 <div
-                                    class="flex items-center gap-1.5 text-[12px] {{ $plan->$key ? 'dark:text-gray-300 text-gray-700' : 'dark:text-gray-600 text-gray-300 line-through' }}">
+                                    class="flex items-center gap-1.5 text-[12px] {{ $plan->$key ? 'dark:text-gray-300 text-gray-800' : 'dark:text-gray-600 text-gray-300 line-through' }}">
                                     <i
-                                        class="fa-solid {{ $plan->$key ? 'fa-circle-check text-emerald-400' : 'fa-circle-xmark text-gray-500' }} text-[12px]"></i>
+                                        class="fa-solid {{ $plan->$key ? 'fa-circle-check text-emerald-400' : 'fa-circle-xmark text-gray-800' }} text-[12px]"></i>
                                     {{ $label }}
                                 </div>
                             @endforeach
@@ -190,7 +188,7 @@
                         <div class="flex flex-wrap gap-1.5 mb-4 relative z-10">
                             @foreach (['max_tasks' => 'Tasks', 'max_habits' => 'Habits', 'max_notes' => 'Notes', 'max_goals' => 'Goals'] as $field => $label)
                                 <span
-                                    class="px-2 py-0.5 rounded-lg text-[11px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-600">
+                                    class="px-2 py-0.5 rounded-lg text-[11px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-800">
                                     {{ $plan->limitLabel($field) }} {{ $label }}
                                 </span>
                             @endforeach
@@ -204,14 +202,14 @@
                                 <p class="text-[15px] font-extrabold dark:text-white text-gray-900 leading-tight">
                                     {{ $plan->active_subscribers_count ?? 0 }}
                                 </p>
-                                <p class="text-[10px] dark:text-gray-500 text-gray-400 uppercase tracking-wide">Active Subs
+                                <p class="text-[10px] dark:text-white text-gray-800 uppercase tracking-wide">Active Subs
                                 </p>
                             </div>
                             <div class="flex-1 dark:bg-orange-500/[0.08] bg-orange-50 rounded-xl px-3 py-2 text-center">
                                 <p class="text-[15px] font-extrabold text-orange-400 leading-tight">
                                     ${{ number_format($plan->revenue_total ?? 0, 2) }}
                                 </p>
-                                <p class="text-[10px] dark:text-gray-500 text-gray-400 uppercase tracking-wide">Revenue</p>
+                                <p class="text-[10px] dark:text-white text-gray-800 uppercase tracking-wide">Revenue</p>
                             </div>
                         </div>
 
@@ -245,9 +243,9 @@
          CREATE MODAL
     ══════════════════════════════════════════════ --}}
         <div id="createModal"
-            class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-start justify-center px-4 py-8 overflow-y-auto">
+            class="hidden fixed inset-0 z-50 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] flex items-start justify-center px-4 py-8 overflow-y-auto">
             <div
-                class="w-full max-w-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-6 my-auto">
+                class="w-full max-w-2xl  veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-6 my-auto">
                 <div class="flex justify-between items-center mb-5">
                     <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-plus"></i> Create
                         Subscription Plan</h3>
@@ -265,9 +263,9 @@
          EDIT MODAL
     ══════════════════════════════════════════════ --}}
         <div id="editModal"
-            class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-start justify-center px-4 py-8 overflow-y-auto">
+            class="hidden fixed inset-0 z-50 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] flex items-start justify-center px-4 py-8 overflow-y-auto">
             <div
-                class="w-full max-w-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-6 my-auto">
+                class="w-full max-w-2xl  veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-6 my-auto">
                 <div class="flex justify-between items-center mb-5">
                     <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-edit"></i> Edit
                         Subscription Plan</h3>

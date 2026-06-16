@@ -25,23 +25,23 @@
                     },
                     colors: {
                         brand: {
-                            orange: '#f97316',
-                            pink: '#ec4899',
-                            amber: '#f59e0b'
+                            orange: '#ff6a1a',
+                            pink: '#ff2fa8',
+                            amber: '#ffd43b'
                         },
                         dark: {
-                            page: '#0d0b14',
-                            sidebar: '#100e1a',
-                            card: '#17141f',
-                            card2: '#1a1625',
-                            border: 'rgba(255,255,255,0.07)',
+                            page: '#05040b',
+                            sidebar: '#080713',
+                            card: '#120c1f',
+                            card2: '#1a0f28',
+                            border: 'rgba(255,80,180,0.18)',
                         },
                         light: {
-                            page: '#f0e8dc',
-                            sidebar: '#fdf6ee',
-                            card: '#ffffff',
-                            card2: '#fef8f2',
-                            border: 'rgba(0,0,0,0.07)',
+                            page: '#f3dfbf',
+                            sidebar: '#f7e7cc',
+                            card: '#f9ead2',
+                            card2: '#fff1d8',
+                            border: 'rgba(255,140,20,0.20)',
                         }
                     },
                     keyframes: {
@@ -222,20 +222,39 @@
             opacity: 0.88;
             transform: translateY(-1px);
         }
+
+
+        /* Modification */
+        .veroa-card {
+            background: rgba(255, 239, 213, 0.55);
+            border: 1px solid rgba(255, 150, 30, 0.18);
+            box-shadow: 0 18px 45px rgba(180, 95, 20, 0.10), inset 0 1px 0 rgba(255, 255, 255, .35);
+            backdrop-filter: blur(18px);
+        }
+
+        .dark .veroa-card {
+            background: #0f0a1c;
+            border: 1px solid rgba(236, 72, 153, 0.16);
+            box-shadow: none;
+        }
+
+        .veroa-panel {
+            background: rgba(255, 238, 210, 0.42);
+            border: 1px solid rgba(255, 160, 40, 0.18);
+            backdrop-filter: blur(22px);
+        }
+
+        .dark .veroa-panel {
+            background: rgba(8, 7, 19, 0.72);
+            border: 1px solid rgba(255, 47, 168, 0.15);
+        }
     </style>
 </head>
 
-<body class="dark:bg-[#0d0b14] bg-[#f0e8dc] min-h-screen overflow-x-hidden transition-colors duration-300">
+<body class="dark:bg-[#05040b] bg-[#f3dfbf] min-h-screen overflow-x-hidden transition-colors duration-300">
 
     <!-- ── Ambient Orbs (dark mode) ── -->
-    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden dark:block hidden">
-        <div class="absolute w-[420px] h-[420px] rounded-full -top-20 left-1/3 animate-pulseGlow"
-            style="background:radial-gradient(circle, rgba(249,115,22,0.18) 0%, transparent 65%); filter:blur(60px);">
-        </div>
-        <div class="absolute w-[360px] h-[360px] rounded-full bottom-1/4 right-1/4 animate-pulseGlow"
-            style="background:radial-gradient(circle, rgba(236,72,153,0.14) 0%, transparent 65%); filter:blur(60px); animation-delay:2.5s;">
-        </div>
-    </div>
+
 
     <!-- ── Mobile overlay ── -->
     <div id="overlay" onclick="closeSidebar()"
@@ -249,7 +268,7 @@
     <!-- ═══════════════════════════════════════
         MAIN WRAPPER
     ═══════════════════════════════════════ -->
-    <div class="lg:ml-64 flex flex-col min-h-screen relative z-10">
+    <div class="lg:ml-60 flex flex-col min-h-screen relative z-10">
 
         <!-- ─── HEADER ─── -->
         @include('admin.layouts.navbar')
@@ -270,8 +289,8 @@
 
     <script>
         /* ─────────────────────────────────────
-                           THEME MANAGEMENT
-                        ───────────────────────────────────── */
+                                                   THEME MANAGEMENT
+                                                ───────────────────────────────────── */
         let currentTheme = localStorage.getItem('veroa-theme') || 'dark';
         let prodChart, xpChart, focusChart;
 

@@ -7,7 +7,7 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     <i class="fas fa-tasks"></i> Task Details
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     View subtasks, comments and activity history.
                 </p>
             </div>
@@ -19,7 +19,7 @@
                 </a>
 
                 <a href="{{ route('user.tasks.index') }}"
-                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
+                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-700">
                     <i class="fas fa-arrow-left"></i> Back
                 </a>
             </div>
@@ -27,35 +27,34 @@
 
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
             <div class="xl:col-span-2 space-y-4">
-                <div
-                    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+                <div class="hover-lift veroa-card rounded-2xl p-[18px]">
                     <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900">{{ $task->title }}</h3>
-                    <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-3 leading-relaxed">
+                    <p class="text-[14px] dark:text-white text-gray-800 mt-3 leading-relaxed">
                         {{ $task->description }}
                     </p>
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400"> <i class="fas fa-tasks"></i> Status</p>
+                            <p class="text-[14px] dark:text-white text-gray-800"> <i class="fas fa-tasks"></i> Status</p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ ucwords(str_replace('_', ' ', $task->status)) }}</p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400"> <i class="fas fa-flag"></i> Priority
+                            <p class="text-[14px] dark:text-white text-gray-800"> <i class="fas fa-flag"></i> Priority
                             </p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">{{ ucfirst($task->priority) }}
                             </p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400"> <i class="fas fa-tag"></i> Category</p>
+                            <p class="text-[14px] dark:text-white text-gray-800"> <i class="fas fa-tag"></i> Category</p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ $task->category?->name ?? 'N/A' }}</p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400"> <i class="fas fa-calendar"></i> Due
+                            <p class="text-[14px] dark:text-white text-gray-800"> <i class="fas fa-calendar"></i> Due
                                 Date</p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
                                 {{ $task->due_date ? \Carbon\Carbon::parse($task->due_date)->format('d M, Y') : 'No deadline' }}
@@ -64,8 +63,7 @@
                     </div>
                 </div>
 
-                <div
-                    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+                <div class="hover-lift veroa-card rounded-2xl p-[18px]">
                     <h3 class="text-[16px] font-bold dark:text-white text-gray-900 mb-3.5">Subtasks</h3>
 
                     <form action="{{ route('user.tasks.subtasks.store', $task) }}" method="POST" class="flex gap-2 mb-4">
@@ -74,7 +72,7 @@
                             class="flex-1 px-3.5 py-2 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
                         <button
                             class="px-4 py-2 rounded-[10px] text-white text-[14px] font-bold bg-gradient-to-r from-orange-500 to-pink-500">
-                            Add
+                            <i class="fas fa-plus"></i> Add
                         </button>
                     </form>
 
@@ -85,7 +83,7 @@
                                 @csrf
                                 @method('PATCH')
                                 <button
-                                    class="text-[14px] font-medium {{ $subtask->is_completed ? 'line-through text-gray-400' : 'dark:text-gray-200 text-gray-700' }}">
+                                    class="text-[14px] font-medium {{ $subtask->is_completed ? 'line-through text-gray-400' : 'dark:text-white text-gray-700' }}">
                                     {{ $subtask->is_completed ? '✓' : '○' }} {{ $subtask->title }}
                                 </button>
                             </form>
@@ -100,8 +98,7 @@
                     @endforeach
                 </div>
 
-                <div
-                    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+                <div class="hover-lift veroa-card rounded-2xl p-[18px]">
                     <h3 class="text-[18px] font-bold dark:text-white text-gray-900 mb-3.5"> <i class="fas fa-comments"></i>
                         Comments</h3>
 
@@ -117,16 +114,15 @@
 
                     @foreach ($task->comments as $comment)
                         <div class="py-3 border-b dark:border-white/[0.06] border-black/[0.05]">
-                            <p class="text-[16px] font-bold dark:text-gray-200 text-gray-800">{{ $comment->user->name }}
+                            <p class="text-[16px] font-bold dark:text-white text-gray-800">{{ $comment->user->name }}
                             </p>
-                            <p class="text-[16px] dark:text-gray-500 text-gray-500 mt-1">{{ $comment->comment }}</p>
+                            <p class="text-[16px] dark:text-white text-gray-800 mt-1">{{ $comment->comment }}</p>
                         </div>
                     @endforeach
                 </div>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07]  border-black/[0.07] rounded-2xl p-[18px]">
+            <div class="hover-lift veroa-card rounded-2xl p-[18px]">
                 <h3 class="text-[18px] font-bold dark:text-white text-gray-900 mb-4">
                     <i class="fas fa-history"></i> Task History
                 </h3>
@@ -150,7 +146,7 @@
 
                             <!-- Content -->
                             <div>
-                                <h4 class="text-[13px] font-bold dark:text-white text-gray-900">
+                                <h4 class="text-[13px] font-bold dark:text-white text-gray-800">
                                     {{ $history->action }}
                                 </h4>
 
@@ -242,20 +238,20 @@
 
                                     </div>
                                 @else
-                                    <p class="text-[11.5px] dark:text-gray-500 text-gray-400 mt-1 leading-relaxed">
+                                    <p class="text-[11.5px] dark:text-white text-gray-800 mt-1 leading-relaxed">
                                         <i class="fas fa-exclamation-circle"></i> {{ $history->changes }}
                                     </p>
                                 @endif
 
                                 <!-- Time -->
                                 <div class="flex items-center gap-1.5 mt-2">
-                                    <svg class="w-3.5 h-3.5 dark:text-gray-600 text-gray-400" fill="none"
+                                    <svg class="w-3.5 h-3.5 dark:text-white text-gray-800" fill="none"
                                         stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3" />
                                         <circle cx="12" cy="12" r="9" />
                                     </svg>
 
-                                    <p class="text-[11px] dark:text-gray-600 text-gray-400">
+                                    <p class="text-[11px] dark:text-white text-gray-800">
                                         <i class="fas fa-exclamation-circle"></i>
                                         {{ $history->created_at->format('d M Y h:i A') }}
                                     </p>

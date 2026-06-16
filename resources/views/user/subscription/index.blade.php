@@ -6,10 +6,10 @@
         {{-- ── Header ─────────────────────────────────────────────────────────── --}}
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
+                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-800">
                     <i class="fas fa-cube mr-2"></i> My Subscription
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Manage your plan, view usage, and explore upgrades.
                 </p>
             </div>
@@ -64,21 +64,15 @@
                     ],
                     'expired' => [
                         'bg' => 'dark:bg-gray-500/20 bg-gray-50',
-                        'text' => 'dark:text-gray-400 text-gray-500',
+                        'text' => 'dark:text-white text-gray-800',
                         'border' => 'dark:border-gray-500/30 border-gray-200',
                     ],
                 ];
                 $sc = $statusColors[$currentSubscription->status] ?? $statusColors['active'];
             @endphp
-            <div
-                class="relative overflow-hidden rounded-2xl border dark:border-white/[0.07] border-black/[0.07]
-                dark:bg-[#17141f] bg-white p-6">
+            <div class="relative overflow-hidden veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl border p-6">
 
                 {{-- Ambient glow --}}
-                <div class="absolute top-0 right-0 w-56 h-56 rounded-full blur-3xl opacity-[0.12] pointer-events-none"
-                    style="background:{{ $planColor }}"></div>
-                <div class="absolute bottom-0 left-0 w-40 h-40 rounded-full blur-3xl opacity-[0.08] pointer-events-none"
-                    style="background:{{ $planColor }}"></div>
 
                 <div class="relative z-10">
                     <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
@@ -99,11 +93,11 @@
                                         {{ ucfirst($currentSubscription->status) }}
                                     </span>
                                 </div>
-                                <p class="text-[13px] dark:text-gray-400 text-gray-500">
+                                <p class="text-[13px] dark:text-white text-gray-800">
                                     {{ $isFree ? 'Free plan — upgrade anytime to unlock more.' : $plan->description ?? '' }}
                                 </p>
                                 <div
-                                    class="flex flex-wrap items-center gap-3 mt-2 text-[12px] dark:text-gray-500 text-gray-400">
+                                    class="flex flex-wrap items-center gap-3 mt-2 text-[12px] dark:text-white text-gray-800">
                                     <span><i class="fas fa-calendar-alt mr-1 text-orange-400"></i>
                                         Started
                                         {{ $currentSubscription->starts_at?->format('M d, Y') ?? 'N/A' }}
@@ -134,7 +128,7 @@
                                         : number_format($plan->price_monthly, 2) }}
                                 @endif
                             </p>
-                            <p class="text-[13px] dark:text-gray-500 text-gray-400">
+                            <p class="text-[13px] dark:text-white text-gray-800">
                                 / {{ $currentSubscription->billing_cycle === 'yearly' ? 'year' : 'month' }}
                             </p>
 
@@ -158,8 +152,7 @@
                     {{-- Plan features at a glance --}}
                     @if ($plan->features && count($plan->features) > 0)
                         <div class="mt-5 pt-4 border-t dark:border-white/[0.06] border-black/[0.05]">
-                            <p
-                                class="text-[11px] font-bold uppercase tracking-wider dark:text-gray-500 text-gray-400 mb-2.5">
+                            <p class="text-[11px] font-bold uppercase tracking-wider dark:text-white text-gray-800 mb-2.5">
                                 <i class="fas fa-check-circle mr-1"></i> Plan Includes
                             </p>
                             <div class="flex flex-wrap gap-2">
@@ -177,11 +170,10 @@
             </div>
         @else
             {{-- No subscription found --}}
-            <div
-                class="p-10 text-center dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl">
+            <div class="p-10 text-center veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl">
                 <div class="text-[40px] mb-3">🌱</div>
                 <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900">No active plan found</h3>
-                <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1 mb-4">
+                <p class="text-[13px] dark:text-white text-gray-800 mt-1 mb-4">
                     Start with our free plan to access all basic features.
                 </p>
                 <a href="{{ route('user.pricing') }}"
@@ -194,7 +186,7 @@
         {{-- ══════════════════════════════════════════════════════════════
          USAGE STATS
     ═══════════════════════════════════════════════════════════════ --}}
-        <div class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
+        <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-5">
             <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-4">
                 <i class="fas fa-chart-line mr-1"></i> Usage This Month
             </h3>
@@ -204,45 +196,75 @@
                         $isUnlimited = $stat['limit'] === -1;
                         $isWarning = !$isUnlimited && $stat['pct'] >= 80;
                         $isDanger = !$isUnlimited && $stat['pct'] >= 100;
+
                         $barColor = $isDanger
                             ? 'bg-red-500'
                             : ($isWarning
                                 ? 'bg-yellow-400'
-                                : 'bg-gradient-to-r from-orange-500 to-pink-500');
+                                : 'bg-gradient-to-r from-[#ff2fa8] via-[#ff7b22] to-[#ffd54a]');
+
                         $textColor = $isDanger
-                            ? 'text-red-400'
+                            ? 'text-red-500 dark:text-red-400'
                             : ($isWarning
-                                ? 'text-yellow-400'
-                                : 'dark:text-white text-gray-900');
+                                ? 'text-yellow-500 dark:text-yellow-400'
+                                : 'dark:text-white text-[#151515]');
                     @endphp
+
                     <div
-                        class="dark:bg-white/[0.03] bg-gray-50 rounded-xl p-4 border dark:border-white/[0.05] border-black/[0.04]">
+                        class="rounded-[16px] p-4 border transition-all duration-300
+
+                        bg-[#fbefd9]/85
+                        border-orange-200/60
+                        shadow-[inset_0_1px_0_rgba(255,255,255,.65),0_10px_25px_rgba(180,95,20,.08)]
+
+                        dark:bg-[#0f0a1c]
+                        dark:border-pink-500/15
+                        dark:shadow-none">
+
                         <div class="flex items-center justify-between mb-2">
                             <div class="flex items-center gap-2">
-                                <span class="text-[18px] leading-none">{{ $stat['icon'] }}</span>
-                                <span
-                                    class="text-[13px] font-bold dark:text-gray-300 text-gray-700">{{ $stat['label'] }}</span>
+                                <span class="text-[18px] leading-none">
+                                    {{ $stat['icon'] }}
+                                </span>
+
+                                <span class="text-[13px] font-bold dark:text-gray-300 text-[#5f5242]">
+                                    {{ $stat['label'] }}
+                                </span>
                             </div>
+
                             <span class="text-[13px] font-extrabold {{ $textColor }}">
                                 {{ $stat['used'] }}{{ $isUnlimited ? '' : ' / ' . $stat['limit'] }}
+
                                 @if ($isUnlimited)
-                                    <span class="text-[11px] text-orange-400">∞</span>
+                                    <span class="text-[11px] text-[#ff8a12] dark:text-orange-400">∞</span>
                                 @endif
                             </span>
                         </div>
-                        <div class="w-full h-[6px] rounded-full dark:bg-white/[0.08] bg-gray-200 overflow-hidden">
+
+                        <div
+                            class="w-full h-[8px] rounded-full overflow-hidden
+                            bg-[#f9d9b1] border border-orange-300/40
+                            dark:bg-[#1a1325] dark:border-pink-500/10">
+
                             @if ($isUnlimited)
                                 <div
-                                    class="h-full w-full rounded-full bg-gradient-to-r from-orange-500/30 to-pink-500/30
-                                bg-[length:200%_100%] animate-pulse">
+                                    class="h-full w-full rounded-full
+                                    bg-gradient-to-r from-[#ff2fa8]/40 via-[#ff7b22]/40 to-[#ffd54a]/40
+                                    dark:from-[#ff2fa8]/30 dark:via-[#ff7b22]/30 dark:to-[#ffd54a]/30
+                                    bg-[length:200%_100%] animate-pulse">
                                 </div>
                             @else
-                                <div class="h-full rounded-full {{ $barColor }} transition-all duration-700"
-                                    style="width:{{ $stat['pct'] }}%"></div>
+                                <div class="h-full rounded-full {{ $barColor }}
+                                    shadow-[0_2px_10px_rgba(255,138,18,.30)]
+                                    dark:shadow-[0_0_15px_rgba(255,47,168,.30)]
+                                    transition-all duration-700"
+                                    style="width:{{ $stat['pct'] }}%">
+                                </div>
                             @endif
                         </div>
+
                         @if (!$isUnlimited)
-                            <p class="text-[10px] dark:text-gray-600 text-gray-400 mt-1 text-right">
+                            <p class="text-[10px] dark:text-white text-gray-800 mt-1 text-right">
                                 {{ $stat['pct'] }}% used
                             </p>
                         @endif
@@ -278,7 +300,7 @@
                         <h3 class="text-[20px] font-extrabold dark:text-white text-gray-900 mb-1">
                             Unlock unlimited power
                         </h3>
-                        <p class="text-[13px] dark:text-gray-400 text-gray-500 max-w-[420px]">
+                        <p class="text-[13px] dark:text-white text-gray-800 max-w-[420px]">
                             Remove all limits on tasks, habits, notes and goals. Get advanced analytics,
                             custom themes, priority support and more.
                         </p>
@@ -292,7 +314,7 @@
                     </div>
                     <div class="flex-shrink-0 text-center">
                         <p class="text-[32px] font-extrabold dark:text-white text-gray-900 leading-none">$9.99</p>
-                        <p class="text-[12px] dark:text-gray-500 text-gray-400 mb-3">/month</p>
+                        <p class="text-[12px] dark:text-white text-gray-800 mb-3">/month</p>
                         <a href="{{ route('user.pricing') }}"
                             class="block px-6 py-3 rounded-xl text-white font-bold text-[14px]
                           bg-gradient-to-r from-orange-500 to-pink-500
@@ -309,7 +331,7 @@
          AVAILABLE PLANS (quick upgrade section)
     ═══════════════════════════════════════════════════════════════ --}}
         @if ($availablePlans->count() > 1)
-            <div class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
+            <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-5">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900">
                         <i class="fas fa-list mr-2"></i> Available Plans
@@ -324,27 +346,34 @@
                     @foreach ($availablePlans as $plan)
                         @php
                             $isCurrentPlan = $currentSubscription?->subscription_plan_id === $plan->id;
-                            $planColor = $plan->color ?? '#f97316';
+                            $planColor = $plan->color ?? '#ff8a12';
                             $isFree = $plan->price_monthly == 0;
                         @endphp
-                        <div
-                            class="relative overflow-hidden rounded-xl p-4 border transition-all
-                        {{ $plan->is_featured
-                            ? 'dark:border-orange-500/40 border-orange-200 dark:bg-[#1e1628] bg-orange-50/50'
-                            : 'dark:border-white/[0.07] border-black/[0.07] dark:bg-white/[0.02] bg-gray-50' }}">
 
-                            <div class="absolute top-0 right-0 w-24 h-24 rounded-full blur-2xl opacity-[0.15] pointer-events-none"
-                                style="background:{{ $planColor }}"></div>
+                        <div
+                            class="relative overflow-hidden rounded-[16px] p-4 border transition-all duration-300
+
+                            {{ $plan->is_featured
+                                ? 'bg-[#fff4df] border-orange-400/40 shadow-[0_12px_30px_rgba(180,95,20,.12)] dark:bg-[#120b1f] dark:border-pink-500/20 dark:shadow-none'
+                                : 'bg-[#fbefd9]/85 border-orange-200/60 shadow-[inset_0_1px_0_rgba(255,255,255,.65),0_10px_25px_rgba(180,95,20,.08)] dark:bg-[#0f0a1c] dark:border-pink-500/15 dark:shadow-none' }}">
+
+                            {{-- Removed heavy gradient overlay --}}
+                            <div
+                                class="absolute top-0 right-0 w-20 h-20 rounded-full blur-2xl opacity-[0.08] pointer-events-none
+                                bg-orange-400 dark:bg-pink-500">
+                            </div>
 
                             @if ($isCurrentPlan)
                                 <div
                                     class="absolute top-3 right-3 px-2 py-0.5 rounded-md text-[10px] font-bold
-                            dark:bg-emerald-500/20 bg-emerald-100 dark:text-emerald-400 text-emerald-600">
+                                    bg-emerald-100 text-emerald-600 border border-emerald-300/50
+                                    dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20">
                                     <i class="fas fa-check"></i> Current
                                 </div>
                             @elseif($plan->is_featured && $plan->badge_label)
-                                <div class="absolute top-3 right-3 px-2 py-0.5 rounded-md text-[10px] font-bold text-white"
-                                    style="background:{{ $plan->badge_color ?? $planColor }}">
+                                <div
+                                    class="absolute top-3 right-3 px-2 py-0.5 rounded-md text-[10px] font-bold text-white
+                                    bg-gradient-to-r from-[#ff8a12] to-[#ff2fa8]">
                                     {{ $plan->badge_label }}
                                 </div>
                             @endif
@@ -352,38 +381,44 @@
                             <div class="relative z-10">
                                 <div class="flex items-center gap-2 mb-2">
                                     <span class="text-[22px]">{{ $plan->icon ?? '💎' }}</span>
-                                    <span
-                                        class="text-[15px] font-extrabold dark:text-white text-gray-900">{{ $plan->name }}</span>
+
+                                    <span class="text-[15px] font-extrabold dark:text-white text-[#151515]">
+                                        {{ $plan->name }}
+                                    </span>
                                 </div>
+
                                 <div class="mb-3">
-                                    <span class="text-[24px] font-extrabold dark:text-white text-gray-900">
+                                    <span class="text-[24px] font-extrabold dark:text-white text-[#151515]">
                                         {{ $isFree ? 'Free' : '$' . number_format($plan->price_monthly, 2) }}
                                     </span>
+
                                     @if (!$isFree)
-                                        <span class="text-[12px] dark:text-gray-500 text-gray-400">/mo</span>
+                                        <span class="text-[12px] dark:text-white text-[#8b7355]">/mo</span>
                                     @endif
                                 </div>
 
                                 @if ($isCurrentPlan)
                                     <div
                                         class="w-full py-2 rounded-lg text-center text-[12px] font-bold
-                                dark:bg-emerald-500/10 bg-emerald-50 dark:text-emerald-400 text-emerald-600">
+                                        bg-emerald-100 text-emerald-600 border border-emerald-300/50
+                                        dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20">
                                         <i class="fas fa-check"></i> Your Current Plan
                                     </div>
                                 @elseif($isFree)
                                     <a href="{{ route('user.dashboard') }}"
                                         class="block w-full py-2 rounded-lg text-center text-[12px] font-bold
-                              dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
+                                        bg-[#fff4df] text-[#5f5242] border border-orange-200/60
+                                        dark:bg-white/[0.05] dark:text-gray-300 dark:border-white/[0.06]">
                                         Downgrade to Free
                                     </a>
                                 @else
                                     <button
                                         onclick="openUpgradeModal({{ $plan->id }}, '{{ $plan->name }}', '{{ number_format($plan->price_monthly, 2) }}', '{{ number_format($plan->price_yearly, 2) }}')"
-                                        class="block w-full py-2 rounded-lg text-center text-[12px] font-bold text-white
-                              {{ $plan->is_featured
-                                  ? 'bg-gradient-to-r from-orange-500 to-pink-500 shadow-[0_3px_10px_rgba(249,115,22,0.35)]'
-                                  : 'dark:bg-white/[0.1] bg-gray-200 dark:text-gray-200 text-gray-800' }}
-                              hover:opacity-90 transition-opacity">
+                                        class="block w-full py-2 rounded-lg text-center text-[12px] font-bold transition-opacity hover:opacity-90
+
+                                        {{ $plan->is_featured
+                                            ? 'text-white bg-gradient-to-r from-[#ff8a12] via-[#ff5b2e] to-[#ff2fa8] shadow-[0_4px_14px_rgba(255,106,26,.35)]'
+                                            : 'bg-[#fff4df] text-[#5f5242] border border-orange-200/60 dark:bg-white/[0.06] dark:text-gray-300 dark:border-white/[0.06]' }}">
                                         @if ($plan->has_team_workspace)
                                             Contact Sales
                                         @else
@@ -402,7 +437,7 @@
          SUBSCRIPTION HISTORY
     ═══════════════════════════════════════════════════════════════ --}}
         @if ($subscriptionHistory->count() > 0)
-            <div class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
+            <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-5">
                 <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900 mb-4">
                     <i class="fas fa-history mr-2"></i> Subscription History
                 </h3>
@@ -411,27 +446,27 @@
                         <thead>
                             <tr class="border-b dark:border-white/[0.07] border-black/[0.07]">
                                 <th
-                                    class="text-left py-2.5 px-3 font-bold dark:text-gray-400 text-gray-500 text-[12px] uppercase tracking-wider">
+                                    class="text-left py-2.5 px-3 font-bold dark:text-white text-gray-800 text-[12px] uppercase tracking-wider">
                                     <i class="fas fa-box mr-1"></i> Plan
                                 </th>
                                 <th
-                                    class="text-left py-2.5 px-3 font-bold dark:text-gray-400 text-gray-500 text-[12px] uppercase tracking-wider">
+                                    class="text-left py-2.5 px-3 font-bold dark:text-white text-gray-800 text-[12px] uppercase tracking-wider">
                                     <i class="fas fa-file-invoice mr-1"></i> Billing
                                 </th>
                                 <th
-                                    class="text-left py-2.5 px-3 font-bold dark:text-gray-400 text-gray-500 text-[12px] uppercase tracking-wider">
+                                    class="text-left py-2.5 px-3 font-bold dark:text-white text-gray-800 text-[12px] uppercase tracking-wider">
                                     <i class="fas fa-info-circle mr-1"></i> Status
                                 </th>
                                 <th
-                                    class="text-left py-2.5 px-3 font-bold dark:text-gray-400 text-gray-500 text-[12px] uppercase tracking-wider">
+                                    class="text-left py-2.5 px-3 font-bold dark:text-white text-gray-800 text-[12px] uppercase tracking-wider">
                                     <i class="fas fa-clock mr-1"></i> Started
                                 </th>
                                 <th
-                                    class="text-left py-2.5 px-3 font-bold dark:text-gray-400 text-gray-500 text-[12px] uppercase tracking-wider">
+                                    class="text-left py-2.5 px-3 font-bold dark:text-white text-gray-800 text-[12px] uppercase tracking-wider">
                                     <i class="fas fa-calendar-alt mr-1"></i> Expires
                                 </th>
                                 <th
-                                    class="text-right py-2.5 px-3 font-bold dark:text-gray-400 text-gray-500 text-[12px] uppercase tracking-wider">
+                                    class="text-right py-2.5 px-3 font-bold dark:text-white text-gray-800 text-[12px] uppercase tracking-wider">
                                     <i class="fas fa-dollar-sign mr-1"></i> Paid
                                 </th>
                             </tr>
@@ -444,8 +479,8 @@
                                             => 'dark:bg-emerald-500/20 bg-emerald-50 dark:text-emerald-400 text-emerald-600',
                                         'trial' => 'dark:bg-blue-500/20 bg-blue-50 dark:text-blue-400 text-blue-600',
                                         'cancelled' => 'dark:bg-red-500/20 bg-red-50 dark:text-red-400 text-red-600',
-                                        'expired' => 'dark:bg-gray-500/20 bg-gray-100 dark:text-gray-400 text-gray-500',
-                                        default => 'dark:bg-gray-500/20 bg-gray-100 dark:text-gray-400 text-gray-500',
+                                        'expired' => 'dark:bg-gray-500/20 bg-gray-100 dark:text-white text-gray-800',
+                                        default => 'dark:bg-gray-500/20 bg-gray-100 dark:text-white text-gray-800',
                                     };
                                 @endphp
                                 <tr
@@ -457,17 +492,17 @@
                                                 class="font-bold dark:text-white text-gray-900">{{ $sub->plan->name ?? '—' }}</span>
                                         </div>
                                     </td>
-                                    <td class="py-3 px-3 dark:text-gray-400 text-gray-500 capitalize">
+                                    <td class="py-3 px-3 dark:text-white text-gray-800 capitalize">
                                         {{ $sub->billing_cycle }}</td>
                                     <td class="py-3 px-3">
                                         <span class="px-2.5 py-1 rounded-lg text-[11px] font-bold {{ $sColor }}">
                                             {{ ucfirst($sub->status) }}
                                         </span>
                                     </td>
-                                    <td class="py-3 px-3 dark:text-gray-400 text-gray-500">
+                                    <td class="py-3 px-3 dark:text-white text-gray-800">
                                         {{ $sub->starts_at?->format('M d, Y') ?? '—' }}
                                     </td>
-                                    <td class="py-3 px-3 dark:text-gray-400 text-gray-500">
+                                    <td class="py-3 px-3 dark:text-white text-gray-800">
                                         {{ $sub->ends_at ? $sub->ends_at->format('M d, Y') : '∞ No expiry' }}
                                     </td>
                                     <td class="py-3 px-3 text-right font-bold dark:text-white text-gray-900">
@@ -494,11 +529,11 @@
             <div class="flex items-center justify-between px-6 py-5 border-b dark:border-white/[0.07] border-black/[0.07]">
                 <div>
                     <h3 class="text-[17px] font-extrabold dark:text-white text-gray-900">Upgrade Plan</h3>
-                    <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-0.5">Your request will be reviewed by our
+                    <p class="text-[12px] dark:text-white text-gray-800 mt-0.5">Your request will be reviewed by our
                         team.</p>
                 </div>
                 <button onclick="closeUpgradeModal()"
-                    class="w-8 h-8 flex items-center justify-center rounded-xl dark:bg-white/[0.06] bg-black/[0.05] dark:text-gray-400 text-gray-500 dark:hover:bg-white/[0.1] hover:bg-black/[0.08] transition-colors">
+                    class="w-8 h-8 flex items-center justify-center rounded-xl dark:bg-white/[0.06] bg-black/[0.05] dark:text-white text-gray-800 dark:hover:bg-white/[0.1] hover:bg-black/[0.08] transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -522,7 +557,7 @@
                 {{-- Billing cycle --}}
                 <div>
                     <label
-                        class="block text-[12px] font-bold uppercase tracking-wider dark:text-gray-400 text-gray-500 mb-2">Billing
+                        class="block text-[12px] font-bold uppercase tracking-wider dark:text-white text-gray-800 mb-2">Billing
                         Cycle</label>
                     <div class="flex gap-2">
                         <label class="flex-1 cursor-pointer">
@@ -554,14 +589,14 @@
                 {{-- Optional message --}}
                 <div>
                     <label
-                        class="block text-[12px] font-bold uppercase tracking-wider dark:text-gray-400 text-gray-500 mb-1.5">
+                        class="block text-[12px] font-bold uppercase tracking-wider dark:text-white text-gray-800 mb-1.5">
                         Message to admin <span class="normal-case font-normal">(optional)</span>
                     </label>
                     <textarea name="message" rows="2" placeholder="Any special requests or notes..."
                         class="w-full px-3.5 py-2.5 rounded-xl border dark:border-white/[0.1] border-black/[0.1] dark:bg-white/[0.04] bg-black/[0.02] dark:text-white text-gray-900 text-[14px] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500/50 resize-none"></textarea>
                 </div>
 
-                <p class="text-[12px] dark:text-gray-500 text-gray-400">
+                <p class="text-[12px] dark:text-white text-gray-800">
                     <i class="fas fa-info-circle text-orange-400 mr-1"></i>
                     Your upgrade request will be sent to the admin team who will activate it manually.
                 </p>
@@ -593,7 +628,7 @@
                     <i class="fas fa-exclamation-triangle text-red-400 text-[22px]"></i>
                 </div>
                 <h3 class="text-[17px] font-extrabold dark:text-white text-gray-900">Cancel Subscription?</h3>
-                <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-2">
+                <p class="text-[13px] dark:text-white text-gray-800 mt-2">
                     You'll be moved to the Free plan immediately. All your data will be preserved,
                     but you'll lose access to premium features.
                 </p>

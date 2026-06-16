@@ -1,11 +1,11 @@
 @php
     $user = auth()->user();
     $inputCls = "w-full px-3.5 py-2.5 rounded-[10px] text-[13.5px] outline-none transition
-        dark:bg-[#1a1625] bg-gray-50
-        dark:text-white text-gray-800
-        dark:border dark:border-white/[0.1] border border-black/[0.09]
-        focus:border-orange-400 dark:focus:border-orange-400";
-    $labelCls = "block text-[12px] font-bold dark:text-gray-300 text-gray-600 mb-1.5";
+    dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]
+    border border-orange-200/60 dark:border-pink-500/10
+    focus:border-orange-400 dark:focus:border-pink-500/30
+    focus:ring-2 focus:ring-orange-500/15";
+    $labelCls = 'block text-[12px] font-bold dark:text-gray-300 text-gray-600 mb-1.5';
 @endphp
 
 {{-- ── SECTION: Basic Info ── --}}
@@ -18,12 +18,17 @@
         @csrf @method('PATCH')
 
         {{-- Avatar upload --}}
-        <div class="flex items-center gap-4 p-4 dark:bg-[#1a1625] bg-gray-50 rounded-xl border dark:border-white/[0.07] border-black/[0.06]">
+        <div
+            class="flex items-center gap-4 p-4 rounded-xl
+                    bg-[#fbefd9]/85 dark:bg-[#0f0a1c]
+                    border border-orange-200/60 dark:border-pink-500/15
+                    shadow-[inset_0_1px_0_rgba(255,255,255,.65),0_10px_25px_rgba(180,95,20,.08)]
+                    dark:shadow-none">
             <div class="w-16 h-16 rounded-xl overflow-hidden flex items-center justify-center flex-shrink-0"
                 style="background: linear-gradient(135deg,#f97316,#ec4899);">
-                @if($user->profile)
-                    <img src="{{ asset('storage/profile/' . $user->profile) }}"
-                        id="avatarPreview" class="w-full h-full object-cover">
+                @if ($user->profile)
+                    <img src="{{ asset('storage/profile/' . $user->profile) }}" id="avatarPreview"
+                        class="w-full h-full object-cover">
                 @else
                     <span class="text-[22px] font-extrabold text-white" id="avatarInitial">
                         {{ strtoupper(substr($user->name ?? 'U', 0, 1)) }}
@@ -32,14 +37,17 @@
                 @endif
             </div>
             <div>
-                <label for="profileInput" class="cursor-pointer inline-flex items-center gap-1.5 px-3 py-2 rounded-[8px] text-[12px] font-bold
-                    dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700
-                    border dark:border-white/[0.08] border-black/[0.08] hover:border-orange-400 transition">
+                <label for="profileInput"
+                    class="cursor-pointer inline-flex items-center gap-1.5 px-3 py-2 rounded-[8px] text-[12px] font-bold
+                    bg-[#fff4df] dark:bg-white/[0.05]
+                    text-[#5f5242] dark:text-gray-300
+                    border border-orange-200/60 dark:border-white/[0.08]
+                    hover:border-orange-400 transition">
                     <i class="fa-solid fa-upload text-[11px]"></i> Upload Photo
                 </label>
                 <input type="file" id="profileInput" name="profile" accept="image/*" class="hidden"
                     onchange="previewAvatar(this)">
-                <p class="text-[11px] dark:text-gray-600 text-gray-400 mt-1">JPG, PNG, WebP — max 2MB</p>
+                <p class="text-[11px] dark:text-white text-gray-800 mt-1">JPG, PNG, WebP — max 2MB</p>
             </div>
         </div>
 
@@ -53,7 +61,8 @@
             <div>
                 <label class="{{ $labelCls }}">Username</label>
                 <div class="relative">
-                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[13px] dark:text-gray-500 text-gray-400">@</span>
+                    <span
+                        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[13px] dark:text-gray-500 text-gray-400">@</span>
                     <input type="text" name="username" value="{{ old('username', $user->username) }}"
                         placeholder="yourname" class="{{ $inputCls }} pl-7">
                 </div>
@@ -69,7 +78,8 @@
 
         {{-- Bio --}}
         <div>
-            <label class="{{ $labelCls }}">Bio <span class="dark:text-gray-600 text-gray-400 font-normal">— max 300 characters</span></label>
+            <label class="{{ $labelCls }}">Bio <span class="dark:text-white text-gray-800 font-normal">— max 300
+                    characters</span></label>
             <textarea name="bio" rows="2" placeholder="A short description about yourself..."
                 class="{{ $inputCls }} resize-none" maxlength="300">{{ old('bio', $user->bio) }}</textarea>
         </div>
@@ -85,10 +95,14 @@
                 <label class="{{ $labelCls }}">Gender</label>
                 <select name="gender" class="{{ $inputCls }}">
                     <option value="">Prefer not to say</option>
-                    <option value="male"        {{ old('gender', $user->gender) === 'male'        ? 'selected' : '' }}>Male</option>
-                    <option value="female"      {{ old('gender', $user->gender) === 'female'      ? 'selected' : '' }}>Female</option>
-                    <option value="non-binary"  {{ old('gender', $user->gender) === 'non-binary'  ? 'selected' : '' }}>Non-binary</option>
-                    <option value="prefer_not"  {{ old('gender', $user->gender) === 'prefer_not'  ? 'selected' : '' }}>Prefer not to say</option>
+                    <option value="male" {{ old('gender', $user->gender) === 'male' ? 'selected' : '' }}>Male
+                    </option>
+                    <option value="female" {{ old('gender', $user->gender) === 'female' ? 'selected' : '' }}>
+                        Female</option>
+                    <option value="non-binary" {{ old('gender', $user->gender) === 'non-binary' ? 'selected' : '' }}>
+                        Non-binary</option>
+                    <option value="prefer_not" {{ old('gender', $user->gender) === 'prefer_not' ? 'selected' : '' }}>
+                        Prefer not to say</option>
                 </select>
             </div>
         </div>
@@ -105,8 +119,9 @@
                 <label class="{{ $labelCls }}">Timezone</label>
                 <select name="timezone" class="{{ $inputCls }}">
                     <option value="">Select timezone...</option>
-                    @foreach(\DateTimeZone::listIdentifiers() as $tz)
-                        <option value="{{ $tz }}" {{ old('timezone', $user->timezone) === $tz ? 'selected' : '' }}>
+                    @foreach (\DateTimeZone::listIdentifiers() as $tz)
+                        <option value="{{ $tz }}"
+                            {{ old('timezone', $user->timezone) === $tz ? 'selected' : '' }}>
                             {{ $tz }}
                         </option>
                     @endforeach
@@ -123,8 +138,8 @@
             </div>
             <div>
                 <label class="{{ $labelCls }}">City</label>
-                <input type="text" name="city" value="{{ old('city', $user->city) }}"
-                    placeholder="e.g. Dhaka" class="{{ $inputCls }}">
+                <input type="text" name="city" value="{{ old('city', $user->city) }}" placeholder="e.g. Dhaka"
+                    class="{{ $inputCls }}">
             </div>
         </div>
 
@@ -137,7 +152,7 @@
     </form>
 </div>
 
-<div class="border-t dark:border-white/[0.06] border-black/[0.05]"></div>
+<div class="border-t dark:border-pink-500/10 border-orange-200/60"></div>
 
 {{-- ── SECTION: Change Password ── --}}
 <div>
@@ -151,31 +166,38 @@
         <div>
             <label class="{{ $labelCls }}">Current Password</label>
             <div class="relative">
-                <input type="password" name="current_password" id="curPwd" placeholder="••••••••" class="{{ $inputCls }} pr-10">
+                <input type="password" name="current_password" id="curPwd" placeholder="••••••••"
+                    class="{{ $inputCls }} pr-10">
                 <button type="button" onclick="togglePwd('curPwd','eyeCur')"
                     class="absolute right-3 top-1/2 -translate-y-1/2 dark:text-gray-500 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
                     <i id="eyeCur" class="fa-solid fa-eye text-[13px]"></i>
                 </button>
             </div>
-            @error('current_password') <p class="text-red-400 text-[11px] mt-1">{{ $message }}</p> @enderror
+            @error('current_password')
+                <p class="text-red-400 text-[11px] mt-1">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
                 <label class="{{ $labelCls }}">New Password</label>
                 <div class="relative">
-                    <input type="password" name="password" id="newPwd" placeholder="••••••••" class="{{ $inputCls }} pr-10">
+                    <input type="password" name="password" id="newPwd" placeholder="••••••••"
+                        class="{{ $inputCls }} pr-10">
                     <button type="button" onclick="togglePwd('newPwd','eyeNew')"
                         class="absolute right-3 top-1/2 -translate-y-1/2 dark:text-gray-500 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
                         <i id="eyeNew" class="fa-solid fa-eye text-[13px]"></i>
                     </button>
                 </div>
-                @error('password') <p class="text-red-400 text-[11px] mt-1">{{ $message }}</p> @enderror
+                @error('password')
+                    <p class="text-red-400 text-[11px] mt-1">{{ $message }}</p>
+                @enderror
             </div>
             <div>
                 <label class="{{ $labelCls }}">Confirm New Password</label>
                 <div class="relative">
-                    <input type="password" name="password_confirmation" id="conPwd" placeholder="••••••••" class="{{ $inputCls }} pr-10">
+                    <input type="password" name="password_confirmation" id="conPwd" placeholder="••••••••"
+                        class="{{ $inputCls }} pr-10">
                     <button type="button" onclick="togglePwd('conPwd','eyeCon')"
                         class="absolute right-3 top-1/2 -translate-y-1/2 dark:text-gray-500 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
                         <i id="eyeCon" class="fa-solid fa-eye text-[13px]"></i>
@@ -184,7 +206,7 @@
             </div>
         </div>
 
-        <p class="text-[11.5px] dark:text-gray-600 text-gray-400">
+        <p class="text-[11.5px] dark:text-white text-gray-800">
             Min 8 characters, with uppercase, lowercase and numbers.
         </p>
 
@@ -197,42 +219,45 @@
     </form>
 </div>
 
-<div class="border-t dark:border-white/[0.06] border-black/[0.05]"></div>
+<div class="border-t dark:border-pink-500/10 border-orange-200/60"></div>
 
 {{-- ── SECTION: Subscription Info ── --}}
-@if(isset($subscription) && $subscription)
-<div>
-    <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-4 flex items-center gap-2">
-        <i class="fa-solid fa-credit-card text-orange-400 text-[13px]"></i> Current Subscription
-    </h4>
+@if (isset($subscription) && $subscription)
+    <div>
+        <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-credit-card text-orange-400 text-[13px]"></i> Current Subscription
+        </h4>
 
-    <div class="dark:bg-[#1a1625] bg-gray-50 rounded-xl p-4 border dark:border-white/[0.07] border-black/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-                style="background: {{ $subscription->plan->color ?? '#f97316' }}22;">
-                {{ $subscription->plan->icon ?? '💎' }}
+        <div
+            class="veroa-card rounded-xl p-4 border dark:border-white/[0.07] border-black/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+                    style="background: {{ $subscription->plan->color ?? '#f97316' }}22;">
+                    {{ $subscription->plan->icon ?? '💎' }}
+                </div>
+                <div>
+                    <p class="text-[14px] font-extrabold dark:text-white text-gray-900">
+                        {{ $subscription->plan->name }} Plan</p>
+                    <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-0.5">
+                        {{ ucfirst($subscription->billing_cycle) }} ·
+                        @if ($subscription->ends_at)
+                            Renews {{ $subscription->ends_at->format('M d, Y') }}
+                        @else
+                            No expiry set
+                        @endif
+                        · <span
+                            class="{{ $subscription->status === 'active' ? 'text-emerald-400' : 'text-blue-400' }} font-bold">{{ ucfirst($subscription->status) }}</span>
+                    </p>
+                </div>
             </div>
-            <div>
-                <p class="text-[14px] font-extrabold dark:text-white text-gray-900">{{ $subscription->plan->name }} Plan</p>
-                <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-0.5">
-                    {{ ucfirst($subscription->billing_cycle) }} ·
-                    @if($subscription->ends_at)
-                        Renews {{ $subscription->ends_at->format('M d, Y') }}
-                    @else
-                        No expiry set
-                    @endif
-                    · <span class="{{ $subscription->status === 'active' ? 'text-emerald-400' : 'text-blue-400' }} font-bold">{{ ucfirst($subscription->status) }}</span>
-                </p>
-            </div>
+            <a href="{{ route('user.pricing') }}"
+                class="px-4 py-2 rounded-[10px] text-[12px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
+                Manage Plan
+            </a>
         </div>
-        <a href="{{ route('user.pricing') }}"
-            class="px-4 py-2 rounded-[10px] text-[12px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
-            Manage Plan
-        </a>
     </div>
-</div>
 
-<div class="border-t dark:border-white/[0.06] border-black/[0.05]"></div>
+    <div class="border-t dark:border-pink-500/10 border-orange-200/60"></div>
 @endif
 
 {{-- ── SECTION: Danger Zone ── --}}
@@ -241,7 +266,8 @@
         <i class="fa-solid fa-triangle-exclamation text-[13px]"></i> Danger Zone
     </h4>
 
-    <div class="p-4 rounded-xl border border-red-500/20 dark:bg-red-500/[0.04] bg-red-50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+    <div
+        class="p-4 rounded-xl border border-red-500/20 dark:bg-red-500/[0.04] bg-red-50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
             <p class="text-[13px] font-bold dark:text-white text-gray-900">Delete Account</p>
             <p class="text-[12px] dark:text-gray-500 text-gray-500 mt-0.5">
@@ -256,8 +282,10 @@
 </div>
 
 {{-- Delete Confirm Modal --}}
-<div id="deleteModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
-    <div class="w-full max-w-md dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-6">
+<div id="deleteModal"
+    class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
+    <div
+        class="w-full max-w-md dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-6">
         <div class="text-center mb-5">
             <div class="w-14 h-14 rounded-2xl bg-red-500/10 flex items-center justify-center mx-auto mb-3">
                 <i class="fa-solid fa-triangle-exclamation text-red-500 text-[22px]"></i>
@@ -278,7 +306,9 @@
                     dark:bg-[#1a1625] bg-gray-50 dark:text-white text-gray-800
                     dark:border dark:border-white/[0.1] border border-black/[0.09]
                     focus:border-red-400 transition">
-                @error('password', 'userDeletion') <p class="text-red-400 text-[11px] mt-1">{{ $message }}</p> @enderror
+                @error('password', 'userDeletion')
+                    <p class="text-red-400 text-[11px] mt-1">{{ $message }}</p>
+                @enderror
             </div>
             <div class="flex gap-3">
                 <button type="button" onclick="document.getElementById('deleteModal').classList.add('hidden')"
@@ -301,7 +331,10 @@
             reader.onload = e => {
                 const preview = document.getElementById('avatarPreview');
                 const initial = document.getElementById('avatarInitial');
-                if (preview) { preview.src = e.target.result; preview.classList.remove('hidden'); }
+                if (preview) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('hidden');
+                }
                 if (initial) initial.classList.add('hidden');
             };
             reader.readAsDataURL(input.files[0]);
@@ -310,7 +343,7 @@
 
     function togglePwd(inputId, iconId) {
         const input = document.getElementById(inputId);
-        const icon  = document.getElementById(iconId);
+        const icon = document.getElementById(iconId);
         if (!input || !icon) return;
         if (input.type === 'password') {
             input.type = 'text';

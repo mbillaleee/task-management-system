@@ -4,7 +4,7 @@
 
 
 
-    <section class="flex-1 p-4 sm:p-5 flex flex-col gap-4">
+    <section class="flex-1 flex flex-col gap-4">
 
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -33,7 +33,7 @@
         <!-- Stats Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
             <div
-                class="hover-lift p-4 rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 flex flex-col items-center">
+                class="hover-lift p-4 rounded-2xl  veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border flex flex-col items-center">
                 <div class="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center mb-2">
                     <i class="fas fa-user-shield text-orange-500"></i>
                 </div>
@@ -42,7 +42,7 @@
                 <div class="text-[12px] dark:text-gray-400 text-gray-500">Total Roles</div>
             </div>
             <div
-                class="hover-lift p-4 rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 flex flex-col items-center">
+                class="hover-lift p-4 rounded-2xl  veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border flex flex-col items-center">
                 <div class="w-10 h-10 rounded-full bg-pink-500/20 flex items-center justify-center mb-2">
                     <i class="fas fa-layer-group text-pink-500"></i>
                 </div>
@@ -50,7 +50,7 @@
                 <div class="text-[12px] dark:text-gray-400 text-gray-500">Current Page Items</div>
             </div>
             <div
-                class="hover-lift p-4 rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 flex flex-col items-center">
+                class="hover-lift p-4 rounded-2xl  veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border flex flex-col items-center">
                 <div class="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center mb-2">
                     <i class="fas fa-lock text-amber-500"></i>
                 </div>
@@ -61,7 +61,7 @@
 
         <!-- Roles Table -->
         <div
-            class="mt-5 overflow-x-auto rounded-2xl border dark:border-white/[0.07] border-gray-200 dark:bg-[#17141f] bg-white p-4 hover-lift">
+            class="mt-5 overflow-x-auto rounded-2xl border  veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border p-4 hover-lift">
             <div class="mb-3 flex justify-between items-center">
                 <h3 class="text-[16px] font-bold dark:text-white text-gray-900">
                     <i class="fas fa-users-cog text-orange-500 mr-2"></i> Role List

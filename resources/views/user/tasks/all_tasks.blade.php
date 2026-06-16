@@ -5,17 +5,17 @@
 
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
+                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-800">
                     <i class="fas fa-tasks"></i> My Tasks
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-700 mt-0.5">
                     <i class="fas fa-info-circle"></i> Organize your workflow with priority based task cards.
                 </p>
             </div>
 
             <div class="flex items-center gap-2.5">
                 <a href="{{ route('user.tasks.kanban') }}"
-                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
+                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-white text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
                     <i class="fas fa-columns"></i> Kanban View
                 </a>
 
@@ -53,16 +53,13 @@
                         ][$task->status] ?? 'bg-gray-100 text-gray-500';
                 @endphp
 
-                <div
-                    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-orange-500 blur-3xl opacity-20"></div>
-
+                <div class="hover-lift veroa-card rounded-2xl p-4 relative overflow-hidden">
                     <div class="relative z-10 flex items-start justify-between gap-3">
                         <div>
-                            <h3 class="text-[16px] font-bold dark:text-white text-gray-900 leading-snug">
+                            <h3 class="text-[16px] font-bold dark:text-white text-gray-800 leading-snug">
                                 <i class="fas fa-tasks"></i> {{ $task->title }}
                             </h3>
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-1">
+                            <p class="text-[14px] dark:text-white text-gray-800 mt-1">
                                 <i class="fas fa-folder"></i> {{ $task->category?->name ?? 'Uncategorized' }}
                             </p>
                         </div>
@@ -72,7 +69,7 @@
                         </span>
                     </div>
 
-                    <p class="relative z-10 text-[14px] dark:text-gray-400 text-gray-500 leading-relaxed mt-3">
+                    <p class="relative z-10 text-[14px] dark:text-white text-gray-800 leading-relaxed mt-3">
                         {{ \Illuminate\Support\Str::limit($task->description, 120) ?? 'No description added.' }}
                     </p>
 
@@ -99,7 +96,7 @@
 
                                 $colorClass =
                                     $colors[$label->color] ??
-                                    'bg-gray-100 text-gray-600 dark:bg-white/10 dark:text-gray-300 border border-white/10';
+                                    'bg-gray-100 text-gray-600 dark:bg-white/10 dark:text-white border border-white/10';
                             @endphp
 
                             <span class="px-2.5 py-[4px] rounded-md text-[15px] font-semibold {{ $colorClass }}">
@@ -109,8 +106,7 @@
                         @empty
 
                             <span
-                                class="px-2.5 py-[4px] rounded-md text-[15px] font-semibold
-            bg-gray-100 text-gray-500 dark:bg-white/10 dark:text-gray-400 border border-white/10">
+                                class="px-2.5 py-[4px] rounded-md text-[15px] font-semibold bg-gray-100 text-gray-500 dark:bg-white/10 dark:text-white border border-white/10">
                                 <i class="fas fa-tag"></i> No Label
                             </span>
                         @endforelse
@@ -120,9 +116,9 @@
                     <div
                         class="relative z-10 flex items-center justify-between mt-4 pt-3 border-t dark:border-white/[0.06] border-black/[0.05]">
                         <div>
-                            <p class="text-[16px] dark:text-gray-500 text-gray-400"><i class="fas fa-calendar-alt"></i> Due
+                            <p class="text-[16px] dark:text-white text-gray-800"><i class="fas fa-calendar-alt"></i> Due
                                 Date</p>
-                            <p class="text-[14px] font-semibold dark:text-gray-300 text-gray-700">
+                            <p class="text-[14px] font-semibold dark:text-white text-gray-800 mt-1">
                                 {{ $task->due_date ? $task->due_date->format('d M, Y') : 'No deadline' }}
                             </p>
                         </div>
@@ -134,13 +130,13 @@
 
                     <div class="relative z-10 mt-4">
                         <div class="flex justify-between text-[16px] mb-1.5">
-                            <span class="dark:text-gray-400 text-gray-500"> <i class="fas fa-tasks"></i> Subtasks</span>
+                            <span class="dark:text-white text-gray-800"> <i class="fas fa-tasks"></i> Subtasks</span>
                             <span class="font-bold dark:text-white text-gray-800">
                                 {{ $completedSubtasks }}/{{ $totalSubtasks }}
                             </span>
                         </div>
 
-                        <div class="w-full h-[7px] rounded-full dark:bg-white/[0.08] bg-gray-100 overflow-hidden">
+                        <div class="w-full h-[7px] rounded-full dark:bg-white/[0.08] bg-gray-300 overflow-hidden">
                             <div class="h-full rounded-full bg-gradient-to-r from-orange-500 to-pink-500"
                                 style="width: {{ $progress }}%"></div>
                         </div>
@@ -154,7 +150,7 @@
 
                         <div class="flex items-center gap-2">
                             <a href="{{ route('user.tasks.edit', $task) }}"
-                                class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
+                                class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-700">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
 
@@ -172,9 +168,9 @@
             @empty
                 <div
                     class="col-span-full hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-8 text-center">
-                    <h3 class="text-[16px] font-bold dark:text-white text-gray-900"><i class="fas fa-tasks"></i> No tasks
+                    <h3 class="text-[16px] font-bold dark:text-white text-gray-800"><i class="fas fa-tasks"></i> No tasks
                         found</h3>
-                    <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-1"><i class="fas fa-info-circle"></i> Create
+                    <p class="text-[12px] dark:text-white text-gray-700 mt-1"><i class="fas fa-info-circle"></i> Create
                         your first task to get started.</p>
                 </div>
             @endforelse

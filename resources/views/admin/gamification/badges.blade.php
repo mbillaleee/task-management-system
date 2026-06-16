@@ -7,7 +7,7 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
                 <h2 class="text-[20px] font-extrabold dark:text-white text-gray-900"><i class="fas fa-medal"></i> Badges</h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400">Create and manage achievement badges.</p>
+                <p class="text-[14px] dark:text-white text-gray-900">Create and manage achievement badges.</p>
             </div>
 
             <div class="flex gap-2">
@@ -34,9 +34,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
             @forelse($badges as $badge)
                 <div
-                    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-24 h-24 blur-3xl opacity-20"
-                        style="background: {{ $badge->color }}"></div>
+                    class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-4 relative overflow-hidden">
 
                     <div class="relative z-10 flex items-start justify-between gap-3">
                         <div>
@@ -45,7 +43,7 @@
                                 {{ $badge->icon ?? '🏆' }}
                             </div>
                             <h3 class="text-[16px] font-bold dark:text-white text-gray-900">{{ $badge->name }}</h3>
-                            <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">
+                            <p class="text-[13px] dark:text-white text-gray-900 mt-1">
                                 {{ \Illuminate\Support\Str::limit($badge->description, 80) }}
                             </p>
                             <p class="text-[12px] text-emerald-400 font-bold mt-2">
@@ -71,14 +69,14 @@
                         <div class="flex gap-2">
                             <button type="button"
                                 onclick="openEditBadgeModal(
-        {{ $badge->id }},
-        @js($badge->name),
-        @js($badge->description),
-        @js($badge->icon),
-        @js($badge->color),
-        {{ $badge->xp_required }},
-        {{ $badge->is_active ? 1 : 0 }}
-    )"
+                                    {{ $badge->id }},
+                                    @js($badge->name),
+                                    @js($badge->description),
+                                    @js($badge->icon),
+                                    @js($badge->color),
+                                    {{ $badge->xp_required }},
+                                    {{ $badge->is_active ? 1 : 0 }}
+                                )"
                                 class="px-3 py-2 rounded-lg text-[13px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
                                 <i class="fas fa-edit"></i> Edit
                             </button>
@@ -97,9 +95,9 @@
                 </div>
             @empty
                 <div
-                    class="col-span-full p-10 text-center rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07]">
+                    class="col-span-full p-10 text-center rounded-2xl veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border dark:border-white/[0.07]">
                     <p class="text-[18px] font-bold dark:text-white text-gray-900">No badges created yet.</p>
-                    <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-1">Create your first badge to reward users.
+                    <p class="text-[14px] dark:text-white text-gray-900 mt-1">Create your first badge to reward users.
                     </p>
                 </div>
             @endforelse
@@ -110,9 +108,8 @@
 
         {{-- ==================== CREATE MODAL ==================== --}}
         <div id="createBadgeModal"
-            class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
-            <div
-                class="w-full max-w-lg dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-5">
+            class="hidden fixed inset-0 z-50 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border flex items-center justify-center px-4">
+            <div class="w-full max-w-lg veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-5">
                 <div class="flex justify-between mb-4">
                     <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-plus"></i> Create
                         Badge</h3>
@@ -129,9 +126,8 @@
 
         {{-- ==================== EDIT MODAL ==================== --}}
         <div id="editBadgeModal"
-            class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
-            <div
-                class="w-full max-w-lg dark:bg-[#17141f] bg-white border dark:border-white/[0.08] border-black/[0.08] rounded-2xl p-5">
+            class="hidden fixed inset-0 z-50 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border flex items-center justify-center px-4">
+            <div class="w-full max-w-lg veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-5">
                 <div class="flex justify-between mb-4">
                     <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-edit"></i> Edit
                         Badge</h3>

@@ -8,7 +8,7 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     <i class="fas fa-repeat mr-1"></i> My Habits
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Build consistency with daily and weekly habit tracking.
                 </p>
             </div>
@@ -48,8 +48,7 @@
                 @endphp
 
                 <div
-                    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-orange-500 blur-3xl opacity-20"></div>
+                    class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-4 relative overflow-hidden">
 
                     <div class="relative z-10 flex items-start justify-between gap-3">
                         <div>
@@ -57,7 +56,7 @@
                                 {{ $habit->title }}
                             </h3>
 
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-1">
+                            <p class="text-[14px] dark:text-white text-gray-800 mt-1">
                                 {{ $habit->category?->name ?? 'General' }}
                             </p>
                         </div>
@@ -67,20 +66,20 @@
                         </span>
                     </div>
 
-                    <p class="relative z-10 text-[14px] dark:text-gray-400 text-gray-500 leading-relaxed mt-3">
+                    <p class="relative z-10 text-[14px] dark:text-white text-gray-800 leading-relaxed mt-3">
                         {{ \Illuminate\Support\Str::limit($habit->description, 120) ?? 'No description added.' }}
                     </p>
 
                     <div class="relative z-10 grid grid-cols-2 gap-3 mt-4">
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400">Current Streak</p>
+                            <p class="text-[14px] dark:text-white text-gray-800">Current Streak</p>
                             <p class="text-[16px] font-bold dark:text-white text-gray-800">
                                 {{ $habit->streak?->current_streak ?? 0 }} Days
                             </p>
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400">Best Streak</p>
+                            <p class="text-[14px] dark:text-white text-gray-800">Best Streak</p>
                             <p class="text-[16px] font-bold dark:text-white text-gray-800">
                                 {{ $habit->streak?->best_streak ?? 0 }} Days
                             </p>
@@ -90,7 +89,7 @@
                     <div
                         class="relative z-10 flex items-center justify-between mt-4 pt-3 border-t dark:border-white/[0.06] border-black/[0.05]">
                         <div>
-                            <p class="text-[16px] dark:text-gray-500 text-gray-400">Frequency</p>
+                            <p class="text-[16px] dark:text-white text-gray-800">Frequency</p>
                             <span
                                 class="inline-block mt-1 px-2.5 py-[4px] rounded-lg text-[15px] font-bold {{ $frequencyClass }}">
                                 {{ ucfirst($habit->frequency) }}
@@ -137,10 +136,9 @@
                     </div>
                 </div>
             @empty
-                <div
-                    class="col-span-full hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-8 text-center">
+                <div class="col-span-full hover-lift veroa-card rounded-2xl p-8 text-center">
                     <h3 class="text-[16px] font-bold dark:text-white text-gray-900">No habits found</h3>
-                    <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-1">Create your first habit to start building
+                    <p class="text-[12px] dark:text-white text-gray-800 mt-1">Create your first habit to start building
                         consistency.</p>
                 </div>
             @endforelse

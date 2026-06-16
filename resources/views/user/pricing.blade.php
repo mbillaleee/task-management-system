@@ -9,7 +9,7 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     <i class="fas fa-tag mr-2"></i> Pricing
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Choose the right plan for your productivity journey.
                 </p>
             </div>
@@ -32,9 +32,8 @@
         {{-- ── Current Plan Banner (if subscribed) ── --}}
         @if ($currentSubscription)
             <div
-                class="relative overflow-hidden rounded-2xl border border-orange-500/30 dark:bg-[#1c1015] bg-orange-50 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div class="absolute top-0 right-0 w-40 h-40 bg-orange-500 blur-[80px] opacity-10 pointer-events-none">
-                </div>
+                class="relative overflow-hidden rounded-2xl border border-orange-500/30 veroa-card p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+
                 <div class="relative z-10 flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
                         style="background: {{ $currentSubscription->plan->color ?? '#f97316' }}22; border: 1.5px solid {{ $currentSubscription->plan->color ?? '#f97316' }}44;">
@@ -42,13 +41,13 @@
                     </div>
                     <div>
 
-                        <p class="text-[14px] font-extrabold dark:text-white text-gray-900">
+                        <p class="text-[14px] font-extrabold dark:text-white text-gray-800">
                             You're on the <span
                                 style="color: {{ $currentSubscription->plan->color ?? '#f97316' }}">{{ $currentSubscription->plan->name }}</span>
                             plan
                         </p>
 
-                        <p class="text-[12px] dark:text-gray-400 text-gray-500 mt-0.5">
+                        <p class="text-[12px] dark:text-white text-gray-800 mt-0.5">
                             {{ ucfirst($currentSubscription->billing_cycle) }} billing
                             @if ($currentSubscription->ends_at)
                                 <i class="fas fa-sync-alt mr-1"></i> Renews
@@ -73,10 +72,7 @@
 
         {{-- ── Hero Banner ── --}}
         <div
-            class="relative overflow-hidden rounded-2xl border dark:border-white/[0.07] border-black/[0.07]
-        dark:bg-[#17141f] bg-white p-6 md:p-8 hover-lift">
-            <div class="absolute top-0 right-0 w-72 h-72 bg-pink-500 blur-[100px] opacity-20 pointer-events-none"></div>
-            <div class="absolute bottom-0 left-0 w-72 h-72 bg-orange-500 blur-[100px] opacity-20 pointer-events-none"></div>
+            class="relative overflow-hidden rounded-2xl border veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border p-6 md:p-8 hover-lift">
             <div class="relative z-10 max-w-2xl">
                 <span
                     class="px-3 py-1 rounded-full text-[11px] font-bold bg-orange-500/[0.15] text-orange-400 border border-orange-500/20">
@@ -89,7 +85,7 @@
                         Upgrade when you grow.
                     </span>
                 </h1>
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-4 leading-relaxed">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-4 leading-relaxed">
                     Manage your tasks, habits, notes, focus sessions and analytics with flexible plans for every workflow.
                 </p>
             </div>
@@ -98,12 +94,11 @@
         {{-- ── Plans Grid ── --}}
         @if ($plans->isEmpty())
             {{-- Fallback when no plans in DB yet --}}
-            <div
-                class="p-12 text-center rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07]">
+            <div class="p-12 text-center rounded-2xl veroa-card">
                 <div class="text-4xl mb-3">💎</div>
                 <p class="text-[16px] font-bold dark:text-white text-gray-900"><i class="fas fa-info-circle mr-1"></i> Plans
                     coming soon</p>
-                <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">Our pricing tiers are being set up. Check back
+                <p class="text-[13px] dark:text-white text-gray-800 mt-1">Our pricing tiers are being set up. Check back
                     shortly.</p>
             </div>
         @else
@@ -129,17 +124,12 @@
 
                     <div class="hover-lift relative overflow-hidden rounded-2xl p-[22px] flex flex-col
                     {{ $isFeatured
-                        ? 'dark:bg-[#17141f] bg-white border border-orange-500/40 shadow-[0_0_40px_rgba(249,115,22,0.18)]'
-                        : 'dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07]' }}"
+                        ? 'dark:bg-[#120b1f] bg-[#fff4df] border border-orange-400/40 dark:border-pink-500/20 shadow-[0_15px_35px_rgba(180,95,20,.12)] dark:shadow-none'
+                        : 'bg-[#fbefd9]/85 dark:bg-[#0f0a1c] border border-orange-200/60 dark:border-pink-500/15 shadow-[inset_0_1px_0_rgba(255,255,255,.65),0_15px_35px_rgba(180,95,20,.10)] dark:shadow-none' }}"
                         style="{{ $isFeatured ? '' : '' }}">
 
                         {{-- Ambient glow --}}
-                        <div class="absolute top-0 right-0 w-32 h-32 blur-3xl opacity-20 pointer-events-none"
-                            style="background: {{ $color }}"></div>
-                        @if ($isFeatured)
-                            <div class="absolute bottom-0 left-0 w-32 h-32 blur-3xl opacity-20 pointer-events-none"
-                                style="background: {{ $color }}"></div>
-                        @endif
+
 
                         {{-- Badge (Featured / Most Popular) --}}
                         @if ($isFeatured && $plan->badge_label)
@@ -172,7 +162,7 @@
                             </div>
 
                             @if ($plan->description)
-                                <p class="text-[12.5px] dark:text-gray-500 text-gray-500 mt-1 mb-5">
+                                <p class="text-[12.5px] dark:text-white text-gray-800 mt-1 mb-5">
                                     {{ $plan->description }}
                                 </p>
                             @else
@@ -185,24 +175,24 @@
                                 <div class="plan-price-monthly">
                                     @if ($isFree)
                                         <span class="text-[38px] font-extrabold dark:text-white text-gray-900">$0</span>
-                                        <span class="text-[12px] dark:text-gray-500 text-gray-500">/month</span>
+                                        <span class="text-[12px] dark:text-white text-gray-800">/month</span>
                                     @else
                                         <span class="text-[38px] font-extrabold dark:text-white text-gray-900">
                                             ${{ rtrim(rtrim(number_format($plan->price_monthly, 2), '0'), '.') }}
                                         </span>
-                                        <span class="text-[12px] dark:text-gray-500 text-gray-500">/month</span>
+                                        <span class="text-[12px] dark:text-white text-gray-800">/month</span>
                                     @endif
                                 </div>
                                 {{-- Yearly price (hidden by default) --}}
                                 <div class="plan-price-yearly hidden">
                                     @if ($isFree)
                                         <span class="text-[38px] font-extrabold dark:text-white text-gray-900">$0</span>
-                                        <span class="text-[12px] dark:text-gray-500 text-gray-500">/year</span>
+                                        <span class="text-[12px] dark:text-white text-gray-800">/year</span>
                                     @else
-                                        <span class="text-[38px] font-extrabold dark:text-white text-gray-900">
+                                        <span class="text-[38px] font-extrabold dark:text-white text-gray-800">
                                             ${{ rtrim(rtrim(number_format($plan->price_yearly, 2), '0'), '.') }}
                                         </span>
-                                        <span class="text-[12px] dark:text-gray-500 text-gray-500">/year</span>
+                                        <span class="text-[12px] dark:text-white text-gray-800">/year</span>
                                         @if ($savings > 0)
                                             <div class="mt-1">
                                                 <span
@@ -349,8 +339,7 @@
 
         {{-- ── Compare table (only if 2+ plans) ── --}}
         @if ($plans->count() >= 2)
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl overflow-hidden">
+            <div class="hover-lift veroa-card rounded-2xl overflow-hidden">
                 <div class="p-4 border-b dark:border-white/[0.06] border-black/[0.05]">
                     <h3 class="text-[15px] font-bold dark:text-white text-gray-900">Compare plans</h3>
                 </div>
@@ -358,11 +347,11 @@
                     <table class="w-full text-[12.5px]">
                         <thead>
                             <tr class="border-b dark:border-white/[0.05] border-black/[0.05]">
-                                <th class="px-4 py-3 text-left font-bold dark:text-gray-400 text-gray-500">Feature</th>
+                                <th class="px-4 py-3 text-left font-bold dark:text-white text-gray-800">Feature</th>
                                 @foreach ($plans as $plan)
                                     <th
                                         class="px-4 py-3 text-center font-extrabold
-                                    {{ $plan->is_featured ? 'dark:text-orange-400 text-orange-500' : 'dark:text-white text-gray-900' }}">
+                                    {{ $plan->is_featured ? 'dark:text-orange-400 text-orange-500' : 'dark:text-white text-gray-800' }}">
                                         <i class="fas fa-check mr-1"></i> {{ $plan->icon ?? '' }} {{ $plan->name }}
                                         @if ($currentPlanId === $plan->id)
                                             <span class="block text-[10px] font-bold text-emerald-400 mt-0.5"><i
@@ -392,7 +381,7 @@
                             @endphp
                             @foreach ($compareRows as $row)
                                 <tr class="dark:hover:bg-white/[0.02] hover:bg-gray-50 transition">
-                                    <td class="px-4 py-2.5 font-bold dark:text-gray-400 text-gray-500">{{ $row['label'] }}
+                                    <td class="px-4 py-2.5 font-bold dark:text-white text-gray-800">{{ $row['label'] }}
                                     </td>
                                     @foreach ($plans as $plan)
                                         <td class="px-4 py-2.5 text-center">
@@ -401,13 +390,13 @@
                                                     <span class="text-emerald-400 font-bold"><i
                                                             class="fas fa-check"></i></span>
                                                 @else
-                                                    <span class="dark:text-gray-600 text-gray-300"><i
+                                                    <span class="dark:text-white text-gray-800"><i
                                                             class="fas fa-times"></i></span>
                                                 @endif
                                             @else
                                                 @php $val = $plan->{$row['field']} ?? -1; @endphp
                                                 <span
-                                                    class="{{ $val == -1 ? 'text-orange-400 font-bold' : 'dark:text-gray-300 text-gray-600' }}">
+                                                    class="{{ $val == -1 ? 'text-orange-400 font-bold' : 'dark:text-white text-gray-800' }}">
                                                     {{ $val == -1 ? '∞' : $val }}
                                                 </span>
                                             @endif
@@ -424,28 +413,26 @@
         {{-- ── FAQ ── --}}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[15px] font-bold dark:text-white text-gray-900 mb-4">What's included?</h3>
+            <div class="hover-lift veroa-card rounded-2xl p-[18px]">
+                <h3 class="text-[15px] font-bold dark:text-white text-gray-800 mb-4">What's included?</h3>
                 <div class="space-y-3">
                     @foreach (['Task management with labels and subtasks', 'Habit streak and daily completion tracking', 'Focus sessions and productivity insights', 'XP progress, levels and activity history'] as $item)
                         <div
                             class="flex items-start gap-3 py-2 border-b last:border-b-0 dark:border-white/[0.06] border-black/[0.05]">
                             <span class="text-orange-400 flex-shrink-0"><i class="fas fa-check"></i> </span>
-                            <p class="text-[12.5px] dark:text-gray-400 text-gray-500">{{ $item }}</p>
+                            <p class="text-[12.5px] dark:text-white text-gray-800">{{ $item }}</p>
                         </div>
                     @endforeach
                 </div>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[15px] font-bold dark:text-white text-gray-900 mb-4"> Frequently Asked Questions</h3>
+            <div class="hover-lift veroa-card rounded-2xl p-[18px]">
+                <h3 class="text-[15px] font-bold dark:text-white text-gray-800 mb-4"> Frequently Asked Questions</h3>
                 <div class="space-y-4">
                     @foreach ([['q' => 'Can I start for free?', 'a' => 'Yes, the free plan is available for basic productivity tracking with no credit card required.'], ['q' => 'Can I upgrade later?', 'a' => 'Yes, you can upgrade to any paid plan anytime. Your existing data is always preserved.'], ['q' => 'Can I switch billing cycle?', 'a' => 'Absolutely — you can switch between monthly and yearly billing at renewal time.'], ['q' => 'Is my data private?', 'a' => 'Your tasks, notes and analytics stay fully protected inside your personal workspace.']] as $faq)
                         <div class="border-b dark:border-white/[0.06] border-black/[0.05] pb-3 last:border-b-0 last:pb-0">
                             <p class="text-[12.5px] font-bold dark:text-gray-200 text-gray-800">{{ $faq['q'] }}</p>
-                            <p class="text-[12px] dark:text-gray-500 text-gray-500 mt-1">{{ $faq['a'] }}</p>
+                            <p class="text-[12px] dark:text-white text-gray-800 mt-1">{{ $faq['a'] }}</p>
                         </div>
                     @endforeach
                 </div>

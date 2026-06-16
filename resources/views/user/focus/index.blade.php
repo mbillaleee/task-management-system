@@ -8,19 +8,19 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     <i class="fas fa-clock mr-2"></i> Focus Sessions
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Manage Pomodoro, deep work, focus timer and break sessions.
                 </p>
             </div>
 
             <div class="flex flex-wrap items-center gap-2.5">
                 <a href="{{ route('user.focus.statistics') }}"
-                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
+                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-white text-gray-800 border dark:border-white/[0.08] border-black/[0.08]">
                     <i class="fas fa-chart-bar mr-2"></i> Statistics
                 </a>
 
                 <a href="{{ route('user.focus.history') }}"
-                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-gray-300 text-gray-700 border dark:border-white/[0.08] border-black/[0.08]">
+                    class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-white dark:text-white text-gray-800 border dark:border-white/[0.08] border-black/[0.08]">
                     <i class="fas fa-history mr-2"></i> History
                 </a>
 
@@ -68,15 +68,14 @@
                 @endphp
 
                 <div
-                    class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-orange-500 blur-3xl opacity-20"></div>
+                    class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-4 relative overflow-hidden">
 
                     <div class="relative z-10 flex items-start justify-between gap-3">
                         <div>
-                            <h3 class="text-[16px] font-bold dark:text-white text-gray-900 leading-snug">
+                            <h3 class="text-[16px] font-bold dark:text-white text-gray-800 leading-snug">
                                 {{ $session->title ?? 'Untitled Session' }}
                             </h3>
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-1">
+                            <p class="text-[14px] dark:text-white text-gray-800 mt-1">
                                 {{ ucwords(str_replace('_', ' ', $session->ambient_sound ?? 'none')) }} sound
                             </p>
                         </div>
@@ -88,7 +87,7 @@
 
                     <div class="relative z-10 grid grid-cols-2 gap-3 mt-4">
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                            <p class="text-[14px] dark:text-white text-gray-800">
                                 <i class="fas fa-clock mr-2"></i> Duration
                             </p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
@@ -97,7 +96,7 @@
                         </div>
 
                         <div class="dark:bg-white/[0.04] bg-gray-50 rounded-xl p-3">
-                            <p class="text-[14px] dark:text-gray-500 text-gray-400">
+                            <p class="text-[14px] dark:text-white text-gray-800">
                                 <i class="fas fa-check-circle mr-2"></i> Completed
                             </p>
                             <p class="text-[14px] font-bold dark:text-white text-gray-800">
@@ -109,11 +108,8 @@
                     <div
                         class="relative z-10 flex items-center justify-between mt-4 pt-3 border-t dark:border-white/[0.06] border-black/[0.05]">
                         <div>
-                            <p class="text-[16px] dark:text-gray-500 text-gray-400">
-                                <i class="fas fa-star mr-2"></i> XP Earned
-                            </p>
-                            <p class="text-[14px] font-semibold dark:text-gray-300 text-gray-700">
-                                {{ $session->xp_earned }}
+                            <p class="text-[16px] dark:text-white text-gray-800">
+                                <i class="fas fa-star mr-2"></i> XP Earned : {{ $session->xp_earned }}
                             </p>
                         </div>
 
@@ -124,13 +120,13 @@
 
                     <div class="relative z-10 mt-4">
                         <div class="flex justify-between text-[16px] mb-1.5">
-                            <span class="dark:text-gray-400 text-gray-500">
+                            <span class="dark:text-white text-gray-800">
                                 <i class="fas fa-chart-line mr-2"></i> Progress
                             </span>
                             <span class="font-bold dark:text-white text-gray-800">{{ $progress }}%</span>
                         </div>
 
-                        <div class="w-full h-[7px] rounded-full dark:bg-white/[0.08] bg-gray-100 overflow-hidden">
+                        <div class="w-full h-[7px] rounded-full dark:bg-white/[0.08] bg-gray-400 overflow-hidden">
                             <div class="h-full rounded-full bg-gradient-to-r from-orange-500 to-pink-500"
                                 style="width: {{ $progress }}%"></div>
                         </div>
@@ -144,7 +140,7 @@
 
                         <div class="flex items-center gap-2">
                             <a href="{{ route('user.focus.edit', $session->id) }}"
-                                class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
+                                class="px-3 py-2 rounded-lg text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800">
                                 <i class="fas fa-edit mr-2"></i> Edit
                             </a>
 
@@ -162,8 +158,8 @@
             @empty
                 <div
                     class="col-span-full hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-8 text-center">
-                    <h3 class="text-[16px] font-bold dark:text-white text-gray-900">No focus sessions found</h3>
-                    <p class="text-[12px] dark:text-gray-500 text-gray-400 mt-1">Create your first focus session to get
+                    <h3 class="text-[16px] font-bold dark:text-white text-gray-800">No focus sessions found</h3>
+                    <p class="text-[12px] dark:text-white text-gray-800 mt-1">Create your first focus session to get
                         started.</p>
                 </div>
             @endforelse

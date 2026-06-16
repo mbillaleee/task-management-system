@@ -6,23 +6,23 @@
         {{-- Header --}}
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900"><i
+                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-800"><i
                         class="fas fa-calendar-alt mr-2"></i> Calendar</h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">Daily planner — full schedule for the day.</p>
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">Daily planner — full schedule for the day.</p>
             </div>
             <div class="flex flex-wrap items-center gap-2.5">
                 <div class="flex items-center dark:bg-white/[0.06] bg-black/[0.05] rounded-[10px] p-1 gap-1">
                     <a href="{{ route('user.calendar.index') }}"
-                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
+                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-white text-gray-800 dark:hover:text-white hover:text-gray-900 transition-colors">
                         <i class="fas fa-calendar mr-1"></i>Month</a>
                     <a href="{{ route('user.calendar.week') }}"
-                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
+                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-white text-gray-800 dark:hover:text-white hover:text-gray-900 transition-colors">
                         <i class="fas fa-calendar-week mr-1"></i>Week</a>
                     <a href="{{ route('user.calendar.day') }}"
                         class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 text-white">
                         <i class="fas fa-calendar-day mr-1"></i>Day</a>
                     <a href="{{ route('user.calendar.timeline') }}"
-                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
+                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-white text-gray-800 dark:hover:text-white hover:text-gray-900 transition-colors">
                         <i class="fas fa-list mr-1"></i>Timeline</a>
                 </div>
                 <button onclick="openCreateModal()"
@@ -35,7 +35,7 @@
 
         {{-- Day nav --}}
         <div
-            class="flex items-center justify-between dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl px-5 py-4">
+            class="flex items-center justify-between veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl px-5 py-4">
             <a href="{{ route('user.calendar.day', ['date' => $prevDay->toDateString()]) }}"
                 class="w-9 h-9 flex items-center justify-center rounded-xl dark:bg-white/[0.06] bg-black/[0.05] dark:text-gray-300 text-gray-600 hover:dark:bg-white/[0.1] transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -43,10 +43,10 @@
                 </svg>
             </a>
             <div class="text-center">
-                <h3 class="text-[20px] font-extrabold dark:text-white text-gray-900">
+                <h3 class="text-[20px] font-extrabold dark:text-white text-gray-800">
                     {{ $date->format('l') }}
                 </h3>
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-medium">
+                <p class="text-[14px] dark:text-white text-gray-800 font-medium">
                     {{ $date->format('F j, Y') }}
                     @if ($date->isToday())
                         <span
@@ -103,8 +103,7 @@
             @endif
 
             {{-- Hour schedule --}}
-            <div
-                class="lg:col-span-2 dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl overflow-hidden">
+            <div class="lg:col-span-2 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl overflow-hidden">
                 <div class="px-5 py-4 border-b dark:border-white/[0.07] border-black/[0.07]">
                     <h4 class="text-[15px] font-extrabold dark:text-white text-gray-900">Schedule</h4>
                 </div>
@@ -127,7 +126,7 @@
                         <div class="flex border-b dark:border-white/[0.04] border-black/[0.04] {{ $isCurrentHour ? 'dark:bg-orange-500/[0.06] bg-orange-50' : '' }}"
                             style="min-height:56px;">
                             <div
-                                class="w-16 flex-shrink-0 px-3 pt-3 text-[11px] font-medium dark:text-gray-600 text-gray-400 text-right">
+                                class="w-16 flex-shrink-0 px-3 pt-3 text-[11px] font-medium dark:text-white text-gray-800 text-right">
                                 {{ $displayHour }}
                             </div>
                             <div class="flex-1 p-1.5 space-y-1 border-l dark:border-white/[0.05] border-black/[0.05]">
@@ -184,24 +183,24 @@
 
             {{-- Sidebar: day summary --}}
             <div class="space-y-4">
-                <div class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4">
+                <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-4">
                     <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-3">Today's Summary</h4>
                     <div class="space-y-2.5">
                         <div class="flex items-center justify-between">
-                            <span class="text-[13px] dark:text-gray-400 text-gray-500">Total Events</span>
+                            <span class="text-[13px] dark:text-white text-gray-800">Total Events</span>
                             <span
                                 class="text-[15px] font-extrabold dark:text-white text-gray-900">{{ $events->count() }}</span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-[13px] dark:text-gray-400 text-gray-500">Timed</span>
+                            <span class="text-[13px] dark:text-white text-gray-800">Timed</span>
                             <span class="text-[15px] font-extrabold text-blue-400">{{ $timedEvents->count() }}</span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-[13px] dark:text-gray-400 text-gray-500">All Day</span>
+                            <span class="text-[13px] dark:text-white text-gray-800">All Day</span>
                             <span class="text-[15px] font-extrabold text-purple-400">{{ $allDayEvents->count() }}</span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-[13px] dark:text-gray-400 text-gray-500">High Priority</span>
+                            <span class="text-[13px] dark:text-white text-gray-800">High Priority</span>
                             <span
                                 class="text-[15px] font-extrabold text-red-400">{{ $events->where('priority', 'high')->count() }}</span>
                         </div>
@@ -209,7 +208,7 @@
                 </div>
 
                 {{-- Quick mini calendar nav --}}
-                <div class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4">
+                <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-4">
                     <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-3">Jump to Date</h4>
                     <input type="date" id="jumpDate" value="{{ $date->toDateString() }}"
                         class="w-full px-3 py-2 rounded-xl border dark:border-white/[0.1] border-black/[0.1] dark:bg-white/[0.05] bg-black/[0.03] dark:text-white text-gray-900 text-[13px] font-medium focus:outline-none focus:ring-2 focus:ring-orange-500/50"
@@ -218,9 +217,9 @@
 
                 {{-- All events list --}}
                 @if ($events->count())
-                    <div
-                        class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4">
-                        <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-3">All Events</h4>
+                    <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-4">
+                        <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-3"><i
+                                class="fas fa-calendar-alt mr-2"></i> All Events</h4>
                         <div class="space-y-2">
                             @foreach ($events->sortBy('start_time') as $ev)
                                 @php
@@ -241,7 +240,7 @@
                                     <div class="flex-1 min-w-0">
                                         <p class="text-[13px] font-semibold dark:text-gray-200 text-gray-700 truncate">
                                             {{ $ev->title }}</p>
-                                        <p class="text-[11px] dark:text-gray-500 text-gray-400">{{ $ev->formatted_time }}
+                                        <p class="text-[11px] dark:text-white text-gray-800">{{ $ev->formatted_time }}
                                         </p>
                                     </div>
                                     @php $sc = ['upcoming'=>'text-blue-400','completed'=>'text-emerald-400','cancelled'=>'text-red-400'][$ev->status] ?? 'text-gray-400'; @endphp

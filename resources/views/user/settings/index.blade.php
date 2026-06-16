@@ -19,7 +19,7 @@
         <div>
             <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900"><i
                     class="fas fa-cog mr-2"></i> Settings</h2>
-            <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">Manage your account, appearance, and preferences.
+            <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">Manage your account, appearance, and preferences.
             </p>
         </div>
 
@@ -47,7 +47,7 @@
 
         {{-- ── Profile Hero Card ── --}}
         <div
-            class="relative overflow-hidden dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5 flex flex-col sm:flex-row items-center sm:items-start gap-5">
+            class="relative overflow-hidden veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border-black/[0.07] rounded-2xl p-5 flex flex-col sm:flex-row items-center sm:items-start gap-5">
             <div class="absolute top-0 right-0 w-48 h-48 bg-orange-500 blur-[80px] opacity-10 pointer-events-none"></div>
             <div class="absolute bottom-0 left-0 w-48 h-48 bg-pink-500 blur-[80px] opacity-10 pointer-events-none"></div>
 
@@ -77,7 +77,7 @@
                 <h3 class="text-[18px] font-extrabold dark:text-white text-gray-900">{{ $user->name }}</h3>
                 <p class="text-[13px] dark:text-gray-400 text-gray-500 mt-0.5">{{ $user->email }}</p>
                 @if ($user->bio)
-                    <p class="text-[12.5px] dark:text-gray-500 text-gray-400 mt-1.5 max-w-md">{{ $user->bio }}</p>
+                    <p class="text-[12.5px] dark:text-white text-gray-800 mt-1.5 max-w-md">{{ $user->bio }}</p>
                 @endif
                 <div class="flex flex-wrap items-center gap-2 mt-3 justify-center sm:justify-start">
                     @if ($subscription)
@@ -120,8 +120,7 @@
         </div>
 
         {{-- ── Tab Bar + Content ── --}}
-        <div
-            class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl overflow-hidden">
+        <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl overflow-hidden">
 
             {{-- Tab Nav --}}
             <div class="flex overflow-x-auto border-b dark:border-white/[0.06] border-black/[0.05] scrollbar-hide">
@@ -130,7 +129,7 @@
                         class="tab-btn flex items-center gap-2 px-5 py-4 text-[13px] font-bold whitespace-nowrap border-b-2 transition-all flex-shrink-0
                         {{ $activeTab === $key
                             ? 'border-orange-500 text-orange-500 dark:text-orange-400'
-                            : 'border-transparent dark:text-gray-500 text-gray-400 dark:hover:text-gray-300 hover:text-gray-600' }}">
+                            : 'border-transparent dark:text-white text-gray-800 dark:hover:text-gray-300 hover:text-gray-600' }}">
                         <i class="fa-solid {{ $tab['icon'] }} text-[13px]"></i>
                         {{ $tab['label'] }}
                     </button>
@@ -138,7 +137,7 @@
             </div>
 
             {{-- Tab Panels --}}
-            <div class="p-5 sm:p-6">
+            <div class="p-5 sm:p-6 veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
 
                 {{-- ══════════ ACCOUNT TAB ══════════ --}}
                 <div id="tab-account" class="tab-panel {{ $activeTab !== 'account' ? 'hidden' : '' }} space-y-6">

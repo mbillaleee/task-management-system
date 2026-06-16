@@ -6,10 +6,10 @@
         {{-- Header --}}
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
+                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-800">
                     <i class="fa-solid fa-tools"></i> Tools
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Quick productivity tools to help you work smarter every day.
                 </p>
             </div>
@@ -22,13 +22,7 @@
         </div>
 
         {{-- Hero --}}
-        <div
-            class="relative overflow-hidden rounded-2xl border dark:border-white/[0.07] border-black/[0.07]
-        dark:bg-[#17141f] bg-white p-6 md:p-8 hover-lift">
-
-            <div class="absolute top-0 right-0 w-72 h-72 bg-orange-500 blur-[100px] opacity-20"></div>
-            <div class="absolute bottom-0 left-0 w-72 h-72 bg-pink-500 blur-[100px] opacity-20"></div>
-
+        <div class="relative overflow-hidden rounded-2xl border veroa-card p-6 md:p-8 hover-lift">
             <div class="relative z-10 max-w-2xl">
                 <span
                     class="px-3 py-1 rounded-full text-[11px] font-bold
@@ -37,14 +31,14 @@
                 </span>
 
                 <h1
-                    class="text-[24px] sm:text-[32px] md:text-[44px] leading-tight font-extrabold tracking-[-1.4px] mt-5 dark:text-white text-gray-900">
+                    class="text-[24px] sm:text-[32px] md:text-[44px] leading-tight font-extrabold tracking-[-1.4px] mt-5 dark:text-white text-gray-800">
                     Powerful tools for <br>
                     <span class="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">
                         focused daily work.
                     </span>
                 </h1>
 
-                <p class="text-[14px] md:text-[14px] dark:text-gray-400 text-gray-500 mt-4 leading-relaxed">
+                <p class="text-[14px] md:text-[14px] dark:text-white text-gray-800 mt-4 leading-relaxed">
                     Use focus timer, checklist, calculator, planner and quick utilities to keep your workflow organized.
                 </p>
             </div>
@@ -56,92 +50,113 @@
             @php
                 $tools = [
                     [
-                        'icon' => '⏱️',
+                        'icon' => 'fa-stopwatch',
                         'title' => 'Pomodoro Timer',
                         'text' => 'Stay focused with work and break sessions.',
                         'status' => 'Active',
+                        'color' => 'orange',
                     ],
                     [
-                        'icon' => '✅',
+                        'icon' => 'fa-check',
                         'title' => 'Quick Checklist',
                         'text' => 'Create small checklists for daily execution.',
                         'status' => 'Ready',
+                        'color' => 'pink',
                     ],
                     [
-                        'icon' => '📅',
+                        'icon' => 'fa-calendar-day',
                         'title' => 'Daily Planner',
                         'text' => 'Plan today’s top priorities and deadlines.',
                         'status' => 'Ready',
+                        'color' => 'blue',
                     ],
                     [
-                        'icon' => '🧮',
-                        'title' => 'Calculator',
+                        'icon' => 'fa-calculator',
+                        'title' => 'Task',
                         'text' => 'Use quick calculations without leaving workspace.',
                         'status' => 'Utility',
+                        'color' => 'purple',
                     ],
                     [
-                        'icon' => '🎧',
+                        'icon' => 'fa-headphones',
                         'title' => 'Ambient Sounds',
                         'text' => 'Improve focus with calm working background sounds.',
                         'status' => 'Focus',
+                        'color' => 'emerald',
                     ],
                     [
-                        'icon' => '📝',
+                        'icon' => 'fa-note-sticky',
                         'title' => 'Quick Notes',
                         'text' => 'Capture ideas, reminders and small thoughts.',
                         'status' => 'Notes',
+                        'color' => 'yellow',
                     ],
                     [
-                        'icon' => '🎯',
+                        'icon' => 'fa-bullseye',
                         'title' => 'Goal Tracker',
                         'text' => 'Track milestones and progress toward goals.',
                         'status' => 'Progress',
+                        'color' => 'red',
                     ],
                     [
-                        'icon' => '📊',
+                        'icon' => 'fa-chart-line',
                         'title' => 'Productivity Score',
                         'text' => 'Review your daily productivity performance.',
                         'status' => 'Analytics',
+                        'color' => 'green',
                     ],
                 ];
             @endphp
 
+            @php
+                $colorMap = [
+                    'orange' => 'text-orange-500 bg-orange-500/10',
+                    'pink' => 'text-pink-500 bg-pink-500/10',
+                    'purple' => 'text-purple-500 bg-purple-500/10',
+                    'emerald' => 'text-emerald-500 bg-emerald-500/10',
+                    'blue' => 'text-blue-500 bg-blue-500/10',
+                    'yellow' => 'text-yellow-500 bg-yellow-500/10',
+                    'red' => 'text-red-500 bg-red-500/10',
+                    'green' => 'text-green-500 bg-green-500/10',
+                ];
+            @endphp
+
             @foreach ($tools as $tool)
-                <div
-                    class="hover-lift relative overflow-hidden dark:bg-[#17141f] bg-white border dark:border-white/[0.07]
-                border-black/[0.07] rounded-2xl p-[18px]">
+                <div class="veroa-card rounded-2xl p-[18px]
+                hover:-translate-y-1 transition duration-300">
 
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-pink-500 blur-3xl opacity-20"></div>
-
-                    <div class="relative z-10">
-                        <div class="flex items-start justify-between gap-3">
-                            <div
-                                class="w-11 h-11 rounded-xl flex items-center justify-center text-[21px]
-                            dark:bg-white/[0.06] bg-gray-100">
-                                {{ $tool['icon'] }}
-                            </div>
-
-                            <span
-                                class="px-2.5 py-[4px] rounded-lg text-[11px] font-bold
-                            dark:bg-orange-500/[0.15] bg-orange-50 text-orange-500 border border-orange-500/20">
-                                {{ $tool['status'] }}
-                            </span>
-                        </div>
-
-                        <h3 class="text-[16px] font-extrabold dark:text-white text-gray-900 mt-4">
-                            {{ $tool['title'] }}
-                        </h3>
-
-                        <p class="text-[14px] dark:text-gray-400 text-gray-500 leading-relaxed mt-2">
-                            {{ $tool['text'] }}
-                        </p>
-
-                        <button
-                            class="mt-4 w-full px-3 py-2 rounded-[10px] text-[14px] font-bold
-                        dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
-                            <i class="fa-solid fa-arrow-right"></i> Open Tool
-                        </button>
+                    <!-- ICON (FEATURE STYLE) -->
+                    <div
+                        class="w-11 h-11 rounded-xl flex items-center justify-center text-[18px]
+                    {{ $colorMap[$tool['color']] }}">
+                        <i class="fa-solid {{ $tool['icon'] }}"></i>
                     </div>
+
+                    <!-- TITLE -->
+                    <h3 class="text-[15px] font-extrabold mt-4
+                   text-gray-800 dark:text-white">
+                        {{ $tool['title'] }}
+                    </h3>
+
+                    <!-- TEXT -->
+                    <p class="text-[12.5px] mt-2 leading-relaxed
+                  text-gray-800 dark:text-white">
+                        {{ $tool['text'] }}
+                    </p>
+
+                    <!-- BUTTON (FEATURE STYLE CTA) -->
+                    {{-- <button
+                        class="mt-4 w-full px-3 py-2 rounded-[10px] text-[14px] font-bold
+            bg-gradient-to-r from-orange-500 to-pink-500
+            text-white
+            shadow-[0_8px_25px_rgba(249,115,22,0.25)]
+            hover:shadow-[0_12px_35px_rgba(236,72,153,0.35)]
+            transition">
+
+                        <i class="fa-solid fa-arrow-right mr-1"></i>
+                        Open Tool
+                    </button> --}}
+
                 </div>
             @endforeach
 
@@ -150,9 +165,8 @@
         {{-- Bottom Widgets --}}
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
-            <div
-                class="lg:col-span-2 hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[15px] font-bold dark:text-white text-gray-900 mb-4">
+            <div class="lg:col-span-2 hover-lift veroa-card rounded-2xl p-[18px]">
+                <h3 class="text-[15px] font-bold dark:text-white text-gray-800 mb-4">
                     Today’s Utility Stack
                 </h3>
 
@@ -164,7 +178,7 @@
                                 class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white bg-gradient-to-r from-orange-500 to-pink-500">
                                 ✓
                             </span>
-                            <p class="text-[12.5px] font-medium dark:text-gray-300 text-gray-700">
+                            <p class="text-[12.5px] font-medium dark:text-white text-gray-800">
                                 {{ $item }}
                             </p>
                         </div>
@@ -172,9 +186,8 @@
                 </div>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
-                <h3 class="text-[15px] font-bold dark:text-white text-gray-900 mb-4">
+            <div class="hover-lift veroa-card rounded-2xl p-[18px]">
+                <h3 class="text-[15px] font-bold dark:text-white text-gray-800 mb-4">
                     Tool Usage
                 </h3>
 

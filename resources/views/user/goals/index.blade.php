@@ -8,7 +8,7 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     <i class="fas fa-bullseye mr-2"></i> Goals Workspace
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Track long-term goals, milestones, deadlines and achievements.
                 </p>
             </div>
@@ -27,48 +27,47 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-flag mr-2"></i>Total
+            <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-5">
+                <p class="text-[14px] dark:text-white text-gray-800 font-bold"><i class="fas fa-flag mr-2"></i>Total
                     Goals</p>
                 <h3 class="text-[34px] font-black dark:text-white text-gray-900 mt-2">{{ $totalGoals }}</h3>
                 <p class="text-[13px] text-orange-400 font-bold"><i class="fas fa-info-circle mr-2"></i> All saved goals</p>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-play-circle mr-2"></i>
+            <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-5">
+                <p class="text-[14px] dark:text-white text-gray-800 font-bold"><i class="fas fa-play-circle mr-2"></i>
                     Active Goals</p>
                 <h3 class="text-[34px] font-black text-pink-400 mt-2">{{ $activeGoals }}</h3>
                 <p class="text-[13px] text-pink-400 font-bold"><i class="fas fa-info-circle mr-2"></i> In progress goals</p>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i
+            <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-5">
+                <p class="text-[14px] dark:text-white text-gray-800 font-bold"><i
                         class="fas fa-check-circle mr-2"></i>Completed</p>
                 <h3 class="text-[34px] font-black text-emerald-400 mt-2">{{ $completedGoals }}</h3>
                 <p class="text-[13px] text-emerald-400 font-bold"><i class="fas fa-info-circle mr-2"></i> Achievements
                     unlocked</p>
             </div>
 
-            <div
-                class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-5">
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 font-bold"><i class="fas fa-coins mr-2"></i>XP Earned
+            <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-5">
+                <p class="text-[14px] dark:text-white text-gray-800 font-bold"><i class="fas fa-coins mr-2"></i>XP Earned
                 </p>
-                <h3 class="text-[34px] font-black text-yellow-400 mt-2">{{ $totalXp }}</h3>
-                <p class="text-[13px] text-yellow-400 font-bold"><i class="fas fa-info-circle mr-2"></i> From goal
+                <h3 class="text-[34px] font-black text-yellow-600 mt-2">{{ $totalXp }}</h3>
+                <p class="text-[13px] text-yellow-600 font-bold"><i class="fas fa-info-circle mr-2"></i> From goal
                     completion</p>
             </div>
         </div>
 
         <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+            class="hover-lift dark:border-pink-500/15 bg-[#f7e4c3]/75
+            dark:bg-[#080612]  backdrop-blur-xl  p-6  space-y-6
+            shadow-[0_20px_60px_rgba(0,0,0,0.25)]
+            dark:shadow-[inset_0_1px_0_rgba(255,255,255,.03)] rounded-2xl p-[18px]">
             <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-5">
                 <div>
                     <h3 class="text-[20px] font-extrabold dark:text-white text-gray-900"><i
                             class="fas fa-bullseye mr-2"></i>All Goals</h3>
-                    <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">
+                    <p class="text-[13px] dark:text-white text-gray-800 mt-1">
                         Search, filter and manage your goals.
                     </p>
                 </div>
@@ -132,15 +131,14 @@
                     @endphp
 
                     <div
-                        class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-4 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-orange-500 blur-3xl opacity-20"></div>
+                        class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-4 relative overflow-hidden">
 
                         <div class="relative z-10 flex items-start justify-between gap-3">
                             <div>
                                 <h3 class="text-[16px] font-bold dark:text-white text-gray-900 leading-snug">
                                     {{ $goal->title }}
                                 </h3>
-                                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-1">
+                                <p class="text-[14px] dark:text-white text-gray-800 mt-1">
                                     {{ $goal->category?->name ?? 'Uncategorized' }}
                                 </p>
                             </div>
@@ -150,14 +148,14 @@
                             </span>
                         </div>
 
-                        <p class="relative z-10 text-[14px] dark:text-gray-400 text-gray-500 leading-relaxed mt-3">
+                        <p class="relative z-10 text-[14px] dark:text-white text-gray-800 leading-relaxed mt-3">
                             {{ \Illuminate\Support\Str::limit($goal->description, 100) ?? 'No description added.' }}
                         </p>
 
                         <div
                             class="relative z-10 flex items-center justify-between mt-4 pt-3 border-t dark:border-white/[0.06] border-black/[0.05]">
                             <div>
-                                <p class="text-[13px] dark:text-gray-500 text-gray-400"><i
+                                <p class="text-[13px] dark:text-white text-gray-800"><i
                                         class="fas fa-calendar-alt mr-2"></i> Deadline</p>
                                 <p class="text-[14px] font-semibold dark:text-gray-300 text-gray-700">
                                     {{ $goal->deadline ? $goal->deadline->format('d M, Y') : 'No deadline' }}
@@ -171,12 +169,12 @@
 
                         <div class="relative z-10 mt-4">
                             <div class="flex justify-between text-[13px] mb-1.5">
-                                <span class="dark:text-gray-400 text-gray-500"><i class="fas fa-chart-line mr-2"></i>
+                                <span class="dark:text-white text-gray-800"><i class="fas fa-chart-line mr-2"></i>
                                     Progress</span>
                                 <span class="font-bold dark:text-white text-gray-800">{{ $goal->progress }}%</span>
                             </div>
 
-                            <div class="w-full h-[7px] rounded-full dark:bg-white/[0.08] bg-gray-100 overflow-hidden">
+                            <div class="w-full h-[7px] rounded-full dark:bg-white/[0.08] bg-gray-400 overflow-hidden">
                                 <div class="h-full rounded-full bg-gradient-to-r from-orange-500 to-pink-500"
                                     style="width: {{ $goal->progress }}%"></div>
                             </div>
@@ -209,7 +207,7 @@
                     <div
                         class="col-span-full dark:bg-white/[0.03] bg-gray-50 border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-10 text-center">
                         <h3 class="text-[18px] font-bold dark:text-white text-gray-900">No goals found</h3>
-                        <p class="text-[13px] dark:text-gray-500 text-gray-400 mt-1">Create your first goal to start
+                        <p class="text-[13px] dark:text-white text-gray-800 mt-1">Create your first goal to start
                             tracking progress.</p>
                     </div>
                 @endforelse

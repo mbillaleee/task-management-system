@@ -2,7 +2,7 @@
 
     {{-- Title --}}
     <div>
-        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Journal Title</label>
+        <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">Journal Title</label>
         <input type="text" name="title" value="{{ old('title', $journal->title ?? '') }}"
             placeholder="Enter journal title"
             class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
@@ -14,9 +14,9 @@
     {{-- Writing Prompt (optional quick pick) --}}
     @if (!empty($prompts))
         <div>
-            <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
+            <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">
                 Writing Prompt
-                <span class="font-normal dark:text-gray-500 text-gray-400 ml-1">(optional)</span>
+                <span class="font-normal dark:text-white text-gray-800 ml-1">(optional)</span>
             </label>
             <div class="flex gap-2">
                 <input type="text" name="prompt" id="promptInput"
@@ -41,9 +41,9 @@
 
     {{-- Content --}}
     <div>
-        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
+        <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">
             Content
-            <span id="wordCount" class="font-normal dark:text-gray-500 text-gray-400 ml-2">0 words</span>
+            <span id="wordCount" class="font-normal dark:text-white text-gray-800 ml-2">0 words</span>
         </label>
         <textarea name="content" id="journalContent" rows="10" placeholder="Write your journal entry here…"
             class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none resize-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">{{ old('content', $journal->content ?? '') }}</textarea>
@@ -55,9 +55,9 @@
     {{-- Row: Category / Type / Mood / Date --}}
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div>
-            <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Category</label>
+            <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">Category</label>
             <select name="journal_category_id"
-                class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 dark:border dark:border-white/[0.1] border border-black/[0.1]">
+                class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
                 <option value="">No Category</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @selected(old('journal_category_id', $journal->journal_category_id ?? '') == $category->id)>
@@ -68,9 +68,9 @@
         </div>
 
         <div>
-            <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Type</label>
+            <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">Type</label>
             <select name="type"
-                class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 dark:border dark:border-white/[0.1] border border-black/[0.1]">
+                class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
                 <option value="daily" @selected(old('type', $journal->type ?? 'daily') == 'daily')>📝 Daily Journal</option>
                 <option value="gratitude" @selected(old('type', $journal->type ?? '') == 'gratitude')>🙏 Gratitude</option>
                 <option value="reflection" @selected(old('type', $journal->type ?? '') == 'reflection')>💭 Reflection</option>
@@ -79,9 +79,9 @@
         </div>
 
         <div>
-            <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Mood</label>
+            <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">Mood</label>
             <select name="mood"
-                class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 dark:border dark:border-white/[0.1] border border-black/[0.1]">
+                class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
                 <option value="">No Mood</option>
                 @foreach (['happy' => '😊 Happy', 'calm' => '😌 Calm', 'neutral' => '😐 Neutral', 'sad' => '😢 Sad', 'angry' => '😠 Angry', 'stressed' => '😤 Stressed', 'excited' => '🤩 Excited'] as $val => $label)
                     <option value="{{ $val }}" @selected(old('mood', $journal->mood ?? '') == $val)>
@@ -92,10 +92,10 @@
         </div>
 
         <div>
-            <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">Journal Date</label>
+            <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">Journal Date</label>
             <input type="date" name="journal_date"
                 value="{{ old('journal_date', isset($journal) && $journal->journal_date ? $journal->journal_date->format('Y-m-d') : now()->format('Y-m-d')) }}"
-                class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-gray-300 text-gray-700 dark:border dark:border-white/[0.1] border border-black/[0.1]">
+                class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">
             @error('journal_date')
                 <p class="text-red-500 text-[11px] mt-1">{{ $message }}</p>
             @enderror
@@ -104,9 +104,9 @@
 
     {{-- Gratitude Notes --}}
     <div>
-        <label class="block text-[12px] font-bold dark:text-gray-300 text-gray-700 mb-1.5">
+        <label class="block text-[12px] font-bold dark:text-white text-gray-800 mb-1.5">
             <i class="fas fa-heart mr-1"></i> Gratitude Notes
-            <span class="font-normal dark:text-gray-500 text-gray-400 ml-1">(optional)</span>
+            <span class="font-normal dark:text-white text-gray-800 ml-1">(optional)</span>
         </label>
         <textarea name="gratitude_notes" rows="3" placeholder="Write 3 things you are grateful for today…"
             class="w-full px-3.5 py-2.5 rounded-[10px] text-[14px] outline-none resize-none dark:bg-[#1a1625] bg-white dark:text-white text-gray-800 dark:border dark:border-white/[0.1] border border-black/[0.1]">{{ old('gratitude_notes', $journal->gratitude_notes ?? '') }}</textarea>
@@ -114,13 +114,13 @@
 
     {{-- Checkboxes --}}
     <div class="flex flex-wrap items-center gap-4">
-        <label class="flex items-center gap-2 text-[14px] font-bold dark:text-gray-300 text-gray-700 cursor-pointer">
+        <label class="flex items-center gap-2 text-[14px] font-bold dark:text-white text-gray-800 cursor-pointer">
             <input type="checkbox" name="is_private" value="1" @checked(old('is_private', $journal->is_private ?? true))
                 class="w-4 h-4 accent-orange-500">
             <i class="fas fa-lock mr-1"></i> Private
         </label>
 
-        <label class="flex items-center gap-2 text-[14px] font-bold dark:text-gray-300 text-gray-700 cursor-pointer">
+        <label class="flex items-center gap-2 text-[14px] font-bold dark:text-white text-gray-800 cursor-pointer">
             <input type="checkbox" name="is_favorite" value="1" @checked(old('is_favorite', $journal->is_favorite ?? false))
                 class="w-4 h-4 accent-yellow-400">
             <i class="fas fa-star mr-1"></i> Mark as Favorite
@@ -130,7 +130,7 @@
     {{-- Actions --}}
     <div class="flex items-center justify-end gap-2 pt-3">
         <a href="{{ route('user.journals.index') }}"
-            class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-gray-300 text-gray-700">
+            class="px-4 py-2 rounded-[10px] text-[14px] font-bold dark:bg-white/[0.07] bg-gray-100 dark:text-white text-gray-800">
             <i class="fas fa-times mr-1"></i> Cancel
         </a>
         <button type="submit"

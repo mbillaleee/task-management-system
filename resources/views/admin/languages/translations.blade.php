@@ -7,7 +7,7 @@
             <div>
                 <h2 class="text-[22px] font-extrabold dark:text-white text-gray-900"> <i class="fas fa-language"></i>
                     {{ $language->title }} Translations</h2>
-                <p class="text-[14px] dark:text-gray-400 text-gray-500 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Edit translations for {{ $language->title }} language.
                 </p>
             </div>

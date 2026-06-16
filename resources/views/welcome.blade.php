@@ -12,9 +12,39 @@
             darkMode: 'class',
         }
     </script>
+
+    <style>
+        .veroa-card {
+            background: rgba(255, 239, 213, 0.55);
+            border: 1px solid rgba(255, 150, 30, 0.18);
+            box-shadow: 0 18px 45px rgba(180, 95, 20, 0.10), inset 0 1px 0 rgba(255, 255, 255, .35);
+            backdrop-filter: blur(18px);
+        }
+
+        .dark .veroa-card {
+            background: #0f0a1c;
+            border: 1px solid rgba(236, 72, 153, 0.16);
+            box-shadow: none;
+        }
+
+        .veroa-panel {
+            background: rgba(255, 238, 210, 0.42);
+            border: 1px solid rgba(255, 160, 40, 0.18);
+            backdrop-filter: blur(22px);
+        }
+
+        .dark .veroa-panel {
+            background: rgba(8, 7, 19, 0.72);
+            border: 1px solid rgba(255, 47, 168, 0.15);
+        }
+    </style>
 </head>
 
-<body class="transition-colors duration-500 bg-gray-50 dark:bg-gray-900 flex items-center justify-center min-h-screen">
+<body
+    class="transition-colors duration-500 bg-gray-50 dark:border-pink-500/15 bg-[#f7e4c3]/75
+            dark:bg-[#080612]  backdrop-blur-xl  p-6  space-y-6
+            shadow-[inset_0_1px_0_rgba(255,255,255,.65),0_20px_50px_rgba(180,95,20,.12),0_8px_20px_rgba(255,140,20,.08)]
+            dark:shadow-[inset_0_1px_0_rgba(255,255,255,.03)] flex items-center justify-center min-h-screen">
 
     <!-- Dark/Light toggle top-right -->
     {{-- <div class="absolute top-4 right-4 flex gap-2">
@@ -25,7 +55,7 @@
     </div> --}}
 
     <!-- Centered login form -->
-    <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-10 transition-colors duration-500">
+    <div class="w-full max-w-md bg-white veroa-card rounded-2xl shadow-2xl p-10 transition-colors duration-500">
         <img src="{{ asset('images/logo.png') }}" alt="" style="width: 100px; height: auto;" class="mx-auto mb-6">
 
         <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white text-center">Welcome Back</h2>
@@ -44,7 +74,7 @@
                         class="w-full px-5 py-3 pr-12 rounded-xl border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-orange-400 focus:outline-none dark:bg-gray-700 dark:text-white transition-colors">
 
                     <button type="button" id="togglePassword"
-                        class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-orange-400 transition-colors">
+                        class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-800 hover:text-orange-400 transition-colors">
                         <i id="passwordIcon" class="fas fa-eye"></i>
                     </button>
                 </div>

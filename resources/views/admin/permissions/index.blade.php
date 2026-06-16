@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('admin')
-    <section class="flex-1 p-4 sm:p-5 flex flex-col gap-4">
+    <section class="flex-1 flex flex-col gap-4">
 
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -28,7 +28,7 @@
         </div>
 
         <!-- Permissions Table & Actions -->
-        <div class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 rounded-2xl p-4">
+        <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] border rounded-2xl p-4">
             <div class="flex justify-between items-center mb-3">
                 <h3 class="text-[16px] font-bold dark:text-white text-gray-900">
                     <i class="fas fa-shield-alt text-orange-500 mr-2"></i> Permission List

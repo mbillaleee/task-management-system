@@ -9,10 +9,10 @@
     <tbody>
         @foreach ($lang_keys as $key => $translation)
             <tr class="hover:bg-gray-50 dark:hover:bg-[#100b18] transition-colors duration-200">
-                <td class="p-2 text-[13px] dark:text-gray-400 text-gray-700">
+                <td class="p-2 text-[13px] dark:text-white text-gray-800">
                     {{ $key + 1 + ($lang_keys->currentPage() - 1) * $lang_keys->perPage() }}
                 </td>
-                <td class="p-2 text-[13px] dark:text-gray-400 text-gray-700 font-medium">
+                <td class="p-2 text-[13px] dark:text-white text-gray-800 font-medium">
                     {{ ucwords(str_replace('_', ' ', $translation->lang_key)) }}
                 </td>
                 <td class="p-2">

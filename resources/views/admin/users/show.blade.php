@@ -46,8 +46,7 @@
         @endif
 
         {{-- ── Profile Banner ──────────────────────────────────────────────────── --}}
-        <div
-            class="relative overflow-hidden rounded-2xl border dark:border-white/[0.07] border-gray-200 dark:bg-[#17141f] bg-white">
+        <div class="relative overflow-hidden rounded-2xl  veroa-card border">
             <div class="h-28 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600"></div>
             <div class="p-5 sm:p-6 -mt-14 flex flex-col md:flex-row md:items-end justify-between gap-5">
                 <div class="flex flex-col sm:flex-row sm:items-end gap-4">
@@ -122,7 +121,7 @@
             <div class="space-y-5 xl:col-span-1">
 
                 {{-- Gamification Stats --}}
-                <div class="rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 p-5">
+                <div class="rounded-2xl  veroa-card border p-5">
                     <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-4">
                         <i class="fas fa-trophy text-amber-500 mr-2"></i> Gamification Stats
                     </h4>
@@ -175,7 +174,7 @@
                 </div>
 
                 {{-- Subscription --}}
-                <div class="rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 p-5">
+                <div class="rounded-2xl  veroa-card border p-5">
                     <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-4">
                         <i class="fas fa-gem text-blue-500 mr-2"></i> Subscription
                     </h4>
@@ -224,7 +223,7 @@
                 </div>
 
                 {{-- Reset Password --}}
-                <div class="rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 p-5">
+                <div class="rounded-2xl  veroa-card border p-5">
                     <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-4">
                         <i class="fas fa-key text-pink-500 mr-2"></i> Reset Password
                     </h4>
@@ -301,8 +300,7 @@
                         ];
                     @endphp
                     @foreach ($activityStats as $stat)
-                        <div
-                            class="hover-lift p-4 rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 flex items-center gap-3">
+                        <div class="hover-lift p-4 rounded-2xl  veroa-card border flex items-center gap-3">
                             <div
                                 class="w-10 h-10 rounded-xl bg-{{ $stat['color'] }}-500/15 flex items-center justify-center shrink-0">
                                 <i class="fas {{ $stat['icon'] }} text-{{ $stat['color'] }}-500 text-[15px]"></i>
@@ -318,7 +316,7 @@
                 </div>
 
                 {{-- Account Information --}}
-                <div class="rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 p-5">
+                <div class="rounded-2xl  veroa-card border p-5">
                     <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-4">
                         <i class="fas fa-circle-info text-blue-500 mr-2"></i> Account Information
                     </h4>
@@ -365,8 +363,7 @@
 
                 {{-- Badges --}}
                 @if ($user->badges->count() > 0)
-                    <div
-                        class="rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 p-5">
+                    <div class="rounded-2xl  veroa-card border p-5">
                         <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-4">
                             <i class="fas fa-medal text-amber-500 mr-2"></i> Earned Badges
                             <span
@@ -386,7 +383,7 @@
                 @endif
 
                 {{-- Subscription History --}}
-                <div class="rounded-2xl dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-gray-200 p-5">
+                <div class="rounded-2xl  veroa-card border p-5">
                     <h4 class="text-[14px] font-extrabold dark:text-white text-gray-900 mb-4">
                         <i class="fas fa-clock-rotate-left text-purple-500 mr-2"></i> Subscription History
                     </h4>

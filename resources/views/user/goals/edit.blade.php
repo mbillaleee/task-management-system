@@ -18,8 +18,7 @@
             </a>
         </div>
 
-        <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+        <div class="hover-lift veroa-card rounded-2xl p-[18px]">
             <form action="{{ route('user.goals.update', $goal) }}" method="POST">
                 @csrf
                 @method('PUT')

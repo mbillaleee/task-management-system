@@ -7,7 +7,7 @@
                 <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900">
                     <i class="fas fa-edit mr-2"></i> Edit Journal
                 </h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">
                     Update journal entry, mood and reflection.
                 </p>
             </div>
@@ -18,8 +18,7 @@
             </a>
         </div>
 
-        <div
-            class="hover-lift dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-[18px]">
+        <div class="hover-lift veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-[18px]">
             <form action="{{ route('user.journals.update', $journal) }}" method="POST">
                 @csrf
                 @method('PUT')

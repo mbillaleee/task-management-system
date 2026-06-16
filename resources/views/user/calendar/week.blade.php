@@ -6,24 +6,24 @@
         {{-- Header --}}
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
-                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-900"><i
+                <h2 class="text-[20px] font-extrabold tracking-[-0.3px] dark:text-white text-gray-800"><i
                         class="fas fa-calendar-week mr-2"></i> Calendar</h2>
-                <p class="text-[14px] dark:text-gray-500 text-gray-400 mt-0.5">Weekly planner — schedule and manage your
+                <p class="text-[14px] dark:text-white text-gray-800 mt-0.5">Weekly planner — schedule and manage your
                     week.</p>
             </div>
             <div class="flex flex-wrap items-center gap-2.5">
                 <div class="flex items-center dark:bg-white/[0.06] bg-black/[0.05] rounded-[10px] p-1 gap-1">
                     <a href="{{ route('user.calendar.index') }}"
-                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors"><i
+                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-white text-gray-800 dark:hover:text-white hover:text-gray-900 transition-colors"><i
                             class="fas fa-calendar-alt mr-1"></i>Month</a>
                     <a href="{{ route('user.calendar.week') }}"
                         class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold bg-gradient-to-r from-orange-500 to-pink-500 text-white"><i
                             class="fas fa-calendar-week mr-1"></i>Week</a>
                     <a href="{{ route('user.calendar.day') }}"
-                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors"><i
+                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-white text-gray-800 dark:hover:text-white hover:text-gray-900 transition-colors"><i
                             class="fas fa-calendar-day mr-1"></i>Day</a>
                     <a href="{{ route('user.calendar.timeline') }}"
-                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors"><i
+                        class="px-3 py-1.5 rounded-[8px] text-[13px] font-bold dark:text-white text-gray-800 dark:hover:text-white hover:text-gray-900 transition-colors"><i
                             class="fas fa-list mr-1"></i>Timeline</a>
                 </div>
                 <button onclick="openCreateModal()"
@@ -35,8 +35,7 @@
         </div>
 
         {{-- Week nav --}}
-        <div
-            class="dark:bg-[#17141f] bg-white border dark:border-white/[0.07] border-black/[0.07] rounded-2xl overflow-hidden">
+        <div class="veroa-card shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl overflow-hidden">
             <div class="flex items-center justify-between px-5 py-4 border-b dark:border-white/[0.07] border-black/[0.07]">
                 <a href="{{ route('user.calendar.week', ['date' => $prevWeek->toDateString()]) }}"
                     class="w-9 h-9 flex items-center justify-center rounded-xl dark:bg-white/[0.06] bg-black/[0.05] dark:text-gray-300 text-gray-600 hover:dark:bg-white/[0.1] transition-colors">
@@ -57,13 +56,13 @@
 
             {{-- Day columns header --}}
             <div class="grid grid-cols-8 border-b dark:border-white/[0.07] border-black/[0.07]">
-                <div class="py-3 px-2 text-[11px] font-bold dark:text-gray-600 text-gray-300 uppercase text-center"><i
+                <div class="py-3 px-2 text-[11px] font-bold dark:text-white text-gray-800 uppercase text-center"><i
                         class="fas fa-clock mr-1"></i> Time
                 </div>
                 @foreach ($weekDays as $wd)
                     @php $isToday = $wd->isToday(); @endphp
                     <div class="py-3 text-center border-l dark:border-white/[0.05] border-black/[0.05]">
-                        <div class="text-[11px] font-bold uppercase dark:text-gray-500 text-gray-400 tracking-wider">
+                        <div class="text-[11px] font-bold uppercase dark:text-white text-gray-800 tracking-wider">
                             {{ $wd->format('D') }}</div>
                         <div
                             class="w-8 h-8 mx-auto mt-0.5 flex items-center justify-center rounded-full text-[15px] font-extrabold
@@ -80,7 +79,7 @@
                     @php $slotHour = \Carbon\Carbon::parse($slot)->hour; @endphp
                     <div class="grid grid-cols-8 border-b dark:border-white/[0.04] border-black/[0.04]"
                         style="min-height:60px;">
-                        <div class="px-2 pt-1 text-[11px] dark:text-gray-600 text-gray-400 font-medium text-right">
+                        <div class="px-2 pt-1 text-[11px] dark:text-white text-gray-800 font-medium text-right">
                             {{ $slot }}</div>
                         @foreach ($weekDays as $wd)
                             @php
